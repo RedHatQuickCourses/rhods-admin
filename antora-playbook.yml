@@ -1,6 +1,6 @@
 site:
   title: Red Hat OpenShift Data Science Administration
-  start_page:rhods-admin::index.adoc
+  start_page: rhods-admin::index.adoc
 
 content:
   sources:
