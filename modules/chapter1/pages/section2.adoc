@@ -1,3 +1,311 @@
-= Section 2
+= installation Using the CLI
 
-This is _Section 2_ of _Chapter 1_ in the *hello* quick course....
+Similarly to the Web console installation, both Red{nbsp}Hat Openshift Pipelines operator and Red{nbsp}Hat Openshift Data Science operator have to be installed.
+
+== Installation of an operator using CLI
+Operator Lifecycle Manager (OLM) uses following resources:
+
+Catalog Resource::
+  Each catalog source resource references an operator repository. Periodically, the OLM
+  examines the catalog sources in the cluster and retrieves information about the operators in
+  each source.
+
+Package manifest::
+ The OLM creates a package manifest for each available operator. The package manifest
+ contains the required information to install an operator, such as the available channels.
+
+Operator group::
+  Operator groups define how the OLM presents operators across namespaces.
+Subscription::
+  Cluster administrators create subscriptions to install operators.
+Operator::
+  The OLM creates operator resources to store information about installed operators. 
+Install plan::
+  The OLM creates install plan resources as part of the installation and update process. When
+  requiring approvals, administrators must approve install plans.
+Cluster service version (CSV)::
+  Each version of an operator has a corresponding CSV. The CSV contains the information that
+  the OLM requires to install the operator.
+
+When installing an operator, an administrator must create only the operator group (unsless the target namespace is openshift operators where the group already exists) and the subscription.
+
+Following are examples of the resources must to create.
+
+Namespace::
+[subs=+quotes]
+----
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: _operator_namespace_
+spec: {}
+----
+
+Operator group::
+[subs=+quotes]
+----
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: _Operator_group_name_
+  namespace: _operator_namespace_
+spec: {}
+----
+
+Subscription::
+[subs=+quotes]
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: _Subscription_name_  <1>
+  namespace: _operator_namespace_
+spec:
+  channel: _channel_
+  installPlanApproval: _Manual/Automatic_
+  name: _Operator_name_
+  source: _Catalog_source_
+  sourceNamespace: openshift-marketplace
+  startingCSV: _Operator_CSV_
+----
+
+<1> Hello World
+
+[#manual_approval]
+[NOTE]
+When *installPlanApproval* is set to  *Manual* the installation has to be manually approved in order to start.
+[subs=+quotes]
+----
+$ oc get installplan -n _operator_namespace_
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   _operator_csv_   Manual     #false#
+
+$ oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_name_
+installplan.operators.coreos.com/install-vpgls patched
+
+oc get installplan -n redhat-ods-operator
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   _operator_name_   Manual     #true#
+----
+
+
+== Installation of the Red{nbsp}Hat Openshift Pipelines Operator
+
+Following command lists available catalog sources.
+Pipelines operator is available  from Red{nbsp}Hat operators catalogue.
+
+[subs=+quotes]
+----
+$ oc get catalogsource -n openshift-marketplace     
+NAME                  DISPLAY               TYPE   PUBLISHER   AGE
+certified-operators   Certified Operators   grpc   Red Hat     24h
+community-operators   Community Operators   grpc   Red Hat     24h
+redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
+#redhat-operators      Red Hat Operators     grpc   Red Hat     24h#
+----
+
+
+To install the Pipelines operator the package manifest must be located.
+
+[subs=+quotes]
+----
+$ oc get packagemanifest 
+..._output omitted_...
+flux                                               Red Hat Marketplace   24h 
+ack-emrcontainers-controller                       Community Operators   24h 
+fujitsu-enterprise-operator                        Certified Operators   24h 
+#openshift-pipelines-operator-rh                    Red Hat Operators     24h# 
+rhoas-operator                                     Community Operators   24h 
+silicom-sts-operator                               Community Operators   24h 
+openshiftartifactoryha-operator                    Certified Operators   24h 
+..._output omitted_ ...
+----
+
+To get more information about the operator use *oc describe*
+[subs=+quotes]
+----
+oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace
+Name:         openshift-pipelines-operator-rh
+Namespace:    openshift-marketplace
+Labels:       catalog=redhat-operators
+..._output omitted_...
+Spec:
+Status:
+  Catalog Source:               redhat-operators
+  Catalog Source Display Name:  Red Hat Operators
+  Catalog Source Namespace:     openshift-marketplace
+  Catalog Source Publisher:     Red Hat
+  Channels:
+    Current CSV:  openshift-pipelines-operator-rh.v1.12.0
+    Current CSV Desc:
+      Annotations:
+        Alm - Examples:  [
+..._output omitted_...
+        Capabilities:                                     Full Lifecycle
+        Categories:                                       Developer Tools, Integration & Delivery
+        Certified:                                        false
+        Description:                                      Red Hat OpenShift Pipelines is a cloud-native CI/CD solution for building pipelines using Tekton concepts which run natively on OpenShift and Kubernetes.
+..._output omitted_...
+
+      Display Name:  Red Hat OpenShift Pipelines
+      Install Modes:
+        Supported:  false
+        Type:       OwnNamespace
+        Supported:  false
+        Type:       SingleNamespace
+        Supported:  false
+        Type:       MultiNamespace
+        Supported:  true
+        Type:       AllNamespaces
+      Keywords:
+        tektoncd
+        openshift
+        build
+        pipeline
+      Links:
+        Name:  Tekton Pipeline GitHub Repository
+        URL:   https://github.com/tektoncd/pipeline
+        Name:  Tekton Operator GitHub Repository
+        URL:   https://github.com/tektoncd/operator
+      Maintainers:
+        Email:   pipelines-extcomm@redhat.com
+        Name:    Red Hat
+      Maturity:  alpha
+      Provider:
+        Name:  Red Hat
+      Related Images:
+..._output omitted_...
+----
+
+The Pipelines operator's default namespace is openshift-operators, hence neither the namespace nor operator group resources must be created. An administrator must create only the subscription to start the installation. Following is an example of the Pipelines operator subscription.
+
+[subs=+quotes]
+----
+$ cat <<EOF > pipelines-subs.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-pipelines-operator-rh
+  namespace: openshift-operators
+spec:
+  channel: latest
+  installPlanApproval: Automatic
+  name: openshift-pipelines-operator-rh
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: openshift-pipelines-operator-rh.v1.12.0
+EOF
+
+$ oc create -f pipelines-subs.yaml
+----
+
+[NOTE]
+In case *installPlanApproval* is set to *Manual*, installation has to be approved first in order to start.
+
+
+== Installation of the Red{nbsp}Hat Openshift Data Science operator
+
+Red{nbsp}Hat Openshift Data Science operator is available through Red Hat Operators catalogue.
+
+[subs=+quotes]
+----
+$ oc get packagemanifest
+_...output ommited..._
+cloudbees-ci-rhmp                                  Red Hat Marketplace   3h34m
+timemachine-operator                               Certified Operators   3h34m
+apicast-community-operator                         Community Operators   3h34m
+#rhods-operator                                     Red Hat Operators     3h34m#
+shipwright-operator                                Community Operators   3h34m
+pachyderm-operator-rhmp                            Red Hat Marketplace   3h34m
+nxiq-operator-certified                            Certified Operators   3h34m
+_...output ommited..._
+----
+
+The operator has a suggested namespace *redhat-ods-operator* to be installed into. However it can be installed into any namespace an administrator chooses.
+
+[subs=+quotes]
+----
+$ oc describe packagemanifest rhods-operator
+_...output ommited..._
+operatorframework.io/suggested-namespace:  redhat-ods-operator
+_...output ommited..._
+----
+
+Unless an administrator chooses to install it into the default openshift-operators namespace, the namespace has to be created first.
+
+----
+$ cat <<EOF > rhods-ns.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: redhat-ods-operator
+spec: {}
+EOF
+
+$ oc create -f rhods-ns.yaml
+namespace/redhat-ods-operator created
+----
+
+Within the new namespace an *Operator Group* resource has to be created
+----
+$ cat <<EOF > rhods-og.yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: redhat-ods-operator
+  namespace: redhat-ods-operator
+spec: {}
+EOF
+
+$ oc create -f rhods-og.yaml
+operatorgroup.operators.coreos.com/redhat-ods-operator created
+----
+
+Finally the operator's subscription can be created to start the installation
+----
+$ cat <<EOF > rhods-subs.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhods-operator
+  namespace: redhat-ods-operator
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: rhods-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: rhods-operator.1.33.0
+EOF
+
+$ oc create -f rhods-subs.yaml
+subscription.operators.coreos.com/rhods-operator created
+----
+
+
+[NOTE]
+In case the *installPlanApproval* is set to *Manual*, installation has to be approved first in order to start. For more information xref:section2.adoc#manual_approval[see the note]
+
+
+
+[NOTE]
+It may take some time for all the operator's pods to start so Red{nbsp}Hat Openshift Data Science dashboard may not be available immediately. You can check their status in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift web console.
+
+----
+$ oc get pods -n redhat-ods-applications
+NAME                                               READY   STATUS              RESTARTS   AGE
+etcd-cc4d875c-8trld                                0/1     PodInitializing     0          7s
+modelmesh-controller-5749b94578-2j8nv              0/1     Running             0          7s
+modelmesh-controller-5749b94578-jcxc7              0/1     ContainerCreating   0          7s
+modelmesh-controller-5749b94578-rww94              0/1     ContainerCreating   0          7s
+notebook-controller-deployment-685bb8f9d6-6dtbh    0/1     Running             0          29s
+odh-model-controller-7d495b56cb-8pnn9              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-8xh5h              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-kcmqr              0/1     Running             0          7s
+odh-notebook-controller-manager-866b7cf859-2wf2j   1/1     Running             0          29s
+rhods-dashboard-7bd94f464f-7lvn8                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-hksf6                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-n5rbz                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s
+----
