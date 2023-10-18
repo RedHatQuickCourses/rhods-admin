@@ -27,66 +27,83 @@ Cluster service version (CSV)::
   Each version of an operator has a corresponding CSV. The CSV contains the information that
   the OLM requires to install the operator.
 
-When installing an operator, an administrator must create only the operator group (unsless the target namespace is openshift operators where the group already exists) and the subscription.
+When installing an operator, an administrator must create only the operator group (unsless the target namespace is openshift operators where the group already exists) and the subscription. Optionally also a namespace can be created if it does not exists.
 
-Following are examples of the resources must to create.
+Following are examples of the resources an adminstrator must to create.
 
 Namespace::
+--
 [subs=+quotes]
 ----
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: _operator_namespace_
+  name: _operator_namespace_ <1>
 spec: {}
 ----
+<1> Name of the namespace to install the operator into.
+--
+NOTE: Namespace has to be only created if it does not already exist. An operator can be installed into an existing namespace.
 
 Operator group::
+--
 [subs=+quotes]
 ----
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  name: _Operator_group_name_
-  namespace: _operator_namespace_
+  name: _Operator_group_name_ <1>
+  namespace: _operator_namespace_ <2>
 spec: {}
 ----
+<1> Name of the operator group resource.
+<2> Name of the namespace to create the operator group resource in.
+--
 
 Subscription::
+--
 [subs=+quotes]
 ----
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: _Subscription_name_  <1>
-  namespace: _operator_namespace_
+  namespace: _operator_namespace_ <2>
 spec:
   channel: _channel_
-  installPlanApproval: _Manual/Automatic_
+  installPlanApproval: _Manual/Automatic_ <3>
   name: _Operator_name_
   source: _Catalog_source_
   sourceNamespace: openshift-marketplace
   startingCSV: _Operator_CSV_
 ----
+<1> Name of the subscription resource.
+<2> Name of the namespace to create the subscription resource in.
+<3> installPlanApproval can be either *Automatic* or *Manual*.
+--
 
-<1> Name of the subscription resource
 [#manual_approval]
-[NOTE]
-When *installPlanApproval* is set to  *Manual* the installation has to be manually approved in order to start.
+
+IMPORTANT: When *installPlanApproval* is set to  *Manual* the installation has to be manually approved in order to start.
+
+--
 [subs=+quotes]
 ----
 $ oc get installplan -n _operator_namespace_
 NAME            CSV                     APPROVAL   APPROVED
-install-vpgls   _operator_csv_   Manual     #false#
+install-vpgls   _operator_csv_   Manual     #false#   <1>
 
-$ oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_name_
-installplan.operators.coreos.com/install-vpgls patched
+$ oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_name_  
+installplan.operators.coreos.com/install-vpgls patched  <2>
 
 oc get installplan -n redhat-ods-operator
 NAME            CSV                     APPROVAL   APPROVED
-install-vpgls   _operator_name_   Manual     #true#
+install-vpgls   _operator_name_   Manual     #true#  <3>
 ----
-
+<1> Approval has not been set.
+<2> The patch command approves the installation.
+<3> Approval has been set.
+--
 
 == Installation of the Red{nbsp}Hat Openshift Pipelines Operator
 
