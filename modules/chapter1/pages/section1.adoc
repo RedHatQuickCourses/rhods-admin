@@ -1,3 +1,64 @@
-= Section 1
+= Installation using the Web Console
 
-This is _Section 1_ of _Chapter 1_ in the *hello* quick course....
+:imagesdir: ./images
+
+
+Red{nbsp}Hat Openshift Data Science is installed as an operator. As a dependecy it requires another operator - Red{nbsp}Hat Openshift Pipelines to be installed as well.
+
+== Installing Red{nbsp}Hat Openshift Pipelines operator
+
+1. Login to Red{nbsp}Hat Openshift using a user which has cluster-admin role assigned
+2. Navigate to **Operators** -> **OperatorHub** and seach for Red{nbsp}Hat Openshift Pipelines
++
+image::pipeline_search.png[]
+
+3. Click on the Red{nbsp}Hat Openshift Pipelines operator and in the pop up window click on **Install** to open operator's installation view.
++
+image::pipeline_install1.png[]
+
+4. In the installation view various installation details can be tuned:  
+  a. Update channel
+  b. Installation mode
+  c. Installed Namespace
+  d. Update approval
++
+image::pipeline_install2.png[]
++
+Unless you have some specific requirements such as a particular version, namespace or update approval strategy, default values can be accepted.
++
+Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showin installation progress will pop up
++
+image::pipeline_install3.png[]
++
+When the operator is installed you can view it's details by clicking on **View{nbsp}Operator** button.
++
+image::pipeline_install4.png[]
+
+== Installing Red{nbsp}Hat Openshift Data Science operator
+
+The process of the Red{nbsp}Hat Openshift Data Science operator installation is very similar to the Red{nbsp}Hat Openshift Pipelines operator.
+
+1. Navigate to **Operators** -> **OperatorHub** and seach for Red{nbsp}Hat Openshift Data Science
++
+image::rhods_install1.png[]
+
+2. Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open operator's installation view.
++
+image::rhods_install2.png[]
+
+3. In the installation view window choose the **Update Channel**, **Installed{nbsp}Namespace** and *Update approval** or accept default values and click on **Install* the button.
++ 
+image::rhods_install3.png[]
++
+Operator Installation progress window will pup up. The installation may take a couple of minutes.
++
+image::rhods_install4.png[]
++
+When the operator is installed open the applications window in the right upper corner and Red{nbsp}Hat Openshift Data Science service should be available.
++
+image::rhods_verify1.png[]
++ 
+When you click on Red{nbsp}Hat Openshift Data Science service button a login window should appear.
++
+image::rhods_verify2.png[]
+    
