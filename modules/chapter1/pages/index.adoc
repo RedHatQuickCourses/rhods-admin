@@ -1,3 +1,7 @@
-= Chapter 1
+= Installation of Red{nbsp}Hat Openshift Data Science
 
-This is the home page of _Chapter_ 1 in the *hello* quick course...
+This chapter covers installation of RHODS using Openshift the web console as well as using the command line interface
+
+== Sections
+* Installation using Openshift web console
+* Installation using CLI
