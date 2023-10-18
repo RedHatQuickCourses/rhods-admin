@@ -69,8 +69,7 @@ spec:
   startingCSV: _Operator_CSV_
 ----
 
-<1> Hello World
-
+<1> Name of the subscription resource
 [#manual_approval]
 [NOTE]
 When *installPlanApproval* is set to  *Manual* the installation has to be manually approved in order to start.
