@@ -3,5 +3,5 @@
 This chapter covers installation of RHODS using Openshift the web console as well as using the command line interface
 
 == Sections
-* Installation using Openshift web console
-* Installation using CLI
+* Installation using the Openshift Web Console
+* Installation using the Command Line Interface
