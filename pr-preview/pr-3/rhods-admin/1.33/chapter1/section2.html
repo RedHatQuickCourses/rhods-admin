@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Installation Using the Command Line Interface :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="section1.html">
+    <link rel="next" href="section3.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Chapter 1</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section1.html">Section 1</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="section2.html">Installation Using the Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section3.html">Section 3</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/users.html">User Types and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Building Custom Workbench Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/custom.html">Building Custom Workbench Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix A</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Chapter 1</a></li>
+    <li><a href="section2.html">Installation Using the Command Line Interface</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Installation Using the Command Line Interface</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Similarly to the Web Console installation, both <strong>Red&#160;Hat Openshift Pipelines</strong> operator and <strong>Red&#160;Hat Openshift Data Science</strong> operators have to be installed.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_of_an_operator_using_cli"><a class="anchor" href="#_installation_of_an_operator_using_cli"></a>Installation of an operator using CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Operator Lifecycle Manager (OLM) uses following resources:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Catalog Resource</dt>
+<dd>
+<p>Each catalog source resource references an operator repository. Periodically, the OLM
+examines the catalog sources in the cluster and retrieves information about the operators in
+each source.</p>
+</dd>
+<dt class="hdlist1">Package manifest</dt>
+<dd>
+<p>The OLM creates a package manifest for each available operator. The package manifest
+contains the required information to install an operator, such as the available channels.</p>
+</dd>
+<dt class="hdlist1">Operator group</dt>
+<dd>
+<p>Operator groups define how the OLM presents operators across namespaces.</p>
+</dd>
+<dt class="hdlist1">Subscription</dt>
+<dd>
+<p>Cluster administrators create subscriptions to install operators.</p>
+</dd>
+<dt class="hdlist1">Operator</dt>
+<dd>
+<p>The OLM creates operator resources to store information about installed operators.</p>
+</dd>
+<dt class="hdlist1">Install plan</dt>
+<dd>
+<p>The OLM creates install plan resources as part of the installation and update process. When
+requiring approvals, administrators must approve install plans.</p>
+</dd>
+<dt class="hdlist1">Cluster service version (CSV)</dt>
+<dd>
+<p>Each version of an operator has a corresponding CSV. The CSV contains the information that
+the OLM requires to install the operator.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>When installing an operator, an administrator must create only the operator group (unless the target namespace is <strong>openshift-operators</strong> where the operator group resource already exists) and the subscription. Optionally a namespace can be created if it does not exists.</p>
+</div>
+<div class="paragraph">
+<p>Following are examples of the resources an adminstrator must create.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Namespace</dt>
+</dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: v1
+kind: Namespace
+metadata:
+  name: <em>operator_namespace</em> <i class="conum" data-value="1"></i><b>(1)</b>
+spec: {}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the namespace to install the operator into.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Namespace has to be only created if it does not already exist. An operator can be installed into an existing namespace.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Operator group</dt>
+</dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: <em>Operator_group_name</em> <i class="conum" data-value="1"></i><b>(1)</b>
+  namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
+spec: {}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the operator group resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Name of the namespace to create the operator group resource in.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Subscription</dt>
+</dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: <em>Subscription_name</em>  <i class="conum" data-value="1"></i><b>(1)</b>
+  namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
+spec:
+  channel: <em>channel</em>
+  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="3"></i><b>(3)</b>
+  name: <em>Operator_name</em>
+  source: <em>Catalog_source</em>
+  sourceNamespace: openshift-marketplace
+  startingCSV: <em>Operator_CSV</em></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the subscription resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Name of the namespace to create the subscription resource in.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>installPlanApproval can be either <strong>Automatic</strong> or <strong>Manual</strong>.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div id="manual_approval" class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When <strong>installPlanApproval</strong> is set to  <strong>Manual</strong>, the installation has to be manually approved in order to start.
+</td>
+</tr>
+</table>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ oc get installplan -n <em>operator_namespace</em>
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   <em>operator_csv</em>   Manual     <mark>false</mark>   <i class="conum" data-value="1"></i><b>(1)</b>
+
+$ oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n <em>operator_namespace</em>
+installplan.operators.coreos.com/install-vpgls patched  <i class="conum" data-value="2"></i><b>(2)</b>
+
+oc get installplan -n redhat-ods-operator
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class="conum" data-value="3"></i><b>(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Approval has not been set.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The patch command approves the installation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Approval has been set and installation starts.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_pipelines_operator"></a>Installation of the Red&#160;Hat Openshift Pipelines Operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following command lists available catalog sources.
+Pipelines operator is available from Red&#160;Hat operators catalogue.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ oc get catalogsource -n openshift-marketplace
+NAME                  DISPLAY               TYPE   PUBLISHER   AGE
+certified-operators   Certified Operators   grpc   Red Hat     24h
+community-operators   Community Operators   grpc   Red Hat     24h
+redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
+<mark>redhat-operators      Red Hat Operators     grpc   Red Hat     24h</mark></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To install the <strong>Red&#160;Hat Openshift Pipelines</strong> operator the package manifest must be located.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ oc get packagemanifest
+...<em>output omitted</em>...
+flux                                               Red Hat Marketplace   24h
+ack-emrcontainers-controller                       Community Operators   24h
+fujitsu-enterprise-operator                        Certified Operators   24h
+<mark>openshift-pipelines-operator-rh                    Red Hat Operators     24h</mark>
+rhoas-operator                                     Community Operators   24h
+silicom-sts-operator                               Community Operators   24h
+openshiftartifactoryha-operator                    Certified Operators   24h
+...<em>output omitted</em> ...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To get more information about the operator use <strong>oc describe</strong></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace
+Name:         openshift-pipelines-operator-rh
+Namespace:    openshift-marketplace
+Labels:       catalog=redhat-operators
+...<em>output omitted</em>...
+Spec:
+Status:
+  Catalog Source:               redhat-operators
+  Catalog Source Display Name:  Red Hat Operators
+  Catalog Source Namespace:     openshift-marketplace
+  Catalog Source Publisher:     Red Hat
+  Channels:
+    Current CSV:  openshift-pipelines-operator-rh.v1.12.0
+    Current CSV Desc:
+      Annotations:
+        Alm - Examples:  [
+...<em>output omitted</em>...
+        Capabilities:                                     Full Lifecycle
+        Categories:                                       Developer Tools, Integration &amp; Delivery
+        Certified:                                        false
+        Description:                                      Red Hat OpenShift Pipelines is a cloud-native CI/CD solution for building pipelines using Tekton concepts which run natively on OpenShift and Kubernetes.
+...<em>output omitted</em>...
+
+      Display Name:  Red Hat OpenShift Pipelines
+      Install Modes:
+        Supported:  false
+        Type:       OwnNamespace
+        Supported:  false
+        Type:       SingleNamespace
+        Supported:  false
+        Type:       MultiNamespace
+        Supported:  true
+        Type:       AllNamespaces
+      Keywords:
+        tektoncd
+        openshift
+        build
+        pipeline
+      Links:
+        Name:  Tekton Pipeline GitHub Repository
+        URL:   https://github.com/tektoncd/pipeline
+        Name:  Tekton Operator GitHub Repository
+        URL:   https://github.com/tektoncd/operator
+      Maintainers:
+        Email:   pipelines-extcomm@redhat.com
+        Name:    Red Hat
+      Maturity:  alpha
+      Provider:
+        Name:  Red Hat
+      Related Images:
+...<em>output omitted</em>...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The Pipelines operator&#8217;s default namespace is openshift-operators, hence neither the namespace nor operator group resources must be created. An administrator must create only the subscription to start the installation. Following is an example of the Pipelines operator subscription creation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ cat &lt;&lt;EOF &gt; pipelines-subs.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-pipelines-operator-rh
+  namespace: openshift-operators
+spec:
+  channel: latest
+  installPlanApproval: Automatic
+  name: openshift-pipelines-operator-rh
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: openshift-pipelines-operator-rh.v1.12.0
+EOF
+
+$ oc create -f pipelines-subs.yaml</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, installation has to be approved first in order to start. Refer to the <a href="#manual_approval">previous section</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_data_science_operator"></a>Installation of the Red&#160;Hat Openshift Data Science operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red&#160;Hat Openshift Data Science operator is available through Red Hat Operators catalogue.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ oc get packagemanifest
+<em>...output ommited...</em>
+cloudbees-ci-rhmp                                  Red Hat Marketplace   3h34m
+timemachine-operator                               Certified Operators   3h34m
+apicast-community-operator                         Community Operators   3h34m
+<mark>rhods-operator                                     Red Hat Operators     3h34m</mark>
+shipwright-operator                                Community Operators   3h34m
+pachyderm-operator-rhmp                            Red Hat Marketplace   3h34m
+nxiq-operator-certified                            Certified Operators   3h34m
+<em>...output ommited...</em></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The operator has a suggested namespace <strong>redhat-ods-operator</strong> to be installed into. However it can be installed into any namespace an administrator chooses.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ oc describe packagemanifest rhods-operator
+<em>...output ommited...</em>
+operatorframework.io/suggested-namespace:  redhat-ods-operator
+<em>...output ommited...</em></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Unless an administrator chooses to install it into the openshift-operators namespace, the namespace has to be created first.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ cat &lt;&lt;EOF &gt; rhods-ns.yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: redhat-ods-operator
+spec: {}
+EOF
+
+$ oc create -f rhods-ns.yaml
+namespace/redhat-ods-operator created</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Within the new namespace an <strong>Operator Group</strong> resource has to be created.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ cat &lt;&lt;EOF &gt; rhods-og.yaml
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: redhat-ods-operator
+  namespace: redhat-ods-operator
+spec: {}
+EOF
+
+$ oc create -f rhods-og.yaml
+operatorgroup.operators.coreos.com/redhat-ods-operator created</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally the operator&#8217;s subscription can be created to start the installation</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ cat &lt;&lt;EOF &gt; rhods-subs.yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhods-operator
+  namespace: redhat-ods-operator
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: rhods-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: rhods-operator.1.33.0
+EOF
+
+$ oc create -f rhods-subs.yaml
+subscription.operators.coreos.com/rhods-operator created</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, installation has to be approved first in order to start. Refer to the <a href="#manual_approval">previous section</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It may take some time for all the operator&#8217;s pods to start hence the <strong>Red&#160;Hat Openshift Data Science</strong> dashboard may not be available immediately. You can check their status in the <strong>redhat-ods-applications</strong> namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ oc get pods -n redhat-ods-applications
+NAME                                               READY   STATUS              RESTARTS   AGE
+etcd-cc4d875c-8trld                                0/1     PodInitializing     0          7s
+modelmesh-controller-5749b94578-2j8nv              0/1     Running             0          7s
+modelmesh-controller-5749b94578-jcxc7              0/1     ContainerCreating   0          7s
+modelmesh-controller-5749b94578-rww94              0/1     ContainerCreating   0          7s
+notebook-controller-deployment-685bb8f9d6-6dtbh    0/1     Running             0          29s
+odh-model-controller-7d495b56cb-8pnn9              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-8xh5h              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-kcmqr              0/1     Running             0          7s
+odh-notebook-controller-manager-866b7cf859-2wf2j   1/1     Running             0          29s
+rhods-dashboard-7bd94f464f-7lvn8                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-hksf6                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-n5rbz                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s</pre>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="section1.html">Section 1</a></span>
+  <span class="next"><a href="section3.html">Section 3</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
