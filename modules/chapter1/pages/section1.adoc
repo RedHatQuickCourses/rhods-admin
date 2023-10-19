@@ -60,4 +60,5 @@ image::rhods_verify2.png[]
 
 IMPORTANT: It may take a while to start all the service pods hence the dashboard may not be accessible. You can check the status of the pods in the project *redhat_ods-applications*.
 Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and ready in order the dashboard to be accessible.
-        
+
+image::rhods_verify_pods.png[]
