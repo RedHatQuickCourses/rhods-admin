@@ -1,6 +1,6 @@
-= installation Using the CLI
+= Installation Using the Command Line Interface
 
-Similarly to the Web console installation, both Red{nbsp}Hat Openshift Pipelines operator and Red{nbsp}Hat Openshift Data Science operator have to be installed.
+Similarly to the Web Console installation, both *Red{nbsp}Hat Openshift Pipelines* operator and *Red{nbsp}Hat Openshift Data Science* operators have to be installed.
 
 == Installation of an operator using CLI
 Operator Lifecycle Manager (OLM) uses following resources:
@@ -27,9 +27,9 @@ Cluster service version (CSV)::
   Each version of an operator has a corresponding CSV. The CSV contains the information that
   the OLM requires to install the operator.
 
-When installing an operator, an administrator must create only the operator group (unsless the target namespace is openshift operators where the group already exists) and the subscription. Optionally also a namespace can be created if it does not exists.
+When installing an operator, an administrator must create only the operator group (unless the target namespace is *openshift-operators* where the operator group resource already exists) and the subscription. Optionally a namespace can be created if it does not exists.
 
-Following are examples of the resources an adminstrator must to create.
+Following are examples of the resources an adminstrator must create.
 
 Namespace::
 --
@@ -84,7 +84,7 @@ spec:
 
 [#manual_approval]
 
-IMPORTANT: When *installPlanApproval* is set to  *Manual* the installation has to be manually approved in order to start.
+IMPORTANT: When *installPlanApproval* is set to  *Manual*, the installation has to be manually approved in order to start.
 
 --
 [subs=+quotes]
@@ -93,7 +93,7 @@ $ oc get installplan -n _operator_namespace_
 NAME            CSV                     APPROVAL   APPROVED
 install-vpgls   _operator_csv_   Manual     #false#   <1>
 
-$ oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_name_  
+$ oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_namespace_  
 installplan.operators.coreos.com/install-vpgls patched  <2>
 
 oc get installplan -n redhat-ods-operator
@@ -102,13 +102,13 @@ install-vpgls   _operator_name_   Manual     #true#  <3>
 ----
 <1> Approval has not been set.
 <2> The patch command approves the installation.
-<3> Approval has been set.
+<3> Approval has been set and installation starts.
 --
 
 == Installation of the Red{nbsp}Hat Openshift Pipelines Operator
 
-Following command lists available catalog sources.
-Pipelines operator is available  from Red{nbsp}Hat operators catalogue.
+The following command lists available catalog sources.
+Pipelines operator is available from Red{nbsp}Hat operators catalogue.
 
 [subs=+quotes]
 ----
@@ -121,7 +121,7 @@ redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
 ----
 
 
-To install the Pipelines operator the package manifest must be located.
+To install the *Red{nbsp}Hat Openshift Pipelines* operator the package manifest must be located.
 
 [subs=+quotes]
 ----
@@ -193,7 +193,7 @@ Status:
 ..._output omitted_...
 ----
 
-The Pipelines operator's default namespace is openshift-operators, hence neither the namespace nor operator group resources must be created. An administrator must create only the subscription to start the installation. Following is an example of the Pipelines operator subscription.
+The Pipelines operator's default namespace is openshift-operators, hence neither the namespace nor operator group resources must be created. An administrator must create only the subscription to start the installation. Following is an example of the Pipelines operator subscription creation.
 
 [subs=+quotes]
 ----
@@ -216,7 +216,7 @@ $ oc create -f pipelines-subs.yaml
 ----
 
 [NOTE]
-In case *installPlanApproval* is set to *Manual*, installation has to be approved first in order to start.
+In case *installPlanApproval* is set to *Manual*, installation has to be approved first in order to start. Refer to the xref:section2.adoc#manual_approval[previous section] for more information.
 
 
 == Installation of the Red{nbsp}Hat Openshift Data Science operator
@@ -247,7 +247,7 @@ operatorframework.io/suggested-namespace:  redhat-ods-operator
 _...output ommited..._
 ----
 
-Unless an administrator chooses to install it into the default openshift-operators namespace, the namespace has to be created first.
+Unless an administrator chooses to install it into the openshift-operators namespace, the namespace has to be created first.
 
 ----
 $ cat <<EOF > rhods-ns.yaml
@@ -262,7 +262,7 @@ $ oc create -f rhods-ns.yaml
 namespace/redhat-ods-operator created
 ----
 
-Within the new namespace an *Operator Group* resource has to be created
+Within the new namespace an *Operator Group* resource has to be created.
 ----
 $ cat <<EOF > rhods-og.yaml
 apiVersion: operators.coreos.com/v1
@@ -300,12 +300,11 @@ subscription.operators.coreos.com/rhods-operator created
 
 
 [NOTE]
-In case the *installPlanApproval* is set to *Manual*, installation has to be approved first in order to start. For more information xref:section2.adoc#manual_approval[see the note]
-
+In case the *installPlanApproval* is set to *Manual*, installation has to be approved first in order to start. Refer to the xref:section2.adoc#manual_approval[previous section] for more information.
 
 
 [NOTE]
-It may take some time for all the operator's pods to start so Red{nbsp}Hat Openshift Data Science dashboard may not be available immediately. You can check their status in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift web console.
+It may take some time for all the operator's pods to start hence the *Red{nbsp}Hat Openshift Data Science* dashboard may not be available immediately. You can check their status in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
 
 ----
 $ oc get pods -n redhat-ods-applications
