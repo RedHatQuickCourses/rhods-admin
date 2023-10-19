@@ -1,14 +1,15 @@
+//:imagesdir: images
+
+
+
 = Installation using the Web Console
-
-:imagesdir: ./images
-
-
+ 
 Red{nbsp}Hat Openshift Data Science is installed as an operator. As a dependecy it requires another operator - Red{nbsp}Hat Openshift Pipelines to be installed as well.
 
 == Installing Red{nbsp}Hat Openshift Pipelines operator
 
 1. Login to Red{nbsp}Hat Openshift using a user which has cluster-admin role assigned
-2. Navigate to **Operators** -> **OperatorHub** and seach for Red{nbsp}Hat Openshift Pipelines
+2. Navigate to **Operators** -> **OperatorHub** and seach for *Red{nbsp}Hat Openshift Pipelines*
 +
 image::pipeline_search.png[]
 
@@ -16,18 +17,13 @@ image::pipeline_search.png[]
 +
 image::pipeline_install1.png[]
 
-4. In the installation view various installation details can be tuned:  
-  a. Update channel
-  b. Installation mode
-  c. Installed Namespace
-  d. Update approval
+
+4. In the installation view some installation details can be tuned. Administrator can set the *Update{nbsp}channel* parameter to a specific version and the *Update{nbsp}approval* parameter to either *Automatic* or *Manual*. The *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters are fixed.
 +
-image::pipeline_install2.png[]
+image::pipeline_install2.png[align="center"]
 +
-Unless you have some specific requirements such as a particular version, namespace or update approval strategy, default values can be accepted.
-+
-Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showin installation progress will pop up
-+
+Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up 
++ 
 image::pipeline_install3.png[]
 +
 When the operator is installed you can view it's details by clicking on **View{nbsp}Operator** button.
@@ -38,7 +34,7 @@ image::pipeline_install4.png[]
 
 The process of the Red{nbsp}Hat Openshift Data Science operator installation is very similar to the Red{nbsp}Hat Openshift Pipelines operator.
 
-1. Navigate to **Operators** -> **OperatorHub** and seach for Red{nbsp}Hat Openshift Data Science
+1. Navigate to **Operators** -> **OperatorHub** and seach for *Red{nbsp}Hat Openshift Data Science*
 +
 image::rhods_install1.png[]
 
@@ -46,7 +42,7 @@ image::rhods_install1.png[]
 +
 image::rhods_install2.png[]
 
-3. In the installation view window choose the **Update Channel**, **Installed{nbsp}Namespace** and *Update approval** or accept default values and click on **Install* the button.
+3. In the installation view window choose the **Update Channel**, **Installed{nbsp}Namespace** and *Update approval** or accept default values and click on **Install* the button. The *Installation{nbsp}mode* is fixed
 + 
 image::rhods_install3.png[]
 +
@@ -54,11 +50,14 @@ Operator Installation progress window will pup up. The installation may take a c
 +
 image::rhods_install4.png[]
 +
-When the operator is installed open the applications window in the right upper corner and Red{nbsp}Hat Openshift Data Science service should be available.
+When the operator is installed open the applications window in the right upper corner and *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
 +
 image::rhods_verify1.png[]
 + 
-When you click on Red{nbsp}Hat Openshift Data Science service button a login window should appear.
+When you click on the *Red{nbsp}Hat Openshift Data Science* dashboard button a login window should appear.
 +
 image::rhods_verify2.png[]
-    
+
+IMPORTANT: It may take a while to start all the service pods hence the dashboard may not be accessible. You can check the status of the pods in the project *redhat_ods-applications*.
+Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and ready in order the dashboard to be accessible.
+        
