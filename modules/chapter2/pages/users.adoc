@@ -11,7 +11,7 @@ By default, any user with the ability to login to OpenShift will be able to acce
 [TIP]
 ====
 
-For assistance with configuring user access to OpenShift with various identity providers, please refer to the official [Preparing for users](https://docs.openshift.com/container-platform/4.13/post_installation_configuration/preparing-for-users.html) OpenShift documentation.
+For assistance with configuring user access to OpenShift with various identity providers, please refer to the official https://docs.openshift.com/container-platform/4.13/post_installation_configuration/preparing-for-users.html[Preparing for users] OpenShift documentation.
 
 ====
 
@@ -47,7 +47,7 @@ The normal Data Science user group can also be updated to change what users are 
 [WARNING]
 ====
 
-Updating the access in the `User and group settings` in the Dashboard will only impact a users abilities to access the Dashbaord, and will not impact any permissions granted by regular Kubernetes based RBAC.  
+Updating the access in the `User and group settings` in the Dashboard will only impact a users abilities to access the Dashboard, and will not impact any permissions granted by regular Kubernetes based RBAC.  
 
 For example, if the normal user group is updated to only allow specific users to access the Dashboard, and a user that is not part of that group has admin may still have the ability to create Data Science related objects such as Notebooks, Data Science Pipelines, or Model Servers in a namespace they have permission in using the associated k8s objects without the UI.
 
@@ -86,7 +86,7 @@ image::../images/create-datascience-project.png[]
 
 For information on how to disable self-provisioner on OpenShift refer to the official OpenShift documentation:
 
-[Disabling project self-provisioning](https://docs.openshift.com/container-platform/4.13/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation)
+https://docs.openshift.com/container-platform/4.13/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation[Disabling project self-provisioning]
 
 ====
 
@@ -134,7 +134,7 @@ metadata:
     opendatahub.io/dashboard: 'true'
 ```
 
-Once the Data Science Project has been created, access to the project will need to be configured for the necessary user or group using either the cli, or a namespace RoleBinding.  Refer to the OpenShift documentation for [Adding roles to users](https://docs.openshift.com/container-platform/4.13/authentication/using-rbac.html#adding-roles_using-rbac) for additional instructions.
+Once the Data Science Project has been created, access to the project will need to be configured for the necessary user or group using either the cli, or a namespace RoleBinding.  Refer to the OpenShift documentation for https://docs.openshift.com/container-platform/4.13/authentication/using-rbac.html#adding-roles_using-rbac[Adding roles to users] for additional instructions.
 
 == Notes
 * [Trevor] We should be recommending configuring users in the default RHODS admin group instead of relying on the cluster-admin role.
