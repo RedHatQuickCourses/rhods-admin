@@ -84,9 +84,7 @@ image::create-datascience-project.png[]
 [TIP]
 ====
 
-For information on how to disable self-provisioner on OpenShift refer to the official OpenShift documentation:
-
-https://docs.openshift.com/container-platform/4.13/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation[Disabling project self-provisioning]
+For information on how to disable self-provisioner on OpenShift refer to the official https://docs.openshift.com/container-platform/4.13/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation[Disabling project self-provisioning] OpenShift documentation.
 
 ====
 
