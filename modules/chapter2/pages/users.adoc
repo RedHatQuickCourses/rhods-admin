@@ -4,7 +4,7 @@
 
 RHODS utilizes OpenShift OAuth as the authentication method for all RHODS related resources.  When attempting to log into the RHODS Dashboard or other UI components, users will be presented with a page prompting them to `Log in with OpenShift`.
 
-image::../images/login-with-openshift.png[]
+image::login-with-openshift.png[]
 
 By default, any user with the ability to login to OpenShift will be able to access the RHODS Dashboard.
 
@@ -30,7 +30,7 @@ Admin access in the RHODS Dashboard allows users to control various settings of 
 
 The default permissions for the RHODS Dashboard can be updated through the `Settings`>`User management` section.
 
-image::../images/user-management.png[]
+image::user-management.png[]
 
 The admin group can be updated to another group other than the default `rhods-admins` group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the 
 cluster-admin ClusterRole.
@@ -79,7 +79,7 @@ spec:
 
 The RHODS Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:
 
-image::../images/create-datascience-project.png[]
+image::create-datascience-project.png[]
 
 [TIP]
 ====
@@ -100,7 +100,7 @@ Users can be granted permissions to the Project using traditional RBAC configura
 
 Additionally, the Dashboard provides a user interface that will allow Admins on the project to easily apply `edit` or `admin` access to other users or groups.  The Permissions view can be access by navigating to a specific project under the Data Science Projects menu, and selecting the Permissions tab.
 
-image::../images/datascience-project-permissions.png[]
+image::datascience-project-permissions.png[]
 
 [NOTE]
 ====
