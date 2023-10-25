@@ -122,7 +122,7 @@ redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
 ----
 
 
-To install the *Red{nbsp}Hat Openshift Pipelines* operator the package manifest must be located.
+To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshift-pipelines-operator-rh` package manifest.
 
 [subs=+quotes]
 ----
