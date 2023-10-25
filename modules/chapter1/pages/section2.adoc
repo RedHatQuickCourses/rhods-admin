@@ -3,6 +3,7 @@
 Similarly to the Web Console installation, both *Red{nbsp}Hat Openshift Pipelines* operator and *Red{nbsp}Hat Openshift Data Science* operators have to be installed.
 
 == Installation of an operator using CLI
+In OpenShift, the Operator Lifecycle Manager (OLM) helps users install and manage operators and their associated services.
 Operator Lifecycle Manager (OLM) uses following resources:
 
 Catalog Resource::
