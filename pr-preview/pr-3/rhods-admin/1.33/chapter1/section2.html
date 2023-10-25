@@ -321,14 +321,14 @@ When <strong>installPlanApproval</strong> is set to  <strong>Manual</strong>, th
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>$ oc get installplan -n <em>operator_namespace</em>
+<pre>$ <strong>oc get installplan -n <em>operator_namespace</em></strong>
 NAME            CSV                     APPROVAL   APPROVED
 install-vpgls   <em>operator_csv</em>   Manual     <mark>false</mark>   <i class="conum" data-value="1"></i><b>(1)</b>
 
-$ oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n <em>operator_namespace</em>
+$ <strong>oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n <em>operator_namespace</em></strong>
 installplan.operators.coreos.com/install-vpgls patched  <i class="conum" data-value="2"></i><b>(2)</b>
 
-oc get installplan -n redhat-ods-operator
+$ <strong>oc get installplan -n redhat-ods-operator</strong>
 NAME            CSV                     APPROVAL   APPROVED
 install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class="conum" data-value="3"></i><b>(3)</b></pre>
 </div>
@@ -375,16 +375,8 @@ redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ oc get packagemanifest | grep pipelines
-...<em>output omitted</em>...
-flux                                               Red Hat Marketplace   24h
-ack-emrcontainers-controller                       Community Operators   24h
-fujitsu-enterprise-operator                        Certified Operators   24h
-<mark>openshift-pipelines-operator-rh                    Red Hat Operators     24h</mark>
-rhoas-operator                                     Community Operators   24h
-silicom-sts-operator                               Community Operators   24h
-openshiftartifactoryha-operator                    Certified Operators   24h
-...<em>output omitted</em> ...</pre>
+<pre>$ <strong>oc get packagemanifest | grep pipelines</strong>
+openshift-pipelines-operator-rh                    Red Hat Operators     24h</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -392,7 +384,7 @@ openshiftartifactoryha-operator                    Certified Operators   24h
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace
+<pre>$ <strong>oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace</strong>
 Name:         openshift-pipelines-operator-rh
 Namespace:    openshift-marketplace
 Labels:       catalog=redhat-operators
@@ -446,11 +438,11 @@ Status:
 </div>
 </div>
 <div class="paragraph">
-<p>The Pipelines operator&#8217;s default namespace is openshift-operators, hence neither the namespace nor operator group resources must be created. An administrator must create only the subscription to start the installation. Following is an example of the Pipelines operator subscription creation.</p>
+<p>The Pipelines operator&#8217;s default namespace is <em>openshift-operators</em>, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ cat &lt;&lt;EOF &gt; pipelines-subs.yaml
+<pre>$ <strong>cat &lt;&lt;EOF &gt; pipelines-subs.yaml</strong>
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -465,7 +457,7 @@ spec:
   startingCSV: openshift-pipelines-operator-rh.v1.12.0
 EOF
 
-$ oc create -f pipelines-subs.yaml</pre>
+$ <strong>oc create -f pipelines-subs.yaml</strong></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -475,7 +467,7 @@ $ oc create -f pipelines-subs.yaml</pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, installation has to be approved first in order to start. Refer to the <a href="#manual_approval">previous section</a> for more information.
+In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">previous section</a> for more information.
 </td>
 </tr>
 </table>
@@ -490,35 +482,27 @@ In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ oc get packagemanifest
-<em>...output ommited...</em>
-cloudbees-ci-rhmp                                  Red Hat Marketplace   3h34m
-timemachine-operator                               Certified Operators   3h34m
-apicast-community-operator                         Community Operators   3h34m
-<mark>rhods-operator                                     Red Hat Operators     3h34m</mark>
-shipwright-operator                                Community Operators   3h34m
-pachyderm-operator-rhmp                            Red Hat Marketplace   3h34m
-nxiq-operator-certified                            Certified Operators   3h34m
-<em>...output ommited...</em></pre>
+<pre>$ <strong>oc get packagemanifest | grep rhods-operator</strong>
+rhods-operator                                     Red Hat Operators     3h34m</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The operator has a suggested namespace <strong>redhat-ods-operator</strong> to be installed into. However it can be installed into any namespace an administrator chooses.</p>
+<p>The operator has a suggested namespace <strong>redhat-ods-operator</strong> to be installed into. However it can be installed into any namespace you choose.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ oc describe packagemanifest rhods-operator
+<pre>$ <strong>oc describe packagemanifest rhods-operator</strong>
 <em>...output ommited...</em>
 operatorframework.io/suggested-namespace:  redhat-ods-operator
 <em>...output ommited...</em></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Unless an administrator chooses to install it into the openshift-operators namespace, the namespace has to be created first.</p>
+<p>Unless you choose to install it into the <em>openshift-operators</em> namespace, create the namespace first.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ cat &lt;&lt;EOF &gt; rhods-ns.yaml
+<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-ns.yaml</strong>
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -526,16 +510,16 @@ metadata:
 spec: {}
 EOF
 
-$ oc create -f rhods-ns.yaml
+$ <strong>oc create -f rhods-ns.yaml</strong>
 namespace/redhat-ods-operator created</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Within the new namespace an <strong>Operator Group</strong> resource has to be created.</p>
+<p>Within the new namespace create the  <strong>Operator Group</strong> resource.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ cat &lt;&lt;EOF &gt; rhods-og.yaml
+<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-og.yaml</strong>
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -544,16 +528,16 @@ metadata:
 spec: {}
 EOF
 
-$ oc create -f rhods-og.yaml
+$ <strong>oc create -f rhods-og.yaml</strong>
 operatorgroup.operators.coreos.com/redhat-ods-operator created</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Finally the operator&#8217;s subscription can be created to start the installation</p>
+<p>Finally create the  operator&#8217;s subscription can to start the installation</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ cat &lt;&lt;EOF &gt; rhods-subs.yaml
+<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-subs.yaml</strong>
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -568,7 +552,7 @@ spec:
   startingCSV: rhods-operator.1.33.0
 EOF
 
-$ oc create -f rhods-subs.yaml
+$ <strong>oc create -f rhods-subs.yaml</strong>
 subscription.operators.coreos.com/rhods-operator created</pre>
 </div>
 </div>
@@ -579,7 +563,7 @@ subscription.operators.coreos.com/rhods-operator created</pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, installation has to be approved first in order to start. Refer to the <a href="#manual_approval">previous section</a> for more information.
+In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">previous section</a> for more information.
 </td>
 </tr>
 </table>
@@ -598,7 +582,7 @@ It may take some time for all the operator&#8217;s pods to start hence the <stro
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ oc get pods -n redhat-ods-applications
+<pre>$ <strong>oc get pods -n redhat-ods-applications</strong>
 NAME                                               READY   STATUS              RESTARTS   AGE
 etcd-cc4d875c-8trld                                0/1     PodInitializing     0          7s
 modelmesh-controller-5749b94578-2j8nv              0/1     Running             0          7s
