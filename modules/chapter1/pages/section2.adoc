@@ -113,7 +113,7 @@ Pipelines operator is available from Red{nbsp}Hat operators catalogue.
 
 [subs=+quotes]
 ----
-$ oc get catalogsource -n openshift-marketplace     
+$ *oc get catalogsource -n openshift-marketplace*
 NAME                  DISPLAY               TYPE   PUBLISHER   AGE
 certified-operators   Certified Operators   grpc   Red Hat     24h
 community-operators   Community Operators   grpc   Red Hat     24h
