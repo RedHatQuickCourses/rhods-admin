@@ -126,7 +126,7 @@ To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshif
 
 [subs=+quotes]
 ----
-$ oc get packagemanifest 
+$ oc get packagemanifest | grep pipelines
 ..._output omitted_...
 flux                                               Red Hat Marketplace   24h 
 ack-emrcontainers-controller                       Community Operators   24h 
