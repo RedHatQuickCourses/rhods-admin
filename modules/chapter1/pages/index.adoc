@@ -1,5 +1,6 @@
 = Installation of Red{nbsp}Hat Openshift Data Science
 
+== Supported configurations
 OpenShift Data Science is supported in two configurations:
  
  * A managed cloud service add-on for *Red Hat OpenShift Dedicated* (with a Customer Cloud Subscription for AWS or GCP) or for Red Hat OpenShift Service on Amazon Web Services (ROSA).
@@ -12,3 +13,4 @@ In this course we cover installation of *OpenShift Data Science self-managed* us
 
 . Installation using the Openshift Web Console.
 . Installation using the Command Line Interface.
+
