@@ -108,9 +108,10 @@ install-vpgls   _operator_name_   Manual     #true#  <3>
 
 == Installation of the Red{nbsp}Hat Openshift Pipelines Operator
 
-The following command lists available catalog sources.
-Pipelines operator is available from Red{nbsp}Hat operators catalogue.
 
+1. The following command lists available catalog sources.
+Pipelines operator is available from Red{nbsp}Hat operators catalogue.
++
 [subs=+quotes]
 ----
 $ *oc get catalogsource -n openshift-marketplace*
@@ -122,15 +123,18 @@ redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
 ----
 
 
-To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshift-pipelines-operator-rh` package manifest.
-
+2. To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshift-pipelines-operator-rh` package manifest.
++
 [subs=+quotes]
 ----
 $ *oc get packagemanifest | grep pipelines*
 openshift-pipelines-operator-rh                    Red Hat Operators     24h
 ----
 
-To get more information about the operator use *oc describe*
+
+
+3. To get more information about the operator use *oc describe*. This is an optional step.
++
 [subs=+quotes]
 ----
 $ *oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace*
@@ -186,8 +190,10 @@ Status:
 ..._output omitted_...
 ----
 
-The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.
 
+4. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.
++
+--
 [subs=+quotes]
 ----
 $ *cat <<EOF > pipelines-subs.yaml*
@@ -210,20 +216,20 @@ $ *oc create -f pipelines-subs.yaml*
 
 [NOTE]
 In case *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section2.adoc#manual_approval[previous section] for more information.
-
+--
 
 == Installation of the Red{nbsp}Hat Openshift Data Science operator
 
-Red{nbsp}Hat Openshift Data Science operator is available through Red Hat Operators catalogue.
-
+1. Red{nbsp}Hat Openshift Data Science operator is available through Red Hat Operators catalogue.
++
 [subs=+quotes]
 ----
 $ *oc get packagemanifest | grep rhods-operator*
 rhods-operator                                     Red Hat Operators     3h34m
 ----
 
-The operator has a suggested namespace *redhat-ods-operator* to be installed into. However it can be installed into any namespace you choose.
-
+2. The operator has a suggested namespace *redhat-ods-operator* to be installed into. However it can be installed into any namespace you choose.
++
 [subs=+quotes]
 ----
 $ *oc describe packagemanifest rhods-operator*
@@ -232,8 +238,9 @@ operatorframework.io/suggested-namespace:  redhat-ods-operator
 _...output ommited..._
 ----
 
-Unless you choose to install it into the _openshift-operators_ namespace, create the namespace first.
-
+3. Unless you choose to install it into the _openshift-operators_ namespace, create the namespace first.
++
+--
 [subs=+quotes]
 ----
 $ *cat <<EOF > rhods-ns.yaml*
@@ -247,8 +254,10 @@ EOF
 $ *oc create -f rhods-ns.yaml*
 namespace/redhat-ods-operator created
 ----
+--
 
-Within the new namespace create the  *Operator Group* resource.
+4. Within the new namespace create the  *Operator Group* resource.
++
 [subs=+quotes]
 ----
 $ *cat <<EOF > rhods-og.yaml*
@@ -264,7 +273,9 @@ $ *oc create -f rhods-og.yaml*
 operatorgroup.operators.coreos.com/redhat-ods-operator created
 ----
 
-Finally create the  operator's subscription can to start the installation
+5. Finally create the  operator's subscription to start the installation.
++
+--
 [subs=+quotes]
 ----
 $ *cat <<EOF > rhods-subs.yaml*
@@ -313,3 +324,4 @@ rhods-dashboard-7bd94f464f-n5rbz                   1/2     Running             0
 rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0          47s
 rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s
 ----
+--
