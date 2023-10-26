@@ -1,7 +1,14 @@
 = Installation of Red{nbsp}Hat Openshift Data Science
 
-This chapter covers installation of RHODS using Openshift the web console as well as using the command line interface
+OpenShift Data Science is supported in two configurations:
+ 
+ * A managed cloud service add-on for *Red Hat OpenShift Dedicated* (with a Customer Cloud Subscription for AWS or GCP) or for Red Hat OpenShift Service on Amazon Web Services (ROSA).
+For information about OpenShift Data Science on a Red Hat managed environment, see https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science/1[Product Documentation for Red Hat OpenShift Data Science.]
 
-== Sections
-* Installation using the Openshift Web Console
-* Installation using the Command Line Interface
+* Self-managed software that you can install on-premise or on the public cloud in a self-managed environment, such as *OpenShift Container Platform*.
+For information about OpenShift Data Science as self-managed software on your OpenShift cluster in a connected or a disconnected environment, see https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science_self-managed[Product Documentation for Red Hat OpenShift Data Science self-managed.]
+
+In this course we cover installation of *OpenShift Data Science self-managed* using two different methods:
+
+. Installation using the Openshift Web Console.
+. Installation using the Command Line Interface.
