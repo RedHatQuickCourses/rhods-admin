@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Section 2 :: Red Hat OpenShift Data Science Administration</title>
+    <title>Installation using the Web Console :: Red Hat OpenShift Data Science Administration</title>
     <link rel="prev" href="section1.html">
     <link rel="next" href="section3.html">
     <meta name="generator" content="Antora 3.1.3">
@@ -50,10 +50,10 @@
     <a class="nav-link" href="index.html">Chapter 1</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section1.html">Installation using the Web Console</a>
+    <a class="nav-link" href="section1.html">Section 1</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="section2.html">Section 2</a>
+    <a class="nav-link" href="section2.html">Installation using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="section3.html">Section 3</a>
@@ -128,7 +128,7 @@
   <ul>
     <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
     <li><a href="index.html">Chapter 1</a></li>
-    <li><a href="section2.html">Section 2</a></li>
+    <li><a href="section2.html">Installation using the Web Console</a></li>
   </ul>
 </nav>
 </div>
@@ -137,12 +137,149 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Section 2</h1>
+<h1 class="page">Installation using the Web Console</h1>
+<div id="preamble">
+<div class="sectionbody">
 <div class="paragraph">
-<p>This is <em>Section 2</em> of <em>Chapter 1</em> in the <strong>hello</strong> quick course&#8230;&#8203;.</p>
+<p><strong>Red&#160;Hat Openshift Data Science</strong> is installed as an operator. As a dependecy it requires the <strong>Red&#160;Hat Openshift Pipelines</strong> operator to be installed as well.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_pipelines_operator"></a>Installation of the Red&#160;Hat Openshift Pipelines operator</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login to Red&#160;Hat Openshift using a user which has the cluster-admin role assigned.</p>
+</li>
+<li>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and seach for <strong>Red&#160;Hat Openshift Pipelines</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_search.png" alt="pipeline search" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the Red&#160;Hat Openshift Pipelines operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install1.png" alt="pipeline install1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>In the installation view some installation parameters can be tuned. Administrator can set the <strong>Update&#160;channel</strong> parameter to a specific version and the <strong>Update&#160;approval</strong> parameter to either <strong>Automatic</strong> or <strong>Manual</strong>. The <strong>Installation&#160;mode</strong> and the <strong>Installed&#160;namespace</strong> parameters are fixed.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install2.png" alt="pipeline install2" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on the <strong>Install</strong> button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install3.png" alt="pipeline install3" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>When the operator is installed you can view it&#8217;s details by clicking on <strong>View&#160;Operator</strong> button.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install4.png" alt="pipeline install4" width="800">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_data_science_operator"></a>Installation of the Red&#160;Hat Openshift Data Science operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The process of the Red&#160;Hat Openshift Data Science operator installation is very similar to the Red&#160;Hat Openshift Pipelines operator.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login to Red Hat Openshift using a user which has the cluster-admin role assigned.</p>
+</li>
+<li>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and seach for <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install1.png" alt="rhods install1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the Red&#160;Hat Openshift Data Science operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install2.png" alt="rhods install2" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>In the installation view window choose the <strong>Update Channel</strong>, <strong>Installed&#160;Namespace</strong> and <strong>Update approval<strong> or accept default values and click on </strong>Install</strong> the button. The <strong>Installation&#160;mode</strong> parameter is fixed.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install3.png" alt="rhods install3" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Operator Installation progress window will pup up. The installation may take a couple of minutes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install4.png" alt="rhods install4" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>When the operator is installed open the applications window in the right upper corner and <strong>Red&#160;Hat Openshift Data Science</strong> dashboard should be available.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify1.png" alt="rhods verify1" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>When you click on the <strong>Red&#160;Hat Openshift Data Science</strong> dashboard button a login window should appear.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify2.png" alt="rhods verify2" width="800">
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+It may take a while to start all the service pods hence the dashboard may not be accessible immediately. You can check the status of the pods in the project <strong>redhat-ods-applications</strong>.
+Navigate to <strong>Workloads</strong> &#8594; <strong>pods</strong> and select project <strong>redhat-ods-applications</strong>. All pods must be running and be ready in order the dashboard to be accessible.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify_pods.png" alt="rhods verify pods" width="800">
+</div>
+</div>
+</div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="section1.html">Installation using the Web Console</a></span>
+  <span class="prev"><a href="section1.html">Section 1</a></span>
   <span class="next"><a href="section3.html">Section 3</a></span>
 </nav>
 </article>
