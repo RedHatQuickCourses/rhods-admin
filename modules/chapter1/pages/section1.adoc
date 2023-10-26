@@ -1,4 +1,3 @@
-
 = Installation using the Web Console
  
 *Red{nbsp}Hat Openshift Data Science* is installed as an operator. As a dependecy it requires the *Red{nbsp}Hat Openshift Pipelines* operator to be installed as well.
