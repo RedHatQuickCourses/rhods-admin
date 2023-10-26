@@ -1,9 +1,52 @@
-= Building Custom Workbench Images
+= Building Custom Notebook Images
 
-Intro blah...
+Custom notebook images allow you to add specific packages and libraries for your projects. This level of customization provides you with a consistent development environment for your teams to work in and ensures that your projects are reproducible between team members. You may also want to create custom notebooks that are more secure than the default notebook image provided in RHODS.
 
-== Notes
+== Image source and Pre-built images
 
+The default RHODS notebook images can be found in the https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images] repository. This repository contains the source code, pre-built images, and examples to help you create your own image. Workbench and runtime images are available.
+
+*Workbench Images* +
+These images can be used directly in workbenches within RHODS after importing them through the RHODS dashboard.
+
+* Jupyter Data Science
+* VSCode Data Science
+* RStudio
+* Jupyter PyTorch
+* VSCode PyTorch
+* Jupyter Tensorflow
+* Jupyter Langchain
+* Langflow 
+
+*Runtime Images* +
+These images can be used in Data Science Pipelines. They contain the exact same set of libraries as the above workbench images, except the IDE part.
+
+* Runtime Data Science	
+* Runtime Data Science (CUDA)	
+* Runtime PyTorch (CUDA)	
+* Runtime Tensorflow (CUDA)	
+* Runtime R	
+* Runtime Spark
+
+For more information on OS packages, bundles, and IDE versions checkout the https://github.com/opendatahub-io-contrib/workbench-images#detailed-images-content[Detailed Images Content] section.
+
+== Building your own images
+We will now build our own image from one of the workbench images listed above.
+
+
+=== Rules
+* On OpenShift, every containers in a standard namespace (unless you modify security) run with a user with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The *best practice* is to set the *ownership at 1001:0* (user "default", group "0").
+* If you don't want/can't do that, another solution is to set permissions properly for any user, like 775.
+* When launching a notebook from Applications->Enabled, the "personal" volume of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.
+
+=== Requirements
+* Need podman
+* Need a image registry
+
+
+
+
+== NOTES
 * Why would you need a custom image?
 * Provide links to Containerfiles for the set of images that we ship with RHODS. Encourage students to build on UBI based base images
 * [Trevor] It is important to cover the minimum requirements that the notebook controller requires for the images to work.  Expected packages, port requirements, and startup scripts.  Additionally it may be good to cover some topics such as the non-root requirement for OCP and use that as a jumping off point to talk about using a RH base image.
