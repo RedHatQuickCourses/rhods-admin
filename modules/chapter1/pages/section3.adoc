@@ -64,6 +64,7 @@ spec: {}
 Subscription::
 --
 [subs=+quotes]
+[#subscription]
 ----
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -71,20 +72,22 @@ metadata:
   name: _Subscription_name_  <1>
   namespace: _operator_namespace_ <2>
 spec:
-  channel: _channel_
-  installPlanApproval: _Manual/Automatic_ <3>
+  channel: _channel_ <3>
+  installPlanApproval: _Manual/Automatic_ <4>
   name: _Operator_name_
   source: _Catalog_source_
   sourceNamespace: openshift-marketplace
-  startingCSV: _Operator_CSV_
+  startingCSV: _Operator_CSV_ <5>
 ----
 <1> Name of the subscription resource.
 <2> Name of the namespace to create the subscription resource in.
-<3> installPlanApproval can be either *Automatic* or *Manual*.
+<3> Update channel to install the operator from. For more information about finding available channels see this xref:section3.adoc#findchannel[note].
+<4> installPlanApproval can be either *Automatic* or *Manual*.
+<5> Staring Cluster Service Version of the operator. For more information about finding available CSVs see this xref:section3.adoc#findchannel[note].
+
 --
 
 [#manual_approval]
-
 IMPORTANT: When *installPlanApproval* is set to  *Manual*, the installation has to be manually approved in order to start.
 
 --
@@ -104,6 +107,41 @@ install-vpgls   _operator_name_   Manual     #true#  <3>
 <1> Approval has not been set.
 <2> The patch command approves the installation.
 <3> Approval has been set and installation starts.
+--
+
+--
+[#findchannel]
+NOTE: It can be little challenging to find available channels and their Cluster Service Versions (CSVs) from the CLI. _JQuery_ is a powerfull tool to filter values from resource manifests.
+
+The following example lists available channels for the *rhods-operator* operator.
+[subs=+quotes]
+----
+*$ oc get packagemanifest rhods-operator -o json|jq '.status.channels[].name'*
+"beta"
+"embedded"
+"stable"
+"alpha"
+----
+
+To find available CSVs for a particular channel you can use the following command.
+
+[subs=+quotes]
+----
+*$ oc get packagemanifest rhods-operator -o json| \
+  jq '.status.channels[]|select(.name=="#alpha#").entries'* <1>
+  [
+  {
+    "name": "rhods-operator.2.2.0",   <2>
+    "version": "2.2.0"
+  },
+  {
+    "name": "rhods-operator.2.1.0",
+    "version": "2.1.0"
+  }
+]
+----
+<1> *alpha* is the name of the channel.
+<2> The value of the _name_ attribute is used as a value of the xref:section3.adoc#subscription[startingCSV] attribute in the subscription to select the starting channel.
 --
 
 == Installation of the Red{nbsp}Hat Openshift Data Science operator
@@ -187,7 +225,7 @@ subscription.operators.coreos.com/rhods-operator created
 
 
 [NOTE]
-In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section2.adoc#manual_approval[previous section] for more information.
+In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[previous section] for more information.
 --
 
 6. Create your Openshift DataScience Cluster
@@ -248,24 +286,19 @@ rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0
 rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s
 ----
 
-== Installation of the Red{nbsp}Hat Openshift Pipelines Operator
+== Installation of other operators required by Openshift Data Science
+
+You may need to install other operators depending on the components and features of Openshift Data Science you want to use:
+
+* Red Hat Openshift Pipelines operator
+* NVIDIA GPU Operator
+* Node Feature Discovery Operator
+
+The following exercise shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.
 
 
-1. The following command lists available catalog sources.
-Pipelines operator is available from Red{nbsp}Hat operators catalogue.
-+
-[subs=+quotes]
-----
-$ *oc get catalogsource -n openshift-marketplace*
-NAME                  DISPLAY               TYPE   PUBLISHER   AGE
-certified-operators   Certified Operators   grpc   Red Hat     24h
-community-operators   Community Operators   grpc   Red Hat     24h
-redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
-#redhat-operators      Red Hat Operators     grpc   Red Hat     24h#
-----
 
-
-2. To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshift-pipelines-operator-rh` package manifest.
+1. To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshift-pipelines-operator-rh` package manifest.
 +
 [subs=+quotes]
 ----
@@ -273,9 +306,7 @@ $ *oc get packagemanifest | grep pipelines*
 openshift-pipelines-operator-rh                    Red Hat Operators     24h
 ----
 
-
-
-3. To get more information about the operator use *oc describe*. This is an optional step.
+2. To get more information about the operator use *oc describe*. You need to find available channels and CSVs associated with them so you can use them later when creating the operator's subscription.
 +
 [subs=+quotes]
 ----
@@ -296,44 +327,10 @@ Status:
       Annotations:
         Alm - Examples:  [
 ..._output omitted_...
-        Capabilities:                                     Full Lifecycle
-        Categories:                                       Developer Tools, Integration & Delivery
-        Certified:                                        false
-        Description:                                      Red Hat OpenShift Pipelines is a cloud-native CI/CD solution for building pipelines using Tekton concepts which run natively on OpenShift and Kubernetes.
-..._output omitted_...
-
-      Display Name:  Red Hat OpenShift Pipelines
-      Install Modes:
-        Supported:  false
-        Type:       OwnNamespace
-        Supported:  false
-        Type:       SingleNamespace
-        Supported:  false
-        Type:       MultiNamespace
-        Supported:  true
-        Type:       AllNamespaces
-      Keywords:
-        tektoncd
-        openshift
-        build
-        pipeline
-      Links:
-        Name:  Tekton Pipeline GitHub Repository
-        URL:   https://github.com/tektoncd/pipeline
-        Name:  Tekton Operator GitHub Repository
-        URL:   https://github.com/tektoncd/operator
-      Maintainers:
-        Email:   pipelines-extcomm@redhat.com
-        Name:    Red Hat
-      Maturity:  alpha
-      Provider:
-        Name:  Red Hat
-      Related Images:
-..._output omitted_...
 ----
 
 
-4. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.
+3. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.
 +
 --
 [subs=+quotes]
@@ -356,6 +353,7 @@ EOF
 $ *oc create -f pipelines-subs.yaml*
 ----
 
+
 [NOTE]
-In case *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section2.adoc#manual_approval[previous section] for more information.
+In case *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[previous section] for more information.
 --
