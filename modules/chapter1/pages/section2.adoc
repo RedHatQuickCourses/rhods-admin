@@ -18,36 +18,98 @@ image::rhods_install1.png[width=800]
 +
 image::rhods_install2.png[width=800]
  
+
 4. In the installation view window choose the **Update Channel**, **Installed{nbsp}Namespace** and *Update approval** or accept default values and click on **Install* the button. The *Installation{nbsp}mode* parameter is fixed.
-+ 
-image::rhods_install3.png[width=800]
++
+NOTE: The version 2 operator is availble via the _alpha_ channel at the moment.
++
+image::rhods2-install-view.png[width=800]
 +
 Operator Installation progress window will pup up. The installation may take a couple of minutes.
 +
-image::rhods_install4.png[width=800]
+image::rhods2-install.png[width=800]
+
+5. When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
 +
-When the operator is installed open the applications window in the right upper corner and *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
+image::rhods2-install-finished.png[width=800]
+
+6. In the *Create DataScienceCluster* view name your cluster and select DataScience components that will be installed and managed by the operator. You can choose to create it using either the _Form view_ and _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster. The following picture shows the _Form view_.  
++
+image::rhods2-create-cluster.png[width=800]
++
+If you choose the _YAML view_, you are presented with a template of the YAML DataScienceCluster definition similar to the one below.
++
+----
+apiVersion: datasciencecluster.opendatahub.io/v1
+kind: DataScienceCluster
+metadata:
+  name: mycluster  <1>
+  labels:
+    app.kubernetes.io/name: datasciencecluster
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/part-of: rhods-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: rhods-operator
+spec:
+  components:
+    codeflare:
+      managementState: Removed  <2>
+    dashboard:
+      managementState: Managed  <3>
+    datasciencepipelines:
+      managementState: Managed
+    kserve:
+      managementState: Removed
+    modelmeshserving:
+      managementState: Managed
+    ray:
+      managementState: Removed
+    workbenches:
+      managementState: Managed
+----
+<1> Name of the cluster
+<2> For components you do not want to install use *Remove*
+<3> For components you want to install and manage by the operator use *Managed*
++
+After naming the cluster and choosing the components you wish the operator to install and manage click on teh *Create* button.
+
+6. Wait until the status of the operator reads *Phase:
+Ready*
++
+image::rhods2-clusters.png[width=800]
+
+7. The operator should be installed and configured now. 
+In the applications window in the right upper corner of the screen the *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
 +
 image::rhods_verify1.png[width=800]
 + 
 When you click on the *Red{nbsp}Hat Openshift Data Science* dashboard button a login window should appear.
 +
 image::rhods_verify2.png[width=800]
-
-IMPORTANT: It may take a while to start all the service pods hence the dashboard may not be accessible immediately. You can check the status of the pods in the project *redhat-ods-applications*.
-Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and be ready in order the dashboard to be accessible.
-
++
+IMPORTANT: It may take a while to start all the service pods hence the login window may not be accessible immediately. If you are getting an error, check the status of the pods in the project *redhat-ods-applications*.
+Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and be ready. If they are not, wait until they become running and ready.
++
 image::rhods_verify_pods.png[width=800] 
 
 
-== Installation of the Red{nbsp}Hat Openshift Pipelines operator
+== Installation of other operators required by Openshift Data Science.
 
-1. Login to Red{nbsp}Hat Openshift using a user which has the cluster-admin role assigned.
+You may need to install other operators depending on the components and features of Openshift Data Science you want to use:
+
+* Red{nbsp}Hat Openshift Pipelines operator
+* NVIDIA GPU Operator
+* Node Feature Discovery Operator
+
+The following exercise shows installation of the *Red{nbsp}Hat Openshift Pipelines* operator. Installation of the two other operators is very similar.
+
+
+1. Login to Red{nbsp}Hat Openshift using a user which has the _cluster-admin_ role assigned.
 2. Navigate to **Operators** -> **OperatorHub** and seach for *Red{nbsp}Hat Openshift Pipelines*
 +
 image::pipeline_search.png[width=800]
 
-3. Click on the Red{nbsp}Hat Openshift Pipelines operator and in the pop up window click on **Install** to open the operator's installation view.
+3. Click on the *Red{nbsp}Hat Openshift Pipelines* operator and in the pop up window click on **Install** to open the operator's installation view.
 +
 image::pipeline_install1.png[width=800]
 
@@ -55,12 +117,12 @@ image::pipeline_install1.png[width=800]
 4. In the installation view some installation parameters can be tuned. Administrator can set the *Update{nbsp}channel* parameter to a specific version and the *Update{nbsp}approval* parameter to either *Automatic* or *Manual*. The *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters are fixed.
 +
 image::pipeline_install2.png[width=800]
-+
-Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
+
+5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
 + 
 image::pipeline_install3.png[width=800]
-+
-When the operator is installed you can view it's details by clicking on **View{nbsp}Operator** button.
+
+6. When the operator is installed you can view it's details by clicking on **View{nbsp}Operator** button.
 +
 image::pipeline_install4.png[width=800]
 
