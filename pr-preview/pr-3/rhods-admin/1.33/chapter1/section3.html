@@ -271,7 +271,7 @@ spec: {}</pre>
 </div>
 <div class="openblock">
 <div class="content">
-<div class="listingblock">
+<div id="subscription" class="listingblock">
 <div class="content">
 <pre>apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -279,12 +279,12 @@ metadata:
   name: <em>Subscription_name</em>  <i class="conum" data-value="1"></i><b>(1)</b>
   namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
 spec:
-  channel: <em>channel</em>
-  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="3"></i><b>(3)</b>
+  channel: <em>channel</em> <i class="conum" data-value="3"></i><b>(3)</b>
+  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="4"></i><b>(4)</b>
   name: <em>Operator_name</em>
   source: <em>Catalog_source</em>
   sourceNamespace: openshift-marketplace
-  startingCSV: <em>Operator_CSV</em></pre>
+  startingCSV: <em>Operator_CSV</em> <i class="conum" data-value="5"></i><b>(5)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -299,7 +299,15 @@ spec:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Update channel to install the operator from. For more information about finding available channels see this <a href="#findchannel">note</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
 <td>installPlanApproval can be either <strong>Automatic</strong> or <strong>Manual</strong>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Staring Cluster Service Version of the operator. For more information about finding available CSVs see this <a href="#findchannel">note</a>.</td>
 </tr>
 </table>
 </div>
@@ -346,6 +354,65 @@ install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class=
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>Approval has been set and installation starts.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="openblock">
+<div class="content">
+<div id="findchannel" class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It can be little challenging to find available channels and their Cluster Service Versions (CSVs) from the CLI. <em>JQuery</em> is a powerfull tool to filter values from resource manifests.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following example lists available channels for the <strong>rhods-operator</strong> operator.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get packagemanifest rhods-operator -o json|jq '.status.channels[].name'</strong>
+"beta"
+"embedded"
+"stable"
+"alpha"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To find available CSVs for a particular channel you can use the following command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get packagemanifest rhods-operator -o json| \
+  jq '.status.channels[]|select(.name=="<mark>alpha</mark>").entries'</strong> <i class="conum" data-value="1"></i><b>(1)</b>
+  [
+  {
+    "name": "rhods-operator.2.2.0",   <i class="conum" data-value="2"></i><b>(2)</b>
+    "version": "2.2.0"
+  },
+  {
+    "name": "rhods-operator.2.1.0",
+    "version": "2.1.0"
+  }
+]</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>alpha</strong> is the name of the channel.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The value of the <em>name</em> attribute is used as a value of the <a href="#subscription">startingCSV</a> attribute in the subscription to select the starting channel.</td>
 </tr>
 </table>
 </div>
@@ -449,7 +516,7 @@ subscription.operators.coreos.com/rhods-operator created</pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="section2.html#manual_approval" class="xref page">previous section</a> for more information.
+In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">previous section</a> for more information.
 </td>
 </tr>
 </table>
@@ -531,24 +598,29 @@ rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_pipelines_operator"></a>Installation of the Red&#160;Hat Openshift Pipelines Operator</h2>
+<h2 id="_installation_of_other_operators_required_by_openshift_data_science"><a class="anchor" href="#_installation_of_other_operators_required_by_openshift_data_science"></a>Installation of other operators required by Openshift Data Science</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>You may need to install other operators depending on the components and features of Openshift Data Science you want to use:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat Openshift Pipelines operator</p>
+</li>
+<li>
+<p>NVIDIA GPU Operator</p>
+</li>
+<li>
+<p>Node Feature Discovery Operator</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following exercise shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
-<li>
-<p>The following command lists available catalog sources.
-Pipelines operator is available from Red&#160;Hat operators catalogue.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc get catalogsource -n openshift-marketplace</strong>
-NAME                  DISPLAY               TYPE   PUBLISHER   AGE
-certified-operators   Certified Operators   grpc   Red Hat     24h
-community-operators   Community Operators   grpc   Red Hat     24h
-redhat-marketplace    Red Hat Marketplace   grpc   Red Hat     24h
-<mark>redhat-operators      Red Hat Operators     grpc   Red Hat     24h</mark></pre>
-</div>
-</div>
-</li>
 <li>
 <p>To install the <strong>Red&#160;Hat Openshift Pipelines</strong> operator, locate the <code>openshift-pipelines-operator-rh</code> package manifest.</p>
 <div class="listingblock">
@@ -559,7 +631,7 @@ openshift-pipelines-operator-rh                    Red Hat Operators     24h</pr
 </div>
 </li>
 <li>
-<p>To get more information about the operator use <strong>oc describe</strong>. This is an optional step.</p>
+<p>To get more information about the operator use <strong>oc describe</strong>. You need to find available channels and CSVs associated with them so you can use them later when creating the operator&#8217;s subscription.</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace</strong>
@@ -578,40 +650,6 @@ Status:
     Current CSV Desc:
       Annotations:
         Alm - Examples:  [
-...<em>output omitted</em>...
-        Capabilities:                                     Full Lifecycle
-        Categories:                                       Developer Tools, Integration &amp; Delivery
-        Certified:                                        false
-        Description:                                      Red Hat OpenShift Pipelines is a cloud-native CI/CD solution for building pipelines using Tekton concepts which run natively on OpenShift and Kubernetes.
-...<em>output omitted</em>...
-
-      Display Name:  Red Hat OpenShift Pipelines
-      Install Modes:
-        Supported:  false
-        Type:       OwnNamespace
-        Supported:  false
-        Type:       SingleNamespace
-        Supported:  false
-        Type:       MultiNamespace
-        Supported:  true
-        Type:       AllNamespaces
-      Keywords:
-        tektoncd
-        openshift
-        build
-        pipeline
-      Links:
-        Name:  Tekton Pipeline GitHub Repository
-        URL:   https://github.com/tektoncd/pipeline
-        Name:  Tekton Operator GitHub Repository
-        URL:   https://github.com/tektoncd/operator
-      Maintainers:
-        Email:   pipelines-extcomm@redhat.com
-        Name:    Red Hat
-      Maturity:  alpha
-      Provider:
-        Name:  Red Hat
-      Related Images:
 ...<em>output omitted</em>...</pre>
 </div>
 </div>
@@ -647,7 +685,7 @@ $ <strong>oc create -f pipelines-subs.yaml</strong></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="section2.html#manual_approval" class="xref page">previous section</a> for more information.
+In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">previous section</a> for more information.
 </td>
 </tr>
 </table>
