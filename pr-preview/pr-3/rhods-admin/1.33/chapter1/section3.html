@@ -354,6 +354,183 @@ install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class=
 </div>
 </div>
 <div class="sect1">
+<h2 id="_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_data_science_operator"></a>Installation of the Red&#160;Hat Openshift Data Science operator</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Red&#160;Hat Openshift Data Science operator is available through Red Hat Operators catalogue.</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc get packagemanifest | grep rhods-operator</strong>
+rhods-operator                                     Red Hat Operators     3h34m</pre>
+</div>
+</div>
+</li>
+<li>
+<p>The operator has a suggested namespace <strong>redhat-ods-operator</strong> to be installed into. However it can be installed into any namespace you choose.</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc describe packagemanifest rhods-operator</strong>
+<em>...output ommited...</em>
+operatorframework.io/suggested-namespace:  redhat-ods-operator
+<em>...output ommited...</em></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Unless you choose to install it into the <em>openshift-operators</em> namespace, create the namespace first.</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-ns.yaml</strong>
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: redhat-ods-operator
+spec: {}
+EOF
+
+$ <strong>oc create -f rhods-ns.yaml</strong>
+namespace/redhat-ods-operator created</pre>
+</div>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Within the new namespace create the  <strong>Operator Group</strong> resource.</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-og.yaml</strong>
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: redhat-ods-operator
+  namespace: redhat-ods-operator
+spec: {}
+EOF
+
+$ <strong>oc create -f rhods-og.yaml</strong>
+operatorgroup.operators.coreos.com/redhat-ods-operator created</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Finally create the  operator&#8217;s subscription to start the installation.</p>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-subs.yaml</strong>
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhods-operator
+  namespace: redhat-ods-operator
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: rhods-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+  startingCSV: rhods-operator.2.2.0
+EOF
+
+$ <strong>oc create -f rhods-subs.yaml</strong>
+subscription.operators.coreos.com/rhods-operator created</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="section2.html#manual_approval" class="xref page">previous section</a> for more information.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p>Create your Openshift DataScience Cluster</p>
+<div class="listingblock">
+<div class="content">
+<pre>cat &lt;&lt;EOF &gt; rhods-cluster.yaml
+apiVersion: datasciencecluster.opendatahub.io/v1
+kind: DataScienceCluster
+metadata:
+  labels:
+    app.kubernetes.io/created-by: rhods-operator
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: datasciencecluster
+    app.kubernetes.io/part-of: rhods-operator
+  name: mycluster
+spec:
+  components:
+    codeflare:
+      managementState: Removed
+    dashboard:
+      managementState: Managed
+    datasciencepipelines:
+      managementState: Managed
+    kserve:
+      managementState: Removed
+    modelmeshserving:
+      managementState: Managed
+    ray:
+      managementState: Removed
+    workbenches:
+      managementState: Managed
+EOF
+
+oc create -f rhods-cluster.yaml</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It may take some time for all the operator&#8217;s pods to start hence the <strong>Red&#160;Hat Openshift Data Science</strong> dashboard may not be available immediately. You can check their status in the <strong>redhat-ods-applications</strong> namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc get pods -n redhat-ods-applications</strong>
+NAME                                               READY   STATUS              RESTARTS   AGE
+etcd-cc4d875c-8trld                                0/1     PodInitializing     0          7s
+modelmesh-controller-5749b94578-2j8nv              0/1     Running             0          7s
+modelmesh-controller-5749b94578-jcxc7              0/1     ContainerCreating   0          7s
+modelmesh-controller-5749b94578-rww94              0/1     ContainerCreating   0          7s
+notebook-controller-deployment-685bb8f9d6-6dtbh    0/1     Running             0          29s
+odh-model-controller-7d495b56cb-8pnn9              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-8xh5h              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-kcmqr              0/1     Running             0          7s
+odh-notebook-controller-manager-866b7cf859-2wf2j   1/1     Running             0          29s
+rhods-dashboard-7bd94f464f-7lvn8                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-hksf6                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-n5rbz                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_pipelines_operator"></a>Installation of the Red&#160;Hat Openshift Pipelines Operator</h2>
 <div class="sectionbody">
 <div class="olist arabic">
@@ -474,146 +651,6 @@ In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, 
 </td>
 </tr>
 </table>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_data_science_operator"></a>Installation of the Red&#160;Hat Openshift Data Science operator</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Red&#160;Hat Openshift Data Science operator is available through Red Hat Operators catalogue.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc get packagemanifest | grep rhods-operator</strong>
-rhods-operator                                     Red Hat Operators     3h34m</pre>
-</div>
-</div>
-</li>
-<li>
-<p>The operator has a suggested namespace <strong>redhat-ods-operator</strong> to be installed into. However it can be installed into any namespace you choose.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc describe packagemanifest rhods-operator</strong>
-<em>...output ommited...</em>
-operatorframework.io/suggested-namespace:  redhat-ods-operator
-<em>...output ommited...</em></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Unless you choose to install it into the <em>openshift-operators</em> namespace, create the namespace first.</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-ns.yaml</strong>
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: redhat-ods-operator
-spec: {}
-EOF
-
-$ <strong>oc create -f rhods-ns.yaml</strong>
-namespace/redhat-ods-operator created</pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Within the new namespace create the  <strong>Operator Group</strong> resource.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-og.yaml</strong>
-apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: redhat-ods-operator
-  namespace: redhat-ods-operator
-spec: {}
-EOF
-
-$ <strong>oc create -f rhods-og.yaml</strong>
-operatorgroup.operators.coreos.com/redhat-ods-operator created</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Finally create the  operator&#8217;s subscription to start the installation.</p>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-subs.yaml</strong>
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: rhods-operator
-  namespace: redhat-ods-operator
-spec:
-  channel: stable
-  installPlanApproval: Automatic
-  name: rhods-operator
-  source: redhat-operators
-  sourceNamespace: openshift-marketplace
-  startingCSV: rhods-operator.1.33.0
-EOF
-
-$ <strong>oc create -f rhods-subs.yaml</strong>
-subscription.operators.coreos.com/rhods-operator created</pre>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="section2.html#manual_approval" class="xref page">previous section</a> for more information.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-It may take some time for all the operator&#8217;s pods to start hence the <strong>Red&#160;Hat Openshift Data Science</strong> dashboard may not be available immediately. You can check their status in the <strong>redhat-ods-applications</strong> namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
-</td>
-</tr>
-</table>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc get pods -n redhat-ods-applications</strong>
-NAME                                               READY   STATUS              RESTARTS   AGE
-etcd-cc4d875c-8trld                                0/1     PodInitializing     0          7s
-modelmesh-controller-5749b94578-2j8nv              0/1     Running             0          7s
-modelmesh-controller-5749b94578-jcxc7              0/1     ContainerCreating   0          7s
-modelmesh-controller-5749b94578-rww94              0/1     ContainerCreating   0          7s
-notebook-controller-deployment-685bb8f9d6-6dtbh    0/1     Running             0          29s
-odh-model-controller-7d495b56cb-8pnn9              0/1     Running             0          7s
-odh-model-controller-7d495b56cb-8xh5h              0/1     Running             0          7s
-odh-model-controller-7d495b56cb-kcmqr              0/1     Running             0          7s
-odh-notebook-controller-manager-866b7cf859-2wf2j   1/1     Running             0          29s
-rhods-dashboard-7bd94f464f-7lvn8                   1/2     Running             0          47s
-rhods-dashboard-7bd94f464f-hksf6                   1/2     Running             0          47s
-rhods-dashboard-7bd94f464f-n5rbz                   1/2     Running             0          47s
-rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0          47s
-rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s</pre>
-</div>
 </div>
 </div>
 </div>
