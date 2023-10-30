@@ -1,4 +1,5 @@
-= General Installation   #find a better title
+//find a better title
+= General Installation   
 
 *Red{nbsp}Hat Openshift Data Science* is distributed as an operator and available through OpenShift marketplace. There are some other operators that you may need to install depending on which features and components of *Red{nbsp}Hat Openshift Data Science* you want to install and use.
 
