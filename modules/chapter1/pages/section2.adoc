@@ -1,6 +1,6 @@
 = Installation using the Web Console
 
-As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Market Place. In the following demonstration you will install the *Red{nbsp}Hat Openshift Data Science* operator version 2 using the Openshift web console.
+As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Market Place. In the following demonstration you will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console.
 
 
 == Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
@@ -20,9 +20,7 @@ IMPORTANT: Make sure you select *Openshift Data Science* from *Red{nbsp}Hat* not
 +
 image::rhods_install2.png[width=800]
 
-4. In the installation view window choose the **Update Channel**, **Installed{nbsp}Namespace** and *Update approval** or accept default values and click on **Install* the button. The *Installation{nbsp}mode* parameter is fixed.
-+
-NOTE: The version 2 operator is availble via the _alpha_ channel at the moment.
+4. In the installation view window choose the _alpha_ *Update Channel*, _Automatic_ *Update approval* and keep the default *Installed Namespace*. Click on the *Install* button to start the installation.
 +
 image::rhods2-install-view.png[width=800]
 +
@@ -34,11 +32,13 @@ image::rhods2-install.png[width=800]
 +
 image::rhods2-install-finished.png[width=800]
 
-6. In the *Create DataScienceCluster* view name your cluster and select DataScience components that will be installed and managed by the operator. You can choose to create it using either the _Form view_ and _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_.  
+6. In the *Create DataScienceCluster* view choose a name for your cluster and select components that will be installed and managed by the operator. For this demonstration you can accept the default selection of components.
++
+You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
 +
 image::rhods2-create-cluster.png[width=800]
 +
-If you choose the _YAML view_, you are presented with a template of the YAML DataScienceCluster definition similar to the one below.
+If you choose the _YAML view_, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.
 +
 ----
 apiVersion: datasciencecluster.opendatahub.io/v1
@@ -69,13 +69,12 @@ spec:
       managementState: Managed
 ----
 <1> Name of the cluster 
-<2> For components you do not want to install use *Remove*
-<3> For components you want to install and manage by the operator use *Managed*
+<2> For components you *do not* want to install use *Remove*
+<3> For components you *want* to install and manage by the operator use *Managed*
 +
 After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
 
-7. Wait until the status of the operator reads *Phase:
-Ready*
+7. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*
 +
 image::rhods2-clusters.png[width=800]
 
@@ -84,7 +83,7 @@ In the applications window in the right upper corner of the screen the *Red{nbsp
 +
 image::rhods_verify1.png[width=800]
 + 
-When you click on the *Red{nbsp}Hat Openshift Data Science* dashboard button a login window should appear.
+9. Click on the *Red{nbsp}Hat Openshift Data Science* button to log in to the *Red{nbsp}Hat Openshift Data Science*.
 +
 image::rhods_verify2.png[width=800]
 +
