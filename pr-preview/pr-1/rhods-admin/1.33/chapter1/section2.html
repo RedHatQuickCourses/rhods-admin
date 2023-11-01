@@ -141,7 +141,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>As mentioned earlier,  <strong>Red&#160;Hat Openshift Data Science</strong> is available as an operator via Openshift Market Place. In the following demonstration you will install the <strong>Red&#160;Hat Openshift Data Science</strong> operator version 2 using the Openshift web console.</p>
+<p>As mentioned earlier,  <strong>Red&#160;Hat Openshift Data Science</strong> is available as an operator via Openshift Market Place. In the following demonstration you will install the <strong>Red&#160;Hat Openshift Data Science operator V2</strong> using the Openshift web console.</p>
 </div>
 </div>
 </div>
@@ -194,19 +194,7 @@ Make sure you select <strong>Openshift Data Science</strong> from <strong>Red&#1
 </div>
 </li>
 <li>
-<p>In the installation view window choose the <strong>Update Channel</strong>, <strong>Installed&#160;Namespace</strong> and <strong>Update approval<strong> or accept default values and click on </strong>Install</strong> the button. The <strong>Installation&#160;mode</strong> parameter is fixed.</p>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The version 2 operator is availble via the <em>alpha</em> channel at the moment.
-</td>
-</tr>
-</table>
-</div>
+<p>In the installation view window choose the <em>alpha</em> <strong>Update Channel</strong>, <em>Automatic</em> <strong>Update approval</strong> and keep the default <strong>Installed Namespace</strong>. Click on the <strong>Install</strong> button to start the installation.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-install-view.png" alt="rhods2 install view" width="800">
@@ -230,14 +218,17 @@ The version 2 operator is availble via the <em>alpha</em> channel at the moment.
 </div>
 </li>
 <li>
-<p>In the <strong>Create DataScienceCluster</strong> view name your cluster and select DataScience components that will be installed and managed by the operator. You can choose to create it using either the <em>Form view</em> and <em>YAML View</em>. The <em>Form view</em> is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the <em>Form view</em>.</p>
+<p>In the <strong>Create DataScienceCluster</strong> view choose a name for your cluster and select components that will be installed and managed by the operator. For this demonstration you can accept the default selection of components.</p>
+<div class="paragraph">
+<p>You can choose to create the DataScienceCluster using either the <em>Form view</em> or the <em>YAML View</em>. The <em>Form view</em> is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the <em>Form view</em>.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-create-cluster.png" alt="rhods2 create cluster" width="800">
 </div>
 </div>
 <div class="paragraph">
-<p>If you choose the <em>YAML view</em>, you are presented with a template of the YAML DataScienceCluster definition similar to the one below.</p>
+<p>If you choose the <em>YAML view</em>, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -277,11 +268,11 @@ spec:
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>For components you do not want to install use <strong>Remove</strong></td>
+<td>For components you <strong>do not</strong> want to install use <strong>Remove</strong></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>For components you want to install and manage by the operator use <strong>Managed</strong></td>
+<td>For components you <strong>want</strong> to install and manage by the operator use <strong>Managed</strong></td>
 </tr>
 </table>
 </div>
@@ -290,8 +281,7 @@ spec:
 </div>
 </li>
 <li>
-<p>Wait until the status of the operator reads <strong>Phase:
-Ready</strong></p>
+<p>After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads <strong>Phase: Ready</strong></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-clusters.png" alt="rhods2 clusters" width="800">
@@ -306,9 +296,9 @@ In the applications window in the right upper corner of the screen the <strong>R
 <img src="_images/rhods_verify1.png" alt="rhods verify1" width="800">
 </div>
 </div>
-<div class="paragraph">
-<p>When you click on the <strong>Red&#160;Hat Openshift Data Science</strong> dashboard button a login window should appear.</p>
-</div>
+</li>
+<li>
+<p>Click on the <strong>Red&#160;Hat Openshift Data Science</strong> button to log in to the <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_verify2.png" alt="rhods verify2" width="800">
