@@ -1,6 +1,6 @@
 = Installation Using the Command Line Interface
 
-This section covers installation of the *Red{nbsp}Hat Openshift Data Science* from the command line interface. Command line installation requires a bit more understanding of openshift resources than web insterface installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.
+This section covers installation of the *Red{nbsp}Hat Openshift Data Science* from the command line interface. Command line installation requires a bit more understanding of openshift resources than the web based installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.
 
 == Introduction to CLI-based operator installations
 In OpenShift, the Operator Lifecycle Manager (OLM) helps users install and manage operators and their associated services.
@@ -28,7 +28,7 @@ Cluster service version (CSV)::
   Each version of an operator has a corresponding CSV. The CSV contains the information that
   the OLM requires to install the operator.
 
-When installing an operator, an administrator must create only the operator group (unless the target namespace is *openshift-operators* where the operator group resource already exists) and the subscription. Optionally a namespace can be created if it does not exists.
+When installing an operator, an administrator must create only the *Operator Group* (unless the target namespace is *openshift-operators* where the *Operator Group* resource already exists) and the *Subscription*. Optionally a *Namespace* can be created if it does not exists. Other resources are created by the OLM.
 
 Following are examples of the resources an adminstrator must create.
 
@@ -63,7 +63,7 @@ spec: {}
 
 Subscription::
 --
-When a subscription is created the OLM starts the installation of the operator based on details set in the subscription resource.
+When a *Subscription* resource is created the OLM starts the installation of the operator based on the details set in the *Subscription* resource.
 [subs=+quotes]
 [#subscription]
 ----
@@ -83,14 +83,15 @@ spec:
 <1> Name of the subscription resource.
 <2> Name of the namespace to create the subscription resource in.
 <3> Update channel to install the operator from. For more information about finding available channels see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
-<4> Staring Cluster Service Version of the operator. For more information about finding available CSVs see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
-<5> installPlanApproval can be either *Automatic* or *Manual*. For more details about manual installation approval se the xref:section3.adoc#manual_approval[Approving Installation Manualy] section
+<4> Starting Cluster Service Version of the operator. For more information about finding available CSVs see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<5> *installPlanApproval* attribute can be either *Automatic* or *Manual*. For more details about manual installation approval se the xref:section3.adoc#manual_approval[Approving Installation Manualy] section.
 --
 
 [#findchannel]
 === Finding Update Channels and Cluster Service Versions
 --
-It can be a little challenging to find available channels and their Cluster Service Versions (CSVs) from the command line interface. _JQuery_ is a powerfull tool to filter values from JSON resource manifests.
+Update channels, CSVs and other details about the operator can be found in a resource *packagemanifest*. 
+It can be however a little challenging to search the *packagemanifest* as it is quite complex. _JQuery_ is a powerfull tool to filter values from JSON resource manifests.
 
 The following example lists available channels for the *rhods-operator* operator.
 [subs=+quotes]
@@ -125,7 +126,7 @@ To find available CSVs for a particular channel you can use the following comman
 
 [#manual_approval]
 === Approving Installation Manualy
-As a part of the installation process OLM creates an *installplan* resource in the namespace the operator will be installed into  . The *installplan* resource contains information about the installation and updates. When the *installPlanApproval* parameter of a subscription is set to  *Manual*, the installation has to be manually approved by patching the corresponding *installplan* resource in order to start.
+As a part of the installation process OLM creates an *installplan* resource in the namespace the operator will be installed into. The *installplan* resource contains information about the installation and updates. When the *installPlanApproval* parameter of a *Subscription* is set to  *Manual*, the installation has to be manually approved by patching the corresponding *installplan* resource in order to start.
 --
 [subs=+quotes]
 ----
@@ -144,6 +145,35 @@ install-vpgls   _operator_name_   Manual     #true#  <3>
 <2> The patch command approves the installation.
 <3> Approval has been set and installation starts.
 --
+[#installprogress]
+=== Checking Installation Progress
+
+Installation progress can be found in the operator's status.
+The following example shows how to find the status of the *Openshift Pipelines* operator installation.
+[subs=+quotes]
+----
+*$ oc get operators*
+NAME                                                  AGE
+mcg-operator.openshift-storage                        7h24m
+ocs-operator.openshift-storage                        7h24m
+odf-csi-addons-operator.openshift-storage             7h24m
+odf-operator.openshift-storage                        7h25m
+#openshift-pipelines-operator-rh.openshift-operators#   20m <1>
+
+*$ oc get operator openshift-pipelines-operator-rh.openshift-operators -o json| \
+jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[]'*
+
+{
+  "lastTransitionTime": "2023-11-01T21:01:25Z",
+  "lastUpdateTime": "2023-11-01T21:01:26Z",
+  "message": "installing: waiting for deployment openshift-pipelines-operator to become ready: deployment \"openshift-pipelines-operator\" not available: Deployment does not have minimum availability.",
+  "reason": "InstallWaiting", <2>
+  "status": "True",
+  "type": "Installing"        <2>
+}
+----
+<1> Operator's resource name
+<2> Status of the installation. Operator is installed when *reason* reads _InstallSucceeded_ and *type* reads _Succeeded_.
 
 
 == Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
@@ -220,7 +250,7 @@ subscription.operators.coreos.com/rhods-operator created
 ----
 <1> The namespace to install the operator into.
 <2> The update channel to install the operator from. To find all available  channels see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
-<3> The Cluster Service Version (CSV) to install. To find all available CVSs for the selected channel see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<3> The Cluster Service Version (CSV) to install. To find all available CSVs for the selected channel see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
 <4> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
 
@@ -237,13 +267,13 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: datasciencecluster
     app.kubernetes.io/part-of: rhods-operator
-  name: mycluster
+  name: mycluster  <1>
 spec:
   components:
     codeflare:
-      managementState: Removed
+      managementState: Removed <2>
     dashboard:
-      managementState: Managed
+      managementState: Managed <3>
     datasciencepipelines:
       managementState: Managed
     kserve:
@@ -258,6 +288,11 @@ EOF
 
 oc create -f rhods-cluster.yaml
 ----
+<1> Name of the cluster
+<2> Use *Remove* for components that *will not* be installed.
+<3> Use *Managed* foc components that will be installed.
+
+6. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
 
 [NOTE]
 It may take some time for all the operator's pods to start hence the *Red{nbsp}Hat Openshift Data Science* dashboard may not be available immediately. You can check their status in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
@@ -286,9 +321,10 @@ rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0
 
 You may need to install other operators depending on the components and features of Openshift Data Science you want to use:
 
-* Red Hat Openshift Pipelines operator
-* NVIDIA GPU Operator
-* Node Feature Discovery Operator
+* https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]
+* https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]
+* https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]
+
 
 The following demo shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.
 
@@ -302,7 +338,7 @@ $ *oc get packagemanifest | grep pipelines*
 openshift-pipelines-operator-rh                    Red Hat Operators     24h
 ----
 
-2. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.
+2. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the *Subscription* resource to start the installation. 
 +
 --
 [subs=+quotes]
@@ -328,3 +364,6 @@ $ *oc create -f pipelines-subs.yaml*
 <2> The Cluster Service Version (CSV) to install. To find all available CVSs for the update channel see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
 <3> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
+3. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
+
+
