@@ -3,10 +3,12 @@
 
 *Red{nbsp}Hat Openshift Data Science* is distributed as an operator and available through OpenShift marketplace. There are some other operators that you may need to install depending on which features and components of *Red{nbsp}Hat Openshift Data Science* you want to install and use.
 
-The https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator] is required for the *Red{nbsp}Hat Openshift Data Science* pipelines component.
+https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
+ This operator is required for the *Red{nbsp}Hat Openshift Data Science* pipelines component.
 
-To ensure that data scientists can use compute-heavy workloads you can https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science_self-managed/1.33/html-single/installing_openshift_data_science_self-managed/index#enabling-gpu-support-in-openshift-data-science_install[enable graphics processing units (GPUs)] in *Openshift Data Science*. It requres the https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]
-and the https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator] to be installed.
+https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
+https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
+These two operators are necessary when you want to https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science_self-managed/1.33/html-single/installing_openshift_data_science_self-managed/index#enabling-gpu-support-in-openshift-data-science_install[enable graphics processing units (GPUs)] in *Openshift Data Science* to ensure that data scientists can use compute-heavy workloads. 
 
 [IMPORTANT]
-*Red{nbsp}Hat Openshift Data Science* operator is available in two different main versions at the moment - version 1 and 2. There are some differences in installation between the two. Mainly that the version 1 operator installs all *Red{nbsp}Hat Openshift Data Science* components automatically whereas version 2 operator requires you to make a selection of the components to be installed and managed by the operator. In the class we are focusing on the version 2 operator as it will become the stable version soon. At the moment it is available through _alpha_ channel.
+*Red{nbsp}Hat Openshift Data Science* operator is available in two different main versions at the moment - *Red{nbsp}Hat Openshift Data Science Operator V1* and *Red{nbsp}Hat Openshift Data Science operator V2*. There are some differences in installation between the two. Mainly that the V1 operator installs all the *Red{nbsp}Hat Openshift Data Science* components automatically whereas the V2 operator requires you to make a selection of the components to be installed and managed by the operator after the installation. In the class we focus on the V2 operator as it will become the stable version soon. At the moment it is available through the _alpha_ channel.
