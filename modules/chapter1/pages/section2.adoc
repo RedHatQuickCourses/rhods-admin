@@ -1,10 +1,9 @@
 = Installation using the Web Console
 
-As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Market place. In the following exercise you will install the operator using the Openshift web console.
+As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Market Place. In the following demonstration you will install the *Red{nbsp}Hat Openshift Data Science* operator version 2 using the Openshift web console.
 
 
-
-== Installation of the Red{nbsp}Hat Openshift Data Science operator
+== Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
@@ -14,10 +13,12 @@ IMPORTANT: The installation requires a user with the _cluster-admin_ role
 +
 image::rhods_install1.png[width=800]
 
+
 3. Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
 +
+IMPORTANT: Make sure you select *Openshift Data Science* from *Red{nbsp}Hat* not the *Community* version.
++
 image::rhods_install2.png[width=800]
- 
 
 4. In the installation view window choose the **Update Channel**, **Installed{nbsp}Namespace** and *Update approval** or accept default values and click on **Install* the button. The *Installation{nbsp}mode* parameter is fixed.
 +
@@ -33,7 +34,7 @@ image::rhods2-install.png[width=800]
 +
 image::rhods2-install-finished.png[width=800]
 
-6. In the *Create DataScienceCluster* view name your cluster and select DataScience components that will be installed and managed by the operator. You can choose to create it using either the _Form view_ and _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster. The following picture shows the _Form view_.  
+6. In the *Create DataScienceCluster* view name your cluster and select DataScience components that will be installed and managed by the operator. You can choose to create it using either the _Form view_ and _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_.  
 +
 image::rhods2-create-cluster.png[width=800]
 +
@@ -67,18 +68,18 @@ spec:
     workbenches:
       managementState: Managed
 ----
-<1> Name of the cluster
+<1> Name of the cluster 
 <2> For components you do not want to install use *Remove*
 <3> For components you want to install and manage by the operator use *Managed*
 +
-After naming the cluster and choosing the components you wish the operator to install and manage click on teh *Create* button.
+After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
 
-6. Wait until the status of the operator reads *Phase:
+7. Wait until the status of the operator reads *Phase:
 Ready*
 +
 image::rhods2-clusters.png[width=800]
 
-7. The operator should be installed and configured now. 
+8. The operator should be installed and configured now. 
 In the applications window in the right upper corner of the screen the *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
 +
 image::rhods_verify1.png[width=800]
@@ -93,7 +94,8 @@ Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. 
 image::rhods_verify_pods.png[width=800] 
 
 
-== Installation of other operators required by Openshift Data Science.
+== Installation of other operators required by Openshift Data Science
+
 
 You may need to install other operators depending on the components and features of Openshift Data Science you want to use:
 
@@ -101,8 +103,9 @@ You may need to install other operators depending on the components and features
 * NVIDIA GPU Operator
 * Node Feature Discovery Operator
 
-The following exercise shows installation of the *Red{nbsp}Hat Openshift Pipelines* operator. Installation of the two other operators is very similar.
+The following demo shows installation of the *Red{nbsp}Hat Openshift Pipelines* operator. Installation of the two other operators is very similar.
 
+=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* operator
 
 1. Login to Red{nbsp}Hat Openshift using a user which has the _cluster-admin_ role assigned.
 2. Navigate to **Operators** -> **OperatorHub** and seach for *Red{nbsp}Hat Openshift Pipelines*
@@ -122,7 +125,7 @@ image::pipeline_install2.png[width=800]
 + 
 image::pipeline_install3.png[width=800]
 
-6. When the operator is installed you can view it's details by clicking on **View{nbsp}Operator** button.
+6. When the installation finishes the operator is ready to be used by the *Red{nbsp}Hat Openshift Data Science*.
 +
 image::pipeline_install4.png[width=800]
 
