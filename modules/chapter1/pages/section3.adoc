@@ -1,6 +1,6 @@
 = Installation Using the Command Line Interface
 
-Similarly to the Web Console installation, both *Red{nbsp}Hat Openshift Pipelines* operator and *Red{nbsp}Hat Openshift Data Science* operators have to be installed.
+This section covers installation of the *Red{nbsp}Hat Openshift Data Science* from the command line interface. Command line installation requires a bit more understanding of openshift resources than web insterface installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.
 
 == Introduction to CLI-based operator installations
 In OpenShift, the Operator Lifecycle Manager (OLM) helps users install and manage operators and their associated services.
@@ -42,7 +42,7 @@ metadata:
   name: _operator_namespace_ <1>
 spec: {}
 ----
-<1> Name of the namespace to install the operator into.
+<1> Name of the namespace to create.
 --
 NOTE: Namespace has to be only created if it does not already exist. An operator can be installed into an existing namespace.
 
@@ -63,6 +63,7 @@ spec: {}
 
 Subscription::
 --
+When a subscription is created the OLM starts the installation of the operator based on details set in the subscription resource.
 [subs=+quotes]
 [#subscription]
 ----
@@ -73,45 +74,23 @@ metadata:
   namespace: _operator_namespace_ <2>
 spec:
   channel: _channel_ <3>
-  installPlanApproval: _Manual/Automatic_ <4>
+  startingCSV: _Operator_CSV_ <4>
+  installPlanApproval: _Manual/Automatic_ <5>
   name: _Operator_name_
   source: _Catalog_source_
   sourceNamespace: openshift-marketplace
-  startingCSV: _Operator_CSV_ <5>
 ----
 <1> Name of the subscription resource.
 <2> Name of the namespace to create the subscription resource in.
-<3> Update channel to install the operator from. For more information about finding available channels see this xref:section3.adoc#findchannel[note].
-<4> installPlanApproval can be either *Automatic* or *Manual*.
-<5> Staring Cluster Service Version of the operator. For more information about finding available CSVs see this xref:section3.adoc#findchannel[note].
-
+<3> Update channel to install the operator from. For more information about finding available channels see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<4> Staring Cluster Service Version of the operator. For more information about finding available CSVs see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<5> installPlanApproval can be either *Automatic* or *Manual*. For more details about manual installation approval se the xref:section3.adoc#manual_approval[Approving Installation Manualy] section
 --
 
-[#manual_approval]
-IMPORTANT: When *installPlanApproval* is set to  *Manual*, the installation has to be manually approved in order to start.
-
---
-[subs=+quotes]
-----
-$ *oc get installplan -n _operator_namespace_*
-NAME            CSV                     APPROVAL   APPROVED
-install-vpgls   _operator_csv_   Manual     #false#   <1>
-
-$ *oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_namespace_*
-installplan.operators.coreos.com/install-vpgls patched  <2>
-
-$ *oc get installplan -n redhat-ods-operator*
-NAME            CSV                     APPROVAL   APPROVED
-install-vpgls   _operator_name_   Manual     #true#  <3>
-----
-<1> Approval has not been set.
-<2> The patch command approves the installation.
-<3> Approval has been set and installation starts.
---
-
---
 [#findchannel]
-NOTE: It can be little challenging to find available channels and their Cluster Service Versions (CSVs) from the CLI. _JQuery_ is a powerfull tool to filter values from resource manifests.
+=== Finding Update Channels and Cluster Service Versions
+--
+It can be a little challenging to find available channels and their Cluster Service Versions (CSVs) from the command line interface. _JQuery_ is a powerfull tool to filter values from JSON resource manifests.
 
 The following example lists available channels for the *rhods-operator* operator.
 [subs=+quotes]
@@ -135,23 +114,46 @@ To find available CSVs for a particular channel you can use the following comman
     "version": "2.2.0"
   },
   {
-    "name": "rhods-operator.2.1.0",
+    "name": "rhods-operator.2.1.0", <2>
     "version": "2.1.0"
   }
 ]
 ----
 <1> *alpha* is the name of the channel.
-<2> The value of the _name_ attribute is used as a value of the xref:section3.adoc#subscription[startingCSV] attribute in the subscription to select the starting channel.
+<2> The value of the _name_ attribute is used as a value of the xref:section3.adoc#subscription[startingCSV] attribute in the subscription to select the starting version.
 --
 
-== Installation of the Red{nbsp}Hat Openshift Data Science operator
+[#manual_approval]
+=== Approving Installation Manualy
+As a part of the installation process OLM creates an *installplan* resource in the namespace the operator will be installed into  . The *installplan* resource contains information about the installation and updates. When the *installPlanApproval* parameter of a subscription is set to  *Manual*, the installation has to be manually approved by patching the corresponding *installplan* resource in order to start.
+--
+[subs=+quotes]
+----
+$ *oc get installplan -n _operator_namespace_*
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   _operator_csv_   Manual     #false#   <1>
 
-1. Red{nbsp}Hat Openshift Data Science operator is available through Red Hat Operators catalogue.
+$ *oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_namespace_*
+installplan.operators.coreos.com/install-vpgls patched  <2>
+
+$ *oc get installplan -n redhat-ods-operator*
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   _operator_name_   Manual     #true#  <3>
+----
+<1> Approval has not been set.
+<2> The patch command approves the installation.
+<3> Approval has been set and installation starts.
+--
+
+
+== Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
+
+1. Red{nbsp}Hat Openshift Data Science operator is available through Red Hat Operators catalogue. To install it, locate the manifest.
 +
 [subs=+quotes]
 ----
 $ *oc get packagemanifest | grep rhods-operator*
-rhods-operator                                     Red Hat Operators     3h34m
+rhods-operator                             Red Hat Operators     3h34m
 ----
 
 2. The operator has a suggested namespace *redhat-ods-operator* to be installed into. However it can be installed into any namespace you choose.
@@ -164,7 +166,7 @@ operatorframework.io/suggested-namespace:  redhat-ods-operator
 _...output ommited..._
 ----
 
-3. Unless you choose to install it into the _openshift-operators_ namespace, create the namespace first.
+3. Unless you choose to install it into the _openshift-operators_ namespace, create the *Namespace* and *Operator Group* in it first.
 +
 --
 [subs=+quotes]
@@ -179,13 +181,7 @@ EOF
 
 $ *oc create -f rhods-ns.yaml*
 namespace/redhat-ods-operator created
-----
---
 
-4. Within the new namespace create the  *Operator Group* resource.
-+
-[subs=+quotes]
-----
 $ *cat <<EOF > rhods-og.yaml*
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
@@ -198,8 +194,8 @@ EOF
 $ *oc create -f rhods-og.yaml*
 operatorgroup.operators.coreos.com/redhat-ods-operator created
 ----
-
-5. Finally create the  operator's subscription to start the installation.
+--
+4. Now create the  operator's subscription to start the installation.
 +
 --
 [subs=+quotes]
@@ -209,26 +205,26 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: rhods-operator
-  namespace: redhat-ods-operator
+  namespace: redhat-ods-operator <1>
 spec:
-  channel: alpha
-  installPlanApproval: Automatic
+  channel: alpha <2>
+  startingCSV: rhods-operator.2.2.0 <3>
+  installPlanApproval: Automatic <4>
   name: rhods-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: rhods-operator.2.2.0
 EOF
 
 $ *oc create -f rhods-subs.yaml*
 subscription.operators.coreos.com/rhods-operator created
 ----
-
-
-[NOTE]
-In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[previous section] for more information.
+<1> The namespace to install the operator into.
+<2> The update channel to install the operator from. To find all available  channels see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<3> The Cluster Service Version (CSV) to install. To find all available CVSs for the selected channel see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<4> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
 
-6. Create your Openshift DataScience Cluster
+5. Finally create your Openshift DataScience Cluster resource to configure your cluster.
 +
 ----
 cat <<EOF > rhods-cluster.yaml
@@ -294,9 +290,9 @@ You may need to install other operators depending on the components and features
 * NVIDIA GPU Operator
 * Node Feature Discovery Operator
 
-The following exercise shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.
+The following demo shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.
 
-
+=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* operator
 
 1. To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshift-pipelines-operator-rh` package manifest.
 +
@@ -306,31 +302,7 @@ $ *oc get packagemanifest | grep pipelines*
 openshift-pipelines-operator-rh                    Red Hat Operators     24h
 ----
 
-2. To get more information about the operator use *oc describe*. You need to find available channels and CSVs associated with them so you can use them later when creating the operator's subscription.
-+
-[subs=+quotes]
-----
-$ *oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace*
-Name:         openshift-pipelines-operator-rh
-Namespace:    openshift-marketplace
-Labels:       catalog=redhat-operators
-..._output omitted_...
-Spec:
-Status:
-  Catalog Source:               redhat-operators
-  Catalog Source Display Name:  Red Hat Operators
-  Catalog Source Namespace:     openshift-marketplace
-  Catalog Source Publisher:     Red Hat
-  Channels:
-    Current CSV:  openshift-pipelines-operator-rh.v1.12.0
-    Current CSV Desc:
-      Annotations:
-        Alm - Examples:  [
-..._output omitted_...
-----
-
-
-3. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.
+2. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.
 +
 --
 [subs=+quotes]
@@ -342,18 +314,17 @@ metadata:
   name: openshift-pipelines-operator-rh
   namespace: openshift-operators
 spec:
-  channel: latest
-  installPlanApproval: Automatic
+  channel: latest <1>
+  startingCSV: openshift-pipelines-operator-rh.v1.12.1 <2>
+  installPlanApproval: Automatic <3>
   name: openshift-pipelines-operator-rh
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: openshift-pipelines-operator-rh.v1.12.0
 EOF
 
 $ *oc create -f pipelines-subs.yaml*
 ----
-
-
-[NOTE]
-In case *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[previous section] for more information.
+<1> The update channel to install the operator from. To find all available channels see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<2> The Cluster Service Version (CSV) to install. To find all available CVSs for the update channel see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<3> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
