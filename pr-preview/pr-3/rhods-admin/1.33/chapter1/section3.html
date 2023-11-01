@@ -141,7 +141,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section covers installation of the <strong>Red&#160;Hat Openshift Data Science</strong> from the command line interface. Command line installation requires a bit more understanding of openshift resources than web insterface installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.</p>
+<p>This section covers installation of the <strong>Red&#160;Hat Openshift Data Science</strong> from the command line interface. Command line installation requires a bit more understanding of openshift resources than the web based installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.</p>
 </div>
 </div>
 </div>
@@ -190,7 +190,7 @@ the OLM requires to install the operator.</p>
 </dl>
 </div>
 <div class="paragraph">
-<p>When installing an operator, an administrator must create only the operator group (unless the target namespace is <strong>openshift-operators</strong> where the operator group resource already exists) and the subscription. Optionally a namespace can be created if it does not exists.</p>
+<p>When installing an operator, an administrator must create only the <strong>Operator Group</strong> (unless the target namespace is <strong>openshift-operators</strong> where the <strong>Operator Group</strong> resource already exists) and the <strong>Subscription</strong>. Optionally a <strong>Namespace</strong> can be created if it does not exists. Other resources are created by the OLM.</p>
 </div>
 <div class="paragraph">
 <p>Following are examples of the resources an adminstrator must create.</p>
@@ -272,7 +272,7 @@ spec: {}</pre>
 <div class="openblock">
 <div class="content">
 <div class="paragraph">
-<p>When a subscription is created the OLM starts the installation of the operator based on details set in the subscription resource.</p>
+<p>When a <strong>Subscription</strong> resource is created the OLM starts the installation of the operator based on the details set in the <strong>Subscription</strong> resource.</p>
 </div>
 <div id="subscription" class="listingblock">
 <div class="content">
@@ -306,11 +306,11 @@ spec:
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Staring Cluster Service Version of the operator. For more information about finding available CSVs see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+<td>Starting Cluster Service Version of the operator. For more information about finding available CSVs see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>installPlanApproval can be either <strong>Automatic</strong> or <strong>Manual</strong>. For more details about manual installation approval se the <a href="#manual_approval">Approving Installation Manualy</a> section</td>
+<td><strong>installPlanApproval</strong> attribute can be either <strong>Automatic</strong> or <strong>Manual</strong>. For more details about manual installation approval se the <a href="#manual_approval">Approving Installation Manualy</a> section.</td>
 </tr>
 </table>
 </div>
@@ -321,7 +321,8 @@ spec:
 <div class="openblock">
 <div class="content">
 <div class="paragraph">
-<p>It can be a little challenging to find available channels and their Cluster Service Versions (CSVs) from the command line interface. <em>JQuery</em> is a powerfull tool to filter values from JSON resource manifests.</p>
+<p>Update channels, CSVs and other details about the operator can be found in a resource <strong>packagemanifest</strong>.
+It can be however a little challenging to search the <strong>packagemanifest</strong> as it is quite complex. <em>JQuery</em> is a powerfull tool to filter values from JSON resource manifests.</p>
 </div>
 <div class="paragraph">
 <p>The following example lists available channels for the <strong>rhods-operator</strong> operator.</p>
@@ -372,7 +373,7 @@ spec:
 <div class="sect2">
 <h3 id="manual_approval"><a class="anchor" href="#manual_approval"></a>Approving Installation Manualy</h3>
 <div class="paragraph">
-<p>As a part of the installation process OLM creates an <strong>installplan</strong> resource in the namespace the operator will be installed into  . The <strong>installplan</strong> resource contains information about the installation and updates. When the <strong>installPlanApproval</strong> parameter of a subscription is set to  <strong>Manual</strong>, the installation has to be manually approved by patching the corresponding <strong>installplan</strong> resource in order to start.</p>
+<p>As a part of the installation process OLM creates an <strong>installplan</strong> resource in the namespace the operator will be installed into. The <strong>installplan</strong> resource contains information about the installation and updates. When the <strong>installPlanApproval</strong> parameter of a <strong>Subscription</strong> is set to  <strong>Manual</strong>, the installation has to be manually approved by patching the corresponding <strong>installplan</strong> resource in order to start.</p>
 </div>
 <div class="openblock">
 <div class="content">
@@ -407,6 +408,48 @@ install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class=
 </table>
 </div>
 </div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="installprogress"><a class="anchor" href="#installprogress"></a>Checking Installation Progress</h3>
+<div class="paragraph">
+<p>Installation progress can be found in the operator&#8217;s status.
+The following example shows how to find the status of the <strong>Openshift Pipelines</strong> operator installation.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get operators</strong>
+NAME                                                  AGE
+mcg-operator.openshift-storage                        7h24m
+ocs-operator.openshift-storage                        7h24m
+odf-csi-addons-operator.openshift-storage             7h24m
+odf-operator.openshift-storage                        7h25m
+<mark>openshift-pipelines-operator-rh.openshift-operators</mark>   20m <i class="conum" data-value="1"></i><b>(1)</b>
+
+<strong>$ oc get operator openshift-pipelines-operator-rh.openshift-operators -o json| \
+jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[]'</strong>
+
+{
+  "lastTransitionTime": "2023-11-01T21:01:25Z",
+  "lastUpdateTime": "2023-11-01T21:01:26Z",
+  "message": "installing: waiting for deployment openshift-pipelines-operator to become ready: deployment \"openshift-pipelines-operator\" not available: Deployment does not have minimum availability.",
+  "reason": "InstallWaiting", <i class="conum" data-value="2"></i><b>(2)</b>
+  "status": "True",
+  "type": "Installing"        <i class="conum" data-value="2"></i><b>(2)</b>
+}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Operator&#8217;s resource name</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Status of the installation. Operator is installed when <strong>reason</strong> reads <em>InstallSucceeded</em> and <strong>type</strong> reads <em>Succeeded</em>.</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -506,7 +549,7 @@ subscription.operators.coreos.com/rhods-operator created</pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The Cluster Service Version (CSV) to install. To find all available CVSs for the selected channel see the the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+<td>The Cluster Service Version (CSV) to install. To find all available CSVs for the selected channel see the the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
@@ -531,13 +574,13 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: datasciencecluster
     app.kubernetes.io/part-of: rhods-operator
-  name: mycluster
+  name: mycluster  <i class="conum" data-value="1"></i><b>(1)</b>
 spec:
   components:
     codeflare:
-      managementState: Removed
+      managementState: Removed <i class="conum" data-value="2"></i><b>(2)</b>
     dashboard:
-      managementState: Managed
+      managementState: Managed <i class="conum" data-value="3"></i><b>(3)</b>
     datasciencepipelines:
       managementState: Managed
     kserve:
@@ -553,6 +596,25 @@ EOF
 oc create -f rhods-cluster.yaml</pre>
 </div>
 </div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the cluster</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Use <strong>Remove</strong> for components that <strong>will not</strong> be installed.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Use <strong>Managed</strong> foc components that will be installed.</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>You may check the installation progress using the operator&#8217;s status information. For more information see the <a href="#installprogress">Checking Installation Progress</a> section.</p>
 </li>
 </ol>
 </div>
@@ -599,13 +661,13 @@ rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0
 <div class="ulist">
 <ul>
 <li>
-<p>Red Hat Openshift Pipelines operator</p>
+<p><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines">Red&#160;Hat Openshift Pipelines Operator</a></p>
 </li>
 <li>
-<p>NVIDIA GPU Operator</p>
+<p><a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html">NVIDIA GPU Operator</a></p>
 </li>
 <li>
-<p>Node Feature Discovery Operator</p>
+<p><a href="https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html">Node Feature Discovery Operator</a></p>
 </li>
 </ul>
 </div>
@@ -626,7 +688,7 @@ openshift-pipelines-operator-rh                    Red Hat Operators     24h</pr
 </div>
 </li>
 <li>
-<p>The Pipelines operator&#8217;s default namespace is <em>openshift-operators</em>, hence neither the namespace nor operator group resources must be created. Create only the subscription resource to start the installation. Following is an example of the Pipelines operator subscription creation.</p>
+<p>The Pipelines operator&#8217;s default namespace is <em>openshift-operators</em>, hence neither the namespace nor operator group resources must be created. Create only the <strong>Subscription</strong> resource to start the installation.</p>
 <div class="openblock">
 <div class="content">
 <div class="listingblock">
@@ -667,6 +729,9 @@ $ <strong>oc create -f pipelines-subs.yaml</strong></pre>
 </div>
 </div>
 </div>
+</li>
+<li>
+<p>You may check the installation progress using the operator&#8217;s status information. For more information see the <a href="#installprogress">Checking Installation Progress</a> section.</p>
 </li>
 </ol>
 </div>
