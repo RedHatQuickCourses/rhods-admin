@@ -141,7 +141,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Similarly to the Web Console installation, both <strong>Red&#160;Hat Openshift Pipelines</strong> operator and <strong>Red&#160;Hat Openshift Data Science</strong> operators have to be installed.</p>
+<p>This section covers installation of the <strong>Red&#160;Hat Openshift Data Science</strong> from the command line interface. Command line installation requires a bit more understanding of openshift resources than web insterface installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.</p>
 </div>
 </div>
 </div>
@@ -215,7 +215,7 @@ spec: {}</pre>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Name of the namespace to install the operator into.</td>
+<td>Name of the namespace to create.</td>
 </tr>
 </table>
 </div>
@@ -271,6 +271,9 @@ spec: {}</pre>
 </div>
 <div class="openblock">
 <div class="content">
+<div class="paragraph">
+<p>When a subscription is created the OLM starts the installation of the operator based on details set in the subscription resource.</p>
+</div>
 <div id="subscription" class="listingblock">
 <div class="content">
 <pre>apiVersion: operators.coreos.com/v1alpha1
@@ -280,11 +283,11 @@ metadata:
   namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
 spec:
   channel: <em>channel</em> <i class="conum" data-value="3"></i><b>(3)</b>
-  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="4"></i><b>(4)</b>
+  startingCSV: <em>Operator_CSV</em> <i class="conum" data-value="4"></i><b>(4)</b>
+  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="5"></i><b>(5)</b>
   name: <em>Operator_name</em>
   source: <em>Catalog_source</em>
-  sourceNamespace: openshift-marketplace
-  startingCSV: <em>Operator_CSV</em> <i class="conum" data-value="5"></i><b>(5)</b></pre>
+  sourceNamespace: openshift-marketplace</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -299,31 +302,77 @@ spec:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Update channel to install the operator from. For more information about finding available channels see this <a href="#findchannel">note</a>.</td>
+<td>Update channel to install the operator from. For more information about finding available channels see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>installPlanApproval can be either <strong>Automatic</strong> or <strong>Manual</strong>.</td>
+<td>Staring Cluster Service Version of the operator. For more information about finding available CSVs see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>Staring Cluster Service Version of the operator. For more information about finding available CSVs see this <a href="#findchannel">note</a>.</td>
+<td>installPlanApproval can be either <strong>Automatic</strong> or <strong>Manual</strong>. For more details about manual installation approval se the <a href="#manual_approval">Approving Installation Manualy</a> section</td>
 </tr>
 </table>
 </div>
 </div>
 </div>
-<div id="manual_approval" class="admonitionblock important">
+<div class="sect2">
+<h3 id="findchannel"><a class="anchor" href="#findchannel"></a>Finding Update Channels and Cluster Service Versions</h3>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>It can be a little challenging to find available channels and their Cluster Service Versions (CSVs) from the command line interface. <em>JQuery</em> is a powerfull tool to filter values from JSON resource manifests.</p>
+</div>
+<div class="paragraph">
+<p>The following example lists available channels for the <strong>rhods-operator</strong> operator.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get packagemanifest rhods-operator -o json|jq '.status.channels[].name'</strong>
+"beta"
+"embedded"
+"stable"
+"alpha"</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To find available CSVs for a particular channel you can use the following command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get packagemanifest rhods-operator -o json| \
+  jq '.status.channels[]|select(.name=="<mark>alpha</mark>").entries'</strong> <i class="conum" data-value="1"></i><b>(1)</b>
+  [
+  {
+    "name": "rhods-operator.2.2.0",   <i class="conum" data-value="2"></i><b>(2)</b>
+    "version": "2.2.0"
+  },
+  {
+    "name": "rhods-operator.2.1.0", <i class="conum" data-value="2"></i><b>(2)</b>
+    "version": "2.1.0"
+  }
+]</pre>
+</div>
+</div>
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-When <strong>installPlanApproval</strong> is set to  <strong>Manual</strong>, the installation has to be manually approved in order to start.
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><strong>alpha</strong> is the name of the channel.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The value of the <em>name</em> attribute is used as a value of the <a href="#subscription">startingCSV</a> attribute in the subscription to select the starting version.</td>
 </tr>
 </table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="manual_approval"><a class="anchor" href="#manual_approval"></a>Approving Installation Manualy</h3>
+<div class="paragraph">
+<p>As a part of the installation process OLM creates an <strong>installplan</strong> resource in the namespace the operator will be installed into  . The <strong>installplan</strong> resource contains information about the installation and updates. When the <strong>installPlanApproval</strong> parameter of a subscription is set to  <strong>Manual</strong>, the installation has to be manually approved by patching the corresponding <strong>installplan</strong> resource in order to start.</p>
 </div>
 <div class="openblock">
 <div class="content">
@@ -359,78 +408,20 @@ install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class=
 </div>
 </div>
 </div>
-<div class="openblock">
-<div class="content">
-<div id="findchannel" class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-It can be little challenging to find available channels and their Cluster Service Versions (CSVs) from the CLI. <em>JQuery</em> is a powerfull tool to filter values from resource manifests.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following example lists available channels for the <strong>rhods-operator</strong> operator.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre><strong>$ oc get packagemanifest rhods-operator -o json|jq '.status.channels[].name'</strong>
-"beta"
-"embedded"
-"stable"
-"alpha"</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>To find available CSVs for a particular channel you can use the following command.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre><strong>$ oc get packagemanifest rhods-operator -o json| \
-  jq '.status.channels[]|select(.name=="<mark>alpha</mark>").entries'</strong> <i class="conum" data-value="1"></i><b>(1)</b>
-  [
-  {
-    "name": "rhods-operator.2.2.0",   <i class="conum" data-value="2"></i><b>(2)</b>
-    "version": "2.2.0"
-  },
-  {
-    "name": "rhods-operator.2.1.0",
-    "version": "2.1.0"
-  }
-]</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>alpha</strong> is the name of the channel.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The value of the <em>name</em> attribute is used as a value of the <a href="#subscription">startingCSV</a> attribute in the subscription to select the starting channel.</td>
-</tr>
-</table>
-</div>
-</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_installation_of_the_redhat_openshift_data_science_operator"></a>Installation of the Red&#160;Hat Openshift Data Science operator</h2>
+<h2 id="_demo_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_data_science_operator"></a>Demo: Installation of the Red&#160;Hat Openshift Data Science operator</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Red&#160;Hat Openshift Data Science operator is available through Red Hat Operators catalogue.</p>
+<p>Red&#160;Hat Openshift Data Science operator is available through Red Hat Operators catalogue. To install it, locate the manifest.</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>oc get packagemanifest | grep rhods-operator</strong>
-rhods-operator                                     Red Hat Operators     3h34m</pre>
+rhods-operator                             Red Hat Operators     3h34m</pre>
 </div>
 </div>
 </li>
@@ -446,7 +437,7 @@ operatorframework.io/suggested-namespace:  redhat-ods-operator
 </div>
 </li>
 <li>
-<p>Unless you choose to install it into the <em>openshift-operators</em> namespace, create the namespace first.</p>
+<p>Unless you choose to install it into the <em>openshift-operators</em> namespace, create the <strong>Namespace</strong> and <strong>Operator Group</strong> in it first.</p>
 <div class="openblock">
 <div class="content">
 <div class="listingblock">
@@ -460,17 +451,9 @@ spec: {}
 EOF
 
 $ <strong>oc create -f rhods-ns.yaml</strong>
-namespace/redhat-ods-operator created</pre>
-</div>
-</div>
-</div>
-</div>
-</li>
-<li>
-<p>Within the new namespace create the  <strong>Operator Group</strong> resource.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>cat &lt;&lt;EOF &gt; rhods-og.yaml</strong>
+namespace/redhat-ods-operator created
+
+$ <strong>cat &lt;&lt;EOF &gt; rhods-og.yaml</strong>
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -483,9 +466,11 @@ $ <strong>oc create -f rhods-og.yaml</strong>
 operatorgroup.operators.coreos.com/redhat-ods-operator created</pre>
 </div>
 </div>
+</div>
+</div>
 </li>
 <li>
-<p>Finally create the  operator&#8217;s subscription to start the installation.</p>
+<p>Now create the  operator&#8217;s subscription to start the installation.</p>
 <div class="openblock">
 <div class="content">
 <div class="listingblock">
@@ -495,29 +480,37 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: rhods-operator
-  namespace: redhat-ods-operator
+  namespace: redhat-ods-operator <i class="conum" data-value="1"></i><b>(1)</b>
 spec:
-  channel: alpha
-  installPlanApproval: Automatic
+  channel: alpha <i class="conum" data-value="2"></i><b>(2)</b>
+  startingCSV: rhods-operator.2.2.0 <i class="conum" data-value="3"></i><b>(3)</b>
+  installPlanApproval: Automatic <i class="conum" data-value="4"></i><b>(4)</b>
   name: rhods-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: rhods-operator.2.2.0
 EOF
 
 $ <strong>oc create -f rhods-subs.yaml</strong>
 subscription.operators.coreos.com/rhods-operator created</pre>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">previous section</a> for more information.
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The namespace to install the operator into.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The update channel to install the operator from. To find all available  channels see the the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The Cluster Service Version (CSV) to install. To find all available CVSs for the selected channel see the the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">Approving Installation Manualy</a> section for more information.</td>
 </tr>
 </table>
 </div>
@@ -525,7 +518,7 @@ In case the <strong>installPlanApproval</strong> is set to <strong>Manual</stron
 </div>
 </li>
 <li>
-<p>Create your Openshift DataScience Cluster</p>
+<p>Finally create your Openshift DataScience Cluster resource to configure your cluster.</p>
 <div class="listingblock">
 <div class="content">
 <pre>cat &lt;&lt;EOF &gt; rhods-cluster.yaml
@@ -617,8 +610,10 @@ rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0
 </ul>
 </div>
 <div class="paragraph">
-<p>The following exercise shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.</p>
+<p>The following demo shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.</p>
 </div>
+<div class="sect2">
+<h3 id="_demo_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_pipelines_operator"></a>Demo: Installation of the <strong>Red&#160;Hat Openshift Pipelines</strong> operator</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -627,30 +622,6 @@ rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0
 <div class="content">
 <pre>$ <strong>oc get packagemanifest | grep pipelines</strong>
 openshift-pipelines-operator-rh                    Red Hat Operators     24h</pre>
-</div>
-</div>
-</li>
-<li>
-<p>To get more information about the operator use <strong>oc describe</strong>. You need to find available channels and CSVs associated with them so you can use them later when creating the operator&#8217;s subscription.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc describe packagemanifest openshift-pipelines-operator-rh -n openshift-marketplace</strong>
-Name:         openshift-pipelines-operator-rh
-Namespace:    openshift-marketplace
-Labels:       catalog=redhat-operators
-...<em>output omitted</em>...
-Spec:
-Status:
-  Catalog Source:               redhat-operators
-  Catalog Source Display Name:  Red Hat Operators
-  Catalog Source Namespace:     openshift-marketplace
-  Catalog Source Publisher:     Red Hat
-  Channels:
-    Current CSV:  openshift-pipelines-operator-rh.v1.12.0
-    Current CSV Desc:
-      Annotations:
-        Alm - Examples:  [
-...<em>output omitted</em>...</pre>
 </div>
 </div>
 </li>
@@ -667,26 +638,30 @@ metadata:
   name: openshift-pipelines-operator-rh
   namespace: openshift-operators
 spec:
-  channel: latest
-  installPlanApproval: Automatic
+  channel: latest <i class="conum" data-value="1"></i><b>(1)</b>
+  startingCSV: openshift-pipelines-operator-rh.v1.12.1 <i class="conum" data-value="2"></i><b>(2)</b>
+  installPlanApproval: Automatic <i class="conum" data-value="3"></i><b>(3)</b>
   name: openshift-pipelines-operator-rh
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: openshift-pipelines-operator-rh.v1.12.0
 EOF
 
 $ <strong>oc create -f pipelines-subs.yaml</strong></pre>
 </div>
 </div>
-<div class="admonitionblock note">
+<div class="colist arabic">
 <table>
 <tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">previous section</a> for more information.
-</td>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The update channel to install the operator from. To find all available channels see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The Cluster Service Version (CSV) to install. To find all available CVSs for the update channel see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">Approving Installation Manualy</a> section for more information.</td>
 </tr>
 </table>
 </div>
@@ -694,6 +669,7 @@ In case <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, 
 </div>
 </li>
 </ol>
+</div>
 </div>
 </div>
 </div>
