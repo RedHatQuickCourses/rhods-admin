@@ -1,0 +1,24 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Load the dowjones dataset
+dowjones = sns.load_dataset("dowjones")
+
+# Convert the dates to datetime objects
+#dowjones.index = pd.to_datetime(dowjones.index)
+
+# Create a line plot with the year on the x-axis
+sns.lineplot(
+    x="Date",
+    y="Price",
+    data=dowjones,
+)
+
+# Set the title and labels
+plt.title("Dow Jones Industrial Average by Year - 1914 to 1968")
+plt.xlabel("Date")
+plt.ylabel("Price")
+
+# Show the plot
+plt.show()

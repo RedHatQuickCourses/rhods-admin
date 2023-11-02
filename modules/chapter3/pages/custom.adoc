@@ -41,25 +41,82 @@ We will now build our own image from one of the workbench images listed above.
 
 === Requirements
 * Need podman
-* Need a image registry
+* Need an image registry
+
+=== Containerfile Overview
+Below is the Containerfile that we'll use to create our custom notebook image.
+
+Before you start to edit the Containerfile lets go over what this Containerfile is doing.
+
+The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use.
+
+[source,dockerfile]
+----
+FROM quay.io/opendatahub-contrib/workbench-images:jupyter-datascience-c9s-py311_2023c_latest
+----
+
+The COPY command copies a requirements.txt file with the extra pacakge that we will need in our notebook. The only package we're installing is Seaborn which is a Python data visualization library. Multiple packages can be installed with the requirements.txt file.
+
+[source,dockerfile]
+----
+COPY requirements.txt ./
+----
+
+The next step is to install the package.
+[source,dockerfile]
+----
+RUN echo "Installing softwares and packages" && \
+    pip install micropipenv && \
+    # Install Python packages \
+    micropipenv install && \
+    rm -f ./requiremnents.txt
+----
+
+We're printing out where Java is installed. Since we haven't installed it yet and it's not part of our base image we should expect the output to be blank.
+[source,dockerfile]
+----
+RUN echo "-- WHERE IS JAVA= " && whereis java
+----
+
+Now we'll install OpenJDK. Note that we are switching to the root user (User 0). We need to do this to have the appropriate permissions to install OpenJDK. After the isntallation command is completed we switch back to User 1001 since the root user is not allowed to run containers in OpenShift.
+[source,dockerfile]
+----
+USER 0
+
+RUN INSTALL_PKGS="java-11-openjdk java-11-openjdk-devel" && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+    yum -y clean all --enablerepo='*'
+
+USER 1001
+----
+
+Now we should be able to see where Java is installed.
+[source,dockerfile]
+----
+RUN echo "-- WHERE IS JAVA= " && whereis java && python -V
+----
+
+Lastly, we'll fix the permissons to support pip in OpenShift, set the work directory, and entry point for the container.
+[source,dockerfile]
+----
+RUN chmod -R g+w /opt/app-root/lib/python3.11/site-packages && \
+    fix-permissions /opt/app-root -P
+
+WORKDIR /opt/app-root/src
+
+ENTRYPOINT ["start-notebook.sh"]
+----
+
+=== Build Steps (TODO: Get screenshots of below steps)
+1. Copy code and open in VSCode.
+2. Open the requirements.txt file + 
+   Note the Seborn dependency in the file.
+3. Open the Containerfile
+4. Add the appropriate commands in the TODO sections. Refer to the Containerfile Overview section above.
+5. We'll now build the image with podman. Open a terminal and got to the root directory where you copied the code. Run the below command. +
+podman build -t rhods-custom-image .
+6. Push the image to your quay repository.
+
+Now you're ready to import the image into RHODS! See the next section to learn how to import your custom image and test it out.
 
 
-
-
-== NOTES
-* Why would you need a custom image?
-* Provide links to Containerfiles for the set of images that we ship with RHODS. Encourage students to build on UBI based base images
-* [Trevor] It is important to cover the minimum requirements that the notebook controller requires for the images to work.  Expected packages, port requirements, and startup scripts.  Additionally it may be good to cover some topics such as the non-root requirement for OCP and use that as a jumping off point to talk about using a RH base image.
-* The general recommendation is usually the build off of the upstream notebook base image: https://github.com/opendatahub-io/notebooks/blob/main/base/ubi9-python-3.9/Dockerfile. 
-* We need to discuss how to actually do that and how to manage the packages when building off those images because it is a non-standard process with pipenv where you need to preserve the upstream packages in order to not break the image.
-* How to build and make the custom image available in the RHODS web console
-Ensure you cover standard container image building best practices - security, minimal, built for OCP with user and group perms, SELinux etc
-* Look for good custom image use cases:
-** Python 3.11/3.12 (performance improvements)
-** Custom Python libs on top of standard RHODS images
-** R based custom images?
-** Julia?
-* [Trevor] - The most common use cases from the field.... 
-** My team needs version xyz of a specific package and the default images ship with zyx.
-** My team needs package xyz and it is not available in any default images.
-** My team needs a specific driver in the image that can only be installed with root access to connect to xyz (e.g. DB2 drivers to connect to oracle databases)
