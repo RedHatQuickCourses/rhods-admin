@@ -26,6 +26,12 @@ Admin access in the RHODS Dashboard allows users to control various settings of 
 - Configuring the idle notebook culler
 - Other notebook configuration settings
 
+To add users to the `rhods-admins` group, run the following command:
+
+```sh
+oc adm groups add-users rhods-admins my-user1 my-user2
+```
+
 == Updating Default User Permissions
 
 The default permissions for the RHODS Dashboard can be updated through the `Settings`>`User management` section.
