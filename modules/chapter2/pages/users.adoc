@@ -106,30 +106,3 @@ image::datascience-project-permissions.png[]
 The Dashboard Permissions user interface only displays users and groups that were granted permissions directly through the Dashboard.  Any users or groups that have been granted permission to the Project by manually creating RoleBindings on the project or who are granted higher level cluster permissions will not be displayed in the user interface.
 
 ====
-
-=== Manually Creating Data Science Projects
-
-When self-provisioner is disabled on a cluster, a cluster administrator will be required to manually create Data Science Projects for users.
-
-As mentioned previously, a Data Science Project is a normal OpenShift project/namespace with a few special labels that allow to to be managed by the RHODS Dashboard, allowing it to be managed using any existing processes or tools your organization already utilizes to manage namespaces.
-
-To manually create a Data Science Project from the cli, you can run the following commands to create a namespace and apply the necessary labels:
-
-```sh
-oc create namespace myproject
-oc label namespace myproject opendatahub.io/dashboard='true' modelmesh-enabled='true' 
-```
-
-Alternatively, the following YAML object can be used to create the Data Science Project:
-
-```yaml
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: myproject
-  labels:
-    modelmesh-enabled: 'true'
-    opendatahub.io/dashboard: 'true'
-```
-
-Once the Data Science Project has been created, access to the project will need to be configured for the necessary user or group using either the cli, or a namespace RoleBinding.  Refer to the OpenShift documentation for https://docs.openshift.com/container-platform/4.13/authentication/using-rbac.html#adding-roles_using-rbac[Adding roles to users] for additional instructions.
