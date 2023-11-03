@@ -39,7 +39,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="../index.html">Intoduction</a>
   </li>
 </ul>
   </li>
@@ -47,7 +47,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../chapter1/index.html">Chapter 1</a>
+    <a class="nav-link" href="../chapter1/index.html">Installation of Red&#160;Hat Openshift Data Science</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../chapter1/section1.html">Section 1</a>
@@ -138,11 +138,21 @@
 </aside>
 <article class="doc">
 <h1 class="page">Users and Permissions</h1>
-<div class="sect1">
-<h2 id="_logging_into_rhods"><a class="anchor" href="#_logging_into_rhods"></a>Logging Into RHODS</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>RHODS utilizes OpenShift OAuth as the authentication method for all RHODS related resources.  When attempting to log into the RHODS Dashboard or other UI components, users will be presented with a page prompting them to <code>Log in with OpenShift</code>.</p>
+<p>As discussed in the previous section, Red Hat OpenShift.AI allows users to install several different components to enable ML workloads.  One of the components is the OpenShift.AI Dashboard, which acts as the primary user interface to help guide users to working with, deploying, and managing ML solutions.</p>
+</div>
+<div class="paragraph">
+<p>This section discusses of the intricacies of managing users with OpenShift.AI and how to modify the default permissions for a project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logging_into_the_openshift_ai_dashboard"><a class="anchor" href="#_logging_into_the_openshift_ai_dashboard"></a>Logging Into The Openshift.AI Dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Openshift.AI utilizes OpenShift OAuth as the authentication method for all Openshift.AI related resources.  When attempting to log into the Openshift.AI Dashboard or other UI components, users will be presented with a page prompting them to <code>Log in with OpenShift</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -150,7 +160,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>By default, any user with the ability to login to OpenShift will be able to access the RHODS Dashboard.</p>
+<p>By default, any user with the ability to login to OpenShift will be able to access the Openshift.AI Dashboard.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -172,10 +182,10 @@
 <h2 id="_admin_access"><a class="anchor" href="#_admin_access"></a>Admin Access</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, users with the <code>cluster-admin</code> role are automatically granted admin permissions in the RHODS Dashboard.  Additional, a group called <code>rhods-admins</code> is automatically created, and any user added to that group will be granted admin permissions.</p>
+<p>By default, users with the <code>cluster-admin</code> role are automatically granted admin permissions in the Openshift.AI Dashboard.  Additional, a group called <code>Openshift.AI-admins</code> is automatically created, and any user added to that group will be granted admin permissions.</p>
 </div>
 <div class="paragraph">
-<p>Admin access in the RHODS Dashboard allows users to control various settings of RHODS through the Dashboard UI, including:</p>
+<p>Admin access in the Openshift.AI Dashboard allows users to control various settings of Openshift.AI through the Dashboard UI, including:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -193,13 +203,21 @@
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>To add users to the <code>Openshift.AI-admins</code> group, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc adm groups add-users Openshift.AI-admins my-user1 my-user2</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_updating_default_user_permissions"><a class="anchor" href="#_updating_default_user_permissions"></a>Updating Default User Permissions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The default permissions for the RHODS Dashboard can be updated through the <code>Settings</code>&gt;`User management` section.</p>
+<p>The default permissions for the Openshift.AI Dashboard can be updated through the <code>Settings</code>&gt;`User management` section.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -207,8 +225,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The admin group can be updated to another group other than the default <code>rhods-admins</code> group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the
-cluster-admin ClusterRole.</p>
+<p>The admin group can be updated to another group other than the default <code>Openshift.AI-admins</code> group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the cluster-admin ClusterRole.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -218,14 +235,14 @@ cluster-admin ClusterRole.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>It is highly recommended that dedicated admin users are configured for RHODS and that organizations do not rely on the <code>cluster-admin</code> role for exclusive permissions to admin configurations of RHODS.  Dedicated Admin users should be added to the existing <code>rhods-admins</code> group, or another group which already contains the correct users should be configured in lieu of the <code>rhods-admins</code> group.</p>
+<p>It is highly recommended that dedicated admin users are configured for Openshift.AI and that organizations do not rely on the <code>cluster-admin</code> role for exclusive permissions to admin configurations of Openshift.AI.  Dedicated Admin users should be added to the existing <code>Openshift.AI-admins</code> group, or another group which already contains the correct users should be configured in lieu of the <code>Openshift.AI-admins</code> group.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>The normal Data Science user group can also be updated to change what users are able to sign into the RHODS Dashboard.  By default, the Dashboard is configured to allow all authenticated users with the <code>system:authenticated</code> role.  A custom group can be configured to allow only specific users belonging to that group to access the Dashboard.</p>
+<p>The normal Data Science user group can also be updated to change what users are able to sign into the Openshift.AI Dashboard.  By default, the Dashboard is configured to allow all authenticated users with the <code>system:authenticated</code> role.  A custom group can be configured to allow only specific users belonging to that group to access the Dashboard.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -247,7 +264,7 @@ cluster-admin ClusterRole.</p>
 <div class="sect2">
 <h3 id="_managing_dashboard_permissions_with_gitops"><a class="anchor" href="#_managing_dashboard_permissions_with_gitops"></a>Managing Dashboard Permissions with GitOps</h3>
 <div class="paragraph">
-<p>The <code>User and group settings</code> in the RHODS Dashboard can also be managed using the <code>OdhDashboardConfigs</code> objected called <code>odh-dashboard-config</code> located in the redhat-ods-applications namespace along with many of the other settings found in the Dashboard&#8217;s Settings section:</p>
+<p>The <code>User and group settings</code> in the Openshift.AI Dashboard can also be managed using the <code>OdhDashboardConfigs</code> objected called <code>odh-dashboard-config</code> located in the redhat-ods-applications namespace along with many of the other settings found in the Dashboard&#8217;s Settings section:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -266,7 +283,7 @@ metadata:
   namespace: redhat-ods-applications
 spec:
   groupsConfig:
-    adminGroups: rhods-admins
+    adminGroups: Openshift.AI-admins
     allowedGroups: 'system:authenticated'</code></pre>
 </div>
 </div>
@@ -274,15 +291,29 @@ spec:
 </div>
 </div>
 <div class="sect1">
-<h2 id="_data_science_project_permissions"><a class="anchor" href="#_data_science_project_permissions"></a>Data Science Project Permissions</h2>
+<h2 id="_default_data_science_project_permissions"><a class="anchor" href="#_default_data_science_project_permissions"></a>Default Data Science Project Permissions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The RHODS Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:</p>
+<p>The Openshift.AI Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/create-datascience-project.png" alt="create datascience project">
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The terms <code>Namespaces</code>, OpenShift <code>Projects</code>, and <code>Data Science Projects</code> are often used synonymy.  While there are slight differences between these different objects, a project is essentially a namespace with some additional features provided by OpenShift.  Similarly, a Data Science Project is just an OpenShift Project that has a specific label, which enables it to be used with the Dashboard.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -299,23 +330,7 @@ spec:
 </table>
 </div>
 <div class="paragraph">
-<p>When a user creates a new Data Science Project through the Dashboard, the Dashboard will create a corresponding OpenShift Project and Kubernetes Namespace.  The user who created the Data Science Project will automatically be granted admin permissions to the Namespace.</p>
-</div>
-<div class="sect2">
-<h3 id="_managing_permissions_on_a_data_science_project"><a class="anchor" href="#_managing_permissions_on_a_data_science_project"></a>Managing Permissions on a Data Science Project</h3>
-<div class="paragraph">
-<p>A Data Science Project is nothing more than a normal OpenShift Project with a few special labels.  As such, permissions to the project function the same as any other project/namespace in OpenShift.</p>
-</div>
-<div class="paragraph">
-<p>Users can be granted permissions to the Project using traditional RBAC configuration.</p>
-</div>
-<div class="paragraph">
-<p>Additionally, the Dashboard provides a user interface that will allow Admins on the project to easily apply <code>edit</code> or <code>admin</code> access to other users or groups.  The Permissions view can be access by navigating to a specific project under the Data Science Projects menu, and selecting the Permissions tab.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/datascience-project-permissions.png" alt="datascience project permissions">
-</div>
+<p>When a user creates a new Data Science Project through the Dashboard, the Dashboard will create a corresponding OpenShift Project and Kubernetes Namespace.  The user who created the Data Science Project will automatically be granted the OpenShift admin role for the Namespace.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -325,7 +340,43 @@ spec:
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The Dashboard Permissions user interface only displays users and groups that were granted permissions directly through the Dashboard.  Any users or groups that have been granted permission to the Project by manually creating RoleBindings on the project or who are granted higher level cluster permissions will not be displayed in the user interface.</p>
+<p>OpenShift allows for both "cluster admins" who have the ability to manage all cluster and namespace scoped objects on a cluster, and "namespace admins" that have permission to manage all namespace scoped objects in a specific namespace.</p>
+</div>
+<div class="paragraph">
+<p>All users with the <code>cluster-admin</code> role have the ability to see all other users namespaces.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_managing_permissions_on_a_data_science_project"><a class="anchor" href="#_managing_permissions_on_a_data_science_project"></a>Managing Permissions on a Data Science Project</h3>
+<div class="paragraph">
+<p>A Data Science Project is nothing more than a normal OpenShift Project with a few special labels.  As such, permissions to the project function the same as any other project/namespace in OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>Users and Groups permissions to a project are managed using Kubernetes Role Based Access and Control (RBAC).  The Dashboard provides a user interface to easily assign additional users or groups permissions to a project.</p>
+</div>
+<div class="paragraph">
+<p>An admin user on the project can add additional users or groups to a project by navigating to a specific project under the Data Science Projects menu, and selecting the Permissions tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/datascience-project-permissions.png" alt="datascience project permissions">
+</div>
+</div>
+<div class="paragraph">
+<p>From the permissions tab, project admin users are able to add additional users or groups and grant them the <code>edit</code> or <code>admin</code> role on the project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Dashboard Permissions user interface only displays users and groups that were granted permissions directly through the Dashboard.  Any users or groups that have been granted permission to the Project by any traditional OpenShift role management such as creating RoleBindings on the project or who are granted higher level cluster permissions will not be displayed in the user interface.</p>
 </div>
 </td>
 </tr>
@@ -366,6 +417,24 @@ metadata:
 <div class="paragraph">
 <p>Once the Data Science Project has been created, access to the project will need to be configured for the necessary user or group using either the cli, or a namespace RoleBinding.  Refer to the OpenShift documentation for <a href="https://docs.openshift.com/container-platform/4.13/authentication/using-rbac.html#adding-roles_using-rbac">Adding roles to users</a> for additional instructions.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise"><a class="anchor" href="#_exercise"></a>Exercise</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a new Data Science Project and add a group with <code>edit</code> permissions.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a Data Science Project called <code>my-project</code>.</p>
+</li>
+<li>
+<p>Grant the team <code>my-team</code> the <code>edit</code> role on the project.</p>
+</li>
+</ol>
 </div>
 </div>
 </div>
