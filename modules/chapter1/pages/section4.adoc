@@ -1,0 +1,3 @@
+= Upgrading Red{nbsp}Hat Openshift Data Science
+
+*Red{nbsp}Hat Openshift Data Science* operator supports _seamless upgrades_, hence upgrades are managed by the *OLM*
