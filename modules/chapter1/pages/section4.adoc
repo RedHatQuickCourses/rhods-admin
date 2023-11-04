@@ -1,3 +1,29 @@
 = Upgrading Red{nbsp}Hat Openshift Data Science
 
-*Red{nbsp}Hat Openshift Data Science* operator supports _seamless upgrades_, hence upgrades are managed by the *OLM*
+*Red{nbsp}Hat Openshift Data Science* operator supports _seamless upgrades_, hence upgrades are completely managed by the *OLM*
+
+If the *installPlanApproval* parametr of the operator's subscription is set to _Automatic_, upgrades take place automatically when a new version of the operator is available without a user's intervention. If it is set to _Manual_ the upgrade must be manually approved. 
+The upgrade can be approved from the web console as well as from the CLI.
+For more details about manual upgare approval from the CLI se the xref:section3.adoc#manual_approval[Approving Installation Manualy] section.
+
+== Demo: Upgrading Red{nbsp}Hat Openshift Data Science
+1. Log in to Red{nbsp} Openshift web console using a user which has _cluster-admin_ role assigned.
+2. Navigate to *Operators* -> *Installed Operators* and select project *redhat-ods-operator*. You should see *Upgrade available* under the *Status* column.
++
+image::rhods2-upgrade-available.png[width=800]
+
+3. Click on the *Upgrade available* status link to open operator's *Install plan*
++
+image::rhods2-upgrade-install-plan.png[width=800] 
+
+4. Click on the *Preview InstallPlan* button to review changes made by the upgrade.
++
+image::rhods2-upgrade-preview.png[width=800]
+
+5. Click on the *Approve* button to approve and start the upgrade and navigate to *Operators* -> *Installed Operators* to view the upgrade status.
++
+image::rhods2-upgrade-status.png[width=800]
+
+6. Wait until the *Status* changes to *Succeeded*
++
+image::rhods2-upgrade-succeeded.png[width=800]
