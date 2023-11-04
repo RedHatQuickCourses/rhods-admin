@@ -1,8 +1,8 @@
 = Uninstalling Red{nbsp}Hat Openshift Data Science
-Uninstalling of the *Red{nbsp}Hat Openshift Data Science* requires unsintalling the operator and cleaning some of the resources that have been created by the operator or users.
 
-IMPORTANT: Before uninstalling the *Red{nbsp}Hat OpenShift Data Science* note all the Datascience projects that have been created. They must be deleted manually. All *Data Science* project resources are created in an *Openshift* namespace with the same name as the *Data Science* project. When an *Openshift* namespace is deleted all resources within it are deleted as well. They can be deleted prior uninstalling the operator from *Red{nbsp}Hat OpenShift Data Science* dashboard or manually any time later.
+*Red{nbsp}Hat Openshift Data Science* operator manages *Red{nbsp}Hat Openshift Data Science* components hence uninstalling of the *Red{nbsp}Hat Openshift Data Science* requires uninstalling the *Red{nbsp}Hat Openshift Data Science* operator and cleaning some of the resources that have been created by the operator or users.
 
+== Demo: Uninstalling Red{nbsp}Hat Openshift Data Science
 . Log in to Red{nbsp} Openshift web console using a user which has the _cluster-admin_ role assigned.
 
 . Delete the DataScienceCluster object. 
@@ -65,8 +65,9 @@ namespace "redhat-ods-operator" deleted
 ----
 
 . Delete the namespaces that the Operator created during 
+installation. They are labeled with label _opendatahub.io/generated-namespace=true_.
 +
-installation. Navigate to *Administration* -> *Namespaces* and filter the namespaces using label *opendatahub.io/generated-namespace*. Delete all the namespaces with this label.
+Navigate to *Administration* -> *Namespaces* and filter the namespaces using label _opendatahub.io/generated-namespace=true_. Delete all the namespaces with this label.
 +
 image::rhods2-delete-generated-ns.png[width=800]
 + 
@@ -79,12 +80,22 @@ namespace "redhat-ods-applications" deleted
 namespace "redhat-ods-monitoring" deleted
 ----
 
-. Make sure that all namespaces created for *Datascience* projects have been removed. They can be removed from the web console similarly to the namespaces you removed earlier or from the CLI.
+. Delete all remaining namespaces created for *Datascience* projects have been removed. These projects are labeled by a label _opendatahub.io/dashboard=true_.
++
+Navidate to *Administration* -> *Namespaces* and filter namespaces based on label _opendatahub.io/dashboard=true_.
++
+image::rhods2-delete-projects.png[width=800]
++
+alternatively you can delete them from the CLI.
 +
 [subs=+quotes]
 ----
-*$ oc delete ns _name-of-the-project_*
-project.project.openshift.io _name-of-the-project_ deleted 
+*$ oc get ns -l opendatahub.io/dashboard=true*
+NAME               STATUS   AGE
+my-rhods-project   Active   6h22m
+
+*$ oc delete ns -l opendatahub.io/dashboard=true*
+namespace "my-rhods-project" deleted
 ----
 
 
