@@ -1,0 +1,90 @@
+= Uninstalling Red{nbsp}Hat Openshift Data Science
+Uninstalling of the *Red{nbsp}Hat Openshift Data Science* requires unsintalling the operator and cleaning some of the resources that have been created by the operator or users.
+
+IMPORTANT: Before uninstalling the *Red{nbsp}Hat OpenShift Data Science* note all the Datascience projects that have been created. They must be deleted manually. All *Data Science* project resources are created in an *Openshift* namespace with the same name as the *Data Science* project. When an *Openshift* namespace is deleted all resources within it are deleted as well. They can be deleted prior uninstalling the operator from *Red{nbsp}Hat OpenShift Data Science* dashboard or manually any time later.
+
+. Log in to Red{nbsp} Openshift web console using a user which has the _cluster-admin_ role assigned.
+
+. Delete the DataScienceCluster object. 
++
+Navigate to *Installed Operators* -> *Red Hat OpenShift Data Science* -> *DataScienceCluster* and delete all the *DSC* resources.
++
+image::rhods2-delete-dsc.png[width=800]
++
+alternatively you can delete the *DataScienceCluster* objects from the CLI.
++
+[subs=+quotes]
+----
+oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')
+datasciencecluster.datasciencecluster.opendatahub.io "default" deleted
+----
+
+
+. Delete the DSCInitialization object that the Operator created during installation. 
++
+Navigate to the *DSCInitialization* tab and delete all *DSCI* resources.
++
+image::rhods2-delete-dsci.png[width=800]
++
+alternatively you can delete the *DCSI* objects from the CLI.
++
+[subs=+quotes]
+----
+*$ oc delete dscinitialization $(oc get dscinitialization --no-headers |  awk '{print $1}')*
+
+dscinitialization.dscinitialization.opendatahub.io "default" deleted
+----
+
+. Uninstall the *Red Hat OpenShift Data Science* operator. 
++
+Navigate to *Operators* ->  *Installed Operators* and uninstall the *Red Hat OpenShift Data Science* operator.
++
+image::rhods2-uninstall-operator.png[width=800]
++
+alternatively you can delete the operator's subscription from the CLI. OLM will uninstall the operator.
++
+[subs=+quotes]
+----
+*$ oc delete subscription rhods-operator -n redhat-ods-operator*
+
+subscription.operators.coreos.com "rhods-operator" deleted
+----
+
+. Delete the namespace where the operator was installed. 
++
+Navigate to *Administration* -> *Namespaces*, search for the redhat-ods-operator and delete it.
++
+image::rhods2-delete-ope-ns.png[width=800]
++
+alternatively you can delete the namespace from the CLI.
++
+[subs=+quotes]
+----
+*$ oc delete ns redhat-ods-operator*
+namespace "redhat-ods-operator" deleted
+----
+
+. Delete the namespaces that the Operator created during 
++
+installation. Navigate to *Administration* -> *Namespaces* and filter the namespaces using label *opendatahub.io/generated-namespace*. Delete all the namespaces with this label.
++
+image::rhods2-delete-generated-ns.png[width=800]
++ 
+alternatively you can delete the namespaces from the CLI.
++
+[subs=+quotes]
+----
+*$ oc delete ns -l opendatahub.io/generated-namespace*
+namespace "redhat-ods-applications" deleted
+namespace "redhat-ods-monitoring" deleted
+----
+
+. Make sure that all namespaces created for *Datascience* projects have been removed. They can be removed from the web console similarly to the namespaces you removed earlier or from the CLI.
++
+[subs=+quotes]
+----
+*$ oc delete ns _name-of-the-project_*
+project.project.openshift.io _name-of-the-project_ deleted 
+----
+
+
