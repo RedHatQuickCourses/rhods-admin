@@ -149,7 +149,22 @@ install-vpgls   _operator_name_   Manual     #true#  <3>
 === Checking Installation Progress
 
 Installation progress can be found in the operator's status.
-The following example shows how to find the status of the *Openshift Pipelines* operator installation.
+The following example shows a quick check of the current  status of the *Openshift Pipelines* operator.
+[subs=+quotes]
+----
+*$ oc get olm|grep ^clusterserviceversion|grep openshift-pipelines-operator*
+clusterserviceversion.../openshift-pipelines-operator...   #Pending#  <1>
+
+*$ oc get olm|grep ^clusterserviceversion|grep openshift-pipelines-operator*
+openshift-pipelines-operator*
+clusterserviceversion.../openshift-pipelines-operator...   #Succeeded#  <2>
+
+----
+<1> The operator is installing.
+<2> The operator has been successfully installed.
+
+If you are interested in more details, you can get the operator's manifest and check it's status attribude. _JQuery_ can be used to filter the status out.
+
 [subs=+quotes]
 ----
 *$ oc get operators*
@@ -158,7 +173,7 @@ mcg-operator.openshift-storage                        7h24m
 ocs-operator.openshift-storage                        7h24m
 odf-csi-addons-operator.openshift-storage             7h24m
 odf-operator.openshift-storage                        7h25m
-#openshift-pipelines-operator-rh.openshift-operators#   20m <1>
+#openshift-pipelines-operator-rh.openshift-operators#   20m    <1>
 
 *$ oc get operator openshift-pipelines-operator-rh.openshift-operators -o json| \
 jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[]'*
@@ -166,7 +181,7 @@ jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[
 {
   "lastTransitionTime": "2023-11-01T21:01:25Z",
   "lastUpdateTime": "2023-11-01T21:01:26Z",
-  "message": "installing: waiting for deployment openshift-pipelines-operator to become ready: deployment \"openshift-pipelines-operator\" not available: Deployment does not have minimum availability.",
+  "message": "installing: waiting for deployment openshift-pipelines-...",
   "reason": "InstallWaiting", <2>
   "status": "True",
   "type": "Installing"        <2>
