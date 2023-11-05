@@ -5,16 +5,28 @@
 [IMPORTANT]
 Upgrading directly from the Red Hat OpenShift Data Science self-managed Beta version to the Generally Available (GA) release is not supported. The operator has to be uninstalled first and replaced with the new version.
 
-== Minor version upgrades
+When an upgrade is available *OLM* creates an *Installplan* for the new version. 
 
-If the xref:section3.adoc#subscription[installPlanApproval] parametr of the operator's subscription is set to _Automatic_, upgrades take place automatically when a new version of the operator is available without a user's intervention. If it is set to _Manual_ the upgrade must be manually approved. 
-It can be approved from the web console as well as from the CLI.
+[subs=+quotes]
+----
+*$ oc get installplan -n redhat-ods-operator*
+NAME            CSV                    APPROVAL   APPROVED
+install-sp49w   rhods-operator.2.2.0   Manual     false   <1>
+install-w6lqv   rhods-operator.2.1.0   Manual     true    <2>
+----
+<1> *Installplan* for the new version of the operator which has not been approved yet. It has to be approved in order to start the upgrade.
+<2> *Installplan* for the currently installed version. It's been approved and the version is currently installed.
 
-The following demonstration shows  how to upgrade from the web console.
-[NOTE]
-For more details about the manual upgrade approval from the CLI se the xref:section3.adoc#manual_approval[Approving Installation Manualy] section.
 
-=== Demo: Upgrading Red{nbsp}Hat Openshift Data Science
+Installplan is approved either automatically when a new version is available without user's intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the xref:section3.adoc#subscription[installPlanApproval] attribute of the operator's subscription. When it is set to _Automatic_ the *installplan* is approved automaticaly and installation starts without user's intervention. _Manual_ value requires a manual approval.
+
+Approvals can be set from the web console as well as from the CLI.
+
+Manual approvals done from the CLI are discussed in the xref:section3.adoc#manual_approval[Approving Installation Manualy] section and are exactly the same as for the installation.
+
+The following demonstration shows a manual approval done from the web console. 
+
+== Demo: Upgrading Red{nbsp}Hat Openshift Data Science
 1. Log in to Red{nbsp} Openshift web console using a user which has _cluster-admin_ role assigned.
 2. Navigate to *Operators* -> *Installed Operators* and select project *redhat-ods-operator*. You should see *Upgrade available* under the *Status* column.
 +
@@ -36,5 +48,5 @@ image::rhods2-upgrade-status.png[width=800]
 +
 image::rhods2-upgrade-succeeded.png[width=800]
 
-== Major version upgrades
-A major version upgrade requires uninstalling the current version of the operator and installing the new one.
+== Backup considerations
+Permanent storage for *Jupiter notebooks* is done using Openshift *Persistent Volume Claims (PVC)* attached to the *Jupiter notebook* pod. The operator does manage PVCs hence there is no need to take a backup as long as the Openshift *Namespace* where the *Jupiter notebook* pod is running is not deleted. Even in an event of accidental operator uninstallation all namespaces created by either the operator or a *Red{nbsp}Hat Openshift Data Science* user remain untouched.
