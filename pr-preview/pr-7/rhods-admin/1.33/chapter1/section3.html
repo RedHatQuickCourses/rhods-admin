@@ -39,7 +39,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="../index.html">Intoduction</a>
   </li>
 </ul>
   </li>
@@ -47,7 +47,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Chapter 1</a>
+    <a class="nav-link" href="index.html">Installation of Red&#160;Hat Openshift Data Science</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="section1.html">Section 1</a>
@@ -127,7 +127,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
-    <li><a href="index.html">Chapter 1</a></li>
+    <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
     <li><a href="section3.html">Installation Using the Command Line Interface</a></li>
   </ul>
 </nav>
@@ -414,7 +414,32 @@ install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class=
 <h3 id="installprogress"><a class="anchor" href="#installprogress"></a>Checking Installation Progress</h3>
 <div class="paragraph">
 <p>Installation progress can be found in the operator&#8217;s status.
-The following example shows how to find the status of the <strong>Openshift Pipelines</strong> operator installation.</p>
+The following example shows a quick check of the current  status of the <strong>Openshift Pipelines</strong> operator.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get olm|grep ^clusterserviceversion|grep openshift-pipelines-operator</strong>
+clusterserviceversion.../openshift-pipelines-operator...   <mark>Pending</mark>  <i class="conum" data-value="1"></i><b>(1)</b>
+
+<strong>$ oc get olm|grep ^clusterserviceversion|grep openshift-pipelines-operator</strong>
+openshift-pipelines-operator*
+clusterserviceversion.../openshift-pipelines-operator...   <mark>Succeeded</mark>  <i class="conum" data-value="2"></i><b>(2)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The operator is installing.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The operator has been successfully installed.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you are interested in more details, you can get the operator&#8217;s manifest and check it&#8217;s status attribude. <em>JQuery</em> can be used to filter the status out.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -424,7 +449,7 @@ mcg-operator.openshift-storage                        7h24m
 ocs-operator.openshift-storage                        7h24m
 odf-csi-addons-operator.openshift-storage             7h24m
 odf-operator.openshift-storage                        7h25m
-<mark>openshift-pipelines-operator-rh.openshift-operators</mark>   20m <i class="conum" data-value="1"></i><b>(1)</b>
+<mark>openshift-pipelines-operator-rh.openshift-operators</mark>   20m    <i class="conum" data-value="1"></i><b>(1)</b>
 
 <strong>$ oc get operator openshift-pipelines-operator-rh.openshift-operators -o json| \
 jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[]'</strong>
@@ -432,7 +457,7 @@ jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[
 {
   "lastTransitionTime": "2023-11-01T21:01:25Z",
   "lastUpdateTime": "2023-11-01T21:01:26Z",
-  "message": "installing: waiting for deployment openshift-pipelines-operator to become ready: deployment \"openshift-pipelines-operator\" not available: Deployment does not have minimum availability.",
+  "message": "installing: waiting for deployment openshift-pipelines-...",
   "reason": "InstallWaiting", <i class="conum" data-value="2"></i><b>(2)</b>
   "status": "True",
   "type": "Installing"        <i class="conum" data-value="2"></i><b>(2)</b>
