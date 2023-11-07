@@ -283,8 +283,7 @@ metadata:
   namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
 spec:
   channel: <em>channel</em> <i class="conum" data-value="3"></i><b>(3)</b>
-  startingCSV: <em>Operator_CSV</em> <i class="conum" data-value="4"></i><b>(4)</b>
-  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="5"></i><b>(5)</b>
+  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="4"></i><b>(4)</b>
   name: <em>Operator_name</em>
   source: <em>Catalog_source</em>
   sourceNamespace: openshift-marketplace</pre>
@@ -302,14 +301,10 @@ spec:
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Update channel to install the operator from. For more information about finding available channels see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+<td>Update channel to install the operator from. For more information about finding available channels see the <a href="#findchannel">Finding Update Channels</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>Starting Cluster Service Version of the operator. For more information about finding available CSVs see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="5"></i><b>5</b></td>
 <td><strong>installPlanApproval</strong> attribute can be either <strong>Automatic</strong> or <strong>Manual</strong>. For more details about manual installation approval se the <a href="#manual_approval">Approving Installation Manualy</a> section.</td>
 </tr>
 </table>
@@ -317,11 +312,11 @@ spec:
 </div>
 </div>
 <div class="sect2">
-<h3 id="findchannel"><a class="anchor" href="#findchannel"></a>Finding Update Channels and Cluster Service Versions</h3>
+<h3 id="findchannel"><a class="anchor" href="#findchannel"></a>Finding Update Channels</h3>
 <div class="openblock">
 <div class="content">
 <div class="paragraph">
-<p>Update channels, CSVs and other details about the operator can be found in a resource <strong>packagemanifest</strong>.
+<p>Update channels and other details about the operator can be found in a resource <strong>packagemanifest</strong>.
 It can be however a little challenging to search the <strong>packagemanifest</strong> as it is quite complex. <em>JQuery</em> is a powerfull tool to filter values from JSON resource manifests.</p>
 </div>
 <div class="paragraph">
@@ -335,37 +330,6 @@ It can be however a little challenging to search the <strong>packagemanifest</st
 "stable"
 "alpha"</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>To find available CSVs for a particular channel you can use the following command.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre><strong>$ oc get packagemanifest rhods-operator -o json| \
-  jq '.status.channels[]|select(.name=="<mark>alpha</mark>").entries'</strong> <i class="conum" data-value="1"></i><b>(1)</b>
-  [
-  {
-    "name": "rhods-operator.2.2.0",   <i class="conum" data-value="2"></i><b>(2)</b>
-    "version": "2.2.0"
-  },
-  {
-    "name": "rhods-operator.2.1.0", <i class="conum" data-value="2"></i><b>(2)</b>
-    "version": "2.1.0"
-  }
-]</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td><strong>alpha</strong> is the name of the channel.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The value of the <em>name</em> attribute is used as a value of the <a href="#subscription">startingCSV</a> attribute in the subscription to select the starting version.</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -485,26 +449,6 @@ jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Red&#160;Hat Openshift Data Science operator is available through Red Hat Operators catalogue. To install it, locate the manifest.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc get packagemanifest | grep rhods-operator</strong>
-rhods-operator                             Red Hat Operators     3h34m</pre>
-</div>
-</div>
-</li>
-<li>
-<p>The operator has a suggested namespace <strong>redhat-ods-operator</strong> to be installed into. However it can be installed into any namespace you choose.</p>
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc describe packagemanifest rhods-operator</strong>
-<em>...output ommited...</em>
-operatorframework.io/suggested-namespace:  redhat-ods-operator
-<em>...output ommited...</em></pre>
-</div>
-</div>
-</li>
-<li>
 <p>Unless you choose to install it into the <em>openshift-operators</em> namespace, create the <strong>Namespace</strong> and <strong>Operator Group</strong> in it first.</p>
 <div class="openblock">
 <div class="content">
@@ -514,6 +458,10 @@ operatorframework.io/suggested-namespace:  redhat-ods-operator
 apiVersion: v1
 kind: Namespace
 metadata:
+  annotations:
+      openshift.io/display-name: "Red Hat OpenShift Data Science"
+  labels:
+    openshift.io/cluster-monitoring: 'true'
   name: redhat-ods-operator
 spec: {}
 EOF
@@ -548,11 +496,10 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: rhods-operator
-  namespace: redhat-ods-operator <i class="conum" data-value="1"></i><b>(1)</b>
+  namespace: redhat-ods-operator
 spec:
-  channel: alpha <i class="conum" data-value="2"></i><b>(2)</b>
-  startingCSV: rhods-operator.2.2.0 <i class="conum" data-value="3"></i><b>(3)</b>
-  installPlanApproval: Automatic <i class="conum" data-value="4"></i><b>(4)</b>
+  channel: alpha <i class="conum" data-value="1"></i><b>(1)</b>
+  installPlanApproval: Automatic <i class="conum" data-value="2"></i><b>(2)</b>
   name: rhods-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
@@ -566,18 +513,10 @@ subscription.operators.coreos.com/rhods-operator created</pre>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The namespace to install the operator into.</td>
+<td>The update channel to install the operator from. To find all available  channels see the the <a href="#findchannel">Finding Update Channels</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The update channel to install the operator from. To find all available  channels see the the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The Cluster Service Version (CSV) to install. To find all available CSVs for the selected channel see the the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
 <td>In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">Approving Installation Manualy</a> section for more information.</td>
 </tr>
 </table>
@@ -599,7 +538,7 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: datasciencecluster
     app.kubernetes.io/part-of: rhods-operator
-  name: mycluster  <i class="conum" data-value="1"></i><b>(1)</b>
+  name: default  <i class="conum" data-value="1"></i><b>(1)</b>
 spec:
   components:
     codeflare:
@@ -629,11 +568,11 @@ oc create -f rhods-cluster.yaml</pre>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Use <strong>Remove</strong> for components that <strong>will not</strong> be installed.</td>
+<td>Use <strong>Removed</strong> for components that <strong>will not</strong> be installed.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Use <strong>Managed</strong> foc components that will be installed.</td>
+<td>Use <strong>Managed</strong> for components that will be installed.</td>
 </tr>
 </table>
 </div>
@@ -726,8 +665,7 @@ metadata:
   namespace: openshift-operators
 spec:
   channel: latest <i class="conum" data-value="1"></i><b>(1)</b>
-  startingCSV: openshift-pipelines-operator-rh.v1.12.1 <i class="conum" data-value="2"></i><b>(2)</b>
-  installPlanApproval: Automatic <i class="conum" data-value="3"></i><b>(3)</b>
+  installPlanApproval: Automatic <i class="conum" data-value="2"></i><b>(2)</b>
   name: openshift-pipelines-operator-rh
   source: redhat-operators
   sourceNamespace: openshift-marketplace
@@ -740,14 +678,10 @@ $ <strong>oc create -f pipelines-subs.yaml</strong></pre>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The update channel to install the operator from. To find all available channels see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
+<td>The update channel to install the operator from. To find all available channels see the <a href="#findchannel">Finding Update Channels</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The Cluster Service Version (CSV) to install. To find all available CVSs for the update channel see the <a href="#findchannel">Finding Update Channels and Cluster Service Versions</a> section.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>In case the <strong>installPlanApproval</strong> is set to <strong>Manual</strong>, approve the installation first to start it. Refer to the <a href="#manual_approval">Approving Installation Manualy</a> section for more information.</td>
 </tr>
 </table>
