@@ -236,11 +236,11 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
   name: rhods-operator
-  namespace: redhat-ods-operator <1>
+  namespace: redhat-ods-operator
 spec:
-  channel: alpha <2>
-  startingCSV: rhods-operator.2.2.0 <3>
-  installPlanApproval: Automatic <4>
+  channel: alpha <1>
+  startingCSV: rhods-operator.2.2.0 <2>
+  installPlanApproval: Automatic <3>
   name: rhods-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
@@ -249,10 +249,9 @@ EOF
 $ *oc create -f rhods-subs.yaml*
 subscription.operators.coreos.com/rhods-operator created
 ----
-<1> The namespace to install the operator into.
-<2> The update channel to install the operator from. To find all available  channels see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
-<3> The Cluster Service Version (CSV) to install. To find all available CSVs for the selected channel see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
-<4> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
+<1> The update channel to install the operator from. To find all available  channels see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<2> The Cluster Service Version (CSV) to install. To find all available CSVs for the selected channel see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<3> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
 
 . Finally create your Openshift DataScience Cluster resource to configure your cluster.
