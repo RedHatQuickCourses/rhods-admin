@@ -44,7 +44,7 @@ If you choose the _YAML view_, you are presented with a template of the YAML Dat
 apiVersion: datasciencecluster.opendatahub.io/v1
 kind: DataScienceCluster
 metadata:
-  name: default  <1>
+  name: default 
   labels:
     app.kubernetes.io/name: datasciencecluster
     app.kubernetes.io/instance: default
@@ -54,9 +54,9 @@ metadata:
 spec:
   components:
     codeflare:
-      managementState: Removed  <2>
+      managementState: Removed  <1>
     dashboard:
-      managementState: Managed  <3>
+      managementState: Managed  <2>
     datasciencepipelines:
       managementState: Managed
     kserve:
@@ -68,9 +68,8 @@ spec:
     workbenches:
       managementState: Managed
 ----
-<1> Name of the cluster 
-<2> For components you *do not* want to install use *Remove*
-<3> For components you *want* to install and manage by the operator use *Managed*
+<1> For components you *do not* want to install use *Remove*
+<2> For components you *want* to install and manage by the operator use *Managed*
 +
 After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
 
