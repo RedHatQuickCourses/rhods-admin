@@ -1,4 +1,4 @@
-= Building Custom Notebook Images
+= Create a Custom Notebook Image
 
 Custom notebook images allow you to add specific packages and libraries for your projects. This level of customization provides you with a consistent development environment for your teams to work in and ensures that your projects are reproducible between team members. You may also want to create custom notebooks that are more secure than the default notebook image provided in RHODS.
 
@@ -44,78 +44,103 @@ We will now build our own image from one of the workbench images listed above.
 * Need an image registry
 
 === Containerfile Overview
-Below is the Containerfile that we'll use to create our custom notebook image.
-
 Before you start to edit the Containerfile lets go over what this Containerfile is doing.
 
-The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use.
+image::../images/customContainerFile.png[Custom Containerfile]
 
-[source,dockerfile]
-----
-FROM quay.io/opendatahub-contrib/workbench-images:jupyter-datascience-c9s-py311_2023c_latest
-----
+1. The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use.
 
-The COPY command copies a requirements.txt file with the extra pacakge that we will need in our notebook. The only package we're installing is Seaborn which is a Python data visualization library. Multiple packages can be installed with the requirements.txt file.
+2. The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. 
 
-[source,dockerfile]
-----
-COPY requirements.txt ./
-----
+3. The next step is to install the packages and remove then requirements.txt file that we just copied in to clean up files. 
 
-The next step is to install the package.
-[source,dockerfile]
-----
-RUN echo "Installing softwares and packages" && \
-    pip install micropipenv && \
-    # Install Python packages \
-    micropipenv install && \
-    rm -f ./requiremnents.txt
-----
+4. We're printing out where Java is installed. Since we haven't installed it yet and it's not part of our base image we should expect the output to be blank.
 
-We're printing out where Java is installed. Since we haven't installed it yet and it's not part of our base image we should expect the output to be blank.
-[source,dockerfile]
-----
-RUN echo "-- WHERE IS JAVA= " && whereis java
-----
+5. We're switching to the root user (User 0). We need to do this to have the appropriate permissions to install OpenJDK.
 
-Now we'll install OpenJDK. Note that we are switching to the root user (User 0). We need to do this to have the appropriate permissions to install OpenJDK. After the isntallation command is completed we switch back to User 1001 since the root user is not allowed to run containers in OpenShift.
-[source,dockerfile]
-----
-USER 0
+6. Now we'll install OpenJDK. Note that we are combining multiple commands together with && instead of having each one run seperately. This helps keep the image size smaller.
 
-RUN INSTALL_PKGS="java-11-openjdk java-11-openjdk-devel" && \
-    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
-    yum -y clean all --enablerepo='*'
+7. After the isntallation command is completed we switch back to User 1001 since the root user is not allowed to run containers in OpenShift.
 
-USER 1001
-----
+8. Now we should be able to see where Java is installed.
 
-Now we should be able to see where Java is installed.
-[source,dockerfile]
-----
-RUN echo "-- WHERE IS JAVA= " && whereis java && python -V
-----
+9. We'll fix the permissons to support pip in OpenShift.
 
-Lastly, we'll fix the permissons to support pip in OpenShift, set the work directory, and entry point for the container.
-[source,dockerfile]
-----
-RUN chmod -R g+w /opt/app-root/lib/python3.11/site-packages && \
-    fix-permissions /opt/app-root -P
+10. Set the work directory,
 
-WORKDIR /opt/app-root/src
-
-ENTRYPOINT ["start-notebook.sh"]
-----
+11. Add the entry point for the container.
 
 === Build Steps (TODO: Get screenshots of below steps)
-1. Copy code and open in VSCode.
-2. Open the requirements.txt file + 
-   Note the Seborn dependency in the file.
-3. Open the Containerfile
-4. Add the appropriate commands in the TODO sections. Refer to the Containerfile Overview section above.
-5. We'll now build the image with podman. Open a terminal and got to the root directory where you copied the code. Run the below command. +
+
+1. Open the requirements.txt file under modules/chapter3/examples. +
+The only package we're installing is seaborn. It's a Python data visualization library that we'll use in our notebook. 
++
+image::../images/seabornReq.png[]
++
+Multiple packages can be installed with the requirements.txt file by adding them on the next line. For example, the below requirements.txt file would install seaborn and the trino packages.
++
+image::../images/seabornTrinoReq.png[]
+
+2. Open the Containerfile under modules/chapter3/examples and add the 3 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
++
+[source, dockerfile]
+----
+   RUN INSTALL_PKGS="java-11-openjdk java-11-openjdk-devel" && \
+      yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+      yum -y clean all --enablerepo='*'
+----
++
+[source, dockerfile]
+----
+   FROM quay.io/opendatahub-contrib/workbench-images:jupyter-datascience-c9s-py311_2023c_latest
+----
++
+[source, dockerfile]
+----
+   COPY requirements.txt ./
+----
++
+3. We'll now build the image with podman. Open a terminal and go to modules/chapter3/examples. Run the below command. 
++
+[source]
+----
 podman build -t rhods-custom-image .
+----
++
+You should see the following in the log:
++
+* The seaborn package is installed successfully.
++
+image::../images/podmanSeabornInstalled.png[]
++
+* The first whereis Java command is blank
++
+image::../images/podmanNoJavaPath.png[]
++
+* The second whereis Java command should display the path if Java was successfully installed.
++
+image::../images/podmanJavaPathExists.png[]
+
+4. Once the image is done building run:
++
+[source]
+----
+podman images
+----
++
+image::../images/podmanImages.png[]
+5. Login to quay.io
++
+[source]
+----
+podman login quay.io
+----
 6. Push the image to your quay repository.
++
+[source]
+----
+podman push rhods-admin-custom-image:latest quay.io/<YOUR_USERNAME>/rhods-admin-custom-image
+----
 
 Now you're ready to import your image into RHODS! See the next section to learn how to import your custom image and test it out.
 
