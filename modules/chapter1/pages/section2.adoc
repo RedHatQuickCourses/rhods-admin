@@ -1,6 +1,6 @@
 = Installation using the Web Console
 
-As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Market Place. In the following demonstration you will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console.
+As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Operator Hub. In the following demonstration you will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console.
 
 
 == Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
@@ -95,7 +95,7 @@ image::rhods_verify_pods.png[width=800]
 == Installation of other operators required by Openshift Data Science
 
 
-You may need to install other operators depending on the components and features of Openshift Data Science you want to use:
+As described in the xref::section1.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use:
 
 * https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]
 * https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]
