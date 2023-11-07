@@ -182,7 +182,7 @@
 <h2 id="_admin_access"><a class="anchor" href="#_admin_access"></a>Admin Access</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, users with the <code>cluster-admin</code> role are automatically granted admin permissions in the Openshift.AI Dashboard.  Additional, a group called <code>Openshift.AI-admins</code> is automatically created, and any user added to that group will be granted admin permissions.</p>
+<p>By default, users with the <code>cluster-admin</code> role are automatically granted admin permissions in the Openshift.AI Dashboard.  Additional, a group called <code>rhods-admins</code> is automatically created, and any user added to that group will be granted admin permissions.</p>
 </div>
 <div class="paragraph">
 <p>Admin access in the Openshift.AI Dashboard allows users to control various settings of Openshift.AI through the Dashboard UI, including:</p>
@@ -204,11 +204,11 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>To add users to the <code>Openshift.AI-admins</code> group, run the following command:</p>
+<p>To add users to the <code>rhods-admins</code> group, run the following command:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc adm groups add-users Openshift.AI-admins my-user1 my-user2</code></pre>
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc adm groups add-users rhods-admins my-user1 my-user2</code></pre>
 </div>
 </div>
 </div>
@@ -225,7 +225,7 @@
 </div>
 </div>
 <div class="paragraph">
-<p>The admin group can be updated to another group other than the default <code>Openshift.AI-admins</code> group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the cluster-admin ClusterRole.</p>
+<p>The admin group can be updated to another group other than the default <code>rhods-admins</code> group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the cluster-admin ClusterRole.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -235,7 +235,7 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>It is highly recommended that dedicated admin users are configured for Openshift.AI and that organizations do not rely on the <code>cluster-admin</code> role for exclusive permissions to admin configurations of Openshift.AI.  Dedicated Admin users should be added to the existing <code>Openshift.AI-admins</code> group, or another group which already contains the correct users should be configured in lieu of the <code>Openshift.AI-admins</code> group.</p>
+<p>It is highly recommended that dedicated admin users are configured for Openshift.AI and that organizations do not rely on the <code>cluster-admin</code> role for exclusive permissions to admin configurations of Openshift.AI.  Dedicated Admin users should be added to the existing <code>rhods-admins</code> group, or another group which already contains the correct users should be configured in lieu of the <code>rhods-admins</code> group.</p>
 </div>
 </td>
 </tr>
@@ -283,7 +283,7 @@ metadata:
   namespace: redhat-ods-applications
 spec:
   groupsConfig:
-    adminGroups: Openshift.AI-admins
+    adminGroups: rhods-admins
     allowedGroups: 'system:authenticated'</code></pre>
 </div>
 </div>
