@@ -68,7 +68,7 @@ spec:
     workbenches:
       managementState: Managed
 ----
-<1> For components you *do not* want to install use *Remove*
+<1> For components you *do not* want to install use *Removed*
 <2> For components you *want* to install and manage by the operator use *Managed*
 +
 After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
