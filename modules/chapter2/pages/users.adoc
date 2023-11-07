@@ -1,4 +1,4 @@
-= Users and Permissions
+= Users, Projects, and Permissions
 
 As discussed in the previous section, Red Hat OpenShift.AI allows users to install several different components to enable ML workloads.  One of the components is the OpenShift.AI Dashboard, which acts as the primary user interface to help guide users to working with, deploying, and managing ML solutions.
 
