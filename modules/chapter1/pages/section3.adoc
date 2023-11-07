@@ -267,7 +267,7 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/name: datasciencecluster
     app.kubernetes.io/part-of: rhods-operator
-  name: mycluster  <1>
+  name: default  <1>
 spec:
   components:
     codeflare:
