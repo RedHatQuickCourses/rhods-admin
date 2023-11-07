@@ -84,6 +84,8 @@ spec:
     allowedGroups: 'system:authenticated'
 ```
 
+This object can be exported from the cluster and stored in a git repository to enable managing these settings with GitOps.
+
 == Default Data Science Project Permissions
 
 The Openshift.AI Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:
