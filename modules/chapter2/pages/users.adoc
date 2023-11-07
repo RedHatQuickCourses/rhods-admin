@@ -167,5 +167,7 @@ Once the Data Science Project has been created, access to the project will need 
 
 Create a new Data Science Project and add a group with `edit` permissions.
 
-1. Create a Data Science Project called `my-project`.
-2. Grant the team `my-team` the `edit` role on the project.
+1. Create a Data Science Project called `group-demo`.
+2. Navigate to the OpenShift Web Console, and create a Group called `my-team`.
+3. Add user1 and user2 to the Group `my-team`.
+4. Back in the OpenShift.AI Dashboard, grant the team `my-team` the `edit` role on the project `group-demo`.
