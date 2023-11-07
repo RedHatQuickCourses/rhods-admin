@@ -39,7 +39,7 @@
   <li class="nav-item" data-depth="0">
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
-    <a class="nav-link" href="../index.html">Home</a>
+    <a class="nav-link" href="../index.html">Intoduction</a>
   </li>
 </ul>
   </li>
@@ -47,7 +47,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Chapter 1</a>
+    <a class="nav-link" href="index.html">Installation of Red&#160;Hat Openshift Data Science</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="section1.html">Section 1</a>
@@ -127,7 +127,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
-    <li><a href="index.html">Chapter 1</a></li>
+    <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
     <li><a href="section2.html">Installation using the Web Console</a></li>
   </ul>
 </nav>
@@ -141,7 +141,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>As mentioned earlier,  <strong>Red&#160;Hat Openshift Data Science</strong> is available as an operator via Openshift Market Place. In the following demonstration you will install the <strong>Red&#160;Hat Openshift Data Science operator V2</strong> using the Openshift web console.</p>
+<p>As mentioned earlier,  <strong>Red&#160;Hat Openshift Data Science</strong> is available as an operator via Openshift Operator Hub. In the following demonstration you will install the <strong>Red&#160;Hat Openshift Data Science operator V2</strong> using the Openshift web console.</p>
 </div>
 </div>
 </div>
@@ -235,7 +235,7 @@ Make sure you select <strong>Openshift Data Science</strong> from <strong>Red&#1
 <pre>apiVersion: datasciencecluster.opendatahub.io/v1
 kind: DataScienceCluster
 metadata:
-  name: mycluster  <i class="conum" data-value="1"></i><b>(1)</b>
+  name: default
   labels:
     app.kubernetes.io/name: datasciencecluster
     app.kubernetes.io/instance: default
@@ -245,9 +245,9 @@ metadata:
 spec:
   components:
     codeflare:
-      managementState: Removed  <i class="conum" data-value="2"></i><b>(2)</b>
+      managementState: Removed  <i class="conum" data-value="1"></i><b>(1)</b>
     dashboard:
-      managementState: Managed  <i class="conum" data-value="3"></i><b>(3)</b>
+      managementState: Managed  <i class="conum" data-value="2"></i><b>(2)</b>
     datasciencepipelines:
       managementState: Managed
     kserve:
@@ -264,14 +264,10 @@ spec:
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Name of the cluster</td>
+<td>For components you <strong>do not</strong> want to install use <strong>Removed</strong></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>For components you <strong>do not</strong> want to install use <strong>Remove</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
 <td>For components you <strong>want</strong> to install and manage by the operator use <strong>Managed</strong></td>
 </tr>
 </table>
@@ -331,7 +327,7 @@ Navigate to <strong>Workloads</strong> &#8594; <strong>pods</strong> and select 
 <h2 id="_installation_of_other_operators_required_by_openshift_data_science"><a class="anchor" href="#_installation_of_other_operators_required_by_openshift_data_science"></a>Installation of other operators required by Openshift Data Science</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You may need to install other operators depending on the components and features of Openshift Data Science you want to use:</p>
+<p>As described in the <a href="section1.html" class="xref page">General Information about Installation</a> section you may need to install other operators depending on the components and features of Openshift Data Science you want to use:</p>
 </div>
 <div class="ulist">
 <ul>
