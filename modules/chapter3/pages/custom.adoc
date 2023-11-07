@@ -46,7 +46,7 @@ We will now build our own image from one of the workbench images listed above.
 === Containerfile Overview
 Before you start to edit the Containerfile lets go over what this Containerfile is doing.
 
-image::../images/customContainerFile.png[Custom Containerfile]
+image::customContainerFile.png[Custom Containerfile]
 
 1. The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use.
 
@@ -70,16 +70,16 @@ image::../images/customContainerFile.png[Custom Containerfile]
 
 11. Add the entry point for the container.
 
-=== Build Steps (TODO: Get screenshots of below steps)
+=== Build Steps
 
 1. Open the requirements.txt file under modules/chapter3/examples. +
 The only package we're installing is seaborn. It's a Python data visualization library that we'll use in our notebook. 
 +
-image::../images/seabornReq.png[]
+image::seabornReq.png[]
 +
 Multiple packages can be installed with the requirements.txt file by adding them on the next line. For example, the below requirements.txt file would install seaborn and the trino packages.
 +
-image::../images/seabornTrinoReq.png[]
+image::seabornTrinoReq.png[]
 
 2. Open the Containerfile under modules/chapter3/examples and add the 3 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
 +
@@ -111,15 +111,15 @@ You should see the following in the log:
 +
 * The seaborn package is installed successfully.
 +
-image::../images/podmanSeabornInstalled.png[]
+image::podmanSeabornInstalled.png[]
 +
 * The first whereis Java command is blank
 +
-image::../images/podmanNoJavaPath.png[]
+image::podmanNoJavaPath.png[]
 +
 * The second whereis Java command should display the path if Java was successfully installed.
 +
-image::../images/podmanJavaPathExists.png[]
+image::podmanJavaPathExists.png[]
 
 4. Once the image is done building run:
 +
@@ -128,7 +128,7 @@ image::../images/podmanJavaPathExists.png[]
 podman images
 ----
 +
-image::../images/podmanImages.png[]
+image::podmanImages.png[]
 5. Login to quay.io
 +
 [source]
