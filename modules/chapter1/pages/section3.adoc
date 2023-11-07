@@ -74,23 +74,21 @@ metadata:
   namespace: _operator_namespace_ <2>
 spec:
   channel: _channel_ <3>
-  startingCSV: _Operator_CSV_ <4>
-  installPlanApproval: _Manual/Automatic_ <5>
+  installPlanApproval: _Manual/Automatic_ <4>
   name: _Operator_name_
   source: _Catalog_source_
   sourceNamespace: openshift-marketplace
 ----
 <1> Name of the subscription resource.
 <2> Name of the namespace to create the subscription resource in.
-<3> Update channel to install the operator from. For more information about finding available channels see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
-<4> Starting Cluster Service Version of the operator. For more information about finding available CSVs see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
-<5> *installPlanApproval* attribute can be either *Automatic* or *Manual*. For more details about manual installation approval se the xref:section3.adoc#manual_approval[Approving Installation Manualy] section.
+<3> Update channel to install the operator from. For more information about finding available channels see the xref:section3.adoc#findchannel[Finding Update Channels] section.
+<4> *installPlanApproval* attribute can be either *Automatic* or *Manual*. For more details about manual installation approval se the xref:section3.adoc#manual_approval[Approving Installation Manualy] section.
 --
 
 [#findchannel]
-=== Finding Update Channels and Cluster Service Versions
+=== Finding Update Channels 
 --
-Update channels, CSVs and other details about the operator can be found in a resource *packagemanifest*. 
+Update channels and other details about the operator can be found in a resource *packagemanifest*. 
 It can be however a little challenging to search the *packagemanifest* as it is quite complex. _JQuery_ is a powerfull tool to filter values from JSON resource manifests.
 
 The following example lists available channels for the *rhods-operator* operator.
@@ -102,26 +100,6 @@ The following example lists available channels for the *rhods-operator* operator
 "stable"
 "alpha"
 ----
-
-To find available CSVs for a particular channel you can use the following command.
-
-[subs=+quotes]
-----
-*$ oc get packagemanifest rhods-operator -o json| \
-  jq '.status.channels[]|select(.name=="#alpha#").entries'* <1>
-  [
-  {
-    "name": "rhods-operator.2.2.0",   <2>
-    "version": "2.2.0"
-  },
-  {
-    "name": "rhods-operator.2.1.0", <2>
-    "version": "2.1.0"
-  }
-]
-----
-<1> *alpha* is the name of the channel.
-<2> The value of the _name_ attribute is used as a value of the xref:section3.adoc#subscription[startingCSV] attribute in the subscription to select the starting version.
 --
 
 [#manual_approval]
@@ -248,7 +226,7 @@ EOF
 $ *oc create -f rhods-subs.yaml*
 subscription.operators.coreos.com/rhods-operator created
 ----
-<1> The update channel to install the operator from. To find all available  channels see the the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<1> The update channel to install the operator from. To find all available  channels see the the xref:section3.adoc#findchannel[Finding Update Channels] section.
 <2> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
 
@@ -357,7 +335,7 @@ EOF
 
 $ *oc create -f pipelines-subs.yaml*
 ----
-<1> The update channel to install the operator from. To find all available channels see the xref:section3.adoc#findchannel[Finding Update Channels and Cluster Service Versions] section.
+<1> The update channel to install the operator from. To find all available channels see the xref:section3.adoc#findchannel[Finding Update Channels] section.
 <2> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
 3. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
