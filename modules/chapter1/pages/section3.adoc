@@ -193,25 +193,7 @@ jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[
 
 == Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
 
-1. Red{nbsp}Hat Openshift Data Science operator is available through Red Hat Operators catalogue. To install it, locate the manifest.
-+
-[subs=+quotes]
-----
-$ *oc get packagemanifest | grep rhods-operator*
-rhods-operator                             Red Hat Operators     3h34m
-----
-
-2. The operator has a suggested namespace *redhat-ods-operator* to be installed into. However it can be installed into any namespace you choose.
-+
-[subs=+quotes]
-----
-$ *oc describe packagemanifest rhods-operator*
-_...output ommited..._
-operatorframework.io/suggested-namespace:  redhat-ods-operator
-_...output ommited..._
-----
-
-3. Unless you choose to install it into the _openshift-operators_ namespace, create the *Namespace* and *Operator Group* in it first.
+. Unless you choose to install it into the _openshift-operators_ namespace, create the *Namespace* and *Operator Group* in it first.
 +
 --
 [subs=+quotes]
@@ -240,7 +222,7 @@ $ *oc create -f rhods-og.yaml*
 operatorgroup.operators.coreos.com/redhat-ods-operator created
 ----
 --
-4. Now create the  operator's subscription to start the installation.
+. Now create the  operator's subscription to start the installation.
 +
 --
 [subs=+quotes]
@@ -269,7 +251,7 @@ subscription.operators.coreos.com/rhods-operator created
 <4> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
 --
 
-5. Finally create your Openshift DataScience Cluster resource to configure your cluster.
+. Finally create your Openshift DataScience Cluster resource to configure your cluster.
 +
 ----
 cat <<EOF > rhods-cluster.yaml
@@ -307,7 +289,7 @@ oc create -f rhods-cluster.yaml
 <2> Use *Remove* for components that *will not* be installed.
 <3> Use *Managed* foc components that will be installed.
 
-6. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
+. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
 
 [NOTE]
 It may take some time for all the operator's pods to start hence the *Red{nbsp}Hat Openshift Data Science* dashboard may not be available immediately. You can check their status in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
