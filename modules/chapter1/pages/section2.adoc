@@ -44,7 +44,7 @@ If you choose the _YAML view_, you are presented with a template of the YAML Dat
 apiVersion: datasciencecluster.opendatahub.io/v1
 kind: DataScienceCluster
 metadata:
-  name: mycluster  <1>
+  name: default  <1>
   labels:
     app.kubernetes.io/name: datasciencecluster
     app.kubernetes.io/instance: default
