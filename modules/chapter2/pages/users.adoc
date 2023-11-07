@@ -21,7 +21,7 @@ For assistance with configuring user access to OpenShift with various identity p
 
 == Admin Access
 
-By default, users with the `cluster-admin` role are automatically granted admin permissions in the Openshift.AI Dashboard.  Additional, a group called `Openshift.AI-admins` is automatically created, and any user added to that group will be granted admin permissions.
+By default, users with the `cluster-admin` role are automatically granted admin permissions in the Openshift.AI Dashboard.  Additional, a group called `rhods-admins` is automatically created, and any user added to that group will be granted admin permissions.
 
 Admin access in the Openshift.AI Dashboard allows users to control various settings of Openshift.AI through the Dashboard UI, including:
 
@@ -30,10 +30,10 @@ Admin access in the Openshift.AI Dashboard allows users to control various setti
 - Configuring the idle notebook culler
 - Other notebook configuration settings
 
-To add users to the `Openshift.AI-admins` group, run the following command:
+To add users to the `rhods-admins` group, run the following command:
 
 ```sh
-oc adm groups add-users Openshift.AI-admins my-user1 my-user2
+oc adm groups add-users rhods-admins my-user1 my-user2
 ```
 
 == Updating Default User Permissions
@@ -42,12 +42,12 @@ The default permissions for the Openshift.AI Dashboard can be updated through th
 
 image::user-management.png[]
 
-The admin group can be updated to another group other than the default `Openshift.AI-admins` group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the cluster-admin ClusterRole.
+The admin group can be updated to another group other than the default `rhods-admins` group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the cluster-admin ClusterRole.
 
 [TIP]
 ====
 
-It is highly recommended that dedicated admin users are configured for Openshift.AI and that organizations do not rely on the `cluster-admin` role for exclusive permissions to admin configurations of Openshift.AI.  Dedicated Admin users should be added to the existing `Openshift.AI-admins` group, or another group which already contains the correct users should be configured in lieu of the `Openshift.AI-admins` group.
+It is highly recommended that dedicated admin users are configured for Openshift.AI and that organizations do not rely on the `cluster-admin` role for exclusive permissions to admin configurations of Openshift.AI.  Dedicated Admin users should be added to the existing `rhods-admins` group, or another group which already contains the correct users should be configured in lieu of the `rhods-admins` group.
 
 ====
 
@@ -80,7 +80,7 @@ metadata:
   namespace: redhat-ods-applications
 spec:
   groupsConfig:
-    adminGroups: Openshift.AI-admins
+    adminGroups: rhods-admins
     allowedGroups: 'system:authenticated'
 ```
 
