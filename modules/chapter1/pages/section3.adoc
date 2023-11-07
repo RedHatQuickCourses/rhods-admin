@@ -265,8 +265,8 @@ EOF
 oc create -f rhods-cluster.yaml
 ----
 <1> Name of the cluster
-<2> Use *Remove* for components that *will not* be installed.
-<3> Use *Managed* foc components that will be installed.
+<2> Use *Removed* for components that *will not* be installed.
+<3> Use *Managed* for components that will be installed.
 
 . You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
 
