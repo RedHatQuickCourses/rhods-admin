@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Create a Custom Notebook Image :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="importcustom.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Intoduction</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">Section 1</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Section 2</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Section 3</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/users.html">User Types and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Building Custom Notebook Images</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="custom.html">Create a Custom Notebook Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="importcustom.html">Importing Custom Notebook Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix A</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Building Custom Notebook Images</a></li>
+    <li><a href="custom.html">Create a Custom Notebook Image</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Create a Custom Notebook Image</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Custom notebook images allow you to add specific packages and libraries for your projects. This level of customization provides you with a consistent development environment for your teams to work in and ensures that your projects are reproducible between team members. You may also want to create custom notebooks that are more secure than the default notebook image provided in RHODS.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_image_source_and_pre_built_images"><a class="anchor" href="#_image_source_and_pre_built_images"></a>Image source and Pre-built images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default RHODS notebook images can be found in the <a href="https://github.com/opendatahub-io-contrib/workbench-images">opendatahub-io-contrib/workbench-images</a> repository. This repository contains the source code, pre-built images, and examples to help you create your own image. Workbench and runtime images are available.</p>
+</div>
+<div class="paragraph">
+<p><strong>Workbench Images</strong><br>
+These images can be used directly in workbenches within RHODS after importing them through the RHODS dashboard.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Jupyter Data Science</p>
+</li>
+<li>
+<p>VSCode Data Science</p>
+</li>
+<li>
+<p>RStudio</p>
+</li>
+<li>
+<p>Jupyter PyTorch</p>
+</li>
+<li>
+<p>VSCode PyTorch</p>
+</li>
+<li>
+<p>Jupyter Tensorflow</p>
+</li>
+<li>
+<p>Jupyter Langchain</p>
+</li>
+<li>
+<p>Langflow</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Runtime Images</strong><br>
+These images can be used in Data Science Pipelines. They contain the exact same set of libraries as the above workbench images, except the IDE part.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Runtime Data Science</p>
+</li>
+<li>
+<p>Runtime Data Science (CUDA)</p>
+</li>
+<li>
+<p>Runtime PyTorch (CUDA)</p>
+</li>
+<li>
+<p>Runtime Tensorflow (CUDA)</p>
+</li>
+<li>
+<p>Runtime R</p>
+</li>
+<li>
+<p>Runtime Spark</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For more information on OS packages, bundles, and IDE versions checkout the <a href="https://github.com/opendatahub-io-contrib/workbench-images#detailed-images-content">Detailed Images Content</a> section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_building_your_own_images"><a class="anchor" href="#_building_your_own_images"></a>Building your own images</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We will now build our own image from one of the workbench images listed above.</p>
+</div>
+<div class="sect2">
+<h3 id="_rules"><a class="anchor" href="#_rules"></a>Rules</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>On OpenShift, every containers in a standard namespace (unless you modify security) run with a user with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The <strong>best practice</strong> is to set the <strong>ownership at 1001:0</strong> (user "default", group "0").</p>
+</li>
+<li>
+<p>If you don&#8217;t want/can&#8217;t do that, another solution is to set permissions properly for any user, like 775.</p>
+</li>
+<li>
+<p>When launching a notebook from Applications&#8594;Enabled, the "personal" volume of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Need podman</p>
+</li>
+<li>
+<p>Need an image registry</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_containerfile_overview"><a class="anchor" href="#_containerfile_overview"></a>Containerfile Overview</h3>
+<div class="paragraph">
+<p>Before you start to edit the Containerfile lets go over what this Containerfile is doing.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/customContainerFile.png" alt="Custom Containerfile">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The FROM command contains the base image that we&#8217;ll be using to build our custom image from. This will already contain common python packages that Data Scientists use.</p>
+</li>
+<li>
+<p>The COPY command copies a requirements.txt file with the extra package that we will need in our notebook.</p>
+</li>
+<li>
+<p>The next step is to install the packages and remove then requirements.txt file that we just copied in to clean up files.</p>
+</li>
+<li>
+<p>We&#8217;re printing out where Java is installed. Since we haven&#8217;t installed it yet and it&#8217;s not part of our base image we should expect the output to be blank.</p>
+</li>
+<li>
+<p>We&#8217;re switching to the root user (User 0). We need to do this to have the appropriate permissions to install OpenJDK.</p>
+</li>
+<li>
+<p>Now we&#8217;ll install OpenJDK. Note that we are combining multiple commands together with &amp;&amp; instead of having each one run seperately. This helps keep the image size smaller.</p>
+</li>
+<li>
+<p>After the isntallation command is completed we switch back to User 1001 since the root user is not allowed to run containers in OpenShift.</p>
+</li>
+<li>
+<p>Now we should be able to see where Java is installed.</p>
+</li>
+<li>
+<p>We&#8217;ll fix the permissons to support pip in OpenShift.</p>
+</li>
+<li>
+<p>Set the work directory,</p>
+</li>
+<li>
+<p>Add the entry point for the container.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_steps_todo_get_screenshots_of_below_steps"><a class="anchor" href="#_build_steps_todo_get_screenshots_of_below_steps"></a>Build Steps (TODO: Get screenshots of below steps)</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open the requirements.txt file under modules/chapter3/examples.<br>
+The only package we&#8217;re installing is seaborn. It&#8217;s a Python data visualization library that we&#8217;ll use in our notebook.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/seabornReq.png" alt="seabornReq">
+</div>
+</div>
+<div class="paragraph">
+<p>Multiple packages can be installed with the requirements.txt file by adding them on the next line. For example, the below requirements.txt file would install seaborn and the trino packages.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/seabornTrinoReq.png" alt="seabornTrinoReq">
+</div>
+</div>
+</li>
+<li>
+<p>Open the Containerfile under modules/chapter3/examples and add the 3 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   RUN INSTALL_PKGS="java-11-openjdk java-11-openjdk-devel" &amp;&amp; \
+      yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS &amp;&amp; \
+      yum -y clean all --enablerepo='*'</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/opendatahub-contrib/workbench-images:jupyter-datascience-c9s-py311_2023c_latest</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   COPY requirements.txt ./</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>We&#8217;ll now build the image with podman. Open a terminal and go to modules/chapter3/examples. Run the below command.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">podman build -t rhods-custom-image .</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You should see the following in the log:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The seaborn package is installed successfully.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/podmanSeabornInstalled.png" alt="podmanSeabornInstalled">
+</div>
+</div>
+</li>
+<li>
+<p>The first whereis Java command is blank</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/podmanNoJavaPath.png" alt="podmanNoJavaPath">
+</div>
+</div>
+</li>
+<li>
+<p>The second whereis Java command should display the path if Java was successfully installed.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/podmanJavaPathExists.png" alt="podmanJavaPathExists">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Once the image is done building run:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">podman images</code></pre>
+</div>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/podmanImages.png" alt="podmanImages">
+</div>
+</div>
+</li>
+<li>
+<p>Login to quay.io</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">podman login quay.io</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Push the image to your quay repository.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-none hljs">podman push rhods-admin-custom-image:latest quay.io/&lt;YOUR_USERNAME&gt;/rhods-admin-custom-image</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Now you&#8217;re ready to import your image into RHODS! See the next section to learn how to import your custom image and test it out.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Building Custom Notebook Images</a></span>
+  <span class="next"><a href="importcustom.html">Importing Custom Notebook Images</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
