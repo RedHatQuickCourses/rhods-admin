@@ -9,8 +9,9 @@ https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{n
  This operator is required if you want to install the  *Red{nbsp}Hat Openshift Data Science Pipelines* component.
 
 https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
-https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
 This *NVIDIA GPU Operator* is required for GPU support in  Red Hat Openshift Data Science.
+
+https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
 The *Node Feature Discovery Operator* is a prerequisity for the *NVIDIA GPU Operator*.
 
 [IMPORTANT]
