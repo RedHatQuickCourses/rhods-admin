@@ -107,7 +107,7 @@ The following demonstration shows the installation of the https://www.redhat.com
 === Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* operator
 
 1. Login to Red{nbsp}Hat Openshift using a user which has the _cluster-admin_ role assigned.
-2. Navigate to **Operators** -> **OperatorHub** and seach for *Red{nbsp}Hat Openshift Pipelines*
+2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Pipelines*
 +
 image::pipeline_search.png[width=800]
 
