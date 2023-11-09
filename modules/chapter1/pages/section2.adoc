@@ -9,7 +9,7 @@ IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
 1. Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
-2. Navigate to **Operators** -> **OperatorHub** and seach for *Red{nbsp}Hat Openshift Data Science*.
+2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
 +
 image::rhods_install1.png[width=800]
 
