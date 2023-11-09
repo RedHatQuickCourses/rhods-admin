@@ -24,7 +24,7 @@ image::rhods_install2.png[width=800]
 +
 image::rhods2-install-view.png[width=800]
 +
-Operator Installation progress window will pup up. The installation may take a couple of minutes.
+Operator Installation progress window will pop up. The installation may take a couple of minutes.
 +
 image::rhods2-install.png[width=800]
 
