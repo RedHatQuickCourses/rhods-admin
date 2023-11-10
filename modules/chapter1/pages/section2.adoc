@@ -7,6 +7,7 @@ As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an 
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
+
 1. Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
 2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
@@ -32,8 +33,16 @@ image::rhods2-install.png[width=800]
 +
 image::rhods2-install-finished.png[width=800]
 
-6. In the *Create DataScienceCluster* view choose a name for your cluster and select components that will be installed and managed by the operator. For this demonstration you can accept the default selection of components.
+6. In the *Create DataScienceCluster* view choose a name for your cluster and select components that will be installed and managed by the operator. There are following components to choose from:
 +
+CodeFlare::
+Data Science Pipelines::
+KServe::
+ModelMeshServing::
+Ray::
+Worbenches::
+
+
 You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
 +
 image::rhods2-create-cluster.png[width=800]
