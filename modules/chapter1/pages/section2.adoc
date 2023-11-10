@@ -33,16 +33,29 @@ image::rhods2-install.png[width=800]
 +
 image::rhods2-install-finished.png[width=800]
 
-6. In the *Create DataScienceCluster* view choose a name for your cluster and select components that will be installed and managed by the operator. There are following components to choose from:
+6. In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
++ 
+There are following components to choose from:
 +
-CodeFlare::
-Data Science Pipelines::
-KServe::
-ModelMeshServing::
-Ray::
-Worbenches::
-
-
+ * *CodeFlare:* CodeFlare simplifies the integration, scaling and acceleration of complex multi-step analytics and machine learning pipelines on the hybrid multi-cloud.CodeFlare, an open-source framework for simplifying the integration and efficient scaling of big data and AI workflows onto the hybrid cloud. CodeFlare is built on top of Ray, an emerging open-source distributed computing framework for machine learning applications. CodeFlare extends the capabilities of Ray by adding specific elements to make scaling workflows easier. 
++
+ * *Ray:* Ray is an open technology for “fast and simple distributed computing.” It makes it easy for data scientists and application developers to run their code in a distributed fashion. It also provides a lean and easy interface for distributed programming with many different libraries, best suited to perform machine learning and other intensive compute tasks. 
++
+ * *Dashboard:* Dashboard provides with a web based user interface to Openshift Data Science.
++
+ * *Data Science Pipelines:* Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models. 
++
+ * *KServe:* Kserve, or KFServing, is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.
++
+ * *ModelMeshServing:* ModelMeshServing is a platform that focuses on serving machine learning models efficiently in production. It aims to provide a unified serving layer for various machine learning frameworks and languages. The goal is to offer high-performance, low-latency model serving with features like model versioning, A/B testing, and multi-model serving.
++
+ * *Workbenches:* Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.
++
+[IMPORTANT]
+Make sure that you install all pre-requisities for selected components. For more details see the xref::section1.adoc[General Information about Installation] section.
++
+For this demonstration you can accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving and Workbenches.
++
 You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
 +
 image::rhods2-create-cluster.png[width=800]
