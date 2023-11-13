@@ -64,7 +64,7 @@ For example, if the normal user group is updated to only allow specific users to
 
 === Managing Dashboard Permissions with GitOps
 
-The `User and group settings` in the OpenShift AI Dashboard can also be managed using the `OdhDashboardConfigs` objected called `odh-dashboard-config` located in the redhat-ods-applications namespace along with many of the other settings found in the Dashboard's Settings section:
+The `User and group settings` in the OpenShift AI Dashboard can also be managed using the `OdhDashboardConfigs` object called `odh-dashboard-config` located in the redhat-ods-applications namespace along with many of the other settings found in the Dashboard's Settings section:
 
 ```sh
 oc get odhdashboardconfigs odh-dashboard-config -n redhat-ods-applications -o yaml
