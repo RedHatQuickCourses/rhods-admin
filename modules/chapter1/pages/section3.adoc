@@ -186,7 +186,7 @@ The following demonstration shows the installation of the https://www.redhat.com
 
 === Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* Operator
 [WARNING]
-If you have already installed the *Red{nbsp}Hat Openshift Data Science* operator during the previous demonstration, you have to uninstall it. Follow the xref:section5.adoc#demo[uninstallation demonstration] first.
+If you have already installed the *Red{nbsp}Hat Openshift Data Science* operator during the previous demonstration, you have to uninstall it. Follow the xref:section5.adoc#demo-rhods[Uninstalling Red{nbsp}Hat Openshift Data Science] demo to uninstall the *Red{nbsp}Hat Openshift Data Science* operator first and xref:section5.adoc#demo-pipelines[Uninstalling Red{nbsp}Hat Openshift Pipelines] to uninstall *Red{nbsp}Hat Openshift Pipelines* first.
 
 . Log in as a user with the _cluster-admin_ role assigned.
 +
