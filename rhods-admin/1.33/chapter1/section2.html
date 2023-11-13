@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Section 2 :: Red Hat OpenShift Data Science Administration</title>
+    <title>Installation using the Web Console :: Red Hat OpenShift Data Science Administration</title>
     <link rel="prev" href="section1.html">
     <link rel="next" href="section3.html">
     <meta name="generator" content="Antora 3.1.3">
@@ -53,10 +53,10 @@
     <a class="nav-link" href="section1.html">General Information about Installation</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="section2.html">Section 2</a>
+    <a class="nav-link" href="section2.html">Installation using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section3.html">Section 3</a>
+    <a class="nav-link" href="section3.html">Installation Using the Command Line Interface</a>
   </li>
 </ul>
   </li>
@@ -128,7 +128,7 @@
   <ul>
     <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
     <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
-    <li><a href="section2.html">Section 2</a></li>
+    <li><a href="section2.html">Installation using the Web Console</a></li>
   </ul>
 </nav>
 </div>
@@ -137,11 +137,350 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<h1 class="page">Section 2</h1>
-
+<h1 class="page">Installation using the Web Console</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Red&#160;Hat Openshift Data Science</strong> is available as an operator via Openshift Operator Hub.  You will install the <strong>Red&#160;Hat Openshift Data Science operator V2</strong> using the Openshift web console in this section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation_of_openshift_data_science_dependecies"><a class="anchor" href="#_installation_of_openshift_data_science_dependecies"></a>Installation of Openshift Data Science dependecies</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As described in the <a href="section1.html" class="xref page">General Information about Installation</a> section you may need to install other operators depending on the components and features of Openshift Data Science you want to use.
+In general not installing dependencies before the <strong>Red&#160;Hat Openshift Data Science</strong> does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it&#8217;s better to install the dependencies beforehand.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines">Red&#160;Hat Openshift Pipelines Operator</a></dt>
+<dd>
+<p>The <strong>Red Hat Openshift Pipelines Operator</strong> is required if you want to install the <strong>Red Hat Openshift Data Science Pipelines</strong> component.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html">NVIDIA GPU Operator</a></dt>
+<dd>
+<p>The <strong>NVIDIA GPU Operator</strong> is required for GPU support in <strong>Red Hat Openshift Data Science</strong>.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html">Node Feature Discovery Operator</a></dt>
+<dd>
+<p>The <strong>Node Feature Discovery Operator</strong> is a prerequisity for the <strong>NVIDIA GPU Operator</strong>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The following demonstration shows the installation of the <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines">Red&#160;Hat Openshift Pipelines Operator</a> which is a dependency of the <strong>Data Science Pipelines</strong> component installed by default. Installation of the two other operators is very similar.</p>
+</div>
+<div class="sect2">
+<h3 id="_demo_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_pipelines_operator"></a>Demo: Installation of the <strong>Red&#160;Hat Openshift Pipelines</strong> operator</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login to Red&#160;Hat Openshift using a user which has the <em>cluster-admin</em> role assigned.</p>
+</li>
+<li>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>Red&#160;Hat Openshift Pipelines</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_search.png" alt="pipeline search" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>Red&#160;Hat Openshift Pipelines</strong> operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install1.png" alt="pipeline install1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>In the installation view choose the <strong>Update&#160;channel</strong> and the <strong>Update&#160;approval</strong> parameters. You can accept the default values. The <strong>Installation&#160;mode</strong> and the <strong>Installed&#160;namespace</strong> parameters are fixed.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install2.png" alt="pipeline install2" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>Install</strong> button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install3.png" alt="pipeline install3" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>When the installation finishes the operator is ready to be used by the <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipeline_install4.png" alt="pipeline install4" width="800">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_demo_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_data_science_operator"></a>Demo: Installation of the Red&#160;Hat Openshift Data Science operator</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The installation requires a user with the <em>cluster-admin</em> role
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login to the Red Hat Openshift using a user which has the <em>cluster-admin</em> role assigned.</p>
+</li>
+<li>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install1.png" alt="rhods install1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the Red&#160;Hat Openshift Data Science operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure you select <strong>Openshift Data Science</strong> from <strong>Red&#160;Hat</strong> not the <strong>Community</strong> version.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install2.png" alt="rhods install2" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>In the installation view window choose the <em>alpha</em> <strong>Update Channel</strong>, <em>Automatic</em> <strong>Update approval</strong> and keep the default <strong>Installed Namespace</strong>. Click on the <strong>Install</strong> button to start the installation.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-install-view.png" alt="rhods2 install view" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Operator Installation progress window will pop up. The installation may take a couple of minutes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-install.png" alt="rhods2 install" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>When the operator&#8217;s installation is finished, click on the <strong>Create DataScienceCluster</strong> button to create and configure your cluster.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-install-finished.png" alt="rhods2 install finished" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>In the <strong>Create DataScienceCluster</strong> view select components that will be installed and managed by the operator.</p>
+<div class="paragraph">
+<p>There are following components to choose from:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>CodeFlare:</strong> CodeFlare simplifies the integration, scaling and acceleration of complex multi-step analytics and machine learning pipelines on the hybrid multi-cloud.CodeFlare, an open-source framework for simplifying the integration and efficient scaling of big data and AI workflows onto the hybrid cloud. CodeFlare is built on top of Ray, an emerging open-source distributed computing framework for machine learning applications. CodeFlare extends the capabilities of Ray by adding specific elements to make scaling workflows easier.</p>
+</li>
+<li>
+<p><strong>Ray:</strong> Ray is an open technology for “fast and simple distributed computing.” It makes it easy for data scientists and application developers to run their code in a distributed fashion. It also provides a lean and easy interface for distributed programming with many different libraries, best suited to perform machine learning and other intensive compute tasks.</p>
+</li>
+<li>
+<p><strong>Dashboard:</strong> A web dashboard that displays installed <strong>Data Science</strong> components with easy access to component UIs and documentation</p>
+</li>
+<li>
+<p><strong>Data Science Pipelines:</strong> Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models.</p>
+</li>
+<li>
+<p><strong>KServe:</strong> Kserve, or KFServing, is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.</p>
+</li>
+<li>
+<p><strong>ModelMeshServing:</strong>  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.</p>
+</li>
+<li>
+<p><strong>Workbenches:</strong> Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving and Workbenches.</p>
+</div>
+<div class="paragraph">
+<p>You can choose to create the DataScienceCluster using either the <em>Form view</em> or the <em>YAML View</em>. The <em>Form view</em> is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the <em>Form view</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-create-cluster.png" alt="rhods2 create cluster" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>If you choose the <em>YAML view</em>, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: datasciencecluster.opendatahub.io/v1
+kind: DataScienceCluster
+metadata:
+  name: default
+  labels:
+    app.kubernetes.io/name: datasciencecluster
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/part-of: rhods-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: rhods-operator
+spec:
+  components:
+    codeflare:
+      managementState: Removed  <i class="conum" data-value="1"></i><b>(1)</b>
+    dashboard:
+      managementState: Managed  <i class="conum" data-value="2"></i><b>(2)</b>
+    datasciencepipelines:
+      managementState: Managed
+    kserve:
+      managementState: Removed
+    modelmeshserving:
+      managementState: Managed
+    ray:
+      managementState: Removed
+    workbenches:
+      managementState: Managed</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>For components you <strong>do not</strong> want to install use <strong>Removed</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>For components you <strong>want</strong> to install and manage by the operator use <strong>Managed</strong></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After naming the cluster and choosing the components you wish the operator to install and manage click on the <strong>Create</strong> button.</p>
+</div>
+</li>
+<li>
+<p>After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads <strong>Phase: Ready</strong>. This represents the status of the whole cluster.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-clusters.png" alt="rhods2 clusters" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>You may also check the status of individual installed components by looking at their conditions. Click on the <strong>default</strong> cluster and switch to the YAML view. Scroll down to view <strong>conditions</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-conditions.png" alt="rhods2 conditions" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Each condition is represented by a <strong>type</strong> and a <strong>status</strong>. The <strong>Type</strong> is a string describing the condition, for instance <em>odh-dashboardReady</em> and the status says whether it is <em>true</em> or not. The following example shows the <strong>Ready</strong> status of the Dashboard component.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>- lastHeartbeatTime: '2023-11-13T10:53:20Z'
+  lastTransitionTime: '2023-11-13T10:53:20Z'
+  message: Component reconciled successfully
+  reason: ReconcileCompleted
+  <mark>status: 'True'</mark>
+  <mark>type: odh-dashboardReady</mark></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The following list shows the conditions you may want to check:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>rayReady</p>
+</li>
+<li>
+<p>codeflareReady</p>
+</li>
+<li>
+<p>model-meshReady</p>
+</li>
+<li>
+<p>workbenchesReady</p>
+</li>
+<li>
+<p>data-science-pipelines-operatorReady</p>
+</li>
+<li>
+<p>odh-dashboardReady</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The operator should be installed and configured now.
+In the applications window in the right upper corner of the screen the <strong>Red&#160;Hat Openshift Data Science</strong> dashboard should be available.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify1.png" alt="rhods verify1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>Red&#160;Hat Openshift Data Science</strong> button to log in to the <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify2.png" alt="rhods verify2" width="800">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+It may take a while to start all the service pods hence the login window may not be accessible immediately. If you are getting an error, check the status of the pods in the project <strong>redhat-ods-applications</strong>.
+Navigate to <strong>Workloads</strong> &#8594; <strong>pods</strong> and select project <strong>redhat-ods-applications</strong>. All pods must be running and be ready. If they are not, wait until they become running and ready.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify_pods.png" alt="rhods verify pods" width="800">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
 <nav class="pagination">
   <span class="prev"><a href="section1.html">General Information about Installation</a></span>
-  <span class="next"><a href="section3.html">Section 3</a></span>
+  <span class="next"><a href="section3.html">Installation Using the Command Line Interface</a></span>
 </nav>
 </article>
   </div>
