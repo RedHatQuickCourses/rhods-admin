@@ -1,16 +1,16 @@
 = Users, Projects, and Permissions
 
-As discussed in the previous section, Red Hat OpenShift.AI allows users to install several different components to enable ML workloads.  One of the components is the OpenShift.AI Dashboard, which acts as the primary user interface to help guide users to working with, deploying, and managing ML solutions.
+As discussed in the previous section, Red Hat OpenShift AI allows users to install several different components to enable ML workloads.  One of the components is the OpenShift AI Dashboard, which acts as the primary user interface to help guide users to working with, deploying, and managing ML solutions.
 
-This section discusses of the intricacies of managing users with OpenShift.AI and how to modify the default permissions for a project.
+This section discusses of the intricacies of managing users with OpenShift AI and how to modify the default permissions for a project.
 
-== Logging Into The Openshift.AI Dashboard
+== Logging Into The OpenShift AI Dashboard
 
-Openshift.AI utilizes OpenShift OAuth as the authentication method for all Openshift.AI related resources.  When attempting to log into the Openshift.AI Dashboard or other UI components, users will be presented with a page prompting them to `Log in with OpenShift`.
+OpenShift AI utilizes OpenShift OAuth as the authentication method for all OpenShift AI related resources.  When attempting to log into the OpenShift AI Dashboard or other UI components, users will be presented with a page prompting them to `Log in with OpenShift`.
 
 image::login-with-openshift.png[]
 
-By default, any user with the ability to login to OpenShift will be able to access the Openshift.AI Dashboard.
+By default, any user with the ability to login to OpenShift will be able to access the OpenShift AI Dashboard.
 
 [TIP]
 ====
@@ -21,9 +21,9 @@ For assistance with configuring user access to OpenShift with various identity p
 
 == Admin Access
 
-By default, users with the `cluster-admin` role are automatically granted admin permissions in the Openshift.AI Dashboard.  Additional, a group called `rhods-admins` is automatically created, and any user added to that group will be granted admin permissions.
+By default, users with the `cluster-admin` role are automatically granted admin permissions in the OpenShift AI Dashboard.  Additional, a group called `rhods-admins` is automatically created, and any user added to that group will be granted admin permissions.
 
-Admin access in the Openshift.AI Dashboard allows users to control various settings of Openshift.AI through the Dashboard UI, including:
+Admin access in the OpenShift AI Dashboard allows users to control various settings of OpenShift AI through the Dashboard UI, including:
 
 - Configuring custom notebook images
 - Configuring custom serving runtimes
@@ -38,7 +38,7 @@ oc adm groups add-users rhods-admins my-user1 my-user2
 
 == Updating Default User Permissions
 
-The default permissions for the Openshift.AI Dashboard can be updated through the `Settings`>`User management` section.
+The default permissions for the OpenShift AI Dashboard can be updated through the `Settings`>`User management` section.
 
 image::user-management.png[]
 
@@ -47,11 +47,11 @@ The admin group can be updated to another group other than the default `rhods-ad
 [TIP]
 ====
 
-It is highly recommended that dedicated admin users are configured for Openshift.AI and that organizations do not rely on the `cluster-admin` role for exclusive permissions to admin configurations of Openshift.AI.  Dedicated Admin users should be added to the existing `rhods-admins` group, or another group which already contains the correct users should be configured in lieu of the `rhods-admins` group.
+It is highly recommended that dedicated admin users are configured for OpenShift AI and that organizations do not rely on the `cluster-admin` role for exclusive permissions to admin configurations of OpenShift AI.  Dedicated Admin users should be added to the existing `rhods-admins` group, or another group which already contains the correct users should be configured in lieu of the `rhods-admins` group.
 
 ====
 
-The normal Data Science user group can also be updated to change what users are able to sign into the Openshift.AI Dashboard.  By default, the Dashboard is configured to allow all authenticated users with the `system:authenticated` role.  A custom group can be configured to allow only specific users belonging to that group to access the Dashboard.
+The normal Data Science user group can also be updated to change what users are able to sign into the OpenShift AI Dashboard.  By default, the Dashboard is configured to allow all authenticated users with the `system:authenticated` role.  A custom group can be configured to allow only specific users belonging to that group to access the Dashboard.
 
 [WARNING]
 ====
@@ -64,7 +64,7 @@ For example, if the normal user group is updated to only allow specific users to
 
 === Managing Dashboard Permissions with GitOps
 
-The `User and group settings` in the Openshift.AI Dashboard can also be managed using the `OdhDashboardConfigs` objected called `odh-dashboard-config` located in the redhat-ods-applications namespace along with many of the other settings found in the Dashboard's Settings section:
+The `User and group settings` in the OpenShift AI Dashboard can also be managed using the `OdhDashboardConfigs` objected called `odh-dashboard-config` located in the redhat-ods-applications namespace along with many of the other settings found in the Dashboard's Settings section:
 
 ```sh
 oc get odhdashboardconfigs odh-dashboard-config -n redhat-ods-applications -o yaml
@@ -88,7 +88,7 @@ This object can be exported from the cluster and stored in a git repository to e
 
 == Default Data Science Project Permissions
 
-The Openshift.AI Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:
+The OpenShift AI Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:
 
 image::create-datascience-project.png[]
 
@@ -121,7 +121,7 @@ All users with the `cluster-admin` role have the ability to see all other users 
 
 === Managing Permissions on a Data Science Project
 
-A Data Science Project is nothing more than a normal OpenShift Project with a few special labels.  As such, permissions to the project function the same as any other project/namespace in OpenShift.
+A Data Science Project is nothing more than a normal OpenShift Project with a few special labels.  These labels are required for the project to appear in the Dashboard.  As such, permissions to the project function the same as any other project/namespace in OpenShift.
 
 Users and Groups permissions to a project are managed using Kubernetes Role Based Access and Control (RBAC).  The Dashboard provides a user interface to easily assign additional users or groups permissions to a project.
 
@@ -172,4 +172,4 @@ Create a new Data Science Project and add a group with `edit` permissions.
 1. Create a Data Science Project called `group-demo`.
 2. Navigate to the OpenShift Web Console, and create a Group called `my-team`.
 3. Add user1 and user2 to the Group `my-team`.
-4. Back in the OpenShift.AI Dashboard, grant the team `my-team` the `edit` role on the project `group-demo`.
+4. Back in the OpenShift AI Dashboard, grant the team `my-team` the `edit` role on the project `group-demo`.
