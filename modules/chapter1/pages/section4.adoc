@@ -1,8 +1,8 @@
 = Upgrading Red{nbsp}Hat Openshift Data Science
 
-*Red{nbsp}Hat Openshift Data Science* operator supports _seamless upgrades_, hence patches and minor version upgrades are completely managed by the *OLM*.
+Upgrades of *Red{nbsp}Hat Openshift Data Science* is handled by the operator. 
 
-[IMPORTANT]
+[NOTE]
 Upgrading directly from the Red Hat OpenShift Data Science self-managed Beta version to the Generally Available (GA) release is not supported. The operator has to be uninstalled first and replaced with the new version.
 
 When an upgrade is available *OLM* creates an *Installplan* for the new version. 
@@ -24,29 +24,41 @@ Approvals can be set from the web console as well as from the CLI.
 
 Manual approvals done from the CLI are discussed in the xref:section3.adoc#manual_approval[Approving Installation Manualy] section and are exactly the same as for the installation.
 
-The following demonstration shows a manual approval done from the web console. 
+The following demonstration shows an upgrade with a manual approval done from the web console. 
 
 == Demo: Upgrading Red{nbsp}Hat Openshift Data Science
-1. Log in to Red{nbsp} Openshift web console using a user which has _cluster-admin_ role assigned.
-2. Navigate to *Operators* -> *Installed Operators* and select project *redhat-ods-operator*. You should see *Upgrade available* under the *Status* column.
+
+[IMPORTANT]
+Make sure that you have installed the *Red{nbsp}Hat Openshift Data Science* operator using one of the previous demonstrations (Web based or CLI). They both install an older version of the operator from the _embedded_ channel.
+
+. Log in to Red{nbsp}Hat Openshift web console using a user which has _cluster-admin_ role assigned.
+
+. Navigate to *Operators* -> *Installed Operators*, select project *redhat-ods-operator*, click on the *Red{nbsp}Hat OpenShift Data Science* and choose the *Subscription* tab.
+Edit the *Update channel* - change it to *alpha* and click on *Save*.
++
+image::rhods2-channel-change.png[width=800]
+
+. Navigate again to *Operators* -> *Installed Operators* and select project *redhat-ods-operator*. You should see *Upgrade available* under the *Status* column.
 +
 image::rhods2-upgrade-available.png[width=800]
 
-3. Click on the *Upgrade available* status link to open operator's *Install plan*
+. Click on the *Upgrade available* status link to open operator's *Install plan*
 +
 image::rhods2-upgrade-install-plan.png[width=800] 
 
-4. Click on the *Preview InstallPlan* button to review changes made by the upgrade.
+. Click on the *Preview InstallPlan* button to review changes to be made by the upgrade.
 +
 image::rhods2-upgrade-preview.png[width=800]
 
-5. Click on the *Approve* button to approve and start the upgrade and navigate to *Operators* -> *Installed Operators* to view the upgrade status.
+. Click on the *Approve* button to approve and start the upgrade and navigate to *Operators* -> *Installed Operators* to view the upgrade status.
 +
 image::rhods2-upgrade-status.png[width=800]
 
-6. Wait until the *Status* changes to *Succeeded*
+. Wait until the *Status* changes to *Succeeded*
 +
 image::rhods2-upgrade-succeeded.png[width=800]
 
 == Backup considerations
-Permanent storage for *Jupiter notebooks* is done using Openshift *Persistent Volume Claims (PVC)* attached to the *Jupiter notebook* pod. The operator does manage PVCs hence there is no need to take a backup as long as the Openshift *Namespace* where the *Jupiter notebook* pod is running is not deleted. Even in an event of accidental operator uninstallation all namespaces created by either the operator or a *Red{nbsp}Hat Openshift Data Science* user remain untouched.
+Permanent storage for *Jupiter notebooks* is done using Openshift *Persistent Volume Claims (PVC)* attached to the *Jupiter notebook* pod. The operator does not manage PVCs hence there is no need to take a backup as long as the Openshift *Namespace* where the *Jupiter notebook* pod is running is not deleted. Even in an event of accidental operator uninstallation all PVCs in namespaces created by either the operator or a *Red{nbsp}Hat Openshift Data Science* user remain untouched.
+
+
