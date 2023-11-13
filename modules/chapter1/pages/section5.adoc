@@ -2,6 +2,7 @@
 
 *Red{nbsp}Hat Openshift Data Science* operator manages *Red{nbsp}Hat Openshift Data Science* components hence uninstalling of the *Red{nbsp}Hat Openshift Data Science* requires uninstalling the *Red{nbsp}Hat Openshift Data Science* operator and cleaning some of the resources that have been created by the operator or users.
 
+[#demo-rhods]
 == Demo: Uninstalling Red{nbsp}Hat Openshift Data Science
 . Log in to Red{nbsp} Openshift web console using a user which has the _cluster-admin_ role assigned.
 
@@ -103,6 +104,7 @@ namespace "my-rhods-project" deleted
 If you have installed some dependencies you can remove them as long as they are not used by other deployments.
 The following demonstration shows uninstallation of the *Red{nbsp}Hat Openshift Pipelines* operator
 
+[#demo-pipelines]
 === Demo: Uninstallation of the *Red{nbsp}Hat Openshift Pipelines* operator
 .  Log in to Red{nbsp} Openshift web console using a user which has the _cluster-admin_ role assigned.
 
