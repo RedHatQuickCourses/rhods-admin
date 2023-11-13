@@ -144,13 +144,13 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Red&#160;Hat Openshift Data Science</strong> operator supports <em>seamless upgrades</em>, hence patches and minor version upgrades are completely managed by the <strong>OLM</strong>.</p>
+<p>Upgrades of <strong>Red&#160;Hat Openshift Data Science</strong> is handled by the operator.</p>
 </div>
-<div class="admonitionblock important">
+<div class="admonitionblock note">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
 Upgrading directly from the Red Hat OpenShift Data Science self-managed Beta version to the Generally Available (GA) release is not supported. The operator has to be uninstalled first and replaced with the new version.
@@ -191,20 +191,41 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <i class="conum" data-
 <p>Manual approvals done from the CLI are discussed in the <a href="section3.html#manual_approval" class="xref page">Approving Installation Manualy</a> section and are exactly the same as for the installation.</p>
 </div>
 <div class="paragraph">
-<p>The following demonstration shows a manual approval done from the web console.</p>
+<p>The following demonstration shows an upgrade with a manual approval done from the web console.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_demo_upgrading_redhat_openshift_data_science"><a class="anchor" href="#_demo_upgrading_redhat_openshift_data_science"></a>Demo: Upgrading Red&#160;Hat Openshift Data Science</h2>
 <div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure that you have installed the <strong>Red&#160;Hat Openshift Data Science</strong> operator using one of the previous demonstrations (Web based or CLI). They both install an older version of the operator from the <em>embedded</em> channel.
+</td>
+</tr>
+</table>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Log in to Red&#160; Openshift web console using a user which has <em>cluster-admin</em> role assigned.</p>
+<p>Log in to Red&#160;Hat Openshift web console using a user which has <em>cluster-admin</em> role assigned.</p>
 </li>
 <li>
-<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong> and select project <strong>redhat-ods-operator</strong>. You should see <strong>Upgrade available</strong> under the <strong>Status</strong> column.</p>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong>, select project <strong>redhat-ods-operator</strong>, click on the <strong>Red&#160;Hat OpenShift Data Science</strong> and choose the <strong>Subscription</strong> tab.
+Edit the <strong>Update channel</strong> - change it to <strong>alpha</strong> and click on <strong>Save</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-channel-change.png" alt="rhods2 channel change" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Navigate again to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong> and select project <strong>redhat-ods-operator</strong>. You should see <strong>Upgrade available</strong> under the <strong>Status</strong> column.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-upgrade-available.png" alt="rhods2 upgrade available" width="800">
@@ -220,7 +241,7 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <i class="conum" data-
 </div>
 </li>
 <li>
-<p>Click on the <strong>Preview InstallPlan</strong> button to review changes made by the upgrade.</p>
+<p>Click on the <strong>Preview InstallPlan</strong> button to review changes to be made by the upgrade.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-upgrade-preview.png" alt="rhods2 upgrade preview" width="800">
@@ -251,7 +272,7 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <i class="conum" data-
 <h2 id="_backup_considerations"><a class="anchor" href="#_backup_considerations"></a>Backup considerations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Permanent storage for <strong>Jupiter notebooks</strong> is done using Openshift <strong>Persistent Volume Claims (PVC)</strong> attached to the <strong>Jupiter notebook</strong> pod. The operator does manage PVCs hence there is no need to take a backup as long as the Openshift <strong>Namespace</strong> where the <strong>Jupiter notebook</strong> pod is running is not deleted. Even in an event of accidental operator uninstallation all namespaces created by either the operator or a <strong>Red&#160;Hat Openshift Data Science</strong> user remain untouched.</p>
+<p>Permanent storage for <strong>Jupiter notebooks</strong> is done using Openshift <strong>Persistent Volume Claims (PVC)</strong> attached to the <strong>Jupiter notebook</strong> pod. The operator does not manage PVCs hence there is no need to take a backup as long as the Openshift <strong>Namespace</strong> where the <strong>Jupiter notebook</strong> pod is running is not deleted. Even in an event of accidental operator uninstallation all PVCs in namespaces created by either the operator or a <strong>Red&#160;Hat Openshift Data Science</strong> user remain untouched.</p>
 </div>
 </div>
 </div>
