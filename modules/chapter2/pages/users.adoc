@@ -21,7 +21,7 @@ For assistance with configuring user access to OpenShift with various identity p
 
 == Admin Access
 
-By default, users with the `cluster-admin` role are automatically granted admin permissions in the OpenShift AI Dashboard.  Additional, a group called `rhods-admins` is automatically created, and any user added to that group will be granted admin permissions.
+By default, users with the `cluster-admin` role are automatically granted admin permissions in the OpenShift AI Dashboard.  Additionally, a group called `rhods-admins` is automatically created, and any user added to that group will be granted admin permissions.
 
 Admin access in the OpenShift AI Dashboard allows users to control various settings of OpenShift AI through the Dashboard UI, including:
 
