@@ -27,7 +27,7 @@ Admin access in the OpenShift AI Dashboard allows users to control various setti
 
 - Configuring custom notebook images
 - Configuring custom serving runtimes
-- Configuring the idle notebook culler
+- Configuring the idle notebook culler (automatic removal of inactive notebooks)
 - Other notebook configuration settings
 
 To add users to the `rhods-admins` group, run the following command:
