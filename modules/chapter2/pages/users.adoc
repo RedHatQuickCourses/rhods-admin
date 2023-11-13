@@ -38,7 +38,7 @@ oc adm groups add-users rhods-admins my-user1 my-user2
 
 == Updating Default User Permissions
 
-The default permissions for the OpenShift AI Dashboard can be updated through the `Settings`>`User management` section.
+The default permissions for the OpenShift AI Dashboard can be updated through the menu:Settings[User management] section.
 
 image::user-management.png[]
 
