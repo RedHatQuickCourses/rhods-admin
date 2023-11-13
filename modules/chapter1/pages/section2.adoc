@@ -48,32 +48,36 @@ image::pipeline_install4.png[width=800]
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
 
-1. Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
+. Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
-2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
+. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
 +
 image::rhods_install1.png[width=800]
 
 
-3. Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
+. Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
 +
 IMPORTANT: Make sure you select *Openshift Data Science* from *Red{nbsp}Hat* not the *Community* version.
 +
 image::rhods_install2.png[width=800]
 
-4. In the installation view window choose the _alpha_ *Update Channel*, _Automatic_ *Update approval* and keep the default *Installed Namespace*. Click on the *Install* button to start the installation.
+. In the installation view window choose the _embedded_ *Update Channel*, _Manual_ *Update approval* and keep the default *Installed Namespace*. Click on the *Install* button to start the installation.
 +
 image::rhods2-install-view.png[width=800]
+
+. Approve the installation.
++
+image::rhods2-install-approve.png[width=800]
 +
 Operator Installation progress window will pop up. The installation may take a couple of minutes.
 +
 image::rhods2-install.png[width=800]
 
-5. When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
+. When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
 +
 image::rhods2-install-finished.png[width=800]
 
-6. In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
+. In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
 + 
 There are following components to choose from:
 +
@@ -132,7 +136,7 @@ spec:
 +
 After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
 
-7. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
+. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
 +
 image::rhods2-clusters.png[width=800]
 +
@@ -161,12 +165,12 @@ The following list shows the conditions you may want to check:
  * data-science-pipelines-operatorReady
  * odh-dashboardReady
 
-8. The operator should be installed and configured now. 
+. The operator should be installed and configured now. 
 In the applications window in the right upper corner of the screen the *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
 +
 image::rhods_verify1.png[width=800]
-+ 
-9. Click on the *Red{nbsp}Hat Openshift Data Science* button to log in to the *Red{nbsp}Hat Openshift Data Science*.
+ 
+. Click on the *Red{nbsp}Hat Openshift Data Science* button to log in to the *Red{nbsp}Hat Openshift Data Science*.
 +
 image::rhods_verify2.png[width=800]
 +
