@@ -1,6 +1,46 @@
 = Installation using the Web Console
 
-As mentioned earlier,  *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Operator Hub. In the following demonstration you will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console.
+*Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Operator Hub.  You will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console in this section.
+
+== Installation of Openshift Data Science dependecies
+
+As described in the xref::section1.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use. 
+In general not installing dependencies before the *Red{nbsp}Hat Openshift Data Science* does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it's better to install the dependencies beforehand.
+
+https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
+The *Red Hat Openshift Pipelines Operator* is required if you want to install the *Red Hat Openshift Data Science Pipelines* component.
+https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
+The *NVIDIA GPU Operator* is required for GPU support in *Red Hat Openshift Data Science*.
+https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
+The *Node Feature Discovery Operator* is a prerequisity for the *NVIDIA GPU Operator*.
+
+
+The following demonstration shows the installation of the https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator] which is a dependency of the *Data Science Pipelines* component installed by default. Installation of the two other operators is very similar.
+
+=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* operator
+
+1. Login to Red{nbsp}Hat Openshift using a user which has the _cluster-admin_ role assigned.
+2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Pipelines*
++
+image::pipeline_search.png[width=800]
+
+3. Click on the *Red{nbsp}Hat Openshift Pipelines* operator and in the pop up window click on **Install** to open the operator's installation view.
++
+image::pipeline_install1.png[width=800]
+
+
+4. In the installation view choose the *Update{nbsp}channel* and the *Update{nbsp}approval* parameters. You can accept the default values. The *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters are fixed.
++
+image::pipeline_install2.png[width=800]
+
+5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
++ 
+image::pipeline_install3.png[width=800]
+
+6. When the installation finishes the operator is ready to be used by the *Red{nbsp}Hat Openshift Data Science*.
++
+image::pipeline_install4.png[width=800]
+
 
 
 == Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
@@ -41,20 +81,17 @@ There are following components to choose from:
 +
  * *Ray:* Ray is an open technology for “fast and simple distributed computing.” It makes it easy for data scientists and application developers to run their code in a distributed fashion. It also provides a lean and easy interface for distributed programming with many different libraries, best suited to perform machine learning and other intensive compute tasks. 
 +
- * *Dashboard:* Dashboard provides with a web based user interface to Openshift Data Science.
+ * *Dashboard:* A web dashboard that displays installed *Data Science* components with easy access to component UIs and documentation
 +
  * *Data Science Pipelines:* Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models. 
 +
  * *KServe:* Kserve, or KFServing, is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.
 +
- * *ModelMeshServing:* ModelMeshServing is a platform that focuses on serving machine learning models efficiently in production. It aims to provide a unified serving layer for various machine learning frameworks and languages. The goal is to offer high-performance, low-latency model serving with features like model versioning, A/B testing, and multi-model serving.
+ * *ModelMeshServing:*  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.
 +
  * *Workbenches:* Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.
 +
-[IMPORTANT]
-Make sure that you install all pre-requisities for selected components. For more details see the xref::section1.adoc[General Information about Installation] section.
-+
-For this demonstration you can accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving and Workbenches.
+For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving and Workbenches.
 +
 You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
 +
@@ -95,9 +132,34 @@ spec:
 +
 After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
 
-7. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*
+7. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
 +
 image::rhods2-clusters.png[width=800]
++
+You may also check the status of individual installed components by looking at their conditions. Click on the *default* cluster and switch to the YAML view. Scroll down to view *conditions*. 
++
+image::rhods2-conditions.png[width=800]
++
+Each condition is represented by a *type* and a *status*. The *Type* is a string describing the condition, for instance _odh-dashboardReady_ and the status says whether it is _true_ or not. The following example shows the *Ready* status of the Dashboard component.
++
+[subs=+quotes]
+----
+- lastHeartbeatTime: '2023-11-13T10:53:20Z'
+  lastTransitionTime: '2023-11-13T10:53:20Z'
+  message: Component reconciled successfully
+  reason: ReconcileCompleted
+  #status: 'True'#
+  #type: odh-dashboardReady#
+---- 
++
+The following list shows the conditions you may want to check:
++
+ * rayReady
+ * codeflareReady
+ * model-meshReady
+ * workbenchesReady
+ * data-science-pipelines-operatorReady
+ * odh-dashboardReady
 
 8. The operator should be installed and configured now. 
 In the applications window in the right upper corner of the screen the *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
@@ -112,41 +174,3 @@ IMPORTANT: It may take a while to start all the service pods hence the login win
 Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and be ready. If they are not, wait until they become running and ready.
 +
 image::rhods_verify_pods.png[width=800] 
-
-
-== Installation of other operators required by Openshift Data Science
-
-
-As described in the xref::section1.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use:
-
-* https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]
-* https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]
-* https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]
-
-
-The following demonstration shows the installation of the https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]. Installation of the two other operators is very similar.
-
-=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* operator
-
-1. Login to Red{nbsp}Hat Openshift using a user which has the _cluster-admin_ role assigned.
-2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Pipelines*
-+
-image::pipeline_search.png[width=800]
-
-3. Click on the *Red{nbsp}Hat Openshift Pipelines* operator and in the pop up window click on **Install** to open the operator's installation view.
-+
-image::pipeline_install1.png[width=800]
-
-
-4. In the installation view choose the *Update{nbsp}channel* and the *Update{nbsp}approval* parameters. You can accept the default values. The *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters are fixed.
-+
-image::pipeline_install2.png[width=800]
-
-5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
-+ 
-image::pipeline_install3.png[width=800]
-
-6. When the installation finishes the operator is ready to be used by the *Red{nbsp}Hat Openshift Data Science*.
-+
-image::pipeline_install4.png[width=800]
-
