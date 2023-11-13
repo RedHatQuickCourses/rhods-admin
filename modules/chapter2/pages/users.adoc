@@ -42,7 +42,7 @@ The default permissions for the OpenShift AI Dashboard can be updated through th
 
 image::user-management.png[]
 
-The admin group can be updated to another group other than the default `rhods-admins` group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the cluster-admin ClusterRole.
+The admin group can be updated to another group other than the default `rhods-admins` group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the `cluster-admin` ClusterRole.
 
 [TIP]
 ====
