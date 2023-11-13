@@ -1,4 +1,3 @@
-//find a better title
 = General Information about Installation   
 
 Red{nbsp}Hat Openshift Data Science is available to install a self-managed version as an operator through OperatorHub or as a fully managed solution through OpenShift Marketplace. 
