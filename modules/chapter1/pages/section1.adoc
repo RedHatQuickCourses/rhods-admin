@@ -6,11 +6,11 @@ Red{nbsp}Hat Openshift Data Science is available to install a self-managed versi
 There are some other operators that you may need to install depending on which features and components of the *Red{nbsp}Hat Openshift Data Science* you want to install and use.
 
 https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
- This operator is required if you want to install the  *Red{nbsp}Hat Openshift Data Science Pipelines* component.
+The *Red{nbsp}Hat Openshift Pipelines Operator* is required if you want to install the  *Red{nbsp}Hat Openshift Data Science Pipelines* component.
 
 https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
+The *NVIDIA GPU Operator* is required for GPU support in  Red Hat Openshift Data Science.
 https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
-This *NVIDIA GPU Operator* is required for GPU support in  Red Hat Openshift Data Science.
 The *Node Feature Discovery Operator* is a prerequisity for the *NVIDIA GPU Operator*.
 
 [IMPORTANT]
