@@ -160,16 +160,86 @@ jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[
   "lastTransitionTime": "2023-11-01T21:01:25Z",
   "lastUpdateTime": "2023-11-01T21:01:26Z",
   "message": "installing: waiting for deployment openshift-pipelines-...",
-  "reason": "InstallWaiting", <2>
-  "status": "True",
-  "type": "Installing"        <2>
+  "reason": "InstallWaiting", <1>
+  "status": "True",           <2>
+  "type": "Installing"        <3>
 }
 ----
-<1> Operator's resource name
-<2> Status of the installation. Operator is installed when *reason* reads _InstallSucceeded_ and *type* reads _Succeeded_.
+<1> Reason for the condition.
+<2> Status of the conditions.
+<3> Type of the condition. *Type* _Installing_ together with *status* _True_ indicate that the installation is in progress. *Type* _Succeeded_ together with *status* _True_ and *reason* _InstallSucceeded_ indicate that the installation has been successfull.
+
+== Installation of Red{nbsp}Hat Openshift Data Science dependencies
+
+As described in the xref::section1.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use.
+In general not installing dependencies before the *Red{nbsp}Hat Openshift Data Science* does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it's better to install the dependencies beforehand.
+
+https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
+The *Red Hat Openshift Pipelines Operator* is required if you want to install the *Red Hat Openshift Data Science Pipelines* component.
+https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
+The *NVIDIA GPU Operator* is required for GPU support in *Red Hat Openshift Data Science*.
+https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
+The *Node Feature Discovery Operator* is a prerequisity for the *NVIDIA GPU Operator*.
+
+
+The following demonstration shows the installation of the https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator] which is a dependency of the *Data Science Pipelines* component installed by default. Installation of the two other operators is very similar.
+
+=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* Operator
+[WARNING]
+If you have already installed the *Red{nbsp}Hat Openshift Data Science* operator during the previous demonstration, you have to uninstall it. Follow the xref:section5.adoc#demo[uninstallation demonstration] first.
+
+. Log in as a user with the _cluster-admin_ role assigned.
++
+[subs=+quotes]
+----
+$ *oc login -u admin -p _password_ https://api...:6443*
+Login successful.
+
+You have access to 74 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+----
+
+. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the *Subscription* resource to start the installation. 
++
+--
+[subs=+quotes]
+----
+$ *cat <<EOF > pipelines-subs.yaml*
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-pipelines-operator-rh
+  namespace: openshift-operators
+spec:
+  channel: latest <1>
+  installPlanApproval: Automatic <2>
+  name: openshift-pipelines-operator-rh
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
+
+$ *oc create -f pipelines-subs.yaml*
+----
+<1> The update channel to install the operator from. To find all available channels see the xref:section3.adoc#findchannel[Finding Update Channels] section.
+<2> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
+--
+. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
 
 
 == Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
+
+. Log in as a user with the _cluster-admin_ role assigned. 
++
+[subs=+quotes]
+----
+$ *oc login -u admin -p _password_ https://api...:6443*
+Login successful.
+
+You have access to 74 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+----
 
 . Unless you choose to install it into the _openshift-operators_ namespace, create the *Namespace* and *Operator Group* in it first.
 +
@@ -216,8 +286,8 @@ metadata:
   name: rhods-operator
   namespace: redhat-ods-operator
 spec:
-  channel: alpha <1>
-  installPlanApproval: Automatic <2>
+  channel: embedded <1>
+  installPlanApproval: Manual <2>
   name: rhods-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
@@ -227,8 +297,33 @@ $ *oc create -f rhods-subs.yaml*
 subscription.operators.coreos.com/rhods-operator created
 ----
 <1> The update channel to install the operator from. To find all available  channels see the the xref:section3.adoc#findchannel[Finding Update Channels] section.
-<2> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
+<2> Installplans will be approved manually.
 --
+
+. Approve the installation manually. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information
++
+[subs=+quotes]
+----
+$ *oc get installplan -n redhat-ods-operator*
+NAME            CSV                     APPROVAL   APPROVED
+install-qsrhj   rhods-operator.2.1.2   Manual   #false#
+
+$ *oc patch installplan install-qsrhj --type merge -p '{"spec":{"approved":true}}' -n redhat-ods-operator*
+installplan.operators.coreos.com/install-qsrhj patched  <2>
+
+$ *oc get installplan -n redhat-ods-operator*
+NAME            CSV                     APPROVAL   APPROVED
+install-qsrhj   redhat-ods-operator   Manual     #true#  <3>
+----
+
+. Check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
++
+[subs=+quotes]
+----
+*$ oc get olm|grep ^clusterserviceversion|grep redhat-ods-operator*
+clusterserviceversion.../openshift-pipelines-operator...   #Succeeded#  <1>
+----
+<1> Make sure that the status is *Succeeded*
 
 . Finally create your Openshift DataScience Cluster resource to configure your cluster.
 +
@@ -268,10 +363,27 @@ oc create -f rhods-cluster.yaml
 <2> Use *Removed* for components that *will not* be installed.
 <3> Use *Managed* for components that will be installed.
 
-. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
+. Now the cluster has been configured and you can check the contition of  individual components of the *Red{nbsp}Hat Openshift Data Science*. 
++
+[subs=+quotes]
+----
+$ *oc get DataScienceCluster default -o json| jq '.status.conditions'*
+_...output ommited..._
+  {
+    "lastHeartbeatTime": "2023-11-13T11:04:37Z",
+    "lastTransitionTime": "2023-11-13T11:04:37Z",
+    "message": "Component reconciled successfully",
+    "reason": "ReconcileCompleted",
+    "status": "True", <1>
+    "type": "workbenchesReady" <2>
+  }
+_...output ommited..._
+----
+<1> Status of the condition
+<2> Type of the condition. *Type* _workbenchesReady_ together with *status* _True_ indicate that the *Workbench* component is ready.
 
 [NOTE]
-It may take some time for all the operator's pods to start hence the *Red{nbsp}Hat Openshift Data Science* dashboard may not be available immediately. You can check their status in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
+It may take some time for all the application pods to start hence the *Red{nbsp}Hat Openshift Data Science* dashboard may not be available immediately. You may check the condition of componens or alternatively you can check the status of the application pods in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
 
 [subs=+quotes]
 ----
@@ -293,51 +405,5 @@ rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0
 rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s
 ----
 
-== Installation of other operators required by Openshift Data Science
-
-You may need to install other operators depending on the components and features of Openshift Data Science you want to use:
-
-* https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]
-* https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]
-* https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]
-
-
-The following demo shows installation of the Red Hat Openshift Pipelines operator. Installation of the two other operators is very similar.
-
-=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* operator
-
-1. To install the *Red{nbsp}Hat Openshift Pipelines* operator, locate the `openshift-pipelines-operator-rh` package manifest.
-+
-[subs=+quotes]
-----
-$ *oc get packagemanifest | grep pipelines*
-openshift-pipelines-operator-rh                    Red Hat Operators     24h
-----
-
-2. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the *Subscription* resource to start the installation. 
-+
---
-[subs=+quotes]
-----
-$ *cat <<EOF > pipelines-subs.yaml*
-apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: openshift-pipelines-operator-rh
-  namespace: openshift-operators
-spec:
-  channel: latest <1>
-  installPlanApproval: Automatic <2>
-  name: openshift-pipelines-operator-rh
-  source: redhat-operators
-  sourceNamespace: openshift-marketplace
-EOF
-
-$ *oc create -f pipelines-subs.yaml*
-----
-<1> The update channel to install the operator from. To find all available channels see the xref:section3.adoc#findchannel[Finding Update Channels] section.
-<2> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manualy] section for more information.
---
-3. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
 
 
