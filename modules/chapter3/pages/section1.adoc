@@ -1,3 +1,0 @@
-= Section 1
-
-This is _Section 1_ of _Chapter 3_ in the *hello* quick course....

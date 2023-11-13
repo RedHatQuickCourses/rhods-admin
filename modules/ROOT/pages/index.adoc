@@ -1,6 +1,8 @@
-= An Example Quick Course
-:navtitle: Home
+= Introduction
+:navtitle: Intoduction
 
-== Introduction
+This course covers basics of the Red{nbsp}Hat Openshift Data Science administration. Mainly it covers following topics:
 
-This is an example quick course demonstrating the usage of Antora for authoring and publishing quick courses.
+. Red{nbsp}Hat Openshift Data Science Installation 
+. Red{nbsp}Hat Openshift Data Science User Management
+. Creating and Configuring a Custom Notebook Image
