@@ -1,0 +1,14 @@
+= Managing Resources
+
+Blah....
+
+== Notes
+* What kind of resources are created in a RHODS DS project/workbench
+* How to control resource allocation - CPU, Storage and other resources
+* How to clean up after a user is removed from the group and from RHODS
+* Idle culler configuration - free up resources and kill idle notebooks
+* Enabling and configuring GPUs for workload acceleration
+* Why is GPU acceleration beneficial and how to configure it
+* How to provision for certain groups of users and not all
+
+
