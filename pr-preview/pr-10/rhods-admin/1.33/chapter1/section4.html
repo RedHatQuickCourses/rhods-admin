@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Upgrading Red&#160;Hat Openshift Data Science :: Red Hat OpenShift Data Science Administration</title>
     <link rel="prev" href="section3.html">
-    <link rel="next" href="../chapter2/index.html">
+    <link rel="next" href="section5.html">
     <meta name="generator" content="Antora 3.1.3">
     <link rel="stylesheet" href="../../../_/css/site.css">
     <script>var uiRootPath = '../../../_'</script>
@@ -56,10 +56,13 @@
     <a class="nav-link" href="section2.html">Installation using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="section3.html">Section 3</a>
+    <a class="nav-link" href="section3.html">Installation Using the Command Line Interface</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
     <a class="nav-link" href="section4.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="section5.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
   </li>
 </ul>
   </li>
@@ -272,13 +275,13 @@ Edit the <strong>Update channel</strong> - change it to <strong>alpha</strong> a
 <h2 id="_backup_considerations"><a class="anchor" href="#_backup_considerations"></a>Backup considerations</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Permanent storage for <strong>Jupiter notebooks</strong> is done using Openshift <strong>Persistent Volume Claims (PVC)</strong> attached to the <strong>Jupiter notebook</strong> pod. The operator does not manage PVCs hence there is no need to take a backup as long as the Openshift <strong>Namespace</strong> where the <strong>Jupiter notebook</strong> pod is running is not deleted. Even in an event of accidental operator uninstallation all PVCs in namespaces created by either the operator or a <strong>Red&#160;Hat Openshift Data Science</strong> user remain untouched.</p>
+<p>Permanent storage for <strong>Jupyter notebooks</strong> is done using OpenShift <strong>Persistent Volume Claims (PVC)</strong> attached to the <strong>Jupyter notebook</strong> pod. The operator does not manage PVCs hence there is no need to take a backup as long as the Openshift <strong>Namespace</strong> where the <strong>Jupyter notebook</strong> pod is running is not deleted. Even in an event of accidental operator uninstallation all PVCs in namespaces created by either the operator or a <strong>Red&#160;Hat Openshift Data Science</strong> user remain untouched.</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="section3.html">Section 3</a></span>
-  <span class="next"><a href="../chapter2/index.html">Controlling User Access and Managing Resources</a></span>
+  <span class="prev"><a href="section3.html">Installation Using the Command Line Interface</a></span>
+  <span class="next"><a href="section5.html">Uninstalling Red&#160;Hat Openshift Data Science</a></span>
 </nav>
 </article>
   </div>
