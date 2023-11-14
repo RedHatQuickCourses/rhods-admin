@@ -37,7 +37,7 @@ image::pipeline_install2.png[width=800]
 + 
 image::pipeline_install3.png[width=800]
 
-6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat Openshift Data Science*.
+6. When the installation finishes the operator is ready to be used by the *Red{nbsp}Hat Openshift Data Science*.
 +
 image::pipeline_install4.png[width=800]
 
@@ -152,11 +152,13 @@ Each condition is represented by a *type* and a *status*. The *Type* is a string
   lastTransitionTime: '2023-11-13T10:53:20Z'
   message: Component reconciled successfully
   reason: ReconcileCompleted
-  #status: 'True'#
-  #type: odh-dashboardReady#
+  status: 'True' <1>
+  type: odh-dashboardReady <2>
 ---- 
+<1> Status of the condition. _True_ means that the condition is met, _False_ means that the condition is not met.
+<2> Type represents the meaning of the condition. Together with the value of _status_ you can assess the state of the component. In this example _type=odh-dashboardReady_  and _status=True_ means that the *Dashboard* component is ready. 
 +
-The following list shows the conditions you may want to check:
+Similarly to the example above other *Red{nbsp}Hat Data Science* components have their condition types. The following list shows the condition types for the *Red{nbsp}Hat Data Science* components.
 +
  * rayReady
  * codeflareReady
