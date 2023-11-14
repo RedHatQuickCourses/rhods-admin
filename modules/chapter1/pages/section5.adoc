@@ -43,7 +43,7 @@ Navigate to *Operators* ->  *Installed Operators* and uninstall the *Red Hat Ope
 +
 image::rhods2-uninstall-operator.png[width=800]
 +
-alternatively you can delete the operator's subscription from the CLI. OLM will uninstall the operator.
+Alternatively you can delete the operator's subscription from the CLI. OLM will uninstall the operator.
 +
 [subs=+quotes]
 ----
