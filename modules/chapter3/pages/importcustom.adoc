@@ -3,63 +3,65 @@
 In this section we will go over importing a custom notebook through the RHODS dashboard and test it to make sure our dependencies are included.
 
 == Import the Notebook Image
-Before we import the image into RHODS we need to set the quay repository we just created to public. In a browser login to quay.io and go to the rhods-admin-custom-image repository. Select the *Settings* gear icon.
-
+1. Before we import the image into RHODS we need to set the quay repository we just created to public. In a browser login to quay.io and go to the rhods-admin-custom-image repository. Select the *Settings* gear icon.
++
 image::quaySettings.png[Quay Repository Settings]
 
-Scroll down until you see the *Repository Visibility* section.  Click the *Make Public* button and click Ok to make the repository public.
 
+2. Scroll down until you see the *Repository Visibility* section.  Click the *Make Public* button and click Ok to make the repository public.
++
 image::quayMakePublic.png[Quay Visibility Setting]
 
-Login to the RHODS dashboard as the admin user. Expand *Settings*, click *Notebook Images*, and then click *Import Image*.
-
+3. Login to the RHODS dashboard as the admin user. Expand *Settings*, click *Notebook Images*, and then click *Import Image*.
++
 image::rhodsAdminCustomNotebook.png[RHODS Admin Notebook Images]
 
-Enter the path to the your repository and give the image a name. Optionally add a description and package information. Click the *Import* button.
-
+4. Enter the path to the your repository and give the image a name. Optionally add a description and package information. Click the *Import* button.
++
 image::rhodsImportCustomImage.png[RHODS Import Notebook]
-
++
 You should now see the image in the list and enabled.
-
++
 image::rhodsNotebookImage.png[RHODS Custom Notebooks]
 
 == Test the Image in a Workbench
 
-Now we'll test out the image we just imported. Go to *Data Science Projects* and then click the *Create data science project* button.
-
+1. Now we'll test out the image we just imported. Go to *Data Science Projects* and then click the *Create data science project* button.
++
 image::rhodsDataScienceProj.png[RHODS Data Science Projects]
 
-Give the project a name and resource name. Click the *Create* button.
-
+2. Give the project a name and resource name. Click the *Create* button.
++
 image::rhodsCreateProj.png[RHODS Project]
 
-Click the *Create* button.
-
+3. Click the *Create* button.
++
 image::rhodsCreateWrkbench.png[RHODS Workbench]
 
-Give the workbench a name and select the rhods-admin-custom-image from the Image selection drop down list. Click the *Create Workbench* button.
-
+4. Give the workbench a name and select the rhods-admin-custom-image from the Image selection drop down list. Click the *Create Workbench* button.
++
 image::rhodsCreateWrkbenchDetails.png[RHODS Workbench Details]
 
-Once the Status changes to Running click the *Open* link.
-
+5. Once the Status changes to Running click the *Open* link.
++
 image::rhodsWorkbenchStart.png[RHODS Workbench Start]
 
-Login to the notebook and click the *Python 3.11* notebook tile.
-
+6. Login to the notebook and click the *Python 3.9.16* notebook tile.
++
 image::rhodsNewPythonNotebook.png[RHODS Python Notebook]
 
-In the first cell of the notebook add the following
+7. In the first cell of the notebook add the following
++
 [source, python]
 ----
 pip list | grep "^s"
 ----
-Prest Shift + Enter on your keyboard to execute the cell. This will find all of the dependencies that start with "s". Note that seaborn is an installed dependency.
-
+Press Shift + Enter on your keyboard to execute the cell. This will find all of the dependencies that start with "s". Note that seaborn is an installed dependency.
++
 image::rhodsPipList.png[RHODS pip list]
 
-Now let's test out the seaborn package to make sure it works. Copy the follwoing code to the cell below.
-
+8. Now let's test out the seaborn package to make sure it works. Copy the following code to the cell below.
++
 [source, python]
 ----
 import seaborn as sns
@@ -84,11 +86,11 @@ plt.ylabel("Price")
 # Show the plot
 plt.show()
 ----
-
++
 image::testSeaborn1.png[Seaborn Code Snippet]
-
-Click Shift + Enter to execute the cell. You should see the graph below. 
-
++
+Click Shift + Enter to execute the cell. You should see the graph below. You can now close the notebook. Don't worry about saving it.
++
 image::testSeaborn2.png[Seaborn Graph]
 
 Congratulations! You've succesfully built, imported, and tested a custom image in RHODS. 

@@ -4,71 +4,66 @@ Custom notebook images allow you to add specific packages and libraries for your
 
 == Image source and Pre-built images
 
-The default RHODS notebook images can be found in the https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images] repository. This repository contains the source code, pre-built images, and examples to help you create your own image. Workbench and runtime images are available.
+The default RHODS notebook images can be found in the https://github.com/opendatahub-io/notebooks[Default RHODS notebooks] repository. This repository contains the source code, pre-built images, and examples to help you create your own image. 
 
-*Workbench Images* +
-These images can be used directly in workbenches within RHODS after importing them through the RHODS dashboard.
+Additional images are available at the ODH contributions repository (https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images]) This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (https://github.com/opendatahub-io-contrib/workbench-images#building-an-image[])
 
-* Jupyter Data Science
-* VSCode Data Science
-* RStudio
-* Jupyter PyTorch
-* VSCode PyTorch
-* Jupyter Tensorflow
-* Jupyter Langchain
-* Langflow 
+== Exercise
+We will now build our own custom image. We'll use https://quay.io/mmurakam/workbenches:fraud-detection-v1.0.1[Fraud Detection Image] as our base image. This image contains artifacts that we will be using later in the course. 
 
-*Runtime Images* +
-These images can be used in Data Science Pipelines. They contain the exact same set of libraries as the above workbench images, except the IDE part.
+We will be adding the seaborn python package to the Fraud Detection image. It is a data visualization library based on matplotlib. 
 
-* Runtime Data Science	
-* Runtime Data Science (CUDA)	
-* Runtime PyTorch (CUDA)	
-* Runtime Tensorflow (CUDA)	
-* Runtime R	
-* Runtime Spark
-
-For more information on OS packages, bundles, and IDE versions checkout the https://github.com/opendatahub-io-contrib/workbench-images#detailed-images-content[Detailed Images Content] section.
-
-== Building your own images
-We will now build our own image from one of the workbench images listed above.
-
-
-=== Rules
+[TIP]
+====
 * On OpenShift, every containers in a standard namespace (unless you modify security) run with a user with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The *best practice* is to set the *ownership at 1001:0* (user "default", group "0").
 * If you don't want/can't do that, another solution is to set permissions properly for any user, like 775.
-* When launching a notebook from Applications->Enabled, the "personal" volume of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.
+* When launching a notebook in RHODS, the working directory of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.
+====
 
 === Requirements
+To build 
+
 * Need podman
 * Need an image registry
 
 === Containerfile Overview
 Before you start to edit the Containerfile lets go over what this Containerfile is doing.
 
-image::customContainerFile.png[Custom Containerfile]
+Containerfile::
+--
+[subs=+quotes]
+----
+#This is the base image we'll be working from
+FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1  <1>
 
-1. The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use.
+# Copying custom packages
+# The requirements.txt file contains additional package dependencies we want installed
+COPY requirements.txt ./  <2>
 
-2. The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. 
+# Install packages and cleanup
+# (all commands are chained to minimize layer size)
+RUN echo "Installing softwares and packages" && \     <3>
+    pip install micropipenv && \
+    # Install Python packages \
+    micropipenv install && \
+    rm -f ./requiremnents.txt
 
-3. The next step is to install the packages and remove then requirements.txt file that we just copied in to clean up files. 
+# Fix permissions to support pip in Openshift environments \
+RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \    <4>
+    fix-permissions /opt/app-root -P
 
-4. We're printing out where Java is installed. Since we haven't installed it yet and it's not part of our base image we should expect the output to be blank.
+WORKDIR /opt/app-root/src  <5>
 
-5. We're switching to the root user (User 0). We need to do this to have the appropriate permissions to install OpenJDK.
+ENTRYPOINT ["start-notebook.sh"]   <6>
+----
+<1> The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. Our Fraud Detection image is using [sh]`quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-2023a-20230714-933b52f` as the base image. You can find more base images at https://quay.io/organization/modh.
 
-6. Now we'll install OpenJDK. Note that we are combining multiple commands together with && instead of having each one run seperately. This helps keep the image size smaller.
+<2> The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on.
 
-7. After the isntallation command is completed we switch back to User 1001 since the root user is not allowed to run containers in OpenShift.
+<3> The next step is to install the packages. Micropipenv is a small footprint alternative to pip, that allows us to install packages from our requirements.txt file. After the seaborn pacakges is installed we then remove the requirements.txt to clean up the files.
 
-8. Now we should be able to see where Java is installed.
-
-9. We'll fix the permissons to support pip in OpenShift.
-
-10. Set the work directory,
-
-11. Add the entry point for the container.
+<4> We'll fix the permissons to support pip in OpenShift.
+--
 
 === Build Steps
 
@@ -81,18 +76,11 @@ Multiple packages can be installed with the requirements.txt file by adding them
 +
 image::seabornTrinoReq.png[]
 
-2. Open the Containerfile under modules/chapter3/examples and add the 3 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
+2. Open the Containerfile under modules/chapter3/examples and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
 +
 [source, dockerfile]
 ----
-   RUN INSTALL_PKGS="java-11-openjdk java-11-openjdk-devel" && \
-      yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
-      yum -y clean all --enablerepo='*'
-----
-+
-[source, dockerfile]
-----
-   FROM quay.io/opendatahub-contrib/workbench-images:jupyter-datascience-c9s-py311_2023c_latest
+   FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1
 ----
 +
 [source, dockerfile]
@@ -111,17 +99,9 @@ You should see the following in the log:
 +
 * The seaborn package is installed successfully.
 +
-image::podmanSeabornInstalled.png[]
-+
-* The first whereis Java command is blank
-+
-image::podmanNoJavaPath.png[]
-+
-* The second whereis Java command should display the path if Java was successfully installed.
-+
 image::podmanJavaPathExists.png[]
 
-4. Once the image is done building run:
+4. Once the image is done building run the below command to make sure the image is in the list.
 +
 [source]
 ----
@@ -129,7 +109,7 @@ podman images
 ----
 +
 image::podmanImages.png[]
-5. Login to quay.io
+5. Login to quay.io so we can push the image you just built up to the quay repository.
 +
 [source]
 ----
@@ -139,7 +119,7 @@ podman login quay.io
 +
 [source]
 ----
-podman push rhods-admin-custom-image:latest quay.io/<YOUR_USERNAME>/rhods-admin-custom-image
+podman push rhods-custom-image:latest quay.io/<YOUR_USERNAME>/rhods-custom-image
 ----
 
 Now you're ready to import your image into RHODS! See the next section to learn how to import your custom image and test it out.
