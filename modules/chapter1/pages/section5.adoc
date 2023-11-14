@@ -54,7 +54,7 @@ subscription.operators.coreos.com "rhods-operator" deleted
 
 . Delete the namespace where the operator was installed. 
 +
-Navigate to *Administration* -> *Namespaces*, search for the redhat-ods-operator and delete it.
+Navigate to *Administration* -> *Namespaces*, search for the `redhat-ods-operator` and delete it.
 +
 image::rhods2-delete-ope-ns.png[width=800]
 +
