@@ -84,7 +84,7 @@ namespace "redhat-ods-monitoring" deleted
 
 . Delete all remaining namespaces created for *Datascience* projects. These namespaces are labeled by the label _opendatahub.io/dashboard=true_.
 +
-Navidate to *Administration* -> *Namespaces*, filter namespaces using the label _opendatahub.io/dashboard=true_ and delete them.
+Navigate to *Administration* -> *Namespaces*, filter namespaces using the label _opendatahub.io/dashboard=true_ and delete them.
 +
 image::rhods2-delete-projects.png[width=800]
 +
