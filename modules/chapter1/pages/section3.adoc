@@ -320,8 +320,10 @@ install-qsrhj   redhat-ods-operator   Manual     #true#  <3>
 +
 [subs=+quotes]
 ----
-*$ oc get olm|grep ^clusterserviceversion|grep redhat-ods-operator*
-clusterserviceversion.../openshift-pipelines-operator...   #Succeeded#  <1>
+*$ oc get olm|grep ^clusterserviceversion|grep ods*
+
+clusterserviceversion... ... rhods-operator.2.1.1  Succeeded  <1>
+=======
 ----
 <1> Make sure that the status is *Succeeded*
 
