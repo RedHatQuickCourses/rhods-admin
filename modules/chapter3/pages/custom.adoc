@@ -1,0 +1,22 @@
+= Building Custom Workbench Images
+
+Intro blah...
+
+== Notes
+
+* Why would you need a custom image?
+* Provide links to Containerfiles for the set of images that we ship with RHODS. Encourage students to build on UBI based base images
+* [Trevor] It is important to cover the minimum requirements that the notebook controller requires for the images to work.  Expected packages, port requirements, and startup scripts.  Additionally it may be good to cover some topics such as the non-root requirement for OCP and use that as a jumping off point to talk about using a RH base image.
+* The general recommendation is usually the build off of the upstream notebook base image: https://github.com/opendatahub-io/notebooks/blob/main/base/ubi9-python-3.9/Dockerfile. 
+* We need to discuss how to actually do that and how to manage the packages when building off those images because it is a non-standard process with pipenv where you need to preserve the upstream packages in order to not break the image.
+* How to build and make the custom image available in the RHODS web console
+Ensure you cover standard container image building best practices - security, minimal, built for OCP with user and group perms, SELinux etc
+* Look for good custom image use cases:
+** Python 3.11/3.12 (performance improvements)
+** Custom Python libs on top of standard RHODS images
+** R based custom images?
+** Julia?
+* [Trevor] - The most common use cases from the field.... 
+** My team needs version xyz of a specific package and the default images ship with zyx.
+** My team needs package xyz and it is not available in any default images.
+** My team needs a specific driver in the image that can only be installed with root access to connect to xyz (e.g. DB2 drivers to connect to oracle databases)

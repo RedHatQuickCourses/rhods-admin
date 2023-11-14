@@ -323,6 +323,7 @@ install-qsrhj   redhat-ods-operator   Manual     #true#  <3>
 *$ oc get olm|grep ^clusterserviceversion|grep ods*
 
 clusterserviceversion... ... rhods-operator.2.1.1  Succeeded  <1>
+=======
 ----
 <1> Make sure that the status is *Succeeded*
 
