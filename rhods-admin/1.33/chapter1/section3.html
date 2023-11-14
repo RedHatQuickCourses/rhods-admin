@@ -666,8 +666,10 @@ install-qsrhj   redhat-ods-operator   Manual     <mark>true</mark>  <i class="co
 <p>Check the installation progress using the operator&#8217;s status information. For more information see the <a href="#installprogress">Checking Installation Progress</a> section.</p>
 <div class="listingblock">
 <div class="content">
-<pre><strong>$ oc get olm|grep ^clusterserviceversion|grep redhat-ods-operator</strong>
-clusterserviceversion.../openshift-pipelines-operator...   <mark>Succeeded</mark>  <i class="conum" data-value="1"></i><b>(1)</b></pre>
+<pre><strong>$ oc get olm|grep ^clusterserviceversion|grep ods</strong>
+
+clusterserviceversion... ... rhods-operator.2.1.1  Succeeded  <i class="conum" data-value="1"></i><b>(1)</b>
+=======</pre>
 </div>
 </div>
 <div class="colist arabic">
