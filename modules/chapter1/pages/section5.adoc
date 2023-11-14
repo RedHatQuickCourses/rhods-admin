@@ -58,7 +58,7 @@ Navigate to *Administration* -> *Namespaces*, search for the redhat-ods-operator
 +
 image::rhods2-delete-ope-ns.png[width=800]
 +
-alternatively you can delete the namespace from the CLI.
+Alternatively you can delete the namespace from the CLI.
 +
 [subs=+quotes]
 ----
