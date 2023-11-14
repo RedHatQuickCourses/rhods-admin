@@ -16,7 +16,8 @@ alternatively you can delete the *DataScienceCluster* objects from the CLI.
 +
 [subs=+quotes]
 ----
-oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')
+$ *oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')*
+
 datasciencecluster.datasciencecluster.opendatahub.io "default" deleted
 ----
 
