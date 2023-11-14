@@ -37,7 +37,7 @@ image::pipeline_install2.png[width=800]
 + 
 image::pipeline_install3.png[width=800]
 
-6. When the installation finishes the operator is ready to be used by the *Red{nbsp}Hat Openshift Data Science*.
+6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat Openshift Data Science*.
 +
 image::pipeline_install4.png[width=800]
 
