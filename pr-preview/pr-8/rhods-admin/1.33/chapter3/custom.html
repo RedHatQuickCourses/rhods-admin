@@ -50,13 +50,16 @@
     <a class="nav-link" href="../chapter1/index.html">Installation of Red&#160;Hat Openshift Data Science</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../chapter1/section1.html">Section 1</a>
+    <a class="nav-link" href="../chapter1/section1.html">General Information about Installation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../chapter1/section2.html">Section 2</a>
+    <a class="nav-link" href="../chapter1/section2.html">Installation using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../chapter1/section3.html">Section 3</a>
+    <a class="nav-link" href="../chapter1/section3.html">Installation Using the Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section5.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
   </li>
 </ul>
   </li>
@@ -152,79 +155,29 @@
 <h2 id="_image_source_and_pre_built_images"><a class="anchor" href="#_image_source_and_pre_built_images"></a>Image source and Pre-built images</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The default RHODS notebook images can be found in the <a href="https://github.com/opendatahub-io-contrib/workbench-images">opendatahub-io-contrib/workbench-images</a> repository. This repository contains the source code, pre-built images, and examples to help you create your own image. Workbench and runtime images are available.</p>
+<p>The default RHODS notebook images can be found in the <a href="https://github.com/opendatahub-io/notebooks">Default RHODS notebooks</a> repository. This repository contains the source code, pre-built images, and examples to help you create your own image.</p>
 </div>
 <div class="paragraph">
-<p><strong>Workbench Images</strong><br>
-These images can be used directly in workbenches within RHODS after importing them through the RHODS dashboard.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Jupyter Data Science</p>
-</li>
-<li>
-<p>VSCode Data Science</p>
-</li>
-<li>
-<p>RStudio</p>
-</li>
-<li>
-<p>Jupyter PyTorch</p>
-</li>
-<li>
-<p>VSCode PyTorch</p>
-</li>
-<li>
-<p>Jupyter Tensorflow</p>
-</li>
-<li>
-<p>Jupyter Langchain</p>
-</li>
-<li>
-<p>Langflow</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Runtime Images</strong><br>
-These images can be used in Data Science Pipelines. They contain the exact same set of libraries as the above workbench images, except the IDE part.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Runtime Data Science</p>
-</li>
-<li>
-<p>Runtime Data Science (CUDA)</p>
-</li>
-<li>
-<p>Runtime PyTorch (CUDA)</p>
-</li>
-<li>
-<p>Runtime Tensorflow (CUDA)</p>
-</li>
-<li>
-<p>Runtime R</p>
-</li>
-<li>
-<p>Runtime Spark</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>For more information on OS packages, bundles, and IDE versions checkout the <a href="https://github.com/opendatahub-io-contrib/workbench-images#detailed-images-content">Detailed Images Content</a> section.</p>
+<p>Additional images are available at the ODH contributions repository (<a href="https://github.com/opendatahub-io-contrib/workbench-images">opendatahub-io-contrib/workbench-images</a>) This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (<a href="https://github.com/opendatahub-io-contrib/workbench-images#building-an-image" class="bare">https://github.com/opendatahub-io-contrib/workbench-images#building-an-image</a>)</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_building_your_own_images"><a class="anchor" href="#_building_your_own_images"></a>Building your own images</h2>
+<h2 id="_exercise"><a class="anchor" href="#_exercise"></a>Exercise</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will now build our own image from one of the workbench images listed above.</p>
+<p>We will now build our own custom image. We&#8217;ll use <a href="https://quay.io/mmurakam/workbenches:fraud-detection-v1.0.1">Fraud Detection Image</a> as our base image. This image contains artifacts that we will be using later in the course.</p>
 </div>
-<div class="sect2">
-<h3 id="_rules"><a class="anchor" href="#_rules"></a>Rules</h3>
+<div class="paragraph">
+<p>We will be adding the seaborn python package to the Fraud Detection image. It is a data visualization library based on matplotlib.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
 <div class="ulist">
 <ul>
 <li>
@@ -234,13 +187,19 @@ These images can be used in Data Science Pipelines. They contain the exact same 
 <p>If you don&#8217;t want/can&#8217;t do that, another solution is to set permissions properly for any user, like 775.</p>
 </li>
 <li>
-<p>When launching a notebook from Applications&#8594;Enabled, the "personal" volume of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.</p>
+<p>When launching a notebook in RHODS, the working directory of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.</p>
 </li>
 </ul>
 </div>
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
+<div class="paragraph">
+<p>To build</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -257,47 +216,60 @@ These images can be used in Data Science Pipelines. They contain the exact same 
 <div class="paragraph">
 <p>Before you start to edit the Containerfile lets go over what this Containerfile is doing.</p>
 </div>
-<div class="imageblock">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Containerfile</dt>
+</dl>
+</div>
+<div class="openblock">
 <div class="content">
-<img src="_images/customContainerFile.png" alt="Custom Containerfile">
+<div class="listingblock">
+<div class="content">
+<pre>#This is the base image we'll be working from
+FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1  <i class="conum" data-value="1"></i><b>(1)</b>
+
+# Copying custom packages
+# The requirements.txt file contains additional package dependencies we want installed
+COPY requirements.txt ./  <i class="conum" data-value="2"></i><b>(2)</b>
+
+# Install packages and cleanup
+# (all commands are chained to minimize layer size)
+RUN echo "Installing softwares and packages" &amp;&amp; \     <i class="conum" data-value="3"></i><b>(3)</b>
+    pip install micropipenv &amp;&amp; \
+    # Install Python packages \
+    micropipenv install &amp;&amp; \
+    rm -f ./requiremnents.txt
+
+# Fix permissions to support pip in Openshift environments \
+RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages &amp;&amp; \    <i class="conum" data-value="4"></i><b>(4)</b>
+    fix-permissions /opt/app-root -P
+
+WORKDIR /opt/app-root/src  <i class="conum" data-value="5"></i><b>(5)</b>
+
+ENTRYPOINT ["start-notebook.sh"]   <i class="conum" data-value="6"></i><b>(6)</b></pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The FROM command contains the base image that we&#8217;ll be using to build our custom image from. This will already contain common python packages that Data Scientists use.</p>
-</li>
-<li>
-<p>The COPY command copies a requirements.txt file with the extra package that we will need in our notebook.</p>
-</li>
-<li>
-<p>The next step is to install the packages and remove then requirements.txt file that we just copied in to clean up files.</p>
-</li>
-<li>
-<p>We&#8217;re printing out where Java is installed. Since we haven&#8217;t installed it yet and it&#8217;s not part of our base image we should expect the output to be blank.</p>
-</li>
-<li>
-<p>We&#8217;re switching to the root user (User 0). We need to do this to have the appropriate permissions to install OpenJDK.</p>
-</li>
-<li>
-<p>Now we&#8217;ll install OpenJDK. Note that we are combining multiple commands together with &amp;&amp; instead of having each one run seperately. This helps keep the image size smaller.</p>
-</li>
-<li>
-<p>After the isntallation command is completed we switch back to User 1001 since the root user is not allowed to run containers in OpenShift.</p>
-</li>
-<li>
-<p>Now we should be able to see where Java is installed.</p>
-</li>
-<li>
-<p>We&#8217;ll fix the permissons to support pip in OpenShift.</p>
-</li>
-<li>
-<p>Set the work directory,</p>
-</li>
-<li>
-<p>Add the entry point for the container.</p>
-</li>
-</ol>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The FROM command contains the base image that we&#8217;ll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. Our Fraud Detection image is using <code class="sh">quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-2023a-20230714-933b52f</code> as the base image. You can find more base images at <a href="https://quay.io/organization/modh" class="bare">https://quay.io/organization/modh</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The next step is to install the packages. Micropipenv is a small footprint alternative to pip, that allows us to install packages from our requirements.txt file. After the seaborn pacakges is installed we then remove the requirements.txt to clean up the files.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>We&#8217;ll fix the permissons to support pip in OpenShift.</td>
+</tr>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -322,17 +294,10 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 </div>
 </li>
 <li>
-<p>Open the Containerfile under modules/chapter3/examples and add the 3 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
+<p>Open the Containerfile under modules/chapter3/examples and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   RUN INSTALL_PKGS="java-11-openjdk java-11-openjdk-devel" &amp;&amp; \
-      yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS &amp;&amp; \
-      yum -y clean all --enablerepo='*'</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/opendatahub-contrib/workbench-images:jupyter-datascience-c9s-py311_2023c_latest</code></pre>
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -357,22 +322,6 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 <p>The seaborn package is installed successfully.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/podmanSeabornInstalled.png" alt="podmanSeabornInstalled">
-</div>
-</div>
-</li>
-<li>
-<p>The first whereis Java command is blank</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/podmanNoJavaPath.png" alt="podmanNoJavaPath">
-</div>
-</div>
-</li>
-<li>
-<p>The second whereis Java command should display the path if Java was successfully installed.</p>
-<div class="imageblock">
-<div class="content">
 <img src="_images/podmanJavaPathExists.png" alt="podmanJavaPathExists">
 </div>
 </div>
@@ -381,7 +330,7 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 </div>
 </li>
 <li>
-<p>Once the image is done building run:</p>
+<p>Once the image is done building run the below command to make sure the image is in the list.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">podman images</code></pre>
@@ -394,7 +343,7 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 </div>
 </li>
 <li>
-<p>Login to quay.io</p>
+<p>Login to quay.io so we can push the image you just built up to the quay repository.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">podman login quay.io</code></pre>
@@ -405,7 +354,7 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 <p>Push the image to your quay repository.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-none hljs">podman push rhods-admin-custom-image:latest quay.io/&lt;YOUR_USERNAME&gt;/rhods-admin-custom-image</code></pre>
+<pre class="highlightjs highlight"><code class="language-none hljs">podman push rhods-custom-image:latest quay.io/&lt;YOUR_USERNAME&gt;/rhods-custom-image</code></pre>
 </div>
 </div>
 </li>

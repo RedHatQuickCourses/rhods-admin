@@ -50,13 +50,16 @@
     <a class="nav-link" href="../chapter1/index.html">Installation of Red&#160;Hat Openshift Data Science</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../chapter1/section1.html">Section 1</a>
+    <a class="nav-link" href="../chapter1/section1.html">General Information about Installation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../chapter1/section2.html">Section 2</a>
+    <a class="nav-link" href="../chapter1/section2.html">Installation using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../chapter1/section3.html">Section 3</a>
+    <a class="nav-link" href="../chapter1/section3.html">Installation Using the Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section5.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
   </li>
 </ul>
   </li>
@@ -151,33 +154,34 @@
 <div class="sect1">
 <h2 id="_import_the_notebook_image"><a class="anchor" href="#_import_the_notebook_image"></a>Import the Notebook Image</h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
 <p>Before we import the image into RHODS we need to set the quay repository we just created to public. In a browser login to quay.io and go to the rhods-admin-custom-image repository. Select the <strong>Settings</strong> gear icon.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/quaySettings.png" alt="Quay Repository Settings">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Scroll down until you see the <strong>Repository Visibility</strong> section.  Click the <strong>Make Public</strong> button and click Ok to make the repository public.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/quayMakePublic.png" alt="Quay Visibility Setting">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Login to the RHODS dashboard as the admin user. Expand <strong>Settings</strong>, click <strong>Notebook Images</strong>, and then click <strong>Import Image</strong>.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsAdminCustomNotebook.png" alt="RHODS Admin Notebook Images">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Enter the path to the your repository and give the image a name. Optionally add a description and package information. Click the <strong>Import</strong> button.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsImportCustomImage.png" alt="RHODS Import Notebook">
@@ -191,78 +195,82 @@
 <img src="_images/rhodsNotebookImage.png" alt="RHODS Custom Notebooks">
 </div>
 </div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_test_the_image_in_a_workbench"><a class="anchor" href="#_test_the_image_in_a_workbench"></a>Test the Image in a Workbench</h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
 <p>Now we&#8217;ll test out the image we just imported. Go to <strong>Data Science Projects</strong> and then click the <strong>Create data science project</strong> button.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsDataScienceProj.png" alt="RHODS Data Science Projects">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Give the project a name and resource name. Click the <strong>Create</strong> button.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsCreateProj.png" alt="RHODS Project">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Click the <strong>Create</strong> button.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsCreateWrkbench.png" alt="RHODS Workbench">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Give the workbench a name and select the rhods-admin-custom-image from the Image selection drop down list. Click the <strong>Create Workbench</strong> button.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsCreateWrkbenchDetails.png" alt="RHODS Workbench Details">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>Once the Status changes to Running click the <strong>Open</strong> link.</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsWorkbenchStart.png" alt="RHODS Workbench Start">
 </div>
 </div>
-<div class="paragraph">
-<p>Login to the notebook and click the <strong>Python 3.11</strong> notebook tile.</p>
-</div>
+</li>
+<li>
+<p>Login to the notebook and click the <strong>Python 3.9.16</strong> notebook tile.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsNewPythonNotebook.png" alt="RHODS Python Notebook">
 </div>
 </div>
-<div class="paragraph">
+</li>
+<li>
 <p>In the first cell of the notebook add the following</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">pip list | grep "^s"</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Prest Shift + Enter on your keyboard to execute the cell. This will find all of the dependencies that start with "s". Note that seaborn is an installed dependency.</p>
+<p>Press Shift + Enter on your keyboard to execute the cell. This will find all of the dependencies that start with "s". Note that seaborn is an installed dependency.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhodsPipList.png" alt="RHODS pip list">
 </div>
 </div>
-<div class="paragraph">
-<p>Now let&#8217;s test out the seaborn package to make sure it works. Copy the follwoing code to the cell below.</p>
-</div>
+</li>
+<li>
+<p>Now let&#8217;s test out the seaborn package to make sure it works. Copy the following code to the cell below.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import seaborn as sns
@@ -294,12 +302,15 @@ plt.show()</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Click Shift + Enter to execute the cell. You should see the graph below.</p>
+<p>Click Shift + Enter to execute the cell. You should see the graph below. You can now close the notebook. Don&#8217;t worry about saving it.</p>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/testSeaborn2.png" alt="Seaborn Graph">
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Congratulations! You&#8217;ve succesfully built, imported, and tested a custom image in RHODS.</p>
