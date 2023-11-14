@@ -73,7 +73,7 @@ Navigate to *Administration* -> *Namespaces*, filter the namespaces using the la
 +
 image::rhods2-delete-generated-ns.png[width=800]
 + 
-alternatively you can delete the namespaces from the CLI.
+Alternatively you can delete the namespaces from the CLI.
 +
 [subs=+quotes]
 ----
