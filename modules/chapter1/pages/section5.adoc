@@ -107,7 +107,7 @@ The following demonstration shows uninstallation of the *Red{nbsp}Hat Openshift 
 
 [#demo-pipelines]
 === Demo: Uninstallation of the *Red{nbsp}Hat Openshift Pipelines* operator
-.  Log in to Red{nbsp} Openshift web console using a user which has the _cluster-admin_ role assigned.
+.  Log in to Red{nbsp}Hat OpenShift web console using a user which has the _cluster-admin_ role assigned.
 
 . Navigate to *Operators* -> *Installed Operators*, choose *All Projects* and click on the three dots on the right side of the *Red{nbsp}Hat Openshift Pipelines* operator.
 +
