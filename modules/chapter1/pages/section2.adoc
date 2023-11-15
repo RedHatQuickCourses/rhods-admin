@@ -63,7 +63,7 @@ image::rhods_install2.png[width=800]
 
 . In the installation view window choose the _embedded_ *Update Channel*, _Manual_ *Update approval* and keep the default *Installed Namespace*. Click on the *Install* button to start the installation.
 +
-image::rhods2-install-view.png[width=800]
+image::rhods2-install-view2.png[width=800]
 
 . Approve the installation.
 +
