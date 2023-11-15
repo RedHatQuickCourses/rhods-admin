@@ -47,7 +47,7 @@ image::pipeline_install4.png[width=800]
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
-test
+
 . Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
 . Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
