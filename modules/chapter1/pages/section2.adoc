@@ -1,4 +1,4 @@
-= Installation using the Web Console 
+= Installation using the Web Console
 
 *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Operator Hub.  You will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console in this section. 
 
@@ -47,14 +47,14 @@ image::pipeline_install4.png[width=800]
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
-
+test
 . Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
 . Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
 +
 image::rhods_install1.png[width=800]
 
-
+  
 . Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
 +
 IMPORTANT: Make sure you select *Openshift Data Science* from *Red{nbsp}Hat* not the *Community* version.
