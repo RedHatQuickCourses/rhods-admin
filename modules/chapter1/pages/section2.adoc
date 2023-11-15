@@ -48,32 +48,60 @@ image::pipeline_install4.png[width=800]
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
 
+<<<<<<< HEAD
 1. Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
 2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
+=======
+. Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
+
+. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
+>>>>>>> jtesar/chapter1-web-console-install
 +
 image::rhods_install1.png[width=800]
 
 
+<<<<<<< HEAD
 3. Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
+=======
+. Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
+>>>>>>> jtesar/chapter1-web-console-install
 +
 IMPORTANT: Make sure you select *Openshift Data Science* from *Red{nbsp}Hat* not the *Community* version.
 +
 image::rhods_install2.png[width=800]
 
+<<<<<<< HEAD
 4. In the installation view window choose the _alpha_ *Update Channel*, _Automatic_ *Update approval* and keep the default *Installed Namespace*. Click on the *Install* button to start the installation.
 +
 image::rhods2-install-view.png[width=800]
+=======
+. In the installation view window choose the _embedded_ *Update Channel*, _Manual_ *Update approval* and keep the default *Installed Namespace*. Click on the *Install* button to start the installation.
++
+image::rhods2-install-view.png[width=800]
+
+. Approve the installation.
++
+image::rhods2-install-approve.png[width=800]
+>>>>>>> jtesar/chapter1-web-console-install
 +
 Operator Installation progress window will pop up. The installation may take a couple of minutes.
 +
 image::rhods2-install.png[width=800]
 
+<<<<<<< HEAD
 5. When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
 +
 image::rhods2-install-finished.png[width=800]
 
 6. In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
+=======
+. When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
++
+image::rhods2-install-finished.png[width=800]
+
+. In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
+>>>>>>> jtesar/chapter1-web-console-install
 + 
 There are following components to choose from:
 +
@@ -132,7 +160,11 @@ spec:
 +
 After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
 
+<<<<<<< HEAD
 7. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
+=======
+. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
+>>>>>>> jtesar/chapter1-web-console-install
 +
 image::rhods2-clusters.png[width=800]
 +
@@ -148,11 +180,21 @@ Each condition is represented by a *type* and a *status*. The *Type* is a string
   lastTransitionTime: '2023-11-13T10:53:20Z'
   message: Component reconciled successfully
   reason: ReconcileCompleted
+<<<<<<< HEAD
   #status: 'True'#
   #type: odh-dashboardReady#
 ---- 
 +
 The following list shows the conditions you may want to check:
+=======
+  status: 'True' <1>
+  type: odh-dashboardReady <2>
+---- 
+<1> Status of the condition. _True_ means that the condition is met, _False_ means that the condition is not met.
+<2> Type represents the meaning of the condition. Together with the value of _status_ you can assess the state of the component. In this example _type=odh-dashboardReady_  and _status=True_ means that the *Dashboard* component is ready. 
++
+Similarly to the example above other *Red{nbsp}Hat Data Science* components have their condition types. The following list shows the condition types for the *Red{nbsp}Hat Data Science* components.
+>>>>>>> jtesar/chapter1-web-console-install
 +
  * rayReady
  * codeflareReady
@@ -161,12 +203,21 @@ The following list shows the conditions you may want to check:
  * data-science-pipelines-operatorReady
  * odh-dashboardReady
 
+<<<<<<< HEAD
 8. The operator should be installed and configured now. 
 In the applications window in the right upper corner of the screen the *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
 +
 image::rhods_verify1.png[width=800]
 + 
 9. Click on the *Red{nbsp}Hat Openshift Data Science* button to log in to the *Red{nbsp}Hat Openshift Data Science*.
+=======
+. The operator should be installed and configured now. 
+In the applications window in the right upper corner of the screen the *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
++
+image::rhods_verify1.png[width=800]
+ 
+. Click on the *Red{nbsp}Hat Openshift Data Science* button to log in to the *Red{nbsp}Hat Openshift Data Science*.
+>>>>>>> jtesar/chapter1-web-console-install
 +
 image::rhods_verify2.png[width=800]
 +
