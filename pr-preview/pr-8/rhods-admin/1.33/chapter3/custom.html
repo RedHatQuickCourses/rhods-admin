@@ -59,6 +59,9 @@
     <a class="nav-link" href="../chapter1/section3.html">Installation Using the Command Line Interface</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../chapter1/section5.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
   </li>
 </ul>
@@ -72,7 +75,7 @@
     <a class="nav-link" href="../chapter2/index.html">Controlling User Access and Managing Resources</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../chapter2/users.html">User Types and Permissions</a>
+    <a class="nav-link" href="../chapter2/users.html">Users, Projects, and Permissions</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../chapter2/resources.html">Managing Resources</a>
@@ -147,7 +150,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Custom notebook images allow you to add specific packages and libraries for your projects. This level of customization provides you with a consistent development environment for your teams to work in and ensures that your projects are reproducible between team members. You may also want to create custom notebooks that are more secure than the default notebook image provided in RHODS.</p>
+<p>Custom notebook images allow you to add specific packages and libraries for your projects. This level of customization provides you with a consistent development environment for your teams to work in and ensures that your projects are reproducible between team members. You may also want to create custom notebooks that are more secure than the default notebook image provided in OpenShift AI.</p>
 </div>
 </div>
 </div>
@@ -155,7 +158,7 @@
 <h2 id="_image_source_and_pre_built_images"><a class="anchor" href="#_image_source_and_pre_built_images"></a>Image source and Pre-built images</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The default RHODS notebook images can be found in the <a href="https://github.com/opendatahub-io/notebooks">Default RHODS notebooks</a> repository. This repository contains the source code, pre-built images, and examples to help you create your own image.</p>
+<p>The default OpenShift AI notebook images can be found in the <a href="https://github.com/opendatahub-io/notebooks">Default OpenShift AI notebooks</a> repository. This repository contains the source code, pre-built images, and examples to help you create your own image.</p>
 </div>
 <div class="paragraph">
 <p>Additional images are available at the ODH contributions repository (<a href="https://github.com/opendatahub-io-contrib/workbench-images">opendatahub-io-contrib/workbench-images</a>) This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (<a href="https://github.com/opendatahub-io-contrib/workbench-images#building-an-image" class="bare">https://github.com/opendatahub-io-contrib/workbench-images#building-an-image</a>)</p>
@@ -187,7 +190,7 @@
 <p>If you don&#8217;t want/can&#8217;t do that, another solution is to set permissions properly for any user, like 775.</p>
 </li>
 <li>
-<p>When launching a notebook in RHODS, the working directory of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.</p>
+<p>When launching a notebook in OpenShift AI, the working directory of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.</p>
 </li>
 </ul>
 </div>
@@ -204,9 +207,23 @@
 <ul>
 <li>
 <p>Need podman</p>
+<div class="ulist">
+<ul>
+<li>
+<p>You could also use buildah, docker, OpenShift BuildConfigs, or a Tekton pipeline, but we&#8217;ll just build the image using podman for this course.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
 <p>Need an image registry</p>
+<div class="ulist">
+<ul>
+<li>
+<p>We&#8217;ll use Quay as our image registry. You can sign up for a free account at <a href="https://quay.io">Quay.io</a> if you don&#8217;t already have one.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -242,11 +259,7 @@ RUN echo "Installing softwares and packages" &amp;&amp; \     <i class="conum" d
 
 # Fix permissions to support pip in Openshift environments \
 RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages &amp;&amp; \    <i class="conum" data-value="4"></i><b>(4)</b>
-    fix-permissions /opt/app-root -P
-
-WORKDIR /opt/app-root/src  <i class="conum" data-value="5"></i><b>(5)</b>
-
-ENTRYPOINT ["start-notebook.sh"]   <i class="conum" data-value="6"></i><b>(6)</b></pre>
+    fix-permissions /opt/app-root -P</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -277,24 +290,31 @@ ENTRYPOINT ["start-notebook.sh"]   <i class="conum" data-value="6"></i><b>(6)</b
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open the requirements.txt file under modules/chapter3/examples.<br>
+<p>Open the requirements.txt file under /6.rhod-admin/custom-images.<br>
 The only package we&#8217;re installing is seaborn. It&#8217;s a Python data visualization library that we&#8217;ll use in our notebook.</p>
-<div class="imageblock">
+<div class="paragraph">
+<p><strong><em>requirements.txt</em></strong></p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="_images/seabornReq.png" alt="seabornReq">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">seaborn==0.12.2</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Multiple packages can be installed with the requirements.txt file by adding them on the next line. For example, the below requirements.txt file would install seaborn and the trino packages.</p>
 </div>
-<div class="imageblock">
+<div class="paragraph">
+<p><strong><em>requirements.txt</em></strong></p>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="_images/seabornTrinoReq.png" alt="seabornTrinoReq">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">seaborn==0.12.2
+trino==0.305.0</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Open the Containerfile under modules/chapter3/examples and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
+<p>Open the Containerfile under /6.rhod-admin/custom-images and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1</code></pre>
@@ -307,14 +327,14 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 </div>
 </li>
 <li>
-<p>We&#8217;ll now build the image with podman. Open a terminal and go to modules/chapter3/examples. Run the below command.</p>
+<p>We&#8217;ll now build the image with podman. Open a terminal and go to /6.rhod-admin/custom-images. Run the below command.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">podman build -t rhods-custom-image .</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You should see the following in the log:</p>
+<p>You should see a similar message in the logs:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -322,7 +342,7 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 <p>The seaborn package is installed successfully.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/podmanJavaPathExists.png" alt="podmanJavaPathExists">
+<img src="_images/podmanSeabornInstalled.png" alt="podmanSeabornInstalled">
 </div>
 </div>
 </li>
@@ -361,7 +381,7 @@ The only package we&#8217;re installing is seaborn. It&#8217;s a Python data vis
 </ol>
 </div>
 <div class="paragraph">
-<p>Now you&#8217;re ready to import your image into RHODS! See the next section to learn how to import your custom image and test it out.</p>
+<p>Now you&#8217;re ready to import your image into OpenShift AI! See the next section to learn how to import your custom image and test it out.</p>
 </div>
 </div>
 </div>
