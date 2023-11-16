@@ -1,7 +1,5 @@
 = Managing Resources
 
-Blah....
-
 == Notes
 * What kind of resources are created in a RHODS DS project/workbench
 * How to control resource allocation - CPU, Storage and other resources
