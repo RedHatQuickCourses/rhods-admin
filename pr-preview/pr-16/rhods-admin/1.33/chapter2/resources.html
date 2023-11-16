@@ -194,12 +194,6 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">A group is a collection of users that like users, can be granted permissions within OpenShift.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Groups</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">groups.user.openshift.io</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A group is a collection of users that like users, can be granted permissions within OpenShift.</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Permissions</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">rolebindings.rbac.authorization.k8s.io</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
@@ -271,6 +265,18 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DSPA&#8217;s create an instance of Data Science Pipelines.  DSPA&#8217;s require a data connection and an S3 bucket to create the instance.  DSPA&#8217;s are namespace scoped to prevent leaking data across multiple projects.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipelines</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When developing a pipeline, depending on the tool, users may generate a YAML based PipelineRun object that is then uploaded into the Dashboard to create an executable pipeline.  Even though this yaml object is a valid Tekton PipelineRun it is intended to be uploaded to the Dashboard, and not applied directly to the cluster.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pipeline Runs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pipelineruns.tekton.dev</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A pipeline can be executed in a number of different ways, including from the Dashboard, which will result in the creation of a pipelinerun.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -310,32 +316,259 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_notes"><a class="anchor" href="#_notes"></a>Notes</h2>
+<h2 id="_configuring_idle_notebook_culling"><a class="anchor" href="#_configuring_idle_notebook_culling"></a>Configuring Idle Notebook Culling</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>What kind of resources are created in a RHODS DS project/workbench</p>
-</li>
-<li>
-<p>How to control resource allocation - CPU, Storage and other resources</p>
-</li>
-<li>
-<p>How to clean up after a user is removed from the group and from RHODS</p>
-</li>
-<li>
-<p>Idle culler configuration - free up resources and kill idle notebooks</p>
-</li>
-<li>
-<p>Enabling and configuring GPUs for workload acceleration</p>
-</li>
-<li>
-<p>Why is GPU acceleration beneficial and how to configure it</p>
-</li>
-<li>
-<p>How to provision for certain groups of users and not all</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Notebooks or Workbenches are intended to be user interactive development environments.  Often times they can consume a large number of compute, memory, or GPU resources, and users may forget to shut them off when they are finished working with them, which can lead to issues where clusters begin to run out of available resources if not cleaned up.</p>
+</div>
+<div class="paragraph">
+<p>The Idle Notebook Culler is intended to help reduce the number of inactive notebooks running on the cluster, by detecting the last time an action was taken in a notebook and shutting down the pods if the notebook has been inactive for a period of time.</p>
+</div>
+<div class="paragraph">
+<p>An admin can enable culling for notebooks though the Dashboard under the menu:Settings[Cluster settings] section:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/idle-notebook-culling.png" alt="idle notebook culling">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, the idle notebook culling can be configured by creating the following config map:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: notebook-controller-culler-config <i class="conum" data-value="1"></i><b>(1)</b>
+  namespace: redhat-ods-applications <i class="conum" data-value="2"></i><b>(2)</b>
+  labels:
+    opendatahub.io/dashboard: 'true'
+data:
+  CULL_IDLE_TIME: '240' <i class="conum" data-value="3"></i><b>(3)</b>
+  ENABLE_CULLING: 'true' <i class="conum" data-value="4"></i><b>(4)</b>
+  IDLENESS_CHECK_PERIOD: '1' <i class="conum" data-value="5"></i><b>(5)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the config map, which must match <code>notebook-controller-culler-config</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The namespaces where the Dashboard is installed</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The time an notebook is idle before it is automatically stopped (in minutes)</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>An option to enable or disable the automatic culling</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>How frequently the culler will check if the notebook is idle (in minutes)</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A notebook is considered idle when the user has not taken any action inside of the notebook such as executing a cell, creating files, or interacting with the user interface in general.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_managing_workbench_and_model_server_sizes"><a class="anchor" href="#_managing_workbench_and_model_server_sizes"></a>Managing Workbench and Model Server Sizes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When launching Workbenches or Model Servers from the Dashboard, users are presented with several default sizes they can select from.  The default options may not suit your organizations needs</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: opendatahub.io/v1alpha
+kind: OdhDashboardConfig
+metadata:
+  annotations:
+    internal.config.kubernetes.io/previousKinds: OdhDashboardConfig
+    internal.config.kubernetes.io/previousNames: odh-dashboard-config
+    internal.config.kubernetes.io/previousNamespaces: default
+  name: odh-dashboard-config <i class="conum" data-value="1"></i><b>(1)</b>
+  namespace: redhat-ods-applications <i class="conum" data-value="2"></i><b>(2)</b>
+  labels:
+    app.kubernetes.io/part-of: rhods-dashboard
+    app.opendatahub.io/rhods-dashboard: 'true'
+spec:
+  dashboardConfig:
+    modelMetricsNamespace: ''
+    enablement: true
+    disableProjects: false
+    disableSupport: false
+    disablePipelines: false
+    disableProjectSharing: false
+    disableModelServing: false
+    disableCustomServingRuntimes: false
+    disableISVBadges: false
+    disableUserManagement: false
+    disableInfo: false
+    disableClusterManager: false
+    disableBYONImageStream: false
+    disableTracking: false
+  groupsConfig:
+    adminGroups: rhods-admins
+    allowedGroups: 'system:authenticated'
+  modelServerSizes: <i class="conum" data-value="3"></i><b>(3)</b>
+    - name: Small
+      resources:
+        limits:
+          cpu: '2'
+          memory: 8Gi
+        requests:
+          cpu: '1'
+          memory: 4Gi
+    - name: Medium
+      resources:
+        limits:
+          cpu: '8'
+          memory: 10Gi
+        requests:
+          cpu: '4'
+          memory: 8Gi
+    - name: Large
+      resources:
+        limits:
+          cpu: '10'
+          memory: 20Gi
+        requests:
+          cpu: '6'
+          memory: 16Gi
+  notebookController:
+    enabled: true
+    notebookNamespace: rhods-notebooks
+    notebookTolerationSettings:
+      enabled: false
+      key: NotebooksOnly
+    pvcSize: 20Gi
+  notebookSizes: <i class="conum" data-value="4"></i><b>(4)</b>
+    - name: Small
+      resources:
+        limits:
+          cpu: '2'
+          memory: 8Gi
+        requests:
+          cpu: '1'
+          memory: 8Gi
+    - name: Medium
+      resources:
+        limits:
+          cpu: '6'
+          memory: 24Gi
+        requests:
+          cpu: '3'
+          memory: 24Gi
+    - name: Large
+      resources:
+        limits:
+          cpu: '14'
+          memory: 56Gi
+        requests:
+          cpu: '7'
+          memory: 56Gi
+    - name: X Large
+      resources:
+        limits:
+          cpu: '30'
+          memory: 120Gi
+        requests:
+          cpu: '15'
+          memory: 120Gi
+  templateOrder: []</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The name of the OdhDashboardConfig, which must match <code>odh-dashboard-config</code></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The namespaces where the Dashboard is installed</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>The default model server sizes, provided as a list</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The default workbench sizes, provided by a list</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Users will most often select the largest option available to them, despite what their actual needs are.  Customizing these options based on the kinds of use cases your organization typically tackles can help to reduce the overall consumption of resources on a cluster.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>OpenShift provides the ability to restrict how many resources, including CPU, memory, and GPUs, are consumed by each project on a cluster with a LimitRange. To learn more about these capabilities refer to the
+<a href="https://docs.openshift.com/container-platform/4.14/nodes/clusters/nodes-cluster-limit-ranges.html">Restrict resource consumption with limit ranges</a> documentation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_removing_an_unused_project"><a class="anchor" href="#_removing_an_unused_project"></a>Removing an Unused Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Over time, projects may become abandoned as users leave your organization or move onto other initiatives. Old projects may need to be cleaned up and removed from the cluster in order to free up those resources.</p>
+</div>
+<div class="paragraph">
+<p>To completely remove a project from OpenShift, you must first delete all of the resources from that project before you will be able to delete the project.</p>
+</div>
+<div class="paragraph">
+<p>The following <code>oc</code> commands can be used to help cleanup OpenShift AI related resources prior to deleting the project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh"># select the project
+oc project my-project
+
+# delete any workbenches
+oc delete notebooks --all
+# delete any models and model servers
+oc delete inferenceservices,servingruntimes --all
+# delete any data science pipeline instances
+oc delete dspa,pipelineruns --all
+
+# cleanup any other non OpenShift AI resources deployed in the project
+
+# delete any other common objects
+oc delete pvc,configmaps,secrets,rolebindings,roles --all
+
+# delete the project
+oc delete project my-project</code></pre>
+</div>
 </div>
 </div>
 </div>
