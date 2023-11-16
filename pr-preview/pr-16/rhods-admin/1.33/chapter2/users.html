@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Users, Projects, and Permissions :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="index.html">
+    <link rel="next" href="resources.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Intoduction</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">General Information about Installation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Installation using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Installation Using the Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section5.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="users.html">Users, Projects, and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Building Custom Workbench Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/custom.html">Building Custom Workbench Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix A</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Controlling User Access and Managing Resources</a></li>
+    <li><a href="users.html">Users, Projects, and Permissions</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Users, Projects, and Permissions</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>As discussed in the previous section, Red Hat OpenShift AI allows users to install several different components to enable ML workloads.  One of the components is the OpenShift AI Dashboard, which acts as the primary user interface to help guide users to working with, deploying, and managing ML solutions.</p>
+</div>
+<div class="paragraph">
+<p>This section discusses of the intricacies of managing users with OpenShift AI and how to modify the default permissions for a project.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logging_into_the_openshift_ai_dashboard"><a class="anchor" href="#_logging_into_the_openshift_ai_dashboard"></a>Logging Into The OpenShift AI Dashboard</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift AI utilizes OpenShift OAuth as the authentication method for all OpenShift AI related resources.  When attempting to log into the OpenShift AI Dashboard or other UI components, users will be presented with a page prompting them to <code>Log in with OpenShift</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/login-with-openshift.png" alt="login with openshift">
+</div>
+</div>
+<div class="paragraph">
+<p>By default, any user with the ability to login to OpenShift will be able to access the OpenShift AI Dashboard.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For assistance with configuring user access to OpenShift with various identity providers, please refer to the official <a href="https://docs.openshift.com/container-platform/4.13/post_installation_configuration/preparing-for-users.html">Preparing for users</a> OpenShift documentation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_admin_access"><a class="anchor" href="#_admin_access"></a>Admin Access</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, users with the <code>cluster-admin</code> role are automatically granted admin permissions in the OpenShift AI Dashboard.  Additionally, a group called <code>rhods-admins</code> is automatically created, and any user added to that group will be granted admin permissions.</p>
+</div>
+<div class="paragraph">
+<p>Admin access in the OpenShift AI Dashboard allows users to control various settings of OpenShift AI through the Dashboard UI, including:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Configuring custom notebook images</p>
+</li>
+<li>
+<p>Configuring custom serving runtimes</p>
+</li>
+<li>
+<p>Configuring the idle notebook culler (automatic removal of inactive notebooks)</p>
+</li>
+<li>
+<p>Other notebook configuration settings</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To add users to the <code>rhods-admins</code> group, run the following command:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc adm groups add-users rhods-admins my-user1 my-user2</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updating_default_user_permissions"><a class="anchor" href="#_updating_default_user_permissions"></a>Updating Default User Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The default permissions for the OpenShift AI Dashboard can be updated through the menu:Settings[User management] section.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/user-management.png" alt="user management">
+</div>
+</div>
+<div class="paragraph">
+<p>The admin group can be updated to another group other than the default <code>rhods-admins</code> group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the <code>cluster-admin</code> ClusterRole.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>It is highly recommended that dedicated admin users are configured for OpenShift AI and that organizations do not rely on the <code>cluster-admin</code> role for exclusive permissions to admin configurations of OpenShift AI.  Dedicated Admin users should be added to the existing <code>rhods-admins</code> group, or another group which already contains the correct users should be configured in lieu of the <code>rhods-admins</code> group.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The normal Data Science user group can also be updated to change what users are able to sign into the OpenShift AI Dashboard.  By default, the Dashboard is configured to allow all authenticated users with the <code>system:authenticated</code> role.  A custom group can be configured to allow only specific users belonging to that group to access the Dashboard.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Updating the access in the <code>User and group settings</code> in the Dashboard will only impact a users abilities to access the Dashboard, and will not impact any permissions granted by regular Kubernetes based RBAC.</p>
+</div>
+<div class="paragraph">
+<p>For example, if the normal user group is updated to only allow specific users to access the Dashboard, and a user that is not part of that group has admin may still have the ability to create Data Science related objects such as Notebooks, Data Science Pipelines, or Model Servers in a namespace they have permission in using the associated k8s objects without the UI.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_managing_dashboard_permissions_with_gitops"><a class="anchor" href="#_managing_dashboard_permissions_with_gitops"></a>Managing Dashboard Permissions with GitOps</h3>
+<div class="paragraph">
+<p>The <code>User and group settings</code> in the OpenShift AI Dashboard can also be managed using the <code>OdhDashboardConfigs</code> object called <code>odh-dashboard-config</code> located in the redhat-ods-applications namespace along with many of the other settings found in the Dashboard&#8217;s Settings section:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc get odhdashboardconfigs odh-dashboard-config -n redhat-ods-applications -o yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>A truncated version of the OdhDashboardConfig object with the groupConfig settings can be found below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: opendatahub.io/v1alpha
+kind: OdhDashboardConfig
+metadata:
+  name: odh-dashboard-config
+  namespace: redhat-ods-applications
+spec:
+  groupsConfig:
+    adminGroups: rhods-admins
+    allowedGroups: 'system:authenticated'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This object can be exported from the cluster and stored in a git repository to enable managing these settings with GitOps.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_default_data_science_project_permissions"><a class="anchor" href="#_default_data_science_project_permissions"></a>Default Data Science Project Permissions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The OpenShift AI Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/create-datascience-project.png" alt="create datascience project">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The terms <code>Namespaces</code>, OpenShift <code>Projects</code>, and <code>Data Science Projects</code> are often used synonymy.  While there are technical differences between these objects, a project is essentially a namespace with some additional features provided by OpenShift.  OpenShift will always create a corresponding project for every namespace, and vise versa.</p>
+</div>
+<div class="paragraph">
+<p>Similarly, a Data Science Project is just an OpenShift Project that has a specific label, which enables it to be used with the Dashboard.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For information on how to disable self-provisioner on OpenShift refer to the official <a href="https://docs.openshift.com/container-platform/4.13/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation">Disabling project self-provisioning</a> OpenShift documentation.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>When a user creates a new Data Science Project through the Dashboard, the Dashboard will create a corresponding OpenShift Project and Kubernetes Namespace.  The user who created the Data Science Project will automatically be granted the OpenShift admin role for the Namespace.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>OpenShift allows for both "cluster admins" who have the ability to manage all cluster and namespace scoped objects on a cluster, and "namespace admins" that have permission to manage all namespace scoped objects in a specific namespace.</p>
+</div>
+<div class="paragraph">
+<p>All users with the <code>cluster-admin</code> role have the ability to see all other users namespaces.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_managing_permissions_on_a_data_science_project"><a class="anchor" href="#_managing_permissions_on_a_data_science_project"></a>Managing Permissions on a Data Science Project</h3>
+<div class="paragraph">
+<p>A Data Science Project is nothing more than a normal OpenShift Project with a few special labels.  These labels are required for the project to appear in the Dashboard.  As such, permissions to the project function the same as any other project/namespace in OpenShift.</p>
+</div>
+<div class="paragraph">
+<p>Users and Groups permissions to a project are managed using Kubernetes Role Based Access and Control (RBAC).  The Dashboard provides a user interface to easily assign additional users or groups permissions to a project.</p>
+</div>
+<div class="paragraph">
+<p>An admin user on the project can add additional users or groups to a project by navigating to a specific project under the Data Science Projects menu, and selecting the Permissions tab.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/datascience-project-permissions.png" alt="datascience project permissions">
+</div>
+</div>
+<div class="paragraph">
+<p>From the permissions tab, project admin users are able to add additional users or groups and grant them the <code>edit</code> or <code>admin</code> role on the project.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The Dashboard Permissions user interface only displays users and groups that were granted permissions directly through the Dashboard.  Any users or groups that have been granted permission to the Project by any traditional OpenShift role management such as creating RoleBindings on the project or who are granted higher level cluster permissions will not be displayed in the user interface.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_manually_creating_data_science_projects"><a class="anchor" href="#_manually_creating_data_science_projects"></a>Manually Creating Data Science Projects</h3>
+<div class="paragraph">
+<p>When self-provisioner is disabled on a cluster, a cluster administrator will be required to manually create Data Science Projects for users.</p>
+</div>
+<div class="paragraph">
+<p>As mentioned previously, a Data Science Project is a normal OpenShift project/namespace with a few special labels that allow to to be managed by the RHODS Dashboard, allowing it to be managed using any existing processes or tools your organization already utilizes to manage namespaces.</p>
+</div>
+<div class="paragraph">
+<p>To manually create a Data Science Project from the cli, you can run the following commands to create a namespace and apply the necessary labels:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">oc create namespace myproject
+oc label namespace myproject opendatahub.io/dashboard='true' modelmesh-enabled='true'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively, the following YAML object can be used to create the Data Science Project:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">kind: Namespace
+apiVersion: v1
+metadata:
+  name: myproject
+  labels:
+    modelmesh-enabled: 'true'
+    opendatahub.io/dashboard: 'true'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the Data Science Project has been created, access to the project will need to be configured for the necessary user or group using either the cli, or a namespace RoleBinding.  Refer to the OpenShift documentation for <a href="https://docs.openshift.com/container-platform/4.13/authentication/using-rbac.html#adding-roles_using-rbac">Adding roles to users</a> for additional instructions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_exercise"><a class="anchor" href="#_exercise"></a>Exercise</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a new Data Science Project and add a group with <code>edit</code> permissions.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a Data Science Project called <code>group-demo</code>.</p>
+</li>
+<li>
+<p>Navigate to the OpenShift Web Console, and create a Group called <code>my-team</code>.</p>
+</li>
+<li>
+<p>Add user1 and user2 to the Group <code>my-team</code>.</p>
+</li>
+<li>
+<p>Back in the OpenShift AI Dashboard, grant the team <code>my-team</code> the <code>edit</code> role on the project <code>group-demo</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">Controlling User Access and Managing Resources</a></span>
+  <span class="next"><a href="resources.html">Managing Resources</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

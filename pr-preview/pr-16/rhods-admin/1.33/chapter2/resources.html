@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Managing Resources :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="users.html">
+    <link rel="next" href="../chapter3/index.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Intoduction</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section1.html">General Information about Installation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section2.html">Installation using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section3.html">Installation Using the Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section4.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/section5.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="users.html">Users, Projects, and Permissions</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Building Custom Workbench Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/custom.html">Building Custom Workbench Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix A</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Controlling User Access and Managing Resources</a></li>
+    <li><a href="resources.html">Managing Resources</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Managing Resources</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift AI allows for end users to create many different types of resources as part of the development and deployment process.  This section will review the different types of resources users are able to create in OpenShift AI and how to manage them.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_kubernetes_resources"><a class="anchor" href="#_kubernetes_resources"></a>Kubernetes Resources</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The majority of actions taken in the OpenShift AI will create a kubernetes object based on that action.  This section will discussion the different components supported by OpenShift AI and the different resources they create or interact with.</p>
+</div>
+<div class="sect2">
+<h3 id="_data_science_projects"><a class="anchor" href="#_data_science_projects"></a>Data Science Projects</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
+<th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
+<th class="tableblock halign-left valign-top">Custom Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Science Project</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">projects.project.openshift.io</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A Data Science Project is synonym with an OpenShift Project or a Namespace.  See the users section for more information on how to create and manage Data Science Projects</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">users.user.openshift.io</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user is an object that corresponds to a specific user that can be granted permissions within OpenShift.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Groups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groups.user.openshift.io</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A group is a collection of users that like users, can be granted permissions within OpenShift.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Groups</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">groups.user.openshift.io</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A group is a collection of users that like users, can be granted permissions within OpenShift.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Permissions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rolebindings.rbac.authorization.k8s.io</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users and Groups are granted permission to a Data Science Project via a RoleBinding.  RoleBindings associate the user or group with a specific Kubernetes Role.  Only the Edit and Admin roles are available within the Dashboard.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_notebook_controller"><a class="anchor" href="#_notebook_controller"></a>Notebook Controller</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
+<th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
+<th class="tableblock halign-left valign-top">Custom Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workbench</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">notebooks.kubeflow.org</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A workbench is a IDE running in a pod using the Kubeflow Notebook Controller.  Workbenches can run a number of web based IDEs including JupyterLab, VSCode, and R Studio, depending on what IDE was built into the workbench image.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster Storage</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">persistentvolumeclaims</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Workbenches utilize cluster storage to persist a users environment when the workbench pod is not running.  When creating a workbench a default cluster storage instance will be created automatically to store any code or files a user creates in the workbench.  Additional cluster storage can be added to the workbench for things like a dedicated PVC for training data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Connection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">secrets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_data_science_pipelines"><a class="anchor" href="#_data_science_pipelines"></a>Data Science Pipelines</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
+<th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
+<th class="tableblock halign-left valign-top">Custom Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data Science Pipeline Application</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">datasciencepipelinesapplications.datasciencepipelinesapplications.opendatahub.io</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_model_mesh"><a class="anchor" href="#_model_mesh"></a>Model Mesh</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
+<th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
+<th class="tableblock halign-left valign-top">Custom Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Model Server</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">servingruntimes.serving.kserve.io</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A model server is used to create a pod to serve models.  A single model server can serve multiple models from a single instance.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Models</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inferenceservices.serving.kserve.io</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Models are associated with a specific model server, from which an endpoint will be created.  Models require a data connection and a location where the model file is stored in the s3 bucket.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_notes"><a class="anchor" href="#_notes"></a>Notes</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>What kind of resources are created in a RHODS DS project/workbench</p>
+</li>
+<li>
+<p>How to control resource allocation - CPU, Storage and other resources</p>
+</li>
+<li>
+<p>How to clean up after a user is removed from the group and from RHODS</p>
+</li>
+<li>
+<p>Idle culler configuration - free up resources and kill idle notebooks</p>
+</li>
+<li>
+<p>Enabling and configuring GPUs for workload acceleration</p>
+</li>
+<li>
+<p>Why is GPU acceleration beneficial and how to configure it</p>
+</li>
+<li>
+<p>How to provision for certain groups of users and not all</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="users.html">Users, Projects, and Permissions</a></span>
+  <span class="next"><a href="../chapter3/index.html">Building Custom Workbench Images</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
