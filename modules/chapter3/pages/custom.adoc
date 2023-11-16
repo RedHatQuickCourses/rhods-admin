@@ -57,9 +57,9 @@ RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \    <4>
 ----
 <1> The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. Our Fraud Detection image is using [sh]`quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-2023a-20230714-933b52f` as the base image. You can find more base images at https://quay.io/organization/modh.
 
-<2> The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on.
+<2> The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on. micropipenv is a small footprint alternative to pip that allows us to install packages from our requirements.txt file.
 
-<3> The next step is to install the packages. Micropipenv is a small footprint alternative to pip, that allows us to install packages from our requirements.txt file. After the seaborn pacakges is installed we then remove the requirements.txt to clean up the files.
+<3> The next step is to install the packages. A lighweight wrapper for pip, micropipenv, allows us to install packages from our requirements.txt file. After the seaborn pacakge is installed we then remove the requirements.txt to clean up the files.
 
 <4> We'll fix the permissons to support pip in OpenShift.
 --
