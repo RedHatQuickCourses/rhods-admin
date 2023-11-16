@@ -70,6 +70,16 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 |Yes
 |DSPA's create an instance of Data Science Pipelines.  DSPA's require a data connection and an S3 bucket to create the instance.  DSPA's are namespace scoped to prevent leaking data across multiple projects.
 
+|Pipelines
+|N/A
+|N/A
+|When developing a pipeline, depending on the tool, users may generate a YAML based PipelineRun object that is then uploaded into the Dashboard to create an executable pipeline.  Even though this yaml object is a valid Tekton PipelineRun it is intended to be uploaded to the Dashboard, and not applied directly to the cluster.
+
+|Pipeline Runs
+|pipelineruns.tekton.dev
+|Yes
+|A pipeline can be executed in a number of different ways, including from the Dashboard, which will result in the creation of a pipelinerun.
+
 |===
 
 === Model Mesh
@@ -90,13 +100,188 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 
 |===
 
-== Notes
-* What kind of resources are created in a RHODS DS project/workbench
-* How to control resource allocation - CPU, Storage and other resources
-* How to clean up after a user is removed from the group and from RHODS
-* Idle culler configuration - free up resources and kill idle notebooks
-* Enabling and configuring GPUs for workload acceleration
-* Why is GPU acceleration beneficial and how to configure it
-* How to provision for certain groups of users and not all
+== Configuring Idle Notebook Culling
 
+Notebooks or Workbenches are intended to be user interactive development environments.  Often times they can consume a large number of compute, memory, or GPU resources, and users may forget to shut them off when they are finished working with them, which can lead to issues where clusters begin to run out of available resources if not cleaned up.
 
+The Idle Notebook Culler is intended to help reduce the number of inactive notebooks running on the cluster, by detecting the last time an action was taken in a notebook and shutting down the pods if the notebook has been inactive for a period of time.
+
+An admin can enable culling for notebooks though the Dashboard under the menu:Settings[Cluster settings] section:
+
+image::idle-notebook-culling.png[]
+
+Alternatively, the idle notebook culling can be configured by creating the following config map:
+
+----
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: notebook-controller-culler-config <1>
+  namespace: redhat-ods-applications <2>
+  labels:
+    opendatahub.io/dashboard: 'true'
+data:
+  CULL_IDLE_TIME: '240' <3>
+  ENABLE_CULLING: 'true' <4>
+  IDLENESS_CHECK_PERIOD: '1' <5>
+----
+
+<1> The name of the config map, which must match `notebook-controller-culler-config`
+<2> The namespaces where the Dashboard is installed
+<3> The time an notebook is idle before it is automatically stopped (in minutes)
+<4> An option to enable or disable the automatic culling
+<5> How frequently the culler will check if the notebook is idle (in minutes)
+
+A notebook is considered idle when the user has not taken any action inside of the notebook such as executing a cell, creating files, or interacting with the user interface in general.
+
+== Managing Workbench and Model Server Sizes
+
+When launching Workbenches or Model Servers from the Dashboard, users are presented with several default sizes they can select from.  The default options may not suit your organizations needs
+
+----
+apiVersion: opendatahub.io/v1alpha
+kind: OdhDashboardConfig
+metadata:
+  annotations:
+    internal.config.kubernetes.io/previousKinds: OdhDashboardConfig
+    internal.config.kubernetes.io/previousNames: odh-dashboard-config
+    internal.config.kubernetes.io/previousNamespaces: default
+  name: odh-dashboard-config <1>
+  namespace: redhat-ods-applications <2>
+  labels:
+    app.kubernetes.io/part-of: rhods-dashboard
+    app.opendatahub.io/rhods-dashboard: 'true'
+spec:
+  dashboardConfig:
+    modelMetricsNamespace: ''
+    enablement: true
+    disableProjects: false
+    disableSupport: false
+    disablePipelines: false
+    disableProjectSharing: false
+    disableModelServing: false
+    disableCustomServingRuntimes: false
+    disableISVBadges: false
+    disableUserManagement: false
+    disableInfo: false
+    disableClusterManager: false
+    disableBYONImageStream: false
+    disableTracking: false
+  groupsConfig:
+    adminGroups: rhods-admins
+    allowedGroups: 'system:authenticated'
+  modelServerSizes: <3>
+    - name: Small
+      resources:
+        limits:
+          cpu: '2'
+          memory: 8Gi
+        requests:
+          cpu: '1'
+          memory: 4Gi
+    - name: Medium
+      resources:
+        limits:
+          cpu: '8'
+          memory: 10Gi
+        requests:
+          cpu: '4'
+          memory: 8Gi
+    - name: Large
+      resources:
+        limits:
+          cpu: '10'
+          memory: 20Gi
+        requests:
+          cpu: '6'
+          memory: 16Gi
+  notebookController:
+    enabled: true
+    notebookNamespace: rhods-notebooks
+    notebookTolerationSettings:
+      enabled: false
+      key: NotebooksOnly
+    pvcSize: 20Gi
+  notebookSizes: <4>
+    - name: Small
+      resources:
+        limits:
+          cpu: '2'
+          memory: 8Gi
+        requests:
+          cpu: '1'
+          memory: 8Gi
+    - name: Medium
+      resources:
+        limits:
+          cpu: '6'
+          memory: 24Gi
+        requests:
+          cpu: '3'
+          memory: 24Gi
+    - name: Large
+      resources:
+        limits:
+          cpu: '14'
+          memory: 56Gi
+        requests:
+          cpu: '7'
+          memory: 56Gi
+    - name: X Large
+      resources:
+        limits:
+          cpu: '30'
+          memory: 120Gi
+        requests:
+          cpu: '15'
+          memory: 120Gi
+  templateOrder: []
+----
+
+<1> The name of the OdhDashboardConfig, which must match `odh-dashboard-config`
+<2> The namespaces where the Dashboard is installed
+<3> The default model server sizes, provided as a list
+<4> The default workbench sizes, provided by a list
+
+[TIP]
+====
+
+Users will most often select the largest option available to them, despite what their actual needs are.  Customizing these options based on the kinds of use cases your organization typically tackles can help to reduce the overall consumption of resources on a cluster.
+
+====
+
+[TIP]
+====
+
+OpenShift provides the ability to restrict how many resources, including CPU, memory, and GPUs, are consumed by each project on a cluster with a LimitRange. To learn more about these capabilities refer to the  
+https://docs.openshift.com/container-platform/4.14/nodes/clusters/nodes-cluster-limit-ranges.html[Restrict resource consumption with limit ranges] documentation.
+
+====
+
+== Removing an Unused Project
+
+Over time, projects may become abandoned as users leave your organization or move onto other initiatives. Old projects may need to be cleaned up and removed from the cluster in order to free up those resources.
+
+To completely remove a project from OpenShift, you must first delete all of the resources from that project before you will be able to delete the project.  
+
+The following `oc` commands can be used to help cleanup OpenShift AI related resources prior to deleting the project:
+
+```sh
+# select the project
+oc project my-project
+
+# delete any workbenches
+oc delete notebooks --all
+# delete any models and model servers
+oc delete inferenceservices,servingruntimes --all
+# delete any data science pipeline instances
+oc delete dspa,pipelineruns --all
+
+# cleanup any other non OpenShift AI resources deployed in the project
+
+# delete any other common objects
+oc delete pvc,configmaps,secrets,rolebindings,roles --all
+
+# delete the project
+oc delete project my-project
+```
