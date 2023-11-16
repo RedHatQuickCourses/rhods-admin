@@ -8,7 +8,7 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 
 === Data Science Projects
 
-[cols="1,1,1"]
+[cols="1,1,1,1"]
 |===
 |OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
 
@@ -42,7 +42,7 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 
 === Notebook Controller
 
-[cols="1,1,1"]
+[cols="1,1,1,1"]
 |===
 |OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
 
@@ -66,7 +66,7 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 
 === Data Science Pipelines
 
-[cols="1,1,1"]
+[cols="1,1,1,1"]
 |===
 |OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
 
@@ -79,7 +79,7 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 
 === Model Mesh
 
-[cols="1,1,1"]
+[cols="1,1,1,1"]
 |===
 |OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
 
