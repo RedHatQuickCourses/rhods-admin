@@ -161,29 +161,28 @@
 <h3 id="_data_science_projects"><a class="anchor" href="#_data_science_projects"></a>Data Science Projects</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
 <th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
 <th class="tableblock halign-left valign-top">Custom Resource</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Data Science Project</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">projects.project.openshift.io</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A Data Science Project is synonym with an OpenShift Project or a Namespace.  See the users section for more information on how to create and manage Data Science Projects</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Users</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Users</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">users.user.openshift.io</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A user is an object that corresponds to a specific user that can be granted permissions within OpenShift.</p></td>
@@ -192,18 +191,16 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Groups</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">groups.user.openshift.io</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A group is a collection of users that like users, can be granted permissions within OpenShift.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A group is a collection of users that like users, can be granted permissions within OpenShift.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Groups</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">groups.user.openshift.io</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A group is a collection of users that like users, can be granted permissions within OpenShift.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Permissions</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Permissions</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">rolebindings.rbac.authorization.k8s.io</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Users and Groups are granted permission to a Data Science Project via a RoleBinding.  RoleBindings associate the user or group with a specific Kubernetes Role.  Only the Edit and Admin roles are available within the Dashboard.</p></td>
@@ -215,29 +212,28 @@
 <h3 id="_notebook_controller"><a class="anchor" href="#_notebook_controller"></a>Notebook Controller</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
 <th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
 <th class="tableblock halign-left valign-top">Custom Resource</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Workbench</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">notebooks.kubeflow.org</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A workbench is a IDE running in a pod using the Kubeflow Notebook Controller.  Workbenches can run a number of web based IDEs including JupyterLab, VSCode, and R Studio, depending on what IDE was built into the workbench image.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster Storage</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cluster Storage</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">persistentvolumeclaims</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Workbenches utilize cluster storage to persist a users environment when the workbench pod is not running.  When creating a workbench a default cluster storage instance will be created automatically to store any code or files a user creates in the workbench.  Additional cluster storage can be added to the workbench for things like a dedicated PVC for training data.</p></td>
@@ -246,6 +242,7 @@
 <td class="tableblock halign-left valign-top"><p class="tableblock">Data Connection</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">secrets</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A data connection is a secret that includes fields required to connect to an S3 bucket.</p></td>
 </tr>
 </tbody>
 </table>
@@ -254,22 +251,25 @@
 <h3 id="_data_science_pipelines"><a class="anchor" href="#_data_science_pipelines"></a>Data Science Pipelines</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
 <th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
 <th class="tableblock halign-left valign-top">Custom Resource</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Data Science Pipeline Application</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">datasciencepipelinesapplications.datasciencepipelinesapplications.opendatahub.io</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DSPA&#8217;s create an instance of Data Science Pipelines.  DSPA&#8217;s require a data connection and an S3 bucket to create the instance.  DSPA&#8217;s are namespace scoped to prevent leaking data across multiple projects.</p></td>
 </tr>
 </tbody>
 </table>
@@ -278,29 +278,28 @@
 <h3 id="_model_mesh"><a class="anchor" href="#_model_mesh"></a>Model Mesh</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">OpenShift AI Resource Name</th>
 <th class="tableblock halign-left valign-top">Kubernetes Resource Name</th>
 <th class="tableblock halign-left valign-top">Custom Resource</th>
+<th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Model Server</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">servingruntimes.serving.kserve.io</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A model server is used to create a pod to serve models.  A single model server can serve multiple models from a single instance.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Models</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Models</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">inferenceservices.serving.kserve.io</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Models are associated with a specific model server, from which an endpoint will be created.  Models require a data connection and a location where the model file is stored in the s3 bucket.</p></td>
