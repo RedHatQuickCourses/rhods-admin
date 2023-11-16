@@ -27,11 +27,6 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 |No
 |A group is a collection of users that like users, can be granted permissions within OpenShift.
 
-|Groups
-|groups.user.openshift.io
-|No
-|A group is a collection of users that like users, can be granted permissions within OpenShift.
-
 |Permissions
 |rolebindings.rbac.authorization.k8s.io
 |No
