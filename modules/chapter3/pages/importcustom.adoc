@@ -1,9 +1,9 @@
 = Importing Custom Notebook Images
 
-In this section we will go over importing a custom notebook through the RHODS dashboard and test it to make sure our dependencies are included.
+In this section we will go over importing a custom notebook through the OpenShift AI dashboard and test it to make sure our dependencies are included.
 
 == Import the Notebook Image
-1. Before we import the image into RHODS we need to set the quay repository we just created to public. In a browser login to quay.io and go to the rhods-admin-custom-image repository. Select the *Settings* gear icon.
+1. Before we import the image into OpenShif AI we need to set the quay repository we just created to public. In a browser login to quay.io and go to the rhods-admin-custom-image repository. Select the *Settings* gear icon.
 +
 image::quaySettings.png[Quay Repository Settings]
 
@@ -12,43 +12,43 @@ image::quaySettings.png[Quay Repository Settings]
 +
 image::quayMakePublic.png[Quay Visibility Setting]
 
-3. Login to the RHODS dashboard as the admin user. Expand *Settings*, click *Notebook Images*, and then click *Import Image*.
+3. Login to the OpenShift AI dashboard as the admin user. Expand *Settings*, click *Notebook Images*, and then click *Import Image*.
 +
-image::rhodsAdminCustomNotebook.png[RHODS Admin Notebook Images]
+image::rhodsAdminCustomNotebook.png[OpenShift AI Admin Notebook Images]
 
 4. Enter the path to the your repository and give the image a name. Optionally add a description and package information. Click the *Import* button.
 +
-image::rhodsImportCustomImage.png[RHODS Import Notebook]
+image::rhodsImportCustomImage.png[OpenShift AI Import Notebook]
 +
 You should now see the image in the list and enabled.
 +
-image::rhodsNotebookImage.png[RHODS Custom Notebooks]
+image::rhodsNotebookImage.png[OpenShift AI Custom Notebooks]
 
 == Test the Image in a Workbench
 
 1. Now we'll test out the image we just imported. Go to *Data Science Projects* and then click the *Create data science project* button.
 +
-image::rhodsDataScienceProj.png[RHODS Data Science Projects]
+image::rhodsDataScienceProj.png[OpenShift AI Data Science Projects]
 
 2. Give the project a name and resource name. Click the *Create* button.
 +
-image::rhodsCreateProj.png[RHODS Project]
+image::rhodsCreateProj.png[OpenShift AI Project]
 
 3. Click the *Create* button.
 +
-image::rhodsCreateWrkbench.png[RHODS Workbench]
+image::rhodsCreateWrkbench.png[OpenShift AI Workbench]
 
 4. Give the workbench a name and select the rhods-admin-custom-image from the Image selection drop down list. Click the *Create Workbench* button.
 +
-image::rhodsCreateWrkbenchDetails.png[RHODS Workbench Details]
+image::rhodsCreateWrkbenchDetails.png[OpenShift AI Workbench Details]
 
 5. Once the Status changes to Running click the *Open* link.
 +
-image::rhodsWorkbenchStart.png[RHODS Workbench Start]
+image::rhodsWorkbenchStart.png[OpenShift AI Workbench Start]
 
 6. Login to the notebook and click the *Python 3.9.16* notebook tile.
 +
-image::rhodsNewPythonNotebook.png[RHODS Python Notebook]
+image::rhodsNewPythonNotebook.png[OpenShift AI Python Notebook]
 
 7. In the first cell of the notebook add the following
 +
@@ -58,7 +58,7 @@ pip list | grep "^s"
 ----
 Press Shift + Enter on your keyboard to execute the cell. This will find all of the dependencies that start with "s". Note that seaborn is an installed dependency.
 +
-image::rhodsPipList.png[RHODS pip list]
+image::rhodsPipList.png[pip list]
 
 8. Now let's test out the seaborn package to make sure it works. Copy the following code to the cell below.
 +
@@ -93,4 +93,4 @@ Click Shift + Enter to execute the cell. You should see the graph below. You can
 +
 image::testSeaborn2.png[Seaborn Graph]
 
-Congratulations! You've succesfully built, imported, and tested a custom image in RHODS. 
+Congratulations! You've succesfully built, imported, and tested a custom image in OpenShift AI. 

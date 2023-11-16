@@ -5,4 +5,4 @@ In this chapter, you learn how to build custom notebook images.
 Goals:
 
 * Create custom notebook images
-* How to import custom notebook images into RHODS
+* How to import custom notebook images into OpenShift AI
