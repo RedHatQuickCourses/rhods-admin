@@ -1,5 +1,100 @@
 = Managing Resources
 
+OpenShift AI allows for end users to create many different types of resources as part of the development and deployment process.  This section will review the different types of resources users are able to create in OpenShift AI and how to manage them.
+
+== Kubernetes Resources
+
+The majority of actions taken in the OpenShift AI will create a kubernetes object based on that action.  This section will discussion the different components supported by OpenShift AI and the different resources they create or interact with.
+
+=== Data Science Projects
+
+[cols="1,1,1"]
+|===
+|OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
+
+|Data Science Project
+|projects.project.openshift.io
+|No
+|A Data Science Project is synonym with an OpenShift Project or a Namespace.  See the users section for more information on how to create and manage Data Science Projects
+
+|Users
+|users.user.openshift.io
+|No
+|A user is an object that corresponds to a specific user that can be granted permissions within OpenShift.
+
+|Groups
+|groups.user.openshift.io
+|No
+|A group is a collection of users that like users, can be granted permissions within OpenShift.
+
+|Groups
+|groups.user.openshift.io
+|No
+|A group is a collection of users that like users, can be granted permissions within OpenShift.
+
+|Permissions
+|rolebindings.rbac.authorization.k8s.io
+|No
+|Users and Groups are granted permission to a Data Science Project via a RoleBinding.  RoleBindings associate the user or group with a specific Kubernetes Role.  Only the Edit and Admin roles are available within the Dashboard.
+
+|===
+
+
+=== Notebook Controller
+
+[cols="1,1,1"]
+|===
+|OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
+
+|Workbench
+|notebooks.kubeflow.org
+|Yes
+|A workbench is a IDE running in a pod using the Kubeflow Notebook Controller.  Workbenches can run a number of web based IDEs including JupyterLab, VSCode, and R Studio, depending on what IDE was built into the workbench image.
+
+|Cluster Storage
+|persistentvolumeclaims
+|No
+|Workbenches utilize cluster storage to persist a users environment when the workbench pod is not running.  When creating a workbench a default cluster storage instance will be created automatically to store any code or files a user creates in the workbench.  Additional cluster storage can be added to the workbench for things like a dedicated PVC for training data.
+
+|Data Connection
+|secrets
+|No
+|A data connection is a secret that includes fields required to connect to an S3 bucket.
+
+|===
+
+
+=== Data Science Pipelines
+
+[cols="1,1,1"]
+|===
+|OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
+
+|Data Science Pipeline Application
+|datasciencepipelinesapplications.datasciencepipelinesapplications.opendatahub.io
+|Yes
+|DSPA's create an instance of Data Science Pipelines.  DSPA's require a data connection and an S3 bucket to create the instance.  DSPA's are namespace scoped to prevent leaking data across multiple projects.
+
+|===
+
+=== Model Mesh
+
+[cols="1,1,1"]
+|===
+|OpenShift AI Resource Name | Kubernetes Resource Name | Custom Resource | Description 
+
+|Model Server
+|servingruntimes.serving.kserve.io
+|Yes
+|A model server is used to create a pod to serve models.  A single model server can serve multiple models from a single instance.
+
+|Models
+|inferenceservices.serving.kserve.io
+|Yes
+|Models are associated with a specific model server, from which an endpoint will be created.  Models require a data connection and a location where the model file is stored in the s3 bucket.
+
+|===
+
 == Notes
 * What kind of resources are created in a RHODS DS project/workbench
 * How to control resource allocation - CPU, Storage and other resources
