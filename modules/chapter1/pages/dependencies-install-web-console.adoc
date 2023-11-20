@@ -89,7 +89,7 @@ image::nfd_configure2.png[width=800]
 +
 image::nfd_verify.png[width=800]
 
-Node Feature Discovery is now successfully installed and configured.
+*Node Feature Discovery* is now successfully installed and configured.
 
 === Demo: Installation of the *NVIDIA GPU Operator*
 
