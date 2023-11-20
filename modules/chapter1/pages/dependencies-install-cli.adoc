@@ -1,0 +1,57 @@
+== Installation of Red{nbsp}Hat Openshift Data Science dependencies
+
+As described in the xref::section1.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use.
+In general not installing dependencies before the *Red{nbsp}Hat Openshift Data Science* does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it's better to install the dependencies beforehand.
+
+https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
+The *Red Hat Openshift Pipelines Operator* is required if you want to install the *Data Science Pipelines* component.
+https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
+The *NVIDIA GPU Operator* is required for GPU support in *Red Hat Openshift Data Science*.
+https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
+The *Node Feature Discovery Operator* is a prerequisity for the *NVIDIA GPU Operator*.
+
+
+The following demonstration shows the installation of the https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator] which is a dependency of the *Data Science Pipelines* component installed by default. Installation of the two other operators is very similar.
+
+=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* Operator
+[WARNING]
+If you have already installed the *Red{nbsp}Hat Openshift Data Science* operator during the previous demonstration, you have to uninstall it. Follow the xref:section5.adoc#demo-rhods[Uninstalling Red{nbsp}Hat Openshift Data Science] demo to uninstall the *Red{nbsp}Hat Openshift Data Science* operator first and xref:section5.adoc#demo-pipelines[Uninstalling Red{nbsp}Hat Openshift Pipelines] to uninstall *Red{nbsp}Hat Openshift Pipelines* first.
+
+. Log in as a user with the _cluster-admin_ role assigned.
++
+[subs=+quotes]
+----
+$ *oc login -u admin -p _password_ https://api...:6443*
+Login successful.
+
+You have access to 74 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+----
+
+. The Pipelines operator's default namespace is _openshift-operators_, hence neither the namespace nor operator group resources must be created. Create only the *Subscription* resource to start the installation. 
++
+--
+[subs=+quotes]
+----
+$ *cat <<EOF > pipelines-subs.yaml*
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-pipelines-operator-rh
+  namespace: openshift-operators
+spec:
+  channel: latest <1>
+  installPlanApproval: Automatic <2>
+  name: openshift-pipelines-operator-rh
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
+
+$ *oc create -f pipelines-subs.yaml*
+----
+<1> The update channel to install the operator from. To find all available channels see the xref:section3.adoc#findchannel[Finding Update Channels] section.
+<2> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:section3.adoc#manual_approval[Approving Installation Manually] section for more information.
+--
+. You may check the installation progress using the operator's status information. For more information see the xref:section3.adoc#installprogress[Checking Installation Progress] section.
+
