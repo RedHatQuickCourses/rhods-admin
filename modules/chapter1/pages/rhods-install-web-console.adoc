@@ -51,7 +51,6 @@ IMPORTANT: The installation requires a user with the _cluster-admin_ role
 . Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
 . Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
->>>>>>> jtesar/chapter1-web-console-install
 +
 image::rhods_install1.png[width=800]
 
