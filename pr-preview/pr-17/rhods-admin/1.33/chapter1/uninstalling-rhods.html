@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Uninstalling Red&#160;Hat Openshift Data Science :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="upgrading-rhods.html">
+    <link rel="next" href="../chapter2/index.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Intoduction</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="install-general-info.html">General Information about Installation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dependencies-install-web-console.html">Installation Dependencies Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dependencies-install-cli.html">dependencies-install-cli.adoc</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rhods-install-cli.html">Installation Red&#160;Hat Openshift Data Science Using the Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="uninstalling-rhods.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/users.html">Users, Projects, and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Building Custom Workbench Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/custom.html">Building Custom Workbench Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix A</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
+    <li><a href="uninstalling-rhods.html">Uninstalling Red&#160;Hat Openshift Data Science</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Uninstalling Red&#160;Hat Openshift Data Science</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Red&#160;Hat Openshift Data Science</strong> operator manages <strong>Red&#160;Hat Openshift Data Science</strong> components hence uninstalling of the <strong>Red&#160;Hat Openshift Data Science</strong> requires uninstalling the <strong>Red&#160;Hat Openshift Data Science</strong> operator and cleaning some of the resources that have been created by the operator or users.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="demo-rhods"><a class="anchor" href="#demo-rhods"></a>Demo: Uninstalling Red&#160;Hat Openshift Data Science</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to Red&#160; Openshift web console using a user which has the <em>cluster-admin</em> role assigned.</p>
+</li>
+<li>
+<p>Delete the DataScienceCluster object.</p>
+<div class="paragraph">
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong> &#8594; <strong>Red Hat OpenShift Data Science</strong> &#8594; <strong>DataScienceCluster</strong> and delete all the <strong>DSC</strong> resources.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-delete-dsc.png" alt="rhods2 delete dsc" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>alternatively you can delete the <strong>DataScienceCluster</strong> objects from the CLI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')</strong>
+
+datasciencecluster.datasciencecluster.opendatahub.io "default" deleted</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Delete the DSCInitialization object that the Operator created during installation.</p>
+<div class="paragraph">
+<p>Navigate to the <strong>DSCInitialization</strong> tab and delete all <strong>DSCI</strong> resources.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-delete-dsci.png" alt="rhods2 delete dsci" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>alternatively you can delete the <strong>DCSI</strong> objects from the CLI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc delete dscinitialization $(oc get dscinitialization --no-headers |  awk '{print $1}')</strong>
+
+dscinitialization.dscinitialization.opendatahub.io "default" deleted</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Uninstall the <strong>Red Hat OpenShift Data Science</strong> operator.</p>
+<div class="paragraph">
+<p>Navigate to <strong>Operators</strong> &#8594;  <strong>Installed Operators</strong> and uninstall the <strong>Red Hat OpenShift Data Science</strong> operator.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-uninstall-operator.png" alt="rhods2 uninstall operator" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively you can delete the operator&#8217;s subscription from the CLI. OLM will uninstall the operator.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc delete subscription rhods-operator -n redhat-ods-operator</strong>
+
+subscription.operators.coreos.com "rhods-operator" deleted</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Delete the namespace where the operator was installed.</p>
+<div class="paragraph">
+<p>Navigate to <strong>Administration</strong> &#8594; <strong>Namespaces</strong>, search for the <code>redhat-ods-operator</code> and delete it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-delete-ope-ns.png" alt="rhods2 delete ope ns" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively you can delete the namespace from the CLI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc delete ns redhat-ods-operator</strong>
+namespace "redhat-ods-operator" deleted</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Delete the namespaces that the Operator created during
+installation. They are labeled with label <em>opendatahub.io/generated-namespace=true</em>.</p>
+<div class="paragraph">
+<p>Navigate to <strong>Administration</strong> &#8594; <strong>Namespaces</strong>, filter the namespaces using the label <em>opendatahub.io/generated-namespace=true</em> and delete them.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-delete-generated-ns.png" alt="rhods2 delete generated ns" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively you can delete the namespaces from the CLI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc delete ns -l opendatahub.io/generated-namespace</strong>
+namespace "redhat-ods-applications" deleted
+namespace "redhat-ods-monitoring" deleted</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Delete all remaining namespaces created for <strong>Datascience</strong> projects. These namespaces are labeled by the label <em>opendatahub.io/dashboard=true</em>.</p>
+<div class="paragraph">
+<p>Navigate to <strong>Administration</strong> &#8594; <strong>Namespaces</strong>, filter namespaces using the label <em>opendatahub.io/dashboard=true</em> and delete them.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-delete-projects.png" alt="rhods2 delete projects" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Alternatively you can delete them from the CLI.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get ns -l opendatahub.io/dashboard=true</strong>
+NAME               STATUS   AGE
+my-rhods-project   Active   6h22m
+
+<strong>$ oc delete ns -l opendatahub.io/dashboard=true</strong>
+namespace "my-rhods-project" deleted</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_uninstalling_the_redhat_openshift_data_science_dependencies"><a class="anchor" href="#_uninstalling_the_redhat_openshift_data_science_dependencies"></a>Uninstalling the Red&#160;Hat Openshift Data Science dependencies.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you have installed some dependencies you can remove them as long as they are not used by other deployments.
+The following demonstration shows uninstallation of the <strong>Red&#160;Hat Openshift Pipelines</strong> operator</p>
+</div>
+<div class="sect2">
+<h3 id="demo-pipelines"><a class="anchor" href="#demo-pipelines"></a>Demo: Uninstallation of the <strong>Red&#160;Hat Openshift Pipelines</strong> operator</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to Red&#160;Hat OpenShift web console using a user which has the <em>cluster-admin</em> role assigned.</p>
+</li>
+<li>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong>, choose <strong>All Projects</strong> and click on the three dots on the right side of the <strong>Red&#160;Hat Openshift Pipelines</strong> operator.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/pipelines-uninstall.png" alt="pipelines uninstall" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Click on Uninstall operator.</p>
+</div>
+</li>
+<li>
+<p>In the pop-up window scroll down, check <strong>Delete all operand instances for this operator</strong> and click on <strong>Uninstall</strong></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/piplines-uninstall-confirm.png" alt="piplines uninstall confirm" width="800">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a></span>
+  <span class="next"><a href="../chapter2/index.html">Controlling User Access and Managing Resources</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
