@@ -2,6 +2,7 @@
 ** xref:install-general-info.adoc[]
 ** xref:dependencies-install-web-console.adoc[]
 ** xref:rhods-install-web-console.adoc[]
+** xref:olm-overview.adoc[]
 ** xref:dependencies-install-cli.adoc[]
 ** xref:rhods-install-cli.adoc[]
 ** xref:upgrading-rhods.adoc[]
