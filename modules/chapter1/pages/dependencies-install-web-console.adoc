@@ -127,5 +127,4 @@ image::gpu_configure2.png[width=800]
 +
 image::gpu_verify.png[width=800]
 
-TIP: The *NVIDIA GPU Operator* many advanced use cases such as Multi-Instance GPU (MIG) and Time Slicing that are configurable using the *ClusterPolicy*.  For information about advanced GPU configuration capabilities, refer to the official https://docs.nvidia.com/datacenter/cloud-native/openshift/latest/introduction.html[NVIDIA Documentation].
-
+TIP: The *NVIDIA GPU Operator* supports many advanced use cases such as Multi-Instance GPU (MIG) and Time Slicing that are configurable using the *ClusterPolicy*.  For information about advanced GPU configuration capabilities, refer to the official https://docs.nvidia.com/datacenter/cloud-native/openshift/latest/introduction.html[NVIDIA Documentation].
