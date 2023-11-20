@@ -1,11 +1,10 @@
 = Controlling User Access and Managing Resources
 
-This chapter teaches you how to managers users and groups within RHODS. You also learn how to control resource (CPU, GPU, memory, disk space, and more) allocation for data science projects.
+This chapter teaches you how to manage data science projects and controller access with users and groups within OpenShift AI.  You will also learn about different administrative configuration options from within OpenShift AI.
 
 Goals:
 
-* Manage RedHat OpenShift Data Science users and groups
-* Control access to resources
-* Enable and configure GPU acceleration of workloads
-* Configure storage for data science projects
-* Configure policies for cleaning up idle resources
+* Manage access to the OpenShift AI Dashboard
+* Control access to data science projects with users and groups
+* Configure automatic cleanup of idle workbenches
+* Manage default workbench and model server sizes
