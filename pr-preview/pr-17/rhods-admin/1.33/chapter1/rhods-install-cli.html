@@ -59,6 +59,9 @@
     <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="olm-overview.html">Introduction to CLI-based operator installations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
     <a class="nav-link" href="dependencies-install-cli.html">Installation Dependencies Using the CLI</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
@@ -153,309 +156,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section covers installation of the <strong>Red&#160;Hat Openshift Data Science</strong> from the command line interface. Command line installation requires a bit more understanding of openshift resources than the web based installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_introduction_to_cli_based_operator_installations"><a class="anchor" href="#_introduction_to_cli_based_operator_installations"></a>Introduction to CLI-based operator installations</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In OpenShift, the Operator Lifecycle Manager (OLM) helps users install and manage operators and their associated services.
-Operator Lifecycle Manager (OLM) uses following resources:</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Catalog Resource</dt>
-<dd>
-<p>Each catalog source resource references an operator repository. Periodically, the OLM
-examines the catalog sources in the cluster and retrieves information about the operators in
-each source.</p>
-</dd>
-<dt class="hdlist1">Package manifest</dt>
-<dd>
-<p>The OLM creates a package manifest for each available operator. The package manifest
-contains the required information to install an operator, such as the available channels.</p>
-</dd>
-<dt class="hdlist1">Operator group</dt>
-<dd>
-<p>Operator groups define how the OLM presents operators across namespaces.</p>
-</dd>
-<dt class="hdlist1">Subscription</dt>
-<dd>
-<p>Cluster administrators create subscriptions to install operators.</p>
-</dd>
-<dt class="hdlist1">Operator</dt>
-<dd>
-<p>The OLM creates operator resources to store information about installed operators.</p>
-</dd>
-<dt class="hdlist1">Install plan</dt>
-<dd>
-<p>The OLM creates install plan resources as part of the installation and update process. When
-requiring approvals, administrators must approve install plans.</p>
-</dd>
-<dt class="hdlist1">Cluster service version (CSV)</dt>
-<dd>
-<p>Each version of an operator has a corresponding CSV. The CSV contains the information that
-the OLM requires to install the operator.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>When installing an operator, an administrator must create only the <strong>Operator Group</strong> (unless the target namespace is <strong>openshift-operators</strong> where the <strong>Operator Group</strong> resource already exists) and the <strong>Subscription</strong>. Optionally a <strong>Namespace</strong> can be created if it does not exists. Other resources are created by the OLM.</p>
-</div>
-<div class="paragraph">
-<p>Following are examples of the resources an adminstrator must create.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Namespace</dt>
-</dl>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>apiVersion: v1
-kind: Namespace
-metadata:
-  name: <em>operator_namespace</em> <i class="conum" data-value="1"></i><b>(1)</b>
-spec: {}</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Name of the namespace to create.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Namespace has to be only created if it does not already exist. An operator can be installed into an existing namespace.
-</td>
-</tr>
-</table>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Operator group</dt>
-</dl>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>apiVersion: operators.coreos.com/v1
-kind: OperatorGroup
-metadata:
-  name: <em>Operator_group_name</em> <i class="conum" data-value="1"></i><b>(1)</b>
-  namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
-spec: {}</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Name of the operator group resource.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Name of the namespace to create the operator group resource in.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Subscription</dt>
-</dl>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="paragraph">
-<p>When a <strong>Subscription</strong> resource is created the OLM starts the installation of the operator based on the details set in the <strong>Subscription</strong> resource.</p>
-</div>
-<div id="subscription" class="listingblock">
-<div class="content">
-<pre>apiVersion: operators.coreos.com/v1alpha1
-kind: Subscription
-metadata:
-  name: <em>Subscription_name</em>  <i class="conum" data-value="1"></i><b>(1)</b>
-  namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
-spec:
-  channel: <em>channel</em> <i class="conum" data-value="3"></i><b>(3)</b>
-  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="4"></i><b>(4)</b>
-  name: <em>Operator_name</em>
-  source: <em>Catalog_source</em>
-  sourceNamespace: openshift-marketplace</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Name of the subscription resource.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Name of the namespace to create the subscription resource in.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Update channel to install the operator from. For more information about finding available channels see the <a href="#findchannel">Finding Update Channels</a> section.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="4"></i><b>4</b></td>
-<td><strong>installPlanApproval</strong> attribute can be either <strong>Automatic</strong> or <strong>Manual</strong>. For more details about manual installation approval se the <a href="#manual_approval">Approving Installation Manualy</a> section.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="findchannel"><a class="anchor" href="#findchannel"></a>Finding Update Channels</h3>
-<div class="openblock">
-<div class="content">
-<div class="paragraph">
-<p>Update channels and other details about the operator can be found in a resource <strong>packagemanifest</strong>.
-It can be however a little challenging to search the <strong>packagemanifest</strong> as it is quite complex. <em>JQuery</em> is a powerfull tool to filter values from JSON resource manifests.</p>
-</div>
-<div class="paragraph">
-<p>The following example lists available channels for the <strong>rhods-operator</strong> operator.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre><strong>$ oc get packagemanifest rhods-operator -o json|jq '.status.channels[].name'</strong>
-"beta"
-"embedded"
-"stable"
-"alpha"</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="manual_approval"><a class="anchor" href="#manual_approval"></a>Approving Installation Manualy</h3>
-<div class="paragraph">
-<p>As a part of the installation process OLM creates an <strong>installplan</strong> resource in the namespace the operator will be installed into. The <strong>installplan</strong> resource contains information about the installation and updates. When the <strong>installPlanApproval</strong> parameter of a <strong>Subscription</strong> is set to  <strong>Manual</strong>, the installation has to be manually approved by patching the corresponding <strong>installplan</strong> resource in order to start.</p>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="listingblock">
-<div class="content">
-<pre>$ <strong>oc get installplan -n <em>operator_namespace</em></strong>
-NAME            CSV                     APPROVAL   APPROVED
-install-vpgls   <em>operator_csv</em>   Manual     <mark>false</mark>   <i class="conum" data-value="1"></i><b>(1)</b>
-
-$ <strong>oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n <em>operator_namespace</em></strong>
-installplan.operators.coreos.com/install-vpgls patched  <i class="conum" data-value="2"></i><b>(2)</b>
-
-$ <strong>oc get installplan -n redhat-ods-operator</strong>
-NAME            CSV                     APPROVAL   APPROVED
-install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class="conum" data-value="3"></i><b>(3)</b></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Approval has not been set.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The patch command approves the installation.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Approval has been set and installation starts.</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="installprogress"><a class="anchor" href="#installprogress"></a>Checking Installation Progress</h3>
-<div class="paragraph">
-<p>Installation progress can be found in the operator&#8217;s status.
-The following example shows a quick check of the current  status of the <strong>Openshift Pipelines</strong> operator.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre><strong>$ oc get olm|grep ^clusterserviceversion|grep openshift-pipelines-operator</strong>
-clusterserviceversion.../openshift-pipelines-operator...   <mark>Pending</mark>  <i class="conum" data-value="1"></i><b>(1)</b>
-
-<strong>$ oc get olm|grep ^clusterserviceversion|grep openshift-pipelines-operator</strong>
-openshift-pipelines-operator*
-clusterserviceversion.../openshift-pipelines-operator...   <mark>Succeeded</mark>  <i class="conum" data-value="2"></i><b>(2)</b></pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The operator is installing.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The operator has been successfully installed.</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>If you are interested in more details, you can get the operator&#8217;s manifest and check it&#8217;s status attribude. <em>JQuery</em> can be used to filter the status out.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre><strong>$ oc get operators</strong>
-NAME                                                  AGE
-mcg-operator.openshift-storage                        7h24m
-ocs-operator.openshift-storage                        7h24m
-odf-csi-addons-operator.openshift-storage             7h24m
-odf-operator.openshift-storage                        7h25m
-<mark>openshift-pipelines-operator-rh.openshift-operators</mark>   20m    <i class="conum" data-value="1"></i><b>(1)</b>
-
-<strong>$ oc get operator openshift-pipelines-operator-rh.openshift-operators -o json| \
-jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[]'</strong>
-
-{
-  "lastTransitionTime": "2023-11-01T21:01:25Z",
-  "lastUpdateTime": "2023-11-01T21:01:26Z",
-  "message": "installing: waiting for deployment openshift-pipelines-...",
-  "reason": "InstallWaiting", <i class="conum" data-value="1"></i><b>(1)</b>
-  "status": "True",           <i class="conum" data-value="2"></i><b>(2)</b>
-  "type": "Installing"        <i class="conum" data-value="3"></i><b>(3)</b>
-}</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Reason for the condition.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Status of the conditions.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>Type of the condition. <strong>Type</strong> <em>Installing</em> together with <strong>status</strong> <em>True</em> indicate that the installation is in progress. <strong>Type</strong> <em>Succeeded</em> together with <strong>status</strong> <em>True</em> and <strong>reason</strong> <em>InstallSucceeded</em> indicate that the installation has been successfull.</td>
-</tr>
-</table>
-</div>
+<p>This section covers installation of the <strong>Red&#160;Hat Openshift Data Science</strong> from the command line interface.</p>
 </div>
 </div>
 </div>
@@ -478,7 +179,7 @@ Using project "default".</pre>
 </div>
 </li>
 <li>
-<p>Unless you choose to install it into the <em>openshift-operators</em> namespace, create the <strong>Namespace</strong> and <strong>Operator Group</strong> in it first.</p>
+<p>Create the redhat-ods-operator <strong>Namespace</strong> and <strong>Operator Group</strong>.</p>
 <div class="openblock">
 <div class="content">
 <div class="listingblock">
@@ -542,11 +243,11 @@ subscription.operators.coreos.com/rhods-operator created</pre>
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The update channel to install the operator from. To find all available  channels see the the <a href="#findchannel">Finding Update Channels</a> section.</td>
+<td>The update channel to install the operator from. To find all available  channels see the the <a href="olm-overview.html#findchannel" class="xref page">Finding Update Channels</a> section.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Installplans will be approved manually.</td>
+<td>InstallPlans will be approved manually.</td>
 </tr>
 </table>
 </div>
@@ -554,7 +255,7 @@ subscription.operators.coreos.com/rhods-operator created</pre>
 </div>
 </li>
 <li>
-<p>Approve the installation manually. Refer to the <a href="#manual_approval">Approving Installation Manualy</a> section for more information</p>
+<p>Approve the installation manually. Refer to the <a href="olm-overview.html#manual_approval" class="xref page">Approving Installation Manualy</a> section for more information</p>
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>oc get installplan -n redhat-ods-operator</strong>
@@ -571,13 +272,12 @@ install-qsrhj   redhat-ods-operator   Manual     <mark>true</mark>  <i class="co
 </div>
 </li>
 <li>
-<p>Check the installation progress using the operator&#8217;s status information. For more information see the <a href="#installprogress">Checking Installation Progress</a> section.</p>
+<p>Check the installation progress using the operator&#8217;s status information. For more information see the <a href="olm-overview.html#installprogress" class="xref page">Checking Installation Progress</a> section.</p>
 <div class="listingblock">
 <div class="content">
-<pre><strong>$ oc get olm|grep ^clusterserviceversion|grep ods</strong>
+<pre><strong>$ oc get olm | grep ^clusterserviceversion | grep ods</strong>
 
-clusterserviceversion... ... rhods-operator.2.1.1  Succeeded  <i class="conum" data-value="1"></i><b>(1)</b>
-=======</pre>
+clusterserviceversion... ... rhods-operator.2.1.1  Succeeded  <i class="conum" data-value="1"></i><b>(1)</b></pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -643,11 +343,11 @@ oc create -f rhods-cluster.yaml</pre>
 </div>
 </li>
 <li>
-<p>Now the cluster has been configured and you can check the contition of  individual components of the <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<p>Now the cluster has been configured and you can check the condition of  individual components of the <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
 <div class="listingblock">
 <div class="content">
-<pre>$ <strong>oc get DataScienceCluster default -o json| jq '.status.conditions'</strong>
-<em>...output ommited...</em>
+<pre>$ <strong>oc get DataScienceCluster default -o json | jq '.status.conditions'</strong>
+<em>...output omitted...</em>
   {
     "lastHeartbeatTime": "2023-11-13T11:04:37Z",
     "lastTransitionTime": "2023-11-13T11:04:37Z",
@@ -656,7 +356,7 @@ oc create -f rhods-cluster.yaml</pre>
     "status": "True", <i class="conum" data-value="1"></i><b>(1)</b>
     "type": "workbenchesReady" <i class="conum" data-value="2"></i><b>(2)</b>
   }
-<em>...output ommited...</em></pre>
+<em>...output omitted...</em></pre>
 </div>
 </div>
 <div class="colist arabic">
