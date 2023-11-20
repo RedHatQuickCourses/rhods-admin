@@ -1,3 +1,5 @@
+= Installation Dependencies Using the CLI
+
 == Installation of Red{nbsp}Hat Openshift Data Science dependencies
 
 As described in the xref::section1.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use.
