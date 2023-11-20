@@ -127,6 +127,12 @@ image::gpu_configure2.png[width=800]
 
 9. After the gpu-cluster-policy *ClusterPolicy* is created, the  *NVIDIA GPU Operator* will update the status of the *ClusterPolicy* to *State: ready*.
 +
-image::gpu_verify.png[width=800]
+image::gpu_verify1.png[width=800]
+
+10. After the *Red{nbsp}Hat Openshift Data Science* operator has been installed and configured, users will be able to see an option for "Number of GPUs" when creating a new workbench.
++
+image::gpu_verify2.png[width=800]
+
+NOTE: The Dashboard may initially show "All GPUs are currently in use, try again later." when *Red{nbsp}Hat Openshift Data Science*  is first installed.  It may take a few minutes after *Red{nbsp}Hat Openshift Data Science* is installed before the GPUs are initially detected.
 
 TIP: The *NVIDIA GPU Operator* supports many advanced use cases such as Multi-Instance GPU (MIG) and Time Slicing that are configurable using the *ClusterPolicy*.  For information about advanced GPU configuration capabilities, refer to the official https://docs.nvidia.com/datacenter/cloud-native/openshift/latest/introduction.html[NVIDIA Documentation].
