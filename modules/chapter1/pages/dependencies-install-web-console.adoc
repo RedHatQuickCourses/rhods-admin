@@ -87,7 +87,7 @@ image::nfd_configure2.png[width=800]
 
 9. A new set of pods should appear in the **Workloads** -> **Pods** section managed by the nfd-worker DaemonSet.  Node Feature Discovery will now be able to automatically detect information about the nodes in the cluster and apply labels to those nodes.
 +
-image::nfd_configure3.png[width=800]
+image::nfd_verify.png[width=800]
 
 Node Feature Discovery is now successfully installed and configured.
 
