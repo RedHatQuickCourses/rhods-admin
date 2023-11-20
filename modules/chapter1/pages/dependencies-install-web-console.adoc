@@ -1,4 +1,4 @@
-= Installation Dependencies Using the Web Console
+= Installing Dependencies Using the Web Console
 
 As described in the xref::install-general-info.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use.  This section will discuss installing and configuring those components.
 
@@ -10,6 +10,8 @@ https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[N
 The *NVIDIA GPU Operator* is required for GPU support in *Red Hat Openshift Data Science*.
 https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
 The *Node Feature Discovery Operator* is a prerequisite for the *NVIDIA GPU Operator*.
+
+This section will discuss the process for installing the dependent operators using the OpenShift Web Console.
 
 == Installation of Data Science Pipelines Dependencies
 
