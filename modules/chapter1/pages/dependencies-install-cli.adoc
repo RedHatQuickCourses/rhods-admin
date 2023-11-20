@@ -63,6 +63,7 @@ $ *oc create -f pipelines-subs.yaml*
 <2> In case the *installPlanApproval* is set to *Manual*, approve the installation first to start it. Refer to the xref:olm-overview.adoc#manual_approval[Approving Installation Manually] section for more information.
 --
 . You may check the installation progress using the operator's status information. For more information see the xref:olm-overview.adoc#installprogress[Checking Installation Progress] section.
+--
 
 == Installation of GPU Dependencies
 
