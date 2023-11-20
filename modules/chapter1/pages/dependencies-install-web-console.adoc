@@ -100,6 +100,7 @@ image::nfd_verify.png[width=800]
 image::gpu_search.png[width=800]
 
 3. Click the NVIDIA GPU Operator tile and in the pop up window click on **Install** to open the operator's installation view.
++
 image::gpu_install1.png[width=800]
 
 4. In the installation view update the *Update channel* and *Update{nbsp}approval* parameters if desired.  Leave the *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters as the default options.
