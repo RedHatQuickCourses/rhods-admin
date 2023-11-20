@@ -2,7 +2,7 @@
 
 Red{nbsp}Hat Openshift Data Science is available to install a self-managed version as an operator through OperatorHub or as a fully managed solution through OpenShift Marketplace. 
 
-There are some other operators that you may need to install depending on which features and components of the *Red{nbsp}Hat Openshift Data Science* you want to install and use.
+In addition to the *Red{nbsp}Hat Openshift Data Science* Operator there are some other operators that you may need to install depending on which features and components of *Red{nbsp}Hat Openshift Data Science* you want to install and use.
 
 https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
 The *Red{nbsp}Hat Openshift Pipelines Operator* is required if you want to install the  *Red{nbsp}Hat Openshift Data Science Pipelines* component.
@@ -11,7 +11,7 @@ https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[N
 The *NVIDIA GPU Operator* is required for GPU support in  Red Hat Openshift Data Science.
 
 https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
-The *Node Feature Discovery Operator* is a prerequisity for the *NVIDIA GPU Operator*.
+The *Node Feature Discovery Operator* is a prerequisite for the *NVIDIA GPU Operator*.
 
 [IMPORTANT]
 *Red{nbsp}Hat Openshift Data Science* operator is available in two different main versions at the moment - *Red{nbsp}Hat Openshift Data Science Operator V1* and *Red{nbsp}Hat Openshift Data Science operator V2*. There are some differences in installation between the two. Mainly that the V1 operator installs all the *Red{nbsp}Hat Openshift Data Science* components automatically whereas the V2 operator requires you to make a selection of the components to be installed and managed by the operator after the installation. In the class we focus on the V2 operator as it will become the stable version soon. At the moment it is available through the _alpha_ and _embedded_ channels.
