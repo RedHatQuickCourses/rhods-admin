@@ -319,7 +319,7 @@ You have access to 74 projects, the list has been suppressed. You can list all p
 
 Using project "default".
 ----
----
+--
 . Create the nvidia-gpu-operator *Namespace* and *Operator Group*.
 +
 --
