@@ -310,8 +310,6 @@ Using project "default".</pre>
 </li>
 <li>
 <p>Create the openshift-nfd <strong>Namespace</strong> and <strong>Operator Group</strong>.</p>
-<div class="openblock">
-<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>cat &lt;&lt;EOF &gt; nfd-ns.yaml</strong>
@@ -342,13 +340,9 @@ $ <strong>oc create -f nfd-og.yaml</strong>
 operatorgroup.operators.coreos.com/openshift-nfd created</pre>
 </div>
 </div>
-</div>
-</div>
 </li>
 <li>
 <p>Now create the  operator&#8217;s subscription to start the installation.</p>
-<div class="openblock">
-<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>cat &lt;&lt;EOF &gt; nfd-sub.yaml</strong>
@@ -369,8 +363,7 @@ $ <strong>oc create -f nfd-sub.yaml</strong>
 subscription.operators.coreos.com/nfd created</pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+</li>
 <li>
 <p>Check the installation progress using the operator&#8217;s status information. For more information see the <a href="olm-overview.html#installprogress" class="xref page">Checking Installation Progress</a> section.</p>
 <div class="listingblock">
@@ -547,9 +540,9 @@ nfd-worker-km7c5                          1/1     Running   0          3h38m</pr
 <div class="paragraph">
 <p>All pods should report as Ready.</p>
 </div>
-<div class="paragraph">
-<p>=== Demo: Installation of the <strong>NVIDIA GPU Operator</strong></p>
 </div>
+<div class="sect2">
+<h3 id="_demo_installation_of_the_nvidia_gpu_operator"><a class="anchor" href="#_demo_installation_of_the_nvidia_gpu_operator"></a>Demo: Installation of the <strong>NVIDIA GPU Operator</strong></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -739,11 +732,6 @@ spec:
 EOF
 
 oc create -f clusterpolicy.yaml</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
 </div>
 </div>
 </li>
