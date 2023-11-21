@@ -643,8 +643,9 @@ $ <strong>oc create -f gpu-sub.yaml</strong>
 subscription.operators.coreos.com/gpu-operator-certified created</pre>
 </div>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
+</div>
+</div>
+</li>
 <li>
 <p>Check the installation progress using the operator&#8217;s status information. For more information see the <a href="olm-overview.html#installprogress" class="xref page">Checking Installation Progress</a> section.</p>
 <div class="listingblock">
@@ -663,6 +664,12 @@ clusterserviceversion... ... gpu-operator-certified.v23.6.1  Succeeded  <i class
 </table>
 </div>
 </li>
+</ol>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Finally create the ClusterPolicy object.</p>
 <div class="listingblock">
@@ -761,9 +768,6 @@ oc create -f clusterpolicy.yaml</pre>
 </ol>
 </div>
 </div>
-</div>
-</li>
-</ol>
 </div>
 </div>
 </div>
