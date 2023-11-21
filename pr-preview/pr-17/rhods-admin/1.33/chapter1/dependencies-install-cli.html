@@ -564,21 +564,19 @@ You have access to 74 projects, the list has been suppressed. You can list all p
 Using project "default".</pre>
 </div>
 </div>
-<hr>
+</li>
+</ol>
+</div>
+</div>
+</div>
 </li>
 <li>
 <p>Create the nvidia-gpu-operator <strong>Namespace</strong> and <strong>Operator Group</strong>.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</li>
-</ol>
-</div>
+<div class="openblock">
+<div class="content">
 <div class="listingblock">
 <div class="content">
-<pre>$ *cat &lt;&lt;EOF &gt; gpu-ns.yaml*
+<pre>$ <strong>cat &lt;&lt;EOF &gt; gpu-ns.yaml</strong>
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -587,10 +585,10 @@ metadata:
     openshift.io/cluster-monitoring: 'true'
 EOF
 
-$ *oc create -f gpu-ns.yaml*
+$ <strong>oc create -f gpu-ns.yaml</strong>
 namespace/nvidia-gpu-operator created
 
-$ *cat &lt;&lt;EOF &gt; gpu-og.yaml*
+$ <strong>cat &lt;&lt;EOF &gt; gpu-og.yaml</strong>
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
@@ -601,37 +599,29 @@ spec:
  - nvidia-gpu-operator
 EOF
 
-$ *oc create -f gpu-og.yaml*
+$ <strong>oc create -f gpu-og.yaml</strong>
 operatorgroup.operators.coreos.com/nvidia-gpu-operator-group created</pre>
 </div>
 </div>
-<div class="openblock">
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
+</div>
+</div>
+</li>
 <li>
 <p>Next, get the default channel for the operator.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
+<div class="openblock">
+<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>CHANNEL=$(oc get packagemanifest gpu-operator-certified -n openshift-marketplace -o jsonpath='{.status.defaultChannel}')</strong></pre>
 </div>
 </div>
-<div class="openblock">
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
+</div>
+</div>
+</li>
 <li>
 <p>Now create the  operator&#8217;s subscription to start the installation.</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
+<div class="openblock">
+<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>cat &lt;&lt;EOF &gt; gpu-sub.yaml</strong>
@@ -765,6 +755,11 @@ spec:
 EOF
 
 oc create -f clusterpolicy.yaml</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 </li>
