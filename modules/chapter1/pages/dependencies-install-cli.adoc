@@ -319,10 +319,9 @@ You have access to 74 projects, the list has been suppressed. You can list all p
 
 Using project "default".
 ----
---
+
 . Create the nvidia-gpu-operator *Namespace* and *Operator Group*.
 +
---
 [subs=+quotes]
 ----
 $ *cat <<EOF > gpu-ns.yaml*
@@ -351,18 +350,16 @@ EOF
 $ *oc create -f gpu-og.yaml*
 operatorgroup.operators.coreos.com/nvidia-gpu-operator-group created
 ----
---
+
 . Next, get the default channel for the operator.
 +
---
 [subs=+quotes]
 ----
 $ *CHANNEL=$(oc get packagemanifest gpu-operator-certified -n openshift-marketplace -o jsonpath='{.status.defaultChannel}')*
 ----
---
+
 . Now create the  operator's subscription to start the installation.
 +
---
 [subs=+quotes]
 ----
 $ *cat <<EOF > gpu-sub.yaml*
@@ -383,7 +380,7 @@ EOF
 $ *oc create -f gpu-sub.yaml*
 subscription.operators.coreos.com/gpu-operator-certified created
 ----
---
+
 . Check the installation progress using the operator's status information. For more information see the xref:olm-overview.adoc#installprogress[Checking Installation Progress] section.
 +
 [subs=+quotes]
@@ -393,9 +390,10 @@ subscription.operators.coreos.com/gpu-operator-certified created
 clusterserviceversion... ... gpu-operator-certified.v23.6.1  Succeeded  <1>
 ----
 <1> Make sure that the status is *Succeeded*
---
+
 . Finally create the ClusterPolicy object.
 +
+[subs=+quotes]
 ----
 cat <<EOF > clusterpolicy.yaml
 kind: ClusterPolicy
