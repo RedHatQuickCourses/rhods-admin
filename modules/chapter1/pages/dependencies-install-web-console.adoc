@@ -53,6 +53,8 @@ Currently, *Red{nbsp}Hat Openshift Data Science* supports accelerated compute wi
 
 The following section will discuss the installation and a basic configuration of both *NVIDIA GPU Operator* and the *Node Feature Discovery* operator.
 
+NOTE: *Node Feature Discovery* and the *NVIDIA GPU Operator* can both be installed in a cluster that does not have a node with a GPU.  This can be helpful when you plan to add GPUs at a later date.  If a GPU is not present in the cluster the Dashboard will not present the user an option to deploy using a GPU.
+
 TIP: To view the list of GPU models supported by the *NVIDIA GPU Operator* refer to the https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/platform-support.html#supported-nvidia-gpus-and-systems[Supported NVIDIA GPUs and Systems] docs.
 
 === Demo: Installation of the *Node Feature Discovery* operator
