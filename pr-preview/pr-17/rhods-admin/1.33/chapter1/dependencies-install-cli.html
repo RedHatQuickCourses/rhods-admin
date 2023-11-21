@@ -565,15 +565,8 @@ Using project "default".</pre>
 </div>
 </div>
 </li>
-</ol>
-</div>
-</div>
-</div>
-</li>
 <li>
 <p>Create the nvidia-gpu-operator <strong>Namespace</strong> and <strong>Operator Group</strong>.</p>
-<div class="openblock">
-<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>cat &lt;&lt;EOF &gt; gpu-ns.yaml</strong>
@@ -603,25 +596,17 @@ $ <strong>oc create -f gpu-og.yaml</strong>
 operatorgroup.operators.coreos.com/nvidia-gpu-operator-group created</pre>
 </div>
 </div>
-</div>
-</div>
 </li>
 <li>
 <p>Next, get the default channel for the operator.</p>
-<div class="openblock">
-<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>CHANNEL=$(oc get packagemanifest gpu-operator-certified -n openshift-marketplace -o jsonpath='{.status.defaultChannel}')</strong></pre>
 </div>
 </div>
-</div>
-</div>
 </li>
 <li>
 <p>Now create the  operator&#8217;s subscription to start the installation.</p>
-<div class="openblock">
-<div class="content">
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>cat &lt;&lt;EOF &gt; gpu-sub.yaml</strong>
@@ -643,8 +628,6 @@ $ <strong>oc create -f gpu-sub.yaml</strong>
 subscription.operators.coreos.com/gpu-operator-certified created</pre>
 </div>
 </div>
-</div>
-</div>
 </li>
 <li>
 <p>Check the installation progress using the operator&#8217;s status information. For more information see the <a href="olm-overview.html#installprogress" class="xref page">Checking Installation Progress</a> section.</p>
@@ -664,12 +647,6 @@ clusterserviceversion... ... gpu-operator-certified.v23.6.1  Succeeded  <i class
 </table>
 </div>
 </li>
-</ol>
-</div>
-<div class="openblock">
-<div class="content">
-<div class="olist arabic">
-<ol class="arabic">
 <li>
 <p>Finally create the ClusterPolicy object.</p>
 <div class="listingblock">
@@ -768,6 +745,9 @@ oc create -f clusterpolicy.yaml</pre>
 </ol>
 </div>
 </div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
