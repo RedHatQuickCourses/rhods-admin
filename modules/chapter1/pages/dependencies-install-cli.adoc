@@ -383,7 +383,7 @@ EOF
 $ *oc create -f gpu-sub.yaml*
 subscription.operators.coreos.com/gpu-operator-certified created
 ----
-
+--
 . Check the installation progress using the operator's status information. For more information see the xref:olm-overview.adoc#installprogress[Checking Installation Progress] section.
 +
 [subs=+quotes]
@@ -393,7 +393,7 @@ subscription.operators.coreos.com/gpu-operator-certified created
 clusterserviceversion... ... gpu-operator-certified.v23.6.1  Succeeded  <1>
 ----
 <1> Make sure that the status is *Succeeded*
-
+--
 . Finally create the ClusterPolicy object.
 +
 ----
