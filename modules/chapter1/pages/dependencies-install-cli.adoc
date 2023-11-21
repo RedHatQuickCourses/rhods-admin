@@ -308,7 +308,7 @@ All pods should report as Ready.
 
 === Demo: Installation of the *NVIDIA GPU Operator*
 
-. Log in as a user with the _cluster-admin_ role assigned. 
+. Log in as a user with the _cluster-admin_ role assigned. test123
 +
 [subs=+quotes]
 ----
