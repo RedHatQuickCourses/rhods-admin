@@ -90,7 +90,6 @@ Using project "default".
 
 . Create the openshift-nfd *Namespace* and *Operator Group*.
 +
---
 [subs=+quotes]
 ----
 $ *cat <<EOF > nfd-ns.yaml*
@@ -120,10 +119,9 @@ EOF
 $ *oc create -f nfd-og.yaml*
 operatorgroup.operators.coreos.com/openshift-nfd created
 ----
---
+
 . Now create the  operator's subscription to start the installation.
 +
---
 [subs=+quotes]
 ----
 $ *cat <<EOF > nfd-sub.yaml*
