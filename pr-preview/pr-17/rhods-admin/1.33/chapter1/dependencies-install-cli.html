@@ -633,7 +633,7 @@ operatorgroup.operators.coreos.com/nvidia-gpu-operator-group created</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ <strong>cat &lt;&lt;EOF &gt; gpu-sub.yaml
+<pre>$ <strong>cat &lt;&lt;EOF &gt; gpu-sub.yaml</strong>
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
 metadata:
@@ -648,7 +648,7 @@ spec:
   startingCSV: "gpu-operator-certified.v22.9.0"
 EOF
 
-$ *oc create -f gpu-sub.yaml</strong>
+$ <strong>oc create -f gpu-sub.yaml</strong>
 subscription.operators.coreos.com/gpu-operator-certified created</pre>
 </div>
 </div>
