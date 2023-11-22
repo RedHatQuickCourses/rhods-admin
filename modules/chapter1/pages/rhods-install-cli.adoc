@@ -1,0 +1,182 @@
+= Installation Red{nbsp}Hat Openshift Data Science Using the Command Line Interface
+
+This section covers installation of the *Red{nbsp}Hat Openshift Data Science* from the command line interface.
+
+== Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
+
+. Log in as a user with the _cluster-admin_ role assigned. 
++
+[subs=+quotes]
+----
+$ *oc login -u admin -p _password_ https://api...:6443*
+Login successful.
+
+You have access to 74 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "default".
+----
+
+. Create the redhat-ods-operator *Namespace* and *Operator Group*.
++
+--
+[subs=+quotes]
+----
+$ *cat <<EOF > rhods-ns.yaml*
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+      openshift.io/display-name: "Red Hat OpenShift Data Science"
+  labels:
+    openshift.io/cluster-monitoring: 'true'      
+  name: redhat-ods-operator
+spec: {}
+EOF
+
+$ *oc create -f rhods-ns.yaml*
+namespace/redhat-ods-operator created
+
+$ *cat <<EOF > rhods-og.yaml*
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: redhat-ods-operator
+  namespace: redhat-ods-operator
+spec: {}
+EOF
+
+$ *oc create -f rhods-og.yaml*
+operatorgroup.operators.coreos.com/redhat-ods-operator created
+----
+--
+. Now create the  operator's subscription to start the installation.
++
+--
+[subs=+quotes]
+----
+$ *cat <<EOF > rhods-subs.yaml*
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhods-operator
+  namespace: redhat-ods-operator
+spec:
+  channel: embedded <1>
+  installPlanApproval: Manual <2>
+  name: rhods-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+EOF
+
+$ *oc create -f rhods-subs.yaml*
+subscription.operators.coreos.com/rhods-operator created
+----
+<1> The update channel to install the operator from. To find all available  channels see the the xref:olm-overview.adoc#findchannel[Finding Update Channels] section.
+<2> InstallPlans will be approved manually.
+--
+
+. Approve the installation manually. Refer to the xref:olm-overview.adoc#manual_approval[Approving Installation Manualy] section for more information
++
+[subs=+quotes]
+----
+$ *oc get installplan -n redhat-ods-operator*
+NAME            CSV                     APPROVAL   APPROVED
+install-qsrhj   rhods-operator.2.1.2   Manual   #false#
+
+$ *oc patch installplan install-qsrhj --type merge -p '{"spec":{"approved":true}}' -n redhat-ods-operator*
+installplan.operators.coreos.com/install-qsrhj patched  <2>
+
+$ *oc get installplan -n redhat-ods-operator*
+NAME            CSV                     APPROVAL   APPROVED
+install-qsrhj   redhat-ods-operator   Manual     #true#  <3>
+----
+
+. Check the installation progress using the operator's status information. For more information see the xref:olm-overview.adoc#installprogress[Checking Installation Progress] section.
++
+[subs=+quotes]
+----
+*$ oc get olm | grep ^clusterserviceversion | grep ods*
+
+clusterserviceversion... ... rhods-operator.2.1.1  Succeeded  <1>
+----
+<1> Make sure that the status is *Succeeded*
+
+. Finally create your Openshift DataScience Cluster resource to configure your cluster.
++
+----
+cat <<EOF > rhods-cluster.yaml
+apiVersion: datasciencecluster.opendatahub.io/v1
+kind: DataScienceCluster
+metadata:
+  labels:
+    app.kubernetes.io/created-by: rhods-operator
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: datasciencecluster
+    app.kubernetes.io/part-of: rhods-operator
+  name: default  <1>
+spec:
+  components:
+    codeflare:
+      managementState: Removed <2>
+    dashboard:
+      managementState: Managed <3>
+    datasciencepipelines:
+      managementState: Managed
+    kserve:
+      managementState: Removed
+    modelmeshserving:
+      managementState: Managed
+    ray:
+      managementState: Removed
+    workbenches:
+      managementState: Managed
+EOF
+
+oc create -f rhods-cluster.yaml
+----
+<1> Name of the cluster
+<2> Use *Removed* for components that *will not* be installed.
+<3> Use *Managed* for components that will be installed.
+
+. Now the cluster has been configured and you can check the condition of  individual components of the *Red{nbsp}Hat Openshift Data Science*. 
++
+[subs=+quotes]
+----
+$ *oc get DataScienceCluster default -o json | jq '.status.conditions'*
+_...output omitted..._
+  {
+    "lastHeartbeatTime": "2023-11-13T11:04:37Z",
+    "lastTransitionTime": "2023-11-13T11:04:37Z",
+    "message": "Component reconciled successfully",
+    "reason": "ReconcileCompleted",
+    "status": "True", <1>
+    "type": "workbenchesReady" <2>
+  }
+_...output omitted..._
+----
+<1> Status of the condition
+<2> Type of the condition. *Type* _workbenchesReady_ together with *status* _True_ indicate that the *Workbench* component is ready.
+
+[NOTE]
+It may take some time for all the application pods to start hence the *Red{nbsp}Hat Openshift Data Science* dashboard may not be available immediately. You may check the condition of componens or alternatively you can check the status of the application pods in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
+
+[subs=+quotes]
+----
+$ *oc get pods -n redhat-ods-applications*
+NAME                                               READY   STATUS              RESTARTS   AGE
+etcd-cc4d875c-8trld                                0/1     PodInitializing     0          7s
+modelmesh-controller-5749b94578-2j8nv              0/1     Running             0          7s
+modelmesh-controller-5749b94578-jcxc7              0/1     ContainerCreating   0          7s
+modelmesh-controller-5749b94578-rww94              0/1     ContainerCreating   0          7s
+notebook-controller-deployment-685bb8f9d6-6dtbh    0/1     Running             0          29s
+odh-model-controller-7d495b56cb-8pnn9              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-8xh5h              0/1     Running             0          7s
+odh-model-controller-7d495b56cb-kcmqr              0/1     Running             0          7s
+odh-notebook-controller-manager-866b7cf859-2wf2j   1/1     Running             0          29s
+rhods-dashboard-7bd94f464f-7lvn8                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-hksf6                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-n5rbz                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-pg984                   1/2     Running             0          47s
+rhods-dashboard-7bd94f464f-xd255                   1/2     Running             0          47s
+----

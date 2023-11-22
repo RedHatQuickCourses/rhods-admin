@@ -1,47 +1,6 @@
-= Installation using the Web Console
+= Installation Red{nbsp}Hat Openshift Data Science Using the Web Console
 
 *Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Operator Hub.  You will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console in this section. 
-
-== Installation of Openshift Data Science dependecies
-
-As described in the xref::section1.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of Openshift Data Science you want to use. 
-In general not installing dependencies before the *Red{nbsp}Hat Openshift Data Science* does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it's better to install the dependencies beforehand.
-
-https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
-The *Red Hat Openshift Pipelines Operator* is required if you want to install the *Red Hat Openshift Data Science Pipelines* component.
-https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
-The *NVIDIA GPU Operator* is required for GPU support in *Red Hat Openshift Data Science*.
-https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
-The *Node Feature Discovery Operator* is a prerequisity for the *NVIDIA GPU Operator*.
-
-
-The following demonstration shows the installation of the https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator] which is a dependency of the *Data Science Pipelines* component installed by default. Installation of the two other operators is very similar.
-
-=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* operator
-
-1. Login to Red{nbsp}Hat Openshift using a user which has the _cluster-admin_ role assigned.
-2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Pipelines*
-+
-image::pipeline_search.png[width=800]
-
-3. Click on the *Red{nbsp}Hat Openshift Pipelines* operator and in the pop up window click on **Install** to open the operator's installation view.
-+
-image::pipeline_install1.png[width=800]
-
-
-4. In the installation view choose the *Update{nbsp}channel* and the *Update{nbsp}approval* parameters. You can accept the default values. The *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters are fixed.
-+
-image::pipeline_install2.png[width=800]
-
-5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
-+ 
-image::pipeline_install3.png[width=800]
-
-6. When the installation finishes the operator is ready to be used by the *Red{nbsp}Hat Openshift Data Science*.
-+
-image::pipeline_install4.png[width=800]
-
-
 
 == Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
 
@@ -51,7 +10,6 @@ IMPORTANT: The installation requires a user with the _cluster-admin_ role
 . Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
 
 . Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
->>>>>>> jtesar/chapter1-web-console-install
 +
 image::rhods_install1.png[width=800]
 

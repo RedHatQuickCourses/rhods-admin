@@ -18,11 +18,11 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <2>
 <2> *Installplan* for the currently installed version. It's been approved and the version is currently installed.
 
 
-Installplan is approved either automatically when a new version is available without user's intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the xref:section3.adoc#subscription[installPlanApproval] attribute of the operator's subscription. When it is set to _Automatic_ the *installplan* is approved automaticaly and installation starts without user's intervention. _Manual_ value requires a manual approval.
+Installplan is approved either automatically when a new version is available without user's intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the xref:rhods-install-cli.adoc#subscription[installPlanApproval] attribute of the operator's subscription. When it is set to _Automatic_ the *installplan* is approved automaticaly and installation starts without user's intervention. _Manual_ value requires a manual approval.
 
 Approvals can be set from the web console as well as from the CLI.
 
-Manual approvals done from the CLI are discussed in the xref:section3.adoc#manual_approval[Approving Installation Manualy] section and are exactly the same as for the installation.
+Manual approvals done from the CLI are discussed in the xref:rhods-install-cli.adoc#manual_approval[Approving Installation Manualy] section and are exactly the same as for the installation.
 
 The following demonstration shows an upgrade with a manual approval done from the web console. 
 

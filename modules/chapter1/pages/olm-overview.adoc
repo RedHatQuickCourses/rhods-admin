@@ -1,0 +1,176 @@
+= Introduction to CLI-based operator installations
+
+Command line installation of an operator requires a bit more understanding of OpenShift resources than the web based installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.
+
+In OpenShift, the Operator Lifecycle Manager (OLM) helps users install and manage operators and their associated services.
+
+Operator Lifecycle Manager (OLM) uses following resources:
+
+Catalog Resource::
+  Each catalog source resource references an operator repository. Periodically, the OLM
+  examines the catalog sources in the cluster and retrieves information about the operators in
+  each source.
+
+Package manifest::
+ The OLM creates a package manifest for each available operator. The package manifest
+ contains the required information to install an operator, such as the available channels.
+
+Operator group::
+  Operator groups define how the OLM presents operators across namespaces and which namespaces an operator has the ability to monitor for objects.
+
+Subscription::
+  Cluster administrators create subscriptions to install operators.
+
+Operator::
+  The OLM creates operator resources to store information about installed operators. 
+
+Install plan::
+  The OLM creates install plan resources as part of the installation and update process. When
+  requiring approvals, administrators must approve install plans.
+
+Cluster service version (CSV)::
+  Each version of an operator has a corresponding CSV. The CSV contains the information that
+  the OLM requires to install the operator.
+
+When installing an operator, an administrator must create only the *Operator Group* (unless the target namespace is *openshift-operators* where the *Operator Group* resource already exists) and the *Subscription*.  Only one *Operator Group* can be created per namespace, but a namespace can contain multiple *Subscriptions*.
+
+Optionally a *Namespace* can be created if it does not exists. Other resources are created by the OLM.
+
+Following are examples of the resources an administrator must create.
+
+Namespace::
+--
+[subs=+quotes]
+----
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: _operator_namespace_ <1>
+spec: {}
+----
+<1> Name of the namespace to create.
+--
+NOTE: Namespace has to be only created if it does not already exist. An operator can be installed into an existing namespace.
+
+Operator group::
+--
+[subs=+quotes]
+----
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: _Operator_group_name_ <1>
+  namespace: _operator_namespace_ <2>
+spec: {}
+----
+<1> Name of the operator group resource.
+<2> Name of the namespace to create the operator group resource in.
+--
+
+Subscription::
+--
+When a *Subscription* resource is created the OLM starts the installation of the operator based on the details set in the *Subscription* resource.
+[subs=+quotes]
+[#subscription]
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: _Subscription_name_  <1>
+  namespace: _operator_namespace_ <2>
+spec:
+  channel: _channel_ <3>
+  installPlanApproval: _Manual/Automatic_ <4>
+  name: _Operator_name_
+  source: _Catalog_source_
+  sourceNamespace: openshift-marketplace
+----
+<1> Name of the subscription resource.
+<2> Name of the namespace to create the subscription resource in.
+<3> Update channel to install the operator from. For more information about finding available channels see the xref:olm-overview.adoc#findchannel[Finding Update Channels] section.
+<4> *installPlanApproval* attribute can be either *Automatic* or *Manual*. For more details about manual installation approval se the xref:olm-overview.adoc#manual_approval[Approving Installation Manually] section.
+--
+
+[#findchannel]
+== Finding Update Channels 
+--
+Update channels and other details about the operator can be found in a resource *packagemanifest*. 
+It can be however a little challenging to search the *packagemanifest* as it is quite complex. _JQuery_ is a powerfull tool to filter values from JSON resource manifests.
+
+The following example lists available channels for the *rhods-operator* operator.
+[subs=+quotes]
+----
+*$ oc get packagemanifest rhods-operator -o json|jq '.status.channels[].name'*
+"beta"
+"embedded"
+"stable"
+"alpha"
+----
+--
+
+[#manual_approval]
+== Approving Installation Manually
+As a part of the installation process OLM creates an *installplan* resource in the namespace the operator will be installed into. The *installplan* resource contains information about the installation and updates. When the *installPlanApproval* parameter of a *Subscription* is set to  *Manual*, the installation has to be manually approved by patching the corresponding *installplan* resource in order to start.
+--
+[subs=+quotes]
+----
+$ *oc get installplan -n _operator_namespace_*
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   _operator_csv_   Manual     #false#   <1>
+
+$ *oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n _operator_namespace_*
+installplan.operators.coreos.com/install-vpgls patched  <2>
+
+$ *oc get installplan -n redhat-ods-operator*
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   _operator_name_   Manual     #true#  <3>
+----
+<1> Approval has not been set.
+<2> The patch command approves the installation.
+<3> Approval has been set and installation starts.
+--
+[#installprogress]
+== Checking Installation Progress
+
+Installation progress can be found in the operator's status.
+The following example shows a quick check of the current  status of the *Openshift Pipelines* operator.
+[subs=+quotes]
+----
+*$ oc get olm | grep ^clusterserviceversion | grep openshift-pipelines-operator*
+clusterserviceversion.../openshift-pipelines-operator...   #Pending#  <1>
+
+*$ oc get olm | grep ^clusterserviceversion | grep openshift-pipelines-operator*
+openshift-pipelines-operator*
+clusterserviceversion.../openshift-pipelines-operator...   #Succeeded#  <2>
+
+----
+<1> The operator is installing.
+<2> The operator has been successfully installed.
+
+If you are interested in more details, you can get the operator's manifest and check it's status attribute. _JQuery_ can be used to filter the status out.
+
+[subs=+quotes]
+----
+*$ oc get operators*
+NAME                                                  AGE
+mcg-operator.openshift-storage                        7h24m
+ocs-operator.openshift-storage                        7h24m
+odf-csi-addons-operator.openshift-storage             7h24m
+odf-operator.openshift-storage                        7h25m
+#openshift-pipelines-operator-rh.openshift-operators#   20m    <1>
+
+*$ oc get operator openshift-pipelines-operator-rh.openshift-operators -o json| \
+jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[]'*
+
+{
+  "lastTransitionTime": "2023-11-01T21:01:25Z",
+  "lastUpdateTime": "2023-11-01T21:01:26Z",
+  "message": "installing: waiting for deployment openshift-pipelines-...",
+  "reason": "InstallWaiting", <1>
+  "status": "True",           <2>
+  "type": "Installing"        <3>
+}
+----
+<1> Reason for the condition.
+<2> Status of the conditions.
+<3> Type of the condition. *Type* _Installing_ together with *status* _True_ indicate that the installation is in progress. *Type* _Succeeded_ together with *status* _True_ and *reason* _InstallSucceeded_ indicate that the installation has been successful.
