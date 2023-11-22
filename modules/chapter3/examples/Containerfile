@@ -1,0 +1,43 @@
+#BASE_IMAGE
+#This is the Jupyter Data Science Workbench image
+####################################################################
+# TODO - Add the command to use the Jupyter Data Science Workbench #
+####################################################################
+
+# Copying custom packages
+# The requirements.txt file contains additional package dependencies we want installed
+###########################################################
+# TODO - Add the command to copy the requirements file    #
+###########################################################
+
+# Install packages and cleanup
+# (all commands are chained to minimize layer size)
+RUN echo "Installing softwares and packages" && \
+    pip install micropipenv && \
+    # Install Python packages \
+    micropipenv install && \
+    rm -f ./requiremnents.txt
+
+# This should be blank since Java has not been installed
+RUN echo "-- WHERE IS JAVA= " && whereis java
+
+# Install openjdk
+# Switch to root user 
+USER 0
+
+###########################################################
+# TODO - Add the command to install OpenJDK               #
+###########################################################
+
+USER 1001
+
+# This should now print the location Java is installed
+RUN echo "-- WHERE IS JAVA= " && whereis java
+
+# Fix permissions to support pip in Openshift environments \
+RUN chmod -R g+w /opt/app-root/lib/python3.11/site-packages && \
+    fix-permissions /opt/app-root -P
+
+WORKDIR /opt/app-root/src
+
+ENTRYPOINT ["start-notebook.sh"]

@@ -1,22 +1,137 @@
-= Building Custom Workbench Images
+= Create a Custom Notebook Image
 
-Intro blah...
+Custom notebook images allow you to add specific packages and libraries for your projects. This level of customization provides you with a consistent development environment for your teams to work in and ensures that your projects are reproducible between team members. You may also want to create custom notebooks that are more secure than the default notebook image provided in OpenShift AI.
 
-== Notes
+== Image source and Pre-built images
 
-* Why would you need a custom image?
-* Provide links to Containerfiles for the set of images that we ship with RHODS. Encourage students to build on UBI based base images
-* [Trevor] It is important to cover the minimum requirements that the notebook controller requires for the images to work.  Expected packages, port requirements, and startup scripts.  Additionally it may be good to cover some topics such as the non-root requirement for OCP and use that as a jumping off point to talk about using a RH base image.
-* The general recommendation is usually the build off of the upstream notebook base image: https://github.com/opendatahub-io/notebooks/blob/main/base/ubi9-python-3.9/Dockerfile. 
-* We need to discuss how to actually do that and how to manage the packages when building off those images because it is a non-standard process with pipenv where you need to preserve the upstream packages in order to not break the image.
-* How to build and make the custom image available in the RHODS web console
-Ensure you cover standard container image building best practices - security, minimal, built for OCP with user and group perms, SELinux etc
-* Look for good custom image use cases:
-** Python 3.11/3.12 (performance improvements)
-** Custom Python libs on top of standard RHODS images
-** R based custom images?
-** Julia?
-* [Trevor] - The most common use cases from the field.... 
-** My team needs version xyz of a specific package and the default images ship with zyx.
-** My team needs package xyz and it is not available in any default images.
-** My team needs a specific driver in the image that can only be installed with root access to connect to xyz (e.g. DB2 drivers to connect to oracle databases)
+The default OpenShift AI notebook images can be found in the https://github.com/opendatahub-io/notebooks[Default OpenShift AI notebooks] repository. This repository contains the source code, pre-built images, and examples to help you create your own image. 
+
+Additional images are available at the ODH contributions repository (https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images]) This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (https://github.com/opendatahub-io-contrib/workbench-images#building-an-image[])
+
+== Exercise
+We will now build our own custom image. We'll use https://quay.io/mmurakam/workbenches:fraud-detection-v1.0.1[Fraud Detection Image] as our base image. This image contains artifacts that we will be using later in the course. 
+
+We will be adding the seaborn python package to the Fraud Detection image. It is a data visualization library based on matplotlib. 
+
+[TIP]
+====
+* On OpenShift, every containers in a standard namespace (unless you modify security) run with a user with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The *best practice* is to set the *ownership at 1001:0* (user "default", group "0").
+* If you don't want/can't do that, another solution is to set permissions properly for any user, like 775.
+* When launching a notebook in OpenShift AI, the working directory of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.
+====
+
+=== Requirements
+To build 
+
+* Need podman
+** You could also use buildah, docker, OpenShift BuildConfigs, or a Tekton pipeline, but we'll just build the image using podman for this course.
+* Need an image registry
+** We'll use Quay as our image registry. You can sign up for a free account at https://quay.io[Quay.io] if you don't already have one.
+
+=== Containerfile Overview
+Before you start to edit the Containerfile lets go over what this Containerfile is doing.
+
+Containerfile::
+--
+[subs=+quotes]
+----
+#This is the base image we'll be working from
+FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1  <1>
+
+# Copying custom packages
+# The requirements.txt file contains additional package dependencies we want installed
+COPY requirements.txt ./  <2>
+
+# Install packages and cleanup
+# (all commands are chained to minimize layer size)
+RUN echo "Installing softwares and packages" && \     <3>
+    pip install micropipenv && \
+    # Install Python packages \
+    micropipenv install && \
+    rm -f ./requiremnents.txt
+
+# Fix permissions to support pip in Openshift environments \
+RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \    <4>
+    fix-permissions /opt/app-root -P
+
+----
+<1> The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. Our Fraud Detection image is using [sh]`quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-2023a-20230714-933b52f` as the base image. You can find more base images at https://quay.io/organization/modh.
+
+<2> The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on. micropipenv is a small footprint alternative to pip that allows us to install packages from our requirements.txt file.
+
+<3> The next step is to install the packages. A lighweight wrapper for pip, micropipenv, allows us to install packages from our requirements.txt file. After the seaborn pacakge is installed we then remove the requirements.txt to clean up the files.
+
+<4> We'll fix the permissons to support pip in OpenShift.
+--
+
+=== Build Steps
+
+1. Open the requirements.txt file under /6.rhod-admin/custom-images. +
+The only package we're installing is seaborn. It's a Python data visualization library that we'll use in our notebook. 
++
+*_requirements.txt_*
++
+[source, text]
+----
+seaborn==0.12.2
+----
++
+Multiple packages can be installed with the requirements.txt file by adding them on the next line. For example, the below requirements.txt file would install seaborn and the trino packages.
++
+*_requirements.txt_*
++
+[source, text]
+----
+seaborn==0.12.2
+trino==0.305.0
+----
+
+2. Open the Containerfile under /6.rhod-admin/custom-images and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
++
+[source, dockerfile]
+----
+   FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1
+----
++
+[source, dockerfile]
+----
+   COPY requirements.txt ./
+----
++
+3. We'll now build the image with podman. Open a terminal and go to /6.rhod-admin/custom-images. Run the below command. 
++
+[source]
+----
+podman build -t rhods-custom-image .
+----
++
+You should see a similar message in the logs:
++
+* The seaborn package is installed successfully.
++
+image::podmanSeabornInstalled.png[]
+
+4. Once the image is done building run the below command to make sure the image is in the list.
++
+[source]
+----
+podman images
+----
++
+image::podmanImages.png[]
+5. Login to quay.io so we can push the image you just built up to the quay repository.
++
+[source]
+----
+podman login quay.io
+----
+6. Push the image to your quay repository.
++
+[source]
+----
+podman push rhods-custom-image:latest quay.io/<YOUR_USERNAME>/rhods-custom-image
+----
+
+Now you're ready to import your image into OpenShift AI! See the next section to learn how to import your custom image and test it out.
+
+
