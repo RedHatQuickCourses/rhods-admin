@@ -1,8 +1,49 @@
-= Introduction
-:navtitle: Intoduction
+= Red Hat OpenShift Data Science Administration
+:navtitle: Home
 
-This course covers basics of the Red{nbsp}Hat Openshift Data Science administration. Mainly it covers following topics:
+Welcome to this quick course on the _Red Hat OpenShift Data Science Administration_.
+This course is the second in a series of 6 courses about Red Hat OpenShift Data Science:
 
-. Red{nbsp}Hat Openshift Data Science Installation 
-. Red{nbsp}Hat Openshift Data Science User Management
-. Creating and Configuring a Custom Notebook Image
+1. https://redhatquickcourses.github.io/rhods-intro[Introduction to Red Hat OpenShift Data Science]
+2. Red Hat OpenShift Data Science Administration  (_This course_)
+3. https://redhatquickcourses.github.io/rhods-analysis[Data Analysis and Visualization with Red Hat OpenShift Data Science]
+4. https://redhatquickcourses.github.io/rhods-model[Creating Machine Learning Models with Red Hat OpenShift Data Science]
+5. https://redhatquickcourses.github.io/rhods-deploy[Deploying Machine Learning Models with Red Hat OpenShift Data Science]
+6. https://redhatquickcourses.github.io/rhods-pipelines[Automation using Data Science Pipelines]
+
+NOTE: After you have completed all the courses in the learning path, you can attempt the https://github.com/RedHatQuickCourses/rhods-qc-apps/tree/main/7.hands-on-lab["Hit the RHODS"] exercise, that tests your understanding of the concepts taught in all the courses.
+
+== Authors
+
+The PTL team acknowledges the valuable contributions of the following Red Hat associates:
+
+* Jiri Tesar
+* Jaime Ramirez Castillo
+* Max Murakami
+* Trevor Royer
+* John Hurlocker
+* Ravi Srinivasan
+
+== Classroom Environment
+
+Use the https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod[Red Hat OpenShift Container Platform 4.13 Workshop] catalog item from Red Hat Demo Platform (RHDP).
+
+This classroom does *NOT* have RHODS pre-installed. You install and configure a basic RHODS instance, and then continue using this instance with other courses in the learning path.
+
+== Prerequisites
+
+* Basic knowledge of OpenShift (or Kubernetes) administration
+* Building and deploying container images
+* OpenShift User and Role administration
+* Basic knowledge of AWS EC2 and S3 services
+
+== Objectives
+
+The overall objectives of this course include:
+
+* Installing RedHat OpenShift Data Science using the web console and CLI
+* Upgrading RedHat OpenShift Data Science components
+* Managing RedHat OpenShift Data Science users and controlling access
+* Enabling GPU support in RedHat OpenShift Data Science
+* Stopping idle notebooks
+* Create and configure a custom notebook image
