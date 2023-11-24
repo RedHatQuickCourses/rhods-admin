@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Introduction to CLI-based operator installations :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="rhods-install-web-console.html">
+    <link rel="next" href="dependencies-install-cli.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="install-general-info.html">General Information about Installation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="olm-overview.html">Introduction to CLI-based operator installations</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dependencies-install-cli.html">Installing Dependencies Using the CLI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="rhods-install-cli.html">Installation Red&#160;Hat Openshift Data Science Using the Command Line Interface</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="uninstalling-rhods.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/users.html">Users, Projects, and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Building Custom Notebook Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/custom.html">Create a Custom Notebook Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/importcustom.html">Importing Custom Notebook Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
+    <li><a href="olm-overview.html">Introduction to CLI-based operator installations</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Introduction to CLI-based operator installations</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Command line installation of an operator requires a bit more understanding of OpenShift resources than the web based installation hence before we get to the actual installation we will go over some theory related to the CLI-based operator installation.</p>
+</div>
+<div class="paragraph">
+<p>In OpenShift, the Operator Lifecycle Manager (OLM) helps users install and manage operators and their associated services.</p>
+</div>
+<div class="paragraph">
+<p>Operator Lifecycle Manager (OLM) uses following resources:</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Catalog Resource</dt>
+<dd>
+<p>Each catalog source resource references an operator repository. Periodically, the OLM
+examines the catalog sources in the cluster and retrieves information about the operators in
+each source.</p>
+</dd>
+<dt class="hdlist1">Package manifest</dt>
+<dd>
+<p>The OLM creates a package manifest for each available operator. The package manifest
+contains the required information to install an operator, such as the available channels.</p>
+</dd>
+<dt class="hdlist1">Operator group</dt>
+<dd>
+<p>Operator groups define how the OLM presents operators across namespaces and which namespaces an operator has the ability to monitor for objects.</p>
+</dd>
+<dt class="hdlist1">Subscription</dt>
+<dd>
+<p>Cluster administrators create subscriptions to install operators.</p>
+</dd>
+<dt class="hdlist1">Operator</dt>
+<dd>
+<p>The OLM creates operator resources to store information about installed operators.</p>
+</dd>
+<dt class="hdlist1">Install plan</dt>
+<dd>
+<p>The OLM creates install plan resources as part of the installation and update process. When
+requiring approvals, administrators must approve install plans.</p>
+</dd>
+<dt class="hdlist1">Cluster service version (CSV)</dt>
+<dd>
+<p>Each version of an operator has a corresponding CSV. The CSV contains the information that
+the OLM requires to install the operator.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>When installing an operator, an administrator must create only the <strong>Operator Group</strong> (unless the target namespace is <strong>openshift-operators</strong> where the <strong>Operator Group</strong> resource already exists) and the <strong>Subscription</strong>.  Only one <strong>Operator Group</strong> can be created per namespace, but a namespace can contain multiple <strong>Subscriptions</strong>.</p>
+</div>
+<div class="paragraph">
+<p>Optionally a <strong>Namespace</strong> can be created if it does not exists. Other resources are created by the OLM.</p>
+</div>
+<div class="paragraph">
+<p>Following are examples of the resources an administrator must create.</p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Namespace</dt>
+</dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: v1
+kind: Namespace
+metadata:
+  name: <em>operator_namespace</em> <i class="conum" data-value="1"></i><b>(1)</b>
+spec: {}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the namespace to create.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Namespace has to be only created if it does not already exist. An operator can be installed into an existing namespace.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Operator group</dt>
+</dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: <em>Operator_group_name</em> <i class="conum" data-value="1"></i><b>(1)</b>
+  namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
+spec: {}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the operator group resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Name of the namespace to create the operator group resource in.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Subscription</dt>
+</dl>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>When a <strong>Subscription</strong> resource is created the OLM starts the installation of the operator based on the details set in the <strong>Subscription</strong> resource.</p>
+</div>
+<div id="subscription" class="listingblock">
+<div class="content">
+<pre>apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: <em>Subscription_name</em>  <i class="conum" data-value="1"></i><b>(1)</b>
+  namespace: <em>operator_namespace</em> <i class="conum" data-value="2"></i><b>(2)</b>
+spec:
+  channel: <em>channel</em> <i class="conum" data-value="3"></i><b>(3)</b>
+  installPlanApproval: <em>Manual/Automatic</em> <i class="conum" data-value="4"></i><b>(4)</b>
+  name: <em>Operator_name</em>
+  source: <em>Catalog_source</em>
+  sourceNamespace: openshift-marketplace</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Name of the subscription resource.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Name of the namespace to create the subscription resource in.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Update channel to install the operator from. For more information about finding available channels see the <a href="#findchannel">Finding Update Channels</a> section.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td><strong>installPlanApproval</strong> attribute can be either <strong>Automatic</strong> or <strong>Manual</strong>. For more details about manual installation approval se the <a href="#manual_approval">Approving Installation Manually</a> section.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="findchannel"><a class="anchor" href="#findchannel"></a>Finding Update Channels</h2>
+<div class="sectionbody">
+<div class="openblock">
+<div class="content">
+<div class="paragraph">
+<p>Update channels and other details about the operator can be found in a resource <strong>packagemanifest</strong>.
+It can be however a little challenging to search the <strong>packagemanifest</strong> as it is quite complex. <em>JQuery</em> is a powerfull tool to filter values from JSON resource manifests.</p>
+</div>
+<div class="paragraph">
+<p>The following example lists available channels for the <strong>rhods-operator</strong> operator.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get packagemanifest rhods-operator -o json|jq '.status.channels[].name'</strong>
+"beta"
+"embedded"
+"stable"
+"alpha"</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="manual_approval"><a class="anchor" href="#manual_approval"></a>Approving Installation Manually</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As a part of the installation process OLM creates an <strong>installplan</strong> resource in the namespace the operator will be installed into. The <strong>installplan</strong> resource contains information about the installation and updates. When the <strong>installPlanApproval</strong> parameter of a <strong>Subscription</strong> is set to  <strong>Manual</strong>, the installation has to be manually approved by patching the corresponding <strong>installplan</strong> resource in order to start.</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc get installplan -n <em>operator_namespace</em></strong>
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   <em>operator_csv</em>   Manual     <mark>false</mark>   <i class="conum" data-value="1"></i><b>(1)</b>
+
+$ <strong>oc patch installplan install-vpgls --type merge -p '{"spec":{"approved":true}}' -n <em>operator_namespace</em></strong>
+installplan.operators.coreos.com/install-vpgls patched  <i class="conum" data-value="2"></i><b>(2)</b>
+
+$ <strong>oc get installplan -n redhat-ods-operator</strong>
+NAME            CSV                     APPROVAL   APPROVED
+install-vpgls   <em>operator_name</em>   Manual     <mark>true</mark>  <i class="conum" data-value="3"></i><b>(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Approval has not been set.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The patch command approves the installation.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Approval has been set and installation starts.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="installprogress"><a class="anchor" href="#installprogress"></a>Checking Installation Progress</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Installation progress can be found in the operator&#8217;s status.
+The following example shows a quick check of the current  status of the <strong>Openshift Pipelines</strong> operator.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get olm | grep ^clusterserviceversion | grep openshift-pipelines-operator</strong>
+clusterserviceversion.../openshift-pipelines-operator...   <mark>Pending</mark>  <i class="conum" data-value="1"></i><b>(1)</b>
+
+<strong>$ oc get olm | grep ^clusterserviceversion | grep openshift-pipelines-operator</strong>
+openshift-pipelines-operator*
+clusterserviceversion.../openshift-pipelines-operator...   <mark>Succeeded</mark>  <i class="conum" data-value="2"></i><b>(2)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The operator is installing.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The operator has been successfully installed.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If you are interested in more details, you can get the operator&#8217;s manifest and check it&#8217;s status attribute. <em>JQuery</em> can be used to filter the status out.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre><strong>$ oc get operators</strong>
+NAME                                                  AGE
+mcg-operator.openshift-storage                        7h24m
+ocs-operator.openshift-storage                        7h24m
+odf-csi-addons-operator.openshift-storage             7h24m
+odf-operator.openshift-storage                        7h25m
+<mark>openshift-pipelines-operator-rh.openshift-operators</mark>   20m    <i class="conum" data-value="1"></i><b>(1)</b>
+
+<strong>$ oc get operator openshift-pipelines-operator-rh.openshift-operators -o json| \
+jq '.status.components.refs[]|select(.kind=="ClusterServiceVersion").conditions[]'</strong>
+
+{
+  "lastTransitionTime": "2023-11-01T21:01:25Z",
+  "lastUpdateTime": "2023-11-01T21:01:26Z",
+  "message": "installing: waiting for deployment openshift-pipelines-...",
+  "reason": "InstallWaiting", <i class="conum" data-value="1"></i><b>(1)</b>
+  "status": "True",           <i class="conum" data-value="2"></i><b>(2)</b>
+  "type": "Installing"        <i class="conum" data-value="3"></i><b>(3)</b>
+}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Reason for the condition.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Status of the conditions.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Type of the condition. <strong>Type</strong> <em>Installing</em> together with <strong>status</strong> <em>True</em> indicate that the installation is in progress. <strong>Type</strong> <em>Succeeded</em> together with <strong>status</strong> <em>True</em> and <strong>reason</strong> <em>InstallSucceeded</em> indicate that the installation has been successful.</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a></span>
+  <span class="next"><a href="dependencies-install-cli.html">Installing Dependencies Using the CLI</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
