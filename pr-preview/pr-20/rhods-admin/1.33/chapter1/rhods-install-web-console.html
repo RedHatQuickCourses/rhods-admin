@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Installation Red&#160;Hat Openshift Data Science Using the Web Console :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="dependencies-install-web-console.html">
+    <link rel="next" href="upgrading-rhods.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="install-general-info.html">General Information about Installation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="uninstalling-rhods.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/users.html">Users, Projects, and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter3/index.html">Building Custom Notebook Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/custom.html">Create a Custom Notebook Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter3/importcustom.html">Importing Custom Notebook Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
+    <li><a href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Installation Red&#160;Hat Openshift Data Science Using the Web Console</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Red&#160;Hat Openshift Data Science</strong> is available as an operator via Openshift Operator Hub.  You will install the <strong>Red&#160;Hat Openshift Data Science operator V2</strong> using the Openshift web console in this section.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_demo_installation_of_the_redhat_openshift_data_science_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_data_science_operator"></a>Demo: Installation of the Red&#160;Hat Openshift Data Science operator</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The installation requires a user with the <em>cluster-admin</em> role
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Login to the Red Hat Openshift using a user which has the <em>cluster-admin</em> role assigned.</p>
+</li>
+<li>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install1.png" alt="rhods install1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the Red&#160;Hat Openshift Data Science operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure you select <strong>Openshift Data Science</strong> from <strong>Red&#160;Hat</strong> not the <strong>Community</strong> version.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_install2.png" alt="rhods install2" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>In the installation view window choose the <em>embedded</em> <strong>Update Channel</strong>, <em>Manual</em> <strong>Update approval</strong> and keep the default <strong>Installed Namespace</strong>. Click on the <strong>Install</strong> button to start the installation.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-install-view2.png" alt="rhods2 install view2" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Approve the installation.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-install-approve.png" alt="rhods2 install approve" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Operator Installation progress window will pop up. The installation may take a couple of minutes.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-install.png" alt="rhods2 install" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>When the operator&#8217;s installation is finished, click on the <strong>Create DataScienceCluster</strong> button to create and configure your cluster.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-install-finished.png" alt="rhods2 install finished" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>In the <strong>Create DataScienceCluster</strong> view select components that will be installed and managed by the operator.</p>
+<div class="paragraph">
+<p>There are following components to choose from:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>CodeFlare:</strong> CodeFlare simplifies the integration, scaling and acceleration of complex multi-step analytics and machine learning pipelines on the hybrid multi-cloud.CodeFlare, an open-source framework for simplifying the integration and efficient scaling of big data and AI workflows onto the hybrid cloud. CodeFlare is built on top of Ray, an emerging open-source distributed computing framework for machine learning applications. CodeFlare extends the capabilities of Ray by adding specific elements to make scaling workflows easier.</p>
+</li>
+<li>
+<p><strong>Ray:</strong> Ray is an open technology for “fast and simple distributed computing.” It makes it easy for data scientists and application developers to run their code in a distributed fashion. It also provides a lean and easy interface for distributed programming with many different libraries, best suited to perform machine learning and other intensive compute tasks.</p>
+</li>
+<li>
+<p><strong>Dashboard:</strong> A web dashboard that displays installed <strong>Data Science</strong> components with easy access to component UIs and documentation</p>
+</li>
+<li>
+<p><strong>Data Science Pipelines:</strong> Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models.</p>
+</li>
+<li>
+<p><strong>KServe:</strong> Kserve, or KFServing, is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.</p>
+</li>
+<li>
+<p><strong>ModelMeshServing:</strong>  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.</p>
+</li>
+<li>
+<p><strong>Workbenches:</strong> Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving and Workbenches.</p>
+</div>
+<div class="paragraph">
+<p>You can choose to create the DataScienceCluster using either the <em>Form view</em> or the <em>YAML View</em>. The <em>Form view</em> is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the <em>Form view</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-create-cluster.png" alt="rhods2 create cluster" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>If you choose the <em>YAML view</em>, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>apiVersion: datasciencecluster.opendatahub.io/v1
+kind: DataScienceCluster
+metadata:
+  name: default
+  labels:
+    app.kubernetes.io/name: datasciencecluster
+    app.kubernetes.io/instance: default
+    app.kubernetes.io/part-of: rhods-operator
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: rhods-operator
+spec:
+  components:
+    codeflare:
+      managementState: Removed  <i class="conum" data-value="1"></i><b>(1)</b>
+    dashboard:
+      managementState: Managed  <i class="conum" data-value="2"></i><b>(2)</b>
+    datasciencepipelines:
+      managementState: Managed
+    kserve:
+      managementState: Removed
+    modelmeshserving:
+      managementState: Managed
+    ray:
+      managementState: Removed
+    workbenches:
+      managementState: Managed</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>For components you <strong>do not</strong> want to install use <strong>Removed</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>For components you <strong>want</strong> to install and manage by the operator use <strong>Managed</strong></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After naming the cluster and choosing the components you wish the operator to install and manage click on the <strong>Create</strong> button.</p>
+</div>
+</li>
+<li>
+<p>After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads <strong>Phase: Ready</strong>. This represents the status of the whole cluster.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-clusters.png" alt="rhods2 clusters" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>You may also check the status of individual installed components by looking at their conditions. Click on the <strong>default</strong> cluster and switch to the YAML view. Scroll down to view <strong>conditions</strong>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods2-conditions.png" alt="rhods2 conditions" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Each condition is represented by a <strong>type</strong> and a <strong>status</strong>. The <strong>Type</strong> is a string describing the condition, for instance <em>odh-dashboardReady</em> and the status says whether it is <em>true</em> or not. The following example shows the <strong>Ready</strong> status of the Dashboard component.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>- lastHeartbeatTime: '2023-11-13T10:53:20Z'
+  lastTransitionTime: '2023-11-13T10:53:20Z'
+  message: Component reconciled successfully
+  reason: ReconcileCompleted
+  status: 'True' <i class="conum" data-value="1"></i><b>(1)</b>
+  type: odh-dashboardReady <i class="conum" data-value="2"></i><b>(2)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Status of the condition. <em>True</em> means that the condition is met, <em>False</em> means that the condition is not met.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Type represents the meaning of the condition. Together with the value of <em>status</em> you can assess the state of the component. In this example <em>type=odh-dashboardReady</em>  and <em>status=True</em> means that the <strong>Dashboard</strong> component is ready.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Similarly to the example above other <strong>Red&#160;Hat Data Science</strong> components have their condition types. The following list shows the condition types for the <strong>Red&#160;Hat Data Science</strong> components.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>rayReady</p>
+</li>
+<li>
+<p>codeflareReady</p>
+</li>
+<li>
+<p>model-meshReady</p>
+</li>
+<li>
+<p>workbenchesReady</p>
+</li>
+<li>
+<p>data-science-pipelines-operatorReady</p>
+</li>
+<li>
+<p>odh-dashboardReady</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>The operator should be installed and configured now.
+In the applications window in the right upper corner of the screen the <strong>Red&#160;Hat Openshift Data Science</strong> dashboard should be available.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify1.png" alt="rhods verify1" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the <strong>Red&#160;Hat Openshift Data Science</strong> button to log in to the <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify2.png" alt="rhods verify2" width="800">
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+It may take a while to start all the service pods hence the login window may not be accessible immediately. If you are getting an error, check the status of the pods in the project <strong>redhat-ods-applications</strong>.
+Navigate to <strong>Workloads</strong> &#8594; <strong>pods</strong> and select project <strong>redhat-ods-applications</strong>. All pods must be running and be ready. If they are not, wait until they become running and ready.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhods_verify_pods.png" alt="rhods verify pods" width="800">
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For assistance installing the <strong>Red&#160;Hat Openshift Data Science</strong> from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/rhods-operator](<a href="https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator" class="bare">https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator</a>) GitHub repo.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a></span>
+  <span class="next"><a href="upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

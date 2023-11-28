@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Importing Custom Notebook Images :: Red Hat OpenShift Data Science Administration</title>
+    <link rel="prev" href="custom.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Red Hat OpenShift Data Science Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Red Hat OpenShift Data Science Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter1/index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/install-general-info.html">General Information about Installation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter1/uninstalling-rhods.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../chapter2/index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/users.html">Users, Projects, and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../chapter2/resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="index.html">Building Custom Notebook Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="custom.html">Create a Custom Notebook Image</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="importcustom.html">Importing Custom Notebook Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift Data Science Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Red Hat OpenShift Data Science Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
+    <li><a href="index.html">Building Custom Notebook Images</a></li>
+    <li><a href="importcustom.html">Importing Custom Notebook Images</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Importing Custom Notebook Images</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this section we will go over importing a custom notebook through the OpenShift AI dashboard and test it to make sure our dependencies are included.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_import_the_notebook_image"><a class="anchor" href="#_import_the_notebook_image"></a>Import the Notebook Image</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Before we import the image into OpenShif AI we need to set the quay repository we just created to public. In a browser login to quay.io and go to the rhods-admin-custom-image repository. Select the <strong>Settings</strong> gear icon.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/quaySettings.png" alt="Quay Repository Settings">
+</div>
+</div>
+</li>
+<li>
+<p>Scroll down until you see the <strong>Repository Visibility</strong> section.  Click the <strong>Make Public</strong> button and click Ok to make the repository public.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/quayMakePublic.png" alt="Quay Visibility Setting">
+</div>
+</div>
+</li>
+<li>
+<p>Login to the OpenShift AI dashboard as the admin user. Expand <strong>Settings</strong>, click <strong>Notebook Images</strong>, and then click <strong>Import Image</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsAdminCustomNotebook.png" alt="OpenShift AI Admin Notebook Images">
+</div>
+</div>
+</li>
+<li>
+<p>Enter the path to the your repository and give the image a name. Optionally add a description and package information. Click the <strong>Import</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsImportCustomImage.png" alt="OpenShift AI Import Notebook">
+</div>
+</div>
+<div class="paragraph">
+<p>You should now see the image in the list and enabled.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsNotebookImage.png" alt="OpenShift AI Custom Notebooks">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_the_image_in_a_workbench"><a class="anchor" href="#_test_the_image_in_a_workbench"></a>Test the Image in a Workbench</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Now we&#8217;ll test out the image we just imported. Go to <strong>Data Science Projects</strong> and then click the <strong>Create data science project</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsDataScienceProj.png" alt="OpenShift AI Data Science Projects">
+</div>
+</div>
+</li>
+<li>
+<p>Give the project a name and resource name. Click the <strong>Create</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsCreateProj.png" alt="OpenShift AI Project">
+</div>
+</div>
+</li>
+<li>
+<p>Click the <strong>Create</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsCreateWrkbench.png" alt="OpenShift AI Workbench">
+</div>
+</div>
+</li>
+<li>
+<p>Give the workbench a name and select the rhods-admin-custom-image from the Image selection drop down list. Click the <strong>Create Workbench</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsCreateWrkbenchDetails.png" alt="OpenShift AI Workbench Details">
+</div>
+</div>
+</li>
+<li>
+<p>Once the Status changes to Running click the <strong>Open</strong> link.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsWorkbenchStart.png" alt="OpenShift AI Workbench Start">
+</div>
+</div>
+</li>
+<li>
+<p>Login to the notebook and click the <strong>Python 3.9.16</strong> notebook tile.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsNewPythonNotebook.png" alt="OpenShift AI Python Notebook">
+</div>
+</div>
+</li>
+<li>
+<p>In the first cell of the notebook add the following</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">pip list | grep "^s"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Press Shift + Enter on your keyboard to execute the cell. This will find all of the dependencies that start with "s". Note that seaborn is an installed dependency.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhodsPipList.png" alt="pip list">
+</div>
+</div>
+</li>
+<li>
+<p>Now let&#8217;s test out the seaborn package to make sure it works. Copy the following code to the cell below.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Load the dowjones dataset
+dowjones = sns.load_dataset("dowjones")
+
+# Create a line plot with the year on the x-axis
+sns.lineplot(
+    x="Date",
+    y="Price",
+    data=dowjones,
+)
+
+# Set the title and labels
+plt.title("Dow Jones Industrial Average by Year - 1914 to 1968")
+plt.xlabel("Date")
+plt.ylabel("Price")
+
+# Show the plot
+plt.show()</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/testSeaborn1.png" alt="Seaborn Code Snippet">
+</div>
+</div>
+<div class="paragraph">
+<p>Click Shift + Enter to execute the cell. You should see the graph below. You can now close the notebook. Don&#8217;t worry about saving it.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/testSeaborn2.png" alt="Seaborn Graph">
+</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Congratulations! You&#8217;ve succesfully built, imported, and tested a custom image in OpenShift AI.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="custom.html">Create a Custom Notebook Image</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
