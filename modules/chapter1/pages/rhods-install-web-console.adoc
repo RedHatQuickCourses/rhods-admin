@@ -132,3 +132,5 @@ IMPORTANT: It may take a while to start all the service pods hence the login win
 Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and be ready. If they are not, wait until they become running and ready.
 +
 image::rhods_verify_pods.png[width=800] 
+
+TIP: For assistance installing the *Red{nbsp}Hat Openshift Data Science* from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/rhods-operator](https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator) GitHub repo.

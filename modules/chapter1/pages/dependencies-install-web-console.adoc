@@ -45,6 +45,8 @@ image::pipeline_install4.png[width=800]
 
 *Red{nbsp}Hat OpenShift Pipelines* is now successfully installed.
 
+TIP: For assistance installing OpenShift Pipelines from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/openshift-pipelines-operator](https://github.com/redhat-cop/gitops-catalog/tree/main/openshift-pipelines-operator) GitHub repo.
+
 == Installation of GPU Dependencies
 
 *Red{nbsp}Hat OpenShift Data Science* makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.
@@ -97,6 +99,8 @@ image::nfd_configure2.png[width=800]
 +
 image::nfd_verify.png[width=800]
 
+TIP: For assistance installing the Node Feature Discovery Operator from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/nfd](https://github.com/redhat-cop/gitops-catalog/tree/main/nfd) GitHub repo.
+
 *Node Feature Discovery* is now successfully installed and configured.
 
 === Demo: Installation of the *NVIDIA GPU Operator*
@@ -142,3 +146,5 @@ image::gpu_verify2.png[width=800]
 NOTE: The Dashboard may initially show "All GPUs are currently in use, try again later." when *Red{nbsp}Hat OpenShift Data Science*  is first installed.  It may take a few minutes after *Red{nbsp}Hat OpenShift Data Science* is installed before the GPUs are initially detected.
 
 TIP: The *NVIDIA GPU Operator* supports many advanced use cases such as Multi-Instance GPU (MIG) and Time Slicing that are configurable using the *ClusterPolicy*.  For information about advanced GPU configuration capabilities, refer to the official https://docs.nvidia.com/datacenter/cloud-native/openshift/latest/introduction.html[NVIDIA Documentation].
+
+TIP: For assistance installing the Node Feature Discovery Operator from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/gpu-operator-certified](https://github.com/redhat-cop/gitops-catalog/tree/main/gpu-operator-certified) GitHub repo.
