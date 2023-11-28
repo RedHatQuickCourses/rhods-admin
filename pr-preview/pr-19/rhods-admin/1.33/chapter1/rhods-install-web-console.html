@@ -186,18 +186,6 @@ The installation requires a user with the <em>cluster-admin</em> role
 </li>
 <li>
 <p>Click on the Red&#160;Hat OpenShift Data Science operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
-<div class="admonitionblock important">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-important" title="Important"></i>
-</td>
-<td class="content">
-Make sure you select <strong>OpenShift Data Science</strong> from <strong>Red&#160;Hat</strong> not the <strong>Community</strong> version.
-</td>
-</tr>
-</table>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_install2.png" alt="rhods install2" width="800">
@@ -205,26 +193,18 @@ Make sure you select <strong>OpenShift Data Science</strong> from <strong>Red&#1
 </div>
 </li>
 <li>
-<p>In the installation view window choose the <em>embedded</em> <strong>Update Channel</strong>, <em>Manual</em> <strong>Update approval</strong> and keep the default <strong>Installed Namespace</strong>. Click on the <strong>Install</strong> button to start the installation.</p>
+<p>In the Install Operator page, leave all of the options as default and click on the <strong>Install</strong> button to start the installation.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods2-install-view2.png" alt="rhods2 install view2" width="800">
+<img src="_images/rhods_install3.png" alt="rhods install3" width="800">
 </div>
 </div>
 </li>
 <li>
-<p>Approve the installation.</p>
+<p>The operator Installation progress window will pop up. The installation may take a couple of minutes.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods2-install-approve.png" alt="rhods2 install approve" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Operator Installation progress window will pop up. The installation may take a couple of minutes.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/rhods2-install.png" alt="rhods2 install" width="800">
+<img src="_images/rhods_install4.png" alt="rhods install4" width="800">
 </div>
 </div>
 </li>
@@ -232,7 +212,7 @@ Make sure you select <strong>OpenShift Data Science</strong> from <strong>Red&#1
 <p>When the operator&#8217;s installation is finished, click on the <strong>Create DataScienceCluster</strong> button to create and configure your cluster.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods2-install-finished.png" alt="rhods2 install finished" width="800">
+<img src="_images/rhods_install5.png" alt="rhods install5" width="800">
 </div>
 </div>
 </li>
@@ -256,7 +236,7 @@ Make sure you select <strong>OpenShift Data Science</strong> from <strong>Red&#1
 <p><strong>Data Science Pipelines:</strong> Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models.</p>
 </li>
 <li>
-<p><strong>KServe:</strong> Kserve, or KFServing, is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.</p>
+<p><strong>KServe:</strong> Kserve is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.</p>
 </li>
 <li>
 <p><strong>ModelMeshServing:</strong>  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.</p>
