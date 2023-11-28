@@ -73,6 +73,8 @@ image::nfd_install1.png[width=800]
 
 4. In the installation view check the box to *Enable Operator recommended cluster monitoring on this Namespace* and the *Update{nbsp}approval* parameters if desired.  Leave the *Update channel*, *Version*, and the *Installed{nbsp}Namespace* parameters as the default options.
 +
+NOTE: Some of these options may vary slightly depending on your version of OpenShift.  Please refer to the official Node Feature Discovery Documentation for your version of OpenShift for the recommended settings.
++
 image::nfd_install2.png[width=800]
 
 5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
