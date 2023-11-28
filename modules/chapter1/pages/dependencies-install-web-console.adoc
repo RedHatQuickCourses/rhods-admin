@@ -71,7 +71,7 @@ IMPORTANT: Make sure you select *Node Feature Discovery* from *Red{nbsp}Hat* not
 +
 image::nfd_install1.png[width=800]
 
-4. In the installation view check the box to *Enable Operator recommended cluster monitoring on this Namespace* and the *Update{nbsp}approval* parameters if desired.  Leave the *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters as the default options.
+4. In the installation view check the box to *Enable Operator recommended cluster monitoring on this Namespace* and the *Update{nbsp}approval* parameters if desired.  Leave the *Update channel*, *Version*, and the *Installed{nbsp}Namespace* parameters as the default options.
 +
 image::nfd_install2.png[width=800]
 
