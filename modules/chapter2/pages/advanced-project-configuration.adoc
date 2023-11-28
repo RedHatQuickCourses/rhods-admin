@@ -1,0 +1,3 @@
+= Advanced Project Configuration
+
+As an organization matures with OpenShift AI, projects will likely outgrow a single project/namespace, and will likely even need to expand across multiple clusters.  This section will discuss some considerations and recommendations for an advanced project structure that will likely 
