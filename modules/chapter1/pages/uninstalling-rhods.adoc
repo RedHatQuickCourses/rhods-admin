@@ -1,10 +1,10 @@
-= Uninstalling Red{nbsp}Hat Openshift Data Science
+= Uninstalling Red{nbsp}Hat OpenShift Data Science
 
-*Red{nbsp}Hat Openshift Data Science* operator manages *Red{nbsp}Hat Openshift Data Science* components hence uninstalling of the *Red{nbsp}Hat Openshift Data Science* requires uninstalling the *Red{nbsp}Hat Openshift Data Science* operator and cleaning some of the resources that have been created by the operator or users.
+*Red{nbsp}Hat OpenShift Data Science* operator manages *Red{nbsp}Hat OpenShift Data Science* components hence uninstalling of the *Red{nbsp}Hat OpenShift Data Science* requires uninstalling the *Red{nbsp}Hat OpenShift Data Science* operator and cleaning some of the resources that have been created by the operator or users.
 
 [#demo-rhods]
-== Demo: Uninstalling Red{nbsp}Hat Openshift Data Science
-. Log in to Red{nbsp} Openshift web console using a user which has the _cluster-admin_ role assigned.
+== Demo: Uninstalling Red{nbsp}Hat OpenShift Data Science
+. Log in to Red{nbsp} OpenShift web console using a user which has the _cluster-admin_ role assigned.
 
 . Delete the DataScienceCluster object. 
 +
@@ -100,16 +100,16 @@ my-rhods-project   Active   6h22m
 namespace "my-rhods-project" deleted
 ----
 
-== Uninstalling the Red{nbsp}Hat Openshift Data Science dependencies.
+== Uninstalling the Red{nbsp}Hat OpenShift Data Science dependencies.
 
 If you have installed some dependencies you can remove them as long as they are not used by other deployments.
-The following demonstration shows uninstallation of the *Red{nbsp}Hat Openshift Pipelines* operator
+The following demonstration shows uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator
 
 [#demo-pipelines]
-=== Demo: Uninstallation of the *Red{nbsp}Hat Openshift Pipelines* operator
+=== Demo: Uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator
 .  Log in to Red{nbsp}Hat OpenShift web console using a user which has the _cluster-admin_ role assigned.
 
-. Navigate to *Operators* -> *Installed Operators*, choose *All Projects* and click on the three dots on the right side of the *Red{nbsp}Hat Openshift Pipelines* operator.
+. Navigate to *Operators* -> *Installed Operators*, choose *All Projects* and click on the three dots on the right side of the *Red{nbsp}Hat OpenShift Pipelines* operator.
 +
 image::pipelines-uninstall.png[width=800]
 +

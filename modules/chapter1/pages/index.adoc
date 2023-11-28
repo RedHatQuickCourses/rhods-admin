@@ -1,4 +1,4 @@
-= Installation of Red{nbsp}Hat Openshift Data Science
+= Installation of Red{nbsp}Hat OpenShift Data Science
 
 == Supported configurations
 OpenShift Data Science is supported in two configurations:
@@ -11,6 +11,6 @@ For information about OpenShift Data Science as self-managed software on your Op
 
 In this course we cover installation of *OpenShift Data Science self-managed* using two different methods:
 
-. Installation using the Openshift Web Console.
+. Installation using the OpenShift Web Console.
 . Installation using the Command Line Interface.
 
