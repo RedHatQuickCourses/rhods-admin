@@ -47,7 +47,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+    <a class="nav-link" href="index.html">Installation of Red&#160;Hat OpenShift Data Science</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="install-general-info.html">General Information about Installation</a>
@@ -56,7 +56,7 @@
     <a class="nav-link" href="dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a>
+    <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat OpenShift Data Science Using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="olm-overview.html">Introduction to CLI-based operator installations</a>
@@ -65,13 +65,13 @@
     <a class="nav-link" href="dependencies-install-cli.html">Installing Dependencies Using the CLI</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="rhods-install-cli.html">Installation Red&#160;Hat Openshift Data Science Using the Command Line Interface</a>
+    <a class="nav-link" href="rhods-install-cli.html">Installation Red&#160;Hat OpenShift Data Science Using the Command Line Interface</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+    <a class="nav-link" href="upgrading-rhods.html">Upgrading Red&#160;Hat OpenShift Data Science</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="uninstalling-rhods.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+    <a class="nav-link" href="uninstalling-rhods.html">Uninstalling Red&#160;Hat OpenShift Data Science</a>
   </li>
 </ul>
   </li>
@@ -138,7 +138,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
-    <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
+    <li><a href="index.html">Installation of Red&#160;Hat OpenShift Data Science</a></li>
     <li><a href="dependencies-install-cli.html">Installing Dependencies Using the CLI</a></li>
   </ul>
 </nav>
@@ -150,23 +150,23 @@
 <article class="doc">
 <h1 class="page">Installing Dependencies Using the CLI</h1>
 <div class="sect1">
-<h2 id="_installation_of_redhat_openshift_data_science_dependencies"><a class="anchor" href="#_installation_of_redhat_openshift_data_science_dependencies"></a>Installation of Red&#160;Hat Openshift Data Science Dependencies</h2>
+<h2 id="_installation_of_redhat_openshift_data_science_dependencies"><a class="anchor" href="#_installation_of_redhat_openshift_data_science_dependencies"></a>Installation of Red&#160;Hat OpenShift Data Science Dependencies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>As described in the <a href="dependencies-install-web-console.html" class="xref page">Installing Dependencies Using the Web Console</a> section, some components of <strong>Red&#160;Hat Openshift Data Science</strong> require additional operators to be installed.</p>
+<p>As described in the <a href="dependencies-install-web-console.html" class="xref page">Installing Dependencies Using the Web Console</a> section, some components of <strong>Red&#160;Hat OpenShift Data Science</strong> require additional operators to be installed.</p>
 </div>
 <div class="paragraph">
-<p>In general not installing dependencies before the <strong>Red&#160;Hat Openshift Data Science</strong> does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it&#8217;s better to install the dependencies beforehand.</p>
+<p>In general not installing dependencies before the <strong>Red&#160;Hat OpenShift Data Science</strong> does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it&#8217;s better to install the dependencies beforehand.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines">Red&#160;Hat Openshift Pipelines Operator</a></dt>
+<dt class="hdlist1"><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines">Red&#160;Hat OpenShift Pipelines Operator</a></dt>
 <dd>
-<p>The <strong>Red Hat Openshift Pipelines Operator</strong> is required if you want to install the <strong>Data Science Pipelines</strong> component.</p>
+<p>The <strong>Red Hat OpenShift Pipelines Operator</strong> is required if you want to install the <strong>Data Science Pipelines</strong> component.</p>
 </dd>
 <dt class="hdlist1"><a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html">NVIDIA GPU Operator</a></dt>
 <dd>
-<p>The <strong>NVIDIA GPU Operator</strong> is required for GPU support in <strong>Red Hat Openshift Data Science</strong>.</p>
+<p>The <strong>NVIDIA GPU Operator</strong> is required for GPU support in <strong>Red Hat OpenShift Data Science</strong>.</p>
 </dd>
 <dt class="hdlist1"><a href="https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html">Node Feature Discovery Operator</a></dt>
 <dd>
@@ -183,13 +183,13 @@
 <h2 id="_installation_of_data_science_pipelines_dependencies"><a class="anchor" href="#_installation_of_data_science_pipelines_dependencies"></a>Installation of Data Science Pipelines Dependencies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Data Science Pipelines component utilizes <strong>Red&#160;Hat Openshift Pipelines</strong> as an execution engine for all pipeline runs, and is required to be installed to take advantage of the Data Science Pipelines component.</p>
+<p>The Data Science Pipelines component utilizes <strong>Red&#160;Hat OpenShift Pipelines</strong> as an execution engine for all pipeline runs, and is required to be installed to take advantage of the Data Science Pipelines component.</p>
 </div>
 <div class="paragraph">
-<p>The following section discusses installing the <strong>Red&#160;Hat Openshift Pipelines</strong> operator.</p>
+<p>The following section discusses installing the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator.</p>
 </div>
 <div class="sect2">
-<h3 id="_demo_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_pipelines_operator"></a>Demo: Installation of the <strong>Red&#160;Hat Openshift Pipelines</strong> Operator</h3>
+<h3 id="_demo_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_pipelines_operator"></a>Demo: Installation of the <strong>Red&#160;Hat OpenShift Pipelines</strong> Operator</h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -197,7 +197,7 @@
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-If you have already installed the <strong>Red&#160;Hat Openshift Data Science</strong> operator during the previous demonstration, you have to uninstall it. Follow the <a href="uninstalling-rhods.html#demo-rhods" class="xref page">Uninstalling Red&#160;Hat Openshift Data Science</a> demo to uninstall the <strong>Red&#160;Hat Openshift Data Science</strong> operator first and <a href="uninstalling-rhods.html#demo-pipelines" class="xref page">Uninstalling Red&#160;Hat Openshift Pipelines</a> to uninstall <strong>Red&#160;Hat Openshift Pipelines</strong> first.
+If you have already installed the <strong>Red&#160;Hat OpenShift Data Science</strong> operator during the previous demonstration, you have to uninstall it. Follow the <a href="uninstalling-rhods.html#demo-rhods" class="xref page">Uninstalling Red&#160;Hat OpenShift Data Science</a> demo to uninstall the <strong>Red&#160;Hat OpenShift Data Science</strong> operator first and <a href="uninstalling-rhods.html#demo-pipelines" class="xref page">Uninstalling Red&#160;Hat OpenShift Pipelines</a> to uninstall <strong>Red&#160;Hat OpenShift Pipelines</strong> first.
 </td>
 </tr>
 </table>
@@ -267,10 +267,10 @@ $ <strong>oc create -f pipelines-subs.yaml</strong></pre>
 <h2 id="_installation_of_gpu_dependencies"><a class="anchor" href="#_installation_of_gpu_dependencies"></a>Installation of GPU Dependencies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Red&#160;Hat Openshift Data Science</strong> makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.</p>
+<p><strong>Red&#160;Hat OpenShift Data Science</strong> makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.</p>
 </div>
 <div class="paragraph">
-<p>Currently, <strong>Red&#160;Hat Openshift Data Science</strong> supports accelerated compute with NVIDIA GPUs using the <strong>NVIDIA GPU Operator</strong> which relies on the <strong>Node Feature Discovery</strong> operator as a dependency.</p>
+<p>Currently, <strong>Red&#160;Hat OpenShift Data Science</strong> supports accelerated compute with NVIDIA GPUs using the <strong>NVIDIA GPU Operator</strong> which relies on the <strong>Node Feature Discovery</strong> operator as a dependency.</p>
 </div>
 <div class="paragraph">
 <p>The following section will discuss the installation and a basic configuration of both <strong>NVIDIA GPU Operator</strong> and the <strong>Node Feature Discovery</strong> operator.</p>
@@ -738,7 +738,7 @@ oc create -f clusterpolicy.yaml</pre>
 </div>
 <nav class="pagination">
   <span class="prev"><a href="olm-overview.html">Introduction to CLI-based operator installations</a></span>
-  <span class="next"><a href="rhods-install-cli.html">Installation Red&#160;Hat Openshift Data Science Using the Command Line Interface</a></span>
+  <span class="next"><a href="rhods-install-cli.html">Installation Red&#160;Hat OpenShift Data Science Using the Command Line Interface</a></span>
 </nav>
 </article>
   </div>
