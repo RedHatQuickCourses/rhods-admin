@@ -1,15 +1,15 @@
 = Installing Dependencies Using the CLI
 
-== Installation of Red{nbsp}Hat Openshift Data Science Dependencies
+== Installation of Red{nbsp}Hat OpenShift Data Science Dependencies
 
-As described in the xref::dependencies-install-web-console.adoc[Installing Dependencies Using the Web Console] section, some components of *Red{nbsp}Hat Openshift Data Science* require additional operators to be installed.  
+As described in the xref::dependencies-install-web-console.adoc[Installing Dependencies Using the Web Console] section, some components of *Red{nbsp}Hat OpenShift Data Science* require additional operators to be installed.  
 
-In general not installing dependencies before the *Red{nbsp}Hat Openshift Data Science* does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it's better to install the dependencies beforehand.
+In general not installing dependencies before the *Red{nbsp}Hat OpenShift Data Science* does not impact the installation process itself, however it may impact initialization of the components that depend on them. Hence it's better to install the dependencies beforehand.
 
-https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat Openshift Pipelines Operator]::
-The *Red Hat Openshift Pipelines Operator* is required if you want to install the *Data Science Pipelines* component.
+https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat OpenShift Pipelines Operator]::
+The *Red Hat OpenShift Pipelines Operator* is required if you want to install the *Data Science Pipelines* component.
 https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
-The *NVIDIA GPU Operator* is required for GPU support in *Red Hat Openshift Data Science*.
+The *NVIDIA GPU Operator* is required for GPU support in *Red Hat OpenShift Data Science*.
 https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
 The *Node Feature Discovery Operator* is a prerequisite for the *NVIDIA GPU Operator*.
 
@@ -18,13 +18,13 @@ This section will discuss the process for installing the dependent operators usi
 
 == Installation of Data Science Pipelines Dependencies
 
-The Data Science Pipelines component utilizes *Red{nbsp}Hat Openshift Pipelines* as an execution engine for all pipeline runs, and is required to be installed to take advantage of the Data Science Pipelines component.
+The Data Science Pipelines component utilizes *Red{nbsp}Hat OpenShift Pipelines* as an execution engine for all pipeline runs, and is required to be installed to take advantage of the Data Science Pipelines component.
 
-The following section discusses installing the *Red{nbsp}Hat Openshift Pipelines* operator.
+The following section discusses installing the *Red{nbsp}Hat OpenShift Pipelines* operator.
 
-=== Demo: Installation of the *Red{nbsp}Hat Openshift Pipelines* Operator
+=== Demo: Installation of the *Red{nbsp}Hat OpenShift Pipelines* Operator
 [WARNING]
-If you have already installed the *Red{nbsp}Hat Openshift Data Science* operator during the previous demonstration, you have to uninstall it. Follow the xref:uninstalling-rhods.adoc#demo-rhods[Uninstalling Red{nbsp}Hat Openshift Data Science] demo to uninstall the *Red{nbsp}Hat Openshift Data Science* operator first and xref:uninstalling-rhods.adoc#demo-pipelines[Uninstalling Red{nbsp}Hat Openshift Pipelines] to uninstall *Red{nbsp}Hat Openshift Pipelines* first.
+If you have already installed the *Red{nbsp}Hat OpenShift Data Science* operator during the previous demonstration, you have to uninstall it. Follow the xref:uninstalling-rhods.adoc#demo-rhods[Uninstalling Red{nbsp}Hat OpenShift Data Science] demo to uninstall the *Red{nbsp}Hat OpenShift Data Science* operator first and xref:uninstalling-rhods.adoc#demo-pipelines[Uninstalling Red{nbsp}Hat OpenShift Pipelines] to uninstall *Red{nbsp}Hat OpenShift Pipelines* first.
 
 . Log in as a user with the _cluster-admin_ role assigned.
 +
@@ -66,9 +66,9 @@ $ *oc create -f pipelines-subs.yaml*
 
 == Installation of GPU Dependencies
 
-*Red{nbsp}Hat Openshift Data Science* makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.
+*Red{nbsp}Hat OpenShift Data Science* makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.
 
-Currently, *Red{nbsp}Hat Openshift Data Science* supports accelerated compute with NVIDIA GPUs using the *NVIDIA GPU Operator* which relies on the *Node Feature Discovery* operator as a dependency.
+Currently, *Red{nbsp}Hat OpenShift Data Science* supports accelerated compute with NVIDIA GPUs using the *NVIDIA GPU Operator* which relies on the *Node Feature Discovery* operator as a dependency.
 
 The following section will discuss the installation and a basic configuration of both *NVIDIA GPU Operator* and the *Node Feature Discovery* operator.
 

@@ -1,8 +1,8 @@
-= Installation Red{nbsp}Hat Openshift Data Science Using the Command Line Interface
+= Installation Red{nbsp}Hat OpenShift Data Science Using the Command Line Interface
 
-This section covers installation of the *Red{nbsp}Hat Openshift Data Science* from the command line interface.
+This section covers installation of the *Red{nbsp}Hat OpenShift Data Science* from the command line interface.
 
-== Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
+== Demo: Installation of the Red{nbsp}Hat OpenShift Data Science operator
 
 . Log in as a user with the _cluster-admin_ role assigned. 
 +
@@ -101,7 +101,7 @@ clusterserviceversion... ... rhods-operator.2.1.1  Succeeded  <1>
 ----
 <1> Make sure that the status is *Succeeded*
 
-. Finally create your Openshift DataScience Cluster resource to configure your cluster.
+. Finally create your OpenShift DataScience Cluster resource to configure your cluster.
 +
 ----
 cat <<EOF > rhods-cluster.yaml
@@ -139,7 +139,7 @@ oc create -f rhods-cluster.yaml
 <2> Use *Removed* for components that *will not* be installed.
 <3> Use *Managed* for components that will be installed.
 
-. Now the cluster has been configured and you can check the condition of  individual components of the *Red{nbsp}Hat Openshift Data Science*. 
+. Now the cluster has been configured and you can check the condition of  individual components of the *Red{nbsp}Hat OpenShift Data Science*. 
 +
 [subs=+quotes]
 ----
@@ -159,7 +159,7 @@ _...output omitted..._
 <2> Type of the condition. *Type* _workbenchesReady_ together with *status* _True_ indicate that the *Workbench* component is ready.
 
 [NOTE]
-It may take some time for all the application pods to start hence the *Red{nbsp}Hat Openshift Data Science* dashboard may not be available immediately. You may check the condition of componens or alternatively you can check the status of the application pods in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the Openshift Web Console.
+It may take some time for all the application pods to start hence the *Red{nbsp}Hat OpenShift Data Science* dashboard may not be available immediately. You may check the condition of componens or alternatively you can check the status of the application pods in the *redhat-ods-applications* namespace. Once all pods are running and ready, you can open the dashboard in the OpenShift Web Console.
 
 [subs=+quotes]
 ----

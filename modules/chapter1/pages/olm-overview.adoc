@@ -133,7 +133,7 @@ install-vpgls   _operator_name_   Manual     #true#  <3>
 == Checking Installation Progress
 
 Installation progress can be found in the operator's status.
-The following example shows a quick check of the current  status of the *Openshift Pipelines* operator.
+The following example shows a quick check of the current  status of the *OpenShift Pipelines* operator.
 [subs=+quotes]
 ----
 *$ oc get olm | grep ^clusterserviceversion | grep openshift-pipelines-operator*

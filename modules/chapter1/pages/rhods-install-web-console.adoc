@@ -1,39 +1,33 @@
-= Installation Red{nbsp}Hat Openshift Data Science Using the Web Console
+= Installation Red{nbsp}Hat OpenShift Data Science Using the Web Console
 
-*Red{nbsp}Hat Openshift Data Science* is available as an operator via Openshift Operator Hub.  You will install the *Red{nbsp}Hat Openshift Data Science operator V2* using the Openshift web console in this section. 
+*Red{nbsp}Hat OpenShift Data Science* is available as an operator via OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift Data Science operator V2* using the OpenShift web console in this section. 
 
-== Demo: Installation of the Red{nbsp}Hat Openshift Data Science operator
+== Demo: Installation of the Red{nbsp}Hat OpenShift Data Science operator
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
 
-. Login to the Red Hat Openshift using a user which has the _cluster-admin_ role assigned.
+. Login to the Red Hat OpenShift using a user which has the _cluster-admin_ role assigned.
 
-. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Openshift Data Science*.
+. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat OpenShift Data Science*.
 +
 image::rhods_install1.png[width=800]
 
-. Click on the Red{nbsp}Hat Openshift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
-+
-IMPORTANT: Make sure you select *Openshift Data Science* from *Red{nbsp}Hat* not the *Community* version.
+. Click on the Red{nbsp}Hat OpenShift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
 +
 image::rhods_install2.png[width=800]
 
-. In the installation view window choose the _embedded_ *Update Channel*, _Manual_ *Update approval* and keep the default *Installed Namespace*. Click on the *Install* button to start the installation.
+. In the Install Operator page, leave all of the options as default and click on the *Install* button to start the installation.
 +
-image::rhods2-install-view2.png[width=800]
+image::rhods_install3.png[width=800]
 
-. Approve the installation.
+. The operator Installation progress window will pop up. The installation may take a couple of minutes.
 +
-image::rhods2-install-approve.png[width=800]
-+
-Operator Installation progress window will pop up. The installation may take a couple of minutes.
-+
-image::rhods2-install.png[width=800]
+image::rhods_install4.png[width=800]
 
 . When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
 +
-image::rhods2-install-finished.png[width=800]
+image::rhods_install5.png[width=800]
 
 . In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
 + 
@@ -47,7 +41,7 @@ There are following components to choose from:
 +
  * *Data Science Pipelines:* Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models. 
 +
- * *KServe:* Kserve, or KFServing, is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.
+ * *KServe:* Kserve is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.
 +
  * *ModelMeshServing:*  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.
 +
@@ -126,11 +120,11 @@ Similarly to the example above other *Red{nbsp}Hat Data Science* components have
  * odh-dashboardReady
 
 . The operator should be installed and configured now. 
-In the applications window in the right upper corner of the screen the *Red{nbsp}Hat Openshift Data Science* dashboard should be available.
+In the applications window in the right upper corner of the screen the *Red{nbsp}Hat OpenShift Data Science* dashboard should be available.
 +
 image::rhods_verify1.png[width=800]
  
-. Click on the *Red{nbsp}Hat Openshift Data Science* button to log in to the *Red{nbsp}Hat Openshift Data Science*.
+. Click on the *Red{nbsp}Hat OpenShift Data Science* button to log in to the *Red{nbsp}Hat OpenShift Data Science*.
 +
 image::rhods_verify2.png[width=800]
 +

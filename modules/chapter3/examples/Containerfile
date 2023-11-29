@@ -34,7 +34,7 @@ USER 1001
 # This should now print the location Java is installed
 RUN echo "-- WHERE IS JAVA= " && whereis java
 
-# Fix permissions to support pip in Openshift environments \
+# Fix permissions to support pip in OpenShift environments \
 RUN chmod -R g+w /opt/app-root/lib/python3.11/site-packages && \
     fix-permissions /opt/app-root -P
 
