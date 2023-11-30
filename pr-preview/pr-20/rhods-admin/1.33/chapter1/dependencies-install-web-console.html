@@ -47,7 +47,7 @@
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="index.html">Installation of Red&#160;Hat Openshift Data Science</a>
+    <a class="nav-link" href="index.html">Installation of Red&#160;Hat OpenShift Data Science</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="install-general-info.html">General Information about Installation</a>
@@ -56,13 +56,13 @@
     <a class="nav-link" href="dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a>
+    <a class="nav-link" href="rhods-install-web-console.html">Installation Red&#160;Hat OpenShift Data Science Using the Web Console</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="upgrading-rhods.html">Upgrading Red&#160;Hat Openshift Data Science</a>
+    <a class="nav-link" href="upgrading-rhods.html">Upgrading Red&#160;Hat OpenShift Data Science</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="uninstalling-rhods.html">Uninstalling Red&#160;Hat Openshift Data Science</a>
+    <a class="nav-link" href="uninstalling-rhods.html">Uninstalling Red&#160;Hat OpenShift Data Science</a>
   </li>
 </ul>
   </li>
@@ -129,7 +129,7 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="../index.html">Red Hat OpenShift Data Science Administration</a></li>
-    <li><a href="index.html">Installation of Red&#160;Hat Openshift Data Science</a></li>
+    <li><a href="index.html">Installation of Red&#160;Hat OpenShift Data Science</a></li>
     <li><a href="dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a></li>
   </ul>
 </nav>
@@ -143,20 +143,20 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>As described in the <a href="install-general-info.html" class="xref page">General Information about Installation</a> section you may need to install other operators depending on the components and features of Openshift Data Science you want to use.  This section will discuss installing and configuring those components.</p>
+<p>As described in the <a href="install-general-info.html" class="xref page">General Information about Installation</a> section you may need to install other operators depending on the components and features of OpenShift Data Science you want to use.  This section will discuss installing and configuring those components.</p>
 </div>
 <div class="paragraph">
-<p>It is generally recommended to install any dependent operators prior to installing the <strong>Red&#160;Hat Openshift Data Science</strong> operator.</p>
+<p>It is generally recommended to install any dependent operators prior to installing the <strong>Red&#160;Hat OpenShift Data Science</strong> operator.</p>
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1"><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines">Red&#160;Hat Openshift Pipelines Operator</a></dt>
+<dt class="hdlist1"><a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines">Red&#160;Hat OpenShift Pipelines Operator</a></dt>
 <dd>
-<p>The <strong>Red Hat Openshift Pipelines Operator</strong> is required if you want to install the <strong>Data Science Pipelines</strong> component.</p>
+<p>The <strong>Red Hat OpenShift Pipelines Operator</strong> is required if you want to install the <strong>Data Science Pipelines</strong> component.</p>
 </dd>
 <dt class="hdlist1"><a href="https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html">NVIDIA GPU Operator</a></dt>
 <dd>
-<p>The <strong>NVIDIA GPU Operator</strong> is required for GPU support in <strong>Red Hat Openshift Data Science</strong>.</p>
+<p>The <strong>NVIDIA GPU Operator</strong> is required for GPU support in <strong>Red Hat OpenShift Data Science</strong>.</p>
 </dd>
 <dt class="hdlist1"><a href="https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html">Node Feature Discovery Operator</a></dt>
 <dd>
@@ -173,20 +173,20 @@
 <h2 id="_installation_of_data_science_pipelines_dependencies"><a class="anchor" href="#_installation_of_data_science_pipelines_dependencies"></a>Installation of Data Science Pipelines Dependencies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The Data Science Pipelines component utilizes <strong>Red&#160;Hat Openshift Pipelines</strong> as an execution engine for all pipeline runs, and is required to be installed to take advantage of the Data Science Pipelines component.</p>
+<p>The Data Science Pipelines component utilizes <strong>Red&#160;Hat OpenShift Pipelines</strong> as an execution engine for all pipeline runs, and is required to be installed to take advantage of the Data Science Pipelines component.</p>
 </div>
 <div class="paragraph">
-<p>The following section discusses installing the <strong>Red&#160;Hat Openshift Pipelines</strong> operator.</p>
+<p>The following section discusses installing the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator.</p>
 </div>
 <div class="sect2">
-<h3 id="_demo_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_pipelines_operator"></a>Demo: Installation of the <strong>Red&#160;Hat Openshift Pipelines</strong> operator</h3>
+<h3 id="_demo_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_pipelines_operator"></a>Demo: Installation of the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Login to Red&#160;Hat Openshift using a user which has the <em>cluster-admin</em> role assigned.</p>
+<p>Login to Red&#160;Hat OpenShift using a user which has the <em>cluster-admin</em> role assigned.</p>
 </li>
 <li>
-<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>Red&#160;Hat Openshift Pipelines</strong></p>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>Red&#160;Hat OpenShift Pipelines</strong></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipeline_search.png" alt="pipeline search" width="800">
@@ -194,7 +194,7 @@
 </div>
 </li>
 <li>
-<p>Click on the <strong>Red&#160;Hat Openshift Pipelines</strong> operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<p>Click on the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipeline_install1.png" alt="pipeline install1" width="800">
@@ -218,7 +218,7 @@
 </div>
 </li>
 <li>
-<p>When the installation finishes the operator is ready to be used by <strong>Red&#160;Hat Openshift Data Science</strong>.</p>
+<p>When the installation finishes the operator is ready to be used by <strong>Red&#160;Hat OpenShift Data Science</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipeline_install4.png" alt="pipeline install4" width="800">
@@ -249,10 +249,10 @@ For assistance installing OpenShift Pipelines from YAML or via ArgoCD, refer to 
 <h2 id="_installation_of_gpu_dependencies"><a class="anchor" href="#_installation_of_gpu_dependencies"></a>Installation of GPU Dependencies</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Red&#160;Hat Openshift Data Science</strong> makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.</p>
+<p><strong>Red&#160;Hat OpenShift Data Science</strong> makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.</p>
 </div>
 <div class="paragraph">
-<p>Currently, <strong>Red&#160;Hat Openshift Data Science</strong> supports accelerated compute with NVIDIA GPUs using the <strong>NVIDIA GPU Operator</strong> which relies on the <strong>Node Feature Discovery</strong> operator as a dependency.</p>
+<p>Currently, <strong>Red&#160;Hat OpenShift Data Science</strong> supports accelerated compute with NVIDIA GPUs using the <strong>NVIDIA GPU Operator</strong> which relies on the <strong>Node Feature Discovery</strong> operator as a dependency.</p>
 </div>
 <div class="paragraph">
 <p>The following section will discuss the installation and a basic configuration of both <strong>NVIDIA GPU Operator</strong> and the <strong>Node Feature Discovery</strong> operator.</p>
@@ -286,7 +286,7 @@ To view the list of GPU models supported by the <strong>NVIDIA GPU Operator</str
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Login to Red&#160;Hat Openshift using a user which has the <em>cluster-admin</em> role assigned.</p>
+<p>Login to Red&#160;Hat OpenShift using a user which has the <em>cluster-admin</em> role assigned.</p>
 </li>
 <li>
 <p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>Node Feature Discovery</strong></p>
@@ -317,7 +317,19 @@ Make sure you select <strong>Node Feature Discovery</strong> from <strong>Red&#1
 </div>
 </li>
 <li>
-<p>In the installation view check the box to <strong>Enable Operator recommended cluster monitoring on this Namespace</strong> and the <strong>Update&#160;approval</strong> parameters if desired.  Leave the <strong>Installation&#160;mode</strong> and the <strong>Installed&#160;namespace</strong> parameters as the default options.</p>
+<p>In the installation view check the box to <strong>Enable Operator recommended cluster monitoring on this Namespace</strong> and the <strong>Update&#160;approval</strong> parameters if desired.  Leave the <strong>Update channel</strong>, <strong>Version</strong>, and the <strong>Installed&#160;Namespace</strong> parameters as the default options.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Some of these options may vary slightly depending on your version of OpenShift.  Please refer to the official Node Feature Discovery Documentation for your version of OpenShift for the recommended settings.
+</td>
+</tr>
+</table>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/nfd_install2.png" alt="nfd install2" width="800">
@@ -387,7 +399,7 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Login to Red&#160;Hat Openshift using a user which has the <em>cluster-admin</em> role assigned.</p>
+<p>Login to Red&#160;Hat OpenShift using a user which has the <em>cluster-admin</em> role assigned.</p>
 </li>
 <li>
 <p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>NVIDIA GPU Operator</strong></p>
@@ -454,7 +466,7 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 </div>
 </li>
 <li>
-<p>After the <strong>Red&#160;Hat Openshift Data Science</strong> operator has been installed and configured, users will be able to see an option for "Number of GPUs" when creating a new workbench.</p>
+<p>After the <strong>Red&#160;Hat OpenShift Data Science</strong> operator has been installed and configured, users will be able to see an option for "Number of GPUs" when creating a new workbench.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/gpu_verify2.png" alt="gpu verify2" width="800">
@@ -470,7 +482,7 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The Dashboard may initially show "All GPUs are currently in use, try again later." when <strong>Red&#160;Hat Openshift Data Science</strong>  is first installed.  It may take a few minutes after <strong>Red&#160;Hat Openshift Data Science</strong> is installed before the GPUs are initially detected.
+The Dashboard may initially show "All GPUs are currently in use, try again later." when <strong>Red&#160;Hat OpenShift Data Science</strong>  is first installed.  It may take a few minutes after <strong>Red&#160;Hat OpenShift Data Science</strong> is installed before the GPUs are initially detected.
 </td>
 </tr>
 </table>
@@ -504,7 +516,7 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 </div>
 <nav class="pagination">
   <span class="prev"><a href="install-general-info.html">General Information about Installation</a></span>
-  <span class="next"><a href="rhods-install-web-console.html">Installation Red&#160;Hat Openshift Data Science Using the Web Console</a></span>
+  <span class="next"><a href="rhods-install-web-console.html">Installation Red&#160;Hat OpenShift Data Science Using the Web Console</a></span>
 </nav>
 </article>
   </div>
