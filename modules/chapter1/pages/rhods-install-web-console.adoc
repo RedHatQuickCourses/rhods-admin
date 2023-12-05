@@ -1,4 +1,4 @@
-= Installation Red{nbsp}Hat OpenShift Data Science Using the Web Console
+= Installing Red{nbsp}Hat OpenShift Data Science Using the Web Console
 
 *Red{nbsp}Hat OpenShift Data Science* is available as an operator via OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift Data Science operator V2* using the OpenShift web console in this section. 
 
