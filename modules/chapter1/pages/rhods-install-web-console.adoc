@@ -1,8 +1,8 @@
-= Installing Red{nbsp}Hat OpenShift Data Science Using the Web Console
+= Installing Red{nbsp}Hat OpenShift AI Using the Web Console
 
-*Red{nbsp}Hat OpenShift Data Science* is available as an operator via OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift Data Science operator V2* using the OpenShift web console in this section. 
+*Red{nbsp}Hat OpenShift AI* is available as an operator via OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift Data Science operator V2* using the OpenShift web console in this section.
 
-== Demo: Installation of the Red{nbsp}Hat OpenShift Data Science operator
+== Demo: Installation of Red{nbsp}Hat OpenShift AI
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
@@ -124,7 +124,7 @@ In the applications window in the right upper corner of the screen the *Red{nbsp
 +
 image::rhods_verify1.png[width=800]
  
-. Click on the *Red{nbsp}Hat OpenShift Data Science* button to log in to the *Red{nbsp}Hat OpenShift Data Science*.
+. Click the *Red{nbsp}Hat OpenShift Data Science* button to log in to the *Red{nbsp}Hat OpenShift AI* dashboard.
 +
 image::rhods_verify2.png[width=800]
 +

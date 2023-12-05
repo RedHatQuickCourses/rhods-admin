@@ -1,11 +1,11 @@
-= Upgrading Red{nbsp}Hat OpenShift Data Science
+= Upgrading Red{nbsp}Hat OpenShift AI
 
-Upgrades of *Red{nbsp}Hat OpenShift Data Science* is handled by the operator. 
+Red Hat OpenShift AI upgrades are handled by the *Red{nbsp}Hat OpenShift Data Science* operator.
 
 [NOTE]
 Upgrading directly from the Red Hat OpenShift Data Science self-managed Beta version to the Generally Available (GA) release is not supported. The operator has to be uninstalled first and replaced with the new version.
 
-When an upgrade is available *OLM* creates an *Installplan* for the new version. 
+When an upgrade is available *OLM* creates an *Installplan* for the new version.
 
 [subs=+quotes]
 ----
@@ -26,7 +26,7 @@ Manual approvals done from the CLI are discussed in the xref:rhods-install-cli.a
 
 The following demonstration shows an upgrade with a manual approval done from the web console. 
 
-== Demo: Upgrading Red{nbsp}Hat OpenShift Data Science
+== Demo: Upgrading Red{nbsp}Hat OpenShift AI
 
 [IMPORTANT]
 Make sure that you have installed the *Red{nbsp}Hat OpenShift Data Science* operator using one of the previous demonstrations (Web based or CLI). They both install an older version of the operator from the _embedded_ channel.
@@ -34,7 +34,7 @@ Make sure that you have installed the *Red{nbsp}Hat OpenShift Data Science* oper
 . Log in to Red{nbsp}Hat OpenShift web console using a user which has _cluster-admin_ role assigned.
 
 . Navigate to *Operators* -> *Installed Operators*, select project *redhat-ods-operator*, click on the *Red{nbsp}Hat OpenShift Data Science* and choose the *Subscription* tab.
-Edit the *Update channel* - change it to *alpha* and click on *Save*.
+Edit the *Update channel* - change it to *alpha* and click *Save*.
 +
 image::rhods2-channel-change.png[width=800]
 
@@ -59,6 +59,6 @@ image::rhods2-upgrade-status.png[width=800]
 image::rhods2-upgrade-succeeded.png[width=800]
 
 == Backup considerations
-Permanent storage for *Jupyter notebooks* is done using OpenShift *Persistent Volume Claims (PVC)* attached to the *Jupyter notebook* pod. The operator does not manage PVCs hence there is no need to take a backup as long as the OpenShift *Namespace* where the *Jupyter notebook* pod is running is not deleted. Even in an event of accidental operator uninstallation all PVCs in namespaces created by either the operator or a *Red{nbsp}Hat OpenShift Data Science* user remain untouched.
+Permanent storage for *Jupyter notebooks* is done using OpenShift *Persistent Volume Claims (PVC)* attached to the *Jupyter notebook* pod. The operator does not manage PVCs hence there is no need to take a backup as long as the OpenShift *Namespace* where the *Jupyter notebook* pod is running is not deleted. Even in an event of accidental operator uninstallation all PVCs in namespaces created by either the operator or an OpenShift AI user remain untouched.
 
 
