@@ -39,7 +39,7 @@ This size might be required if you run multiple workbenches and pipelines simult
 [IMPORTANT]
 ====
 RHOAI workbenches and pipelines use large container images.
-Dependencies such as Tensorflow, PyTorch, or CUDA result in images sizes of several gigabytes.
+Dependencies such as Tensorflow, PyTorch, or CUDA result in image sizes of several gigabytes.
 
 The data ingestion and training stages can demand large amounts of memory and CPU/GPU resources.
 Make sure that your worker nodes have enough memory to accomodate pods that consume dozens of GB.
