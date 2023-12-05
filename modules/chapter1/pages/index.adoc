@@ -1,12 +1,12 @@
-= Installation of Red{nbsp}Hat OpenShift Data Science
+= Installation of Red{nbsp}Hat OpenShift AI
 
 == Supported configurations
-OpenShift Data Science is supported in two configurations:
+OpenShift AI is supported in two configurations:
  
  * A managed cloud service add-on for *Red Hat OpenShift Dedicated* (with a Customer Cloud Subscription for AWS or GCP) or for Red Hat OpenShift Service on Amazon Web Services (ROSA).
-For information about OpenShift Data Science on a Red Hat managed environment, see https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science/1[Product Documentation for Red Hat OpenShift Data Science.]
+For information about OpenShift AI on a Red Hat managed environment, see https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science/1[Product Documentation for Red Hat OpenShift AI.]
 
 * Self-managed software that you can install on-premise or on the public cloud in a self-managed environment, such as *OpenShift Container Platform*.
-For information about OpenShift Data Science as self-managed software on your OpenShift cluster in a connected or a disconnected environment, see https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science_self-managed[Product Documentation for Red Hat OpenShift Data Science self-managed.]
+For information about OpenShift AI as self-managed software on your OpenShift cluster in a connected or a disconnected environment, see https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science_self-managed[Product Documentation for Red Hat OpenShift AI self-managed.]
 
-In this course we cover installation of *OpenShift Data Science self-managed* using the OpenShift Web Console.
+In this course we cover installation of *OpenShift AI self-managed* using the OpenShift Web Console.
