@@ -231,6 +231,25 @@ This size might be required if you run multiple workbenches and pipelines simult
 </li>
 </ul>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>RHOAI workbenches and pipelines use large container images.
+Dependencies such as Tensorflow, PyTorch, or CUDA result in images sizes of several gigabytes.</p>
+</div>
+<div class="paragraph">
+<p>The data ingestion and training stages can demand large amounts of memory and CPU/GPU resources.
+Make sure that your worker nodes have enough memory to accomodate pods that consume dozens of GB.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>This classroom does <strong>NOT</strong> have RHOAI pre-installed.
 You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
