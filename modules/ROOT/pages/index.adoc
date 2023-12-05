@@ -28,6 +28,23 @@ The PTL team acknowledges the valuable contributions of the following Red Hat as
 
 Use the https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod[Red Hat OpenShift Container Platform 4.13 Workshop] catalog item from Red Hat Demo Platform (RHDP).
 
+When ordering this demo item:
+
+* Select at least two users in the `User Count` field.
+Having two users is required for the user management exercise.
+
+* In the `OpenShift worker memory size` field, select `64Gi`.
+This size might be required if you run multiple workbenches and pipelines simultaneously.
+
+[IMPORTANT]
+====
+RHOAI workbenches and pipelines use large container images.
+Dependencies such as Tensorflow, PyTorch, or CUDA result in image sizes of several gigabytes.
+
+The data ingestion and training stages can demand large amounts of memory and CPU/GPU resources.
+Make sure that your worker nodes have enough memory to accomodate pods that consume dozens of GB.
+====
+
 This classroom does *NOT* have RHOAI pre-installed.
 You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.
 
