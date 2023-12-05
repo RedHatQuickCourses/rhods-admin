@@ -217,6 +217,40 @@ After you have completed all the courses in the learning path, you can attempt t
 <p>Use the <a href="https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&amp;item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod">Red Hat OpenShift Container Platform 4.13 Workshop</a> catalog item from Red Hat Demo Platform (RHDP).</p>
 </div>
 <div class="paragraph">
+<p>When ordering this demo item:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select at least two users in the <code>User Count</code> field.
+Having two users is required for the user management exercise.</p>
+</li>
+<li>
+<p>In the <code>OpenShift worker memory size</code> field, select <code>64Gi</code>.
+This size might be required if you run multiple workbenches and pipelines simultaneously.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>RHOAI workbenches and pipelines use large container images.
+Dependencies such as Tensorflow, PyTorch, or CUDA result in image sizes of several gigabytes.</p>
+</div>
+<div class="paragraph">
+<p>The data ingestion and training stages can demand large amounts of memory and CPU/GPU resources.
+Make sure that your worker nodes have enough memory to accomodate pods that consume dozens of GB.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
 <p>This classroom does <strong>NOT</strong> have RHOAI pre-installed.
 You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
 </div>
