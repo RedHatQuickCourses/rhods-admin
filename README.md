@@ -1,6 +1,6 @@
 # Red Hat OpenShift AI Administration
 
-This is the second in a series of 6 courses about Red Hat OpenShift AI (RHOAI).
+This is the second in a series of five courses about Red Hat OpenShift AI (RHOAI).
 This courses focuses on the installation, upgrades and administration of the product.
 
 Refer to the quick courses [contributor guide](https://redhatquickcourses.github.io/welcome/1/guide/overview.html) to work with this repository.

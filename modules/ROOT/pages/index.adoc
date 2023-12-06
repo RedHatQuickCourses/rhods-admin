@@ -2,14 +2,13 @@
 :navtitle: Home
 
 Welcome to this quick course on the _Red Hat OpenShift AI Administration_.
-This course is the second in a series of 6 courses about Red Hat OpenShift AI:
+This course is the *second* in a series of *five* courses about Red Hat OpenShift AI:
 
 1. https://redhatquickcourses.github.io/rhods-intro[Introduction to Red Hat OpenShift AI]
 2. Red Hat OpenShift AI Administration  (_This course_)
-3. Data Analysis and Visualization with Red Hat OpenShift AI (Under Development)
-4. https://redhatquickcourses.github.io/rhods-model[Creating Machine Learning Models with Red Hat OpenShift AI]
-5. https://redhatquickcourses.github.io/rhods-deploy[Deploying Machine Learning Models with Red Hat OpenShift AI]
-6. https://redhatquickcourses.github.io/rhods-pipelines[Automation using Data Science Pipelines]
+3. https://redhatquickcourses.github.io/rhods-model[Creating Machine Learning Models with Red Hat OpenShift AI]
+4. https://redhatquickcourses.github.io/rhods-deploy[Deploying Machine Learning Models with Red Hat OpenShift AI]
+5. https://redhatquickcourses.github.io/rhods-pipelines[Automation using Data Science Pipelines]
 
 NOTE: After you have completed all the courses in the learning path, you can attempt the https://github.com/RedHatQuickCourses/rhods-qc-apps/tree/main/7.hands-on-lab["Workshop final hands-on lab"], that tests your understanding of the concepts taught in all the courses.
 
@@ -42,7 +41,7 @@ RHOAI workbenches and pipelines use large container images.
 Dependencies such as Tensorflow, PyTorch, or CUDA result in image sizes of several gigabytes.
 
 The data ingestion and training stages can demand large amounts of memory and CPU/GPU resources.
-Make sure that your worker nodes have enough memory to accomodate pods that consume dozens of GB.
+Make sure that your worker nodes have enough memory to accommodate pods that consume dozens of GB.
 ====
 
 This classroom does *NOT* have RHOAI pre-installed.
