@@ -251,6 +251,40 @@ Make sure that your worker nodes have enough memory to accommodate pods that con
 <p>This classroom does <strong>NOT</strong> have RHOAI pre-installed.
 You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
 </div>
+<div class="sect2">
+<h3 id="_alternative_classroom_environment_on_aws"><a class="anchor" href="#_alternative_classroom_environment_on_aws"></a>Alternative classroom environment on AWS</h3>
+<div class="paragraph">
+<p>You can also use an AWS cluster by ordering the <a href="https://demo.redhat.com/catalog?search=AWS+with+OpenShift+Open+Environment&amp;item=babylon-catalog-prod%2Fsandboxes-gpte.sandbox-ocp.prod">AWS with OpenShift Open Environment</a>.</p>
+</div>
+<div class="paragraph">
+<p>If you use this item, you must:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Make sure that you select <code>3</code> as the control plane count and <code>4.13</code> as the OpenShift version.</p>
+</li>
+<li>
+<p>Configure users and authentication.
+The AWS item is only preconfigured with the <code>kubeadmin</code> user, which does not have the <code>cluster-admin</code> role assigned.
+The exercises in this course, however, assume the existence of an <code>admin</code> user with the <code>cluster-admin</code> role and five non-admin users (<code>user1&#8230;&#8203;user5</code>).
+To configure authentication for these users, use the <a href="_attachments/authentication.yaml" class="xref attachment">authentication.yaml</a> file.</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc replace -f authentication.yaml</strong></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The password for the <code>admin</code> and <code>user1&#8230;&#8203;user5</code> users is <code>openshift23</code>.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
