@@ -53,11 +53,11 @@ You can also use an AWS cluster by ordering the https://demo.redhat.com/catalog?
 
 If you use this item, you must:
 
-* Make sure that you select `3` as the control plane count and `4.13 as the OpenShift version.
+* Make sure that you select `3` as the control plane count and `4.13` as the OpenShift version.
 
 * Configure users and authentication.
 The AWS item is only preconfigured with the `kubeadmin` user, which does not have the `cluster-admin` role assigned.
-The exercises in this course, however, assume the existence of and `admin` user with the `cluster-admin` role and five non-admin users (`user1...user5`).
+The exercises in this course, however, assume the existence of an `admin` user with the `cluster-admin` role and five non-admin users (`user1...user5`).
 To configure authentication for these users, use the xref:attachment$authentication.yaml[authentication.yaml] file.
 +
 [subs=+quotes]
