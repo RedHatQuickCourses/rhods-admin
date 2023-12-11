@@ -25,7 +25,7 @@ The *Node Feature Discovery Operator* is a prerequisite for the *NVIDIA GPU Oper
 
 [IMPORTANT]
 ====
-Make sure that the https://access.redhat.com/documentation/es-es/openshift_container_platform/4.13/html-single/registry/index#configuring-registry-operator[internal OpenShift image registry] is running before installing and running RHOAI.
+Make sure that the https://access.redhat.com/solutions/6993520[internal OpenShift image registry] is running before installing and running RHOAI.
 
 RHOAI uses the internal image registry to pull prebuilt notebook images that are used to run containerized workbenches.
 ====
