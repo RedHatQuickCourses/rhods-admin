@@ -102,7 +102,7 @@ trino==0.305.0
 +
 [source]
 ----
-podman build -t rhods-custom-image .
+podman build -t rhods-admin-custom-image .
 ----
 +
 You should see a similar message in the logs:
