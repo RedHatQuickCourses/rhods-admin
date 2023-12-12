@@ -248,7 +248,7 @@ RUN echo "Installing softwares and packages" &amp;&amp; \     <i class="conum" d
     pip install micropipenv &amp;&amp; \
     # Install Python packages \
     micropipenv install &amp;&amp; \
-    rm -f ./requiremnents.txt
+    rm -f ./requirements.txt
 
 # Fix permissions to support pip in OpenShift environments \
 RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages &amp;&amp; \    <i class="conum" data-value="4"></i><b>(4)</b>
