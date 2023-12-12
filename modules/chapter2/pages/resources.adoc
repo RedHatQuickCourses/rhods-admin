@@ -132,7 +132,15 @@ data:
 <4> An option to enable or disable the automatic culling
 <5> How frequently the culler will check if the notebook is idle (in minutes)
 
-A notebook is considered idle when the user has not taken any action inside of the notebook such as executing a cell, creating files, or interacting with the user interface in general.
+A notebook is considered idle when no logged-in user has taken any action inside of the notebook such as executing a cell, creating files, or interacting with the user interface in general.
+
+[IMPORTANT]
+====
+If your cluster is configured to end user sessions after a certain period of time, then this setting overrides the idle notebook time limit configured in RHOAI.
+
+For example, assume you have configured your cluster to time out user sessions after one hour of inactivity, and also configured the RHOAI idle notebook time limit to five hours.
+In this case, RHOAI will stop a notebook if no logged-in user activity is detected after one hour.
+====
 
 == Managing Workbench and Model Server Sizes
 
@@ -262,8 +270,6 @@ https://docs.openshift.com/container-platform/4.14/nodes/clusters/nodes-cluster-
 
 Over time, projects may become abandoned as users leave your organization or move onto other initiatives. Old projects may need to be cleaned up and removed from the cluster in order to free up those resources.
 
-To completely remove a project from OpenShift, you must first delete all of the resources from that project before you will be able to delete the project.  
-
 The following `oc` commands can be used to help cleanup OpenShift AI related resources prior to deleting the project:
 
 ```sh
@@ -285,3 +291,10 @@ oc delete pvc,configmaps,secrets,rolebindings,roles --all
 # delete the project
 oc delete project my-project
 ```
+
+[TIP]
+====
+There is no need to manually delete all the resources in a data science project before deleting the project.
+
+When you delete a data science project, the finalizer deletes all namespaced resources in this project, including notebooks, model servers, PVCs, configuration maps, secrets, and other common project-scoped objects.
+====
