@@ -270,8 +270,6 @@ https://docs.openshift.com/container-platform/4.14/nodes/clusters/nodes-cluster-
 
 Over time, projects may become abandoned as users leave your organization or move onto other initiatives. Old projects may need to be cleaned up and removed from the cluster in order to free up those resources.
 
-To completely remove a project from OpenShift, you must first delete all of the resources from that project before you will be able to delete the project.  
-
 The following `oc` commands can be used to help cleanup OpenShift AI related resources prior to deleting the project:
 
 ```sh
@@ -293,3 +291,13 @@ oc delete pvc,configmaps,secrets,rolebindings,roles --all
 # delete the project
 oc delete project my-project
 ```
+
+Similarly, you can use the RHOAI dashboard to delete a data science project.
+In the btn:[Data Science Projects] section, locate the project to be deleted, click btn:[⋮] and then click btn:[Delete project].
+
+[TIP]
+====
+There is no need to manually delete all the resources in a data science project before deleting the project.
+
+When you delete a data science project, the finalizer deletes all namespaced resources in this project, including notebooks, model servers, PVCs, configuration maps, secrets, and other common project-scoped objects.
+====
