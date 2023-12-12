@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: htpasswd
+  namespace: openshift-config
+type: Opaque
+data:
+  htpasswd: YWRtaW46JGFwcjEkZnltOWQ4aTMkcWhSYjFyVVcvWFlBaTVkUE9MTnhvMAp1c2VyMTokYXByMSQ3bTFvcGs2NCR2SkM3S1g5cXNFYi94NzNDajJ4eEUwCnVzZXIyOiRhcHIxJHZlbzFmdGo0JHlEaG5yU1VFT25mV3FZaTFyL3JLVS8KdXNlcjM6JGFwcjEkdHA1aGM5bnIkSTFOanVLNy54WkR2QkhWVC9xYjhUMAp1c2VyNDokYXByMSR1Ymd3OGVvMyR4NUFRYzJWdFdMVmRHUkNSL0xkNnUxCnVzZXI1OiRhcHIxJHp2bjhnYnBkJE5vZnlGUDNBdmV6Wm0yT0N1LlVwUS8K
+---
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+    - name: htpasswd_provider
+      challenge: true
+      login: true
+      mappingMethod: claim
+      type: HTPasswd
+      htpasswd:
+        fileData:
+          name: htpasswd
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: "cluster-admin-admin"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: "admin"
