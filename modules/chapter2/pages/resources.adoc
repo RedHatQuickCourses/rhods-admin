@@ -292,6 +292,9 @@ oc delete pvc,configmaps,secrets,rolebindings,roles --all
 oc delete project my-project
 ```
 
+Similarly, you can use the RHOAI dashboard to delete a data science project.
+In the btn:[Data Science Projects] section, locate the project to be deleted, click btn:[⋮] and then click btn:[Delete project].
+
 [TIP]
 ====
 There is no need to manually delete all the resources in a data science project before deleting the project.
