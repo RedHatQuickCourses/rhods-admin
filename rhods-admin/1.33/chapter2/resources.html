@@ -321,7 +321,7 @@
 <p>The Idle Notebook Culler is intended to help reduce the number of inactive notebooks running on the cluster, by detecting the last time an action was taken in a notebook and shutting down the pods if the notebook has been inactive for a period of time.</p>
 </div>
 <div class="paragraph">
-<p>An admin can enable culling for notebooks though the Dashboard under the menu:Settings[Cluster settings] section:</p>
+<p>An admin can enable culling for notebooks though the Dashboard under the <span class="menuseq"><b class="menu">Settings</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Cluster settings</b></span> section:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -371,7 +371,25 @@ data:
 </table>
 </div>
 <div class="paragraph">
-<p>A notebook is considered idle when the user has not taken any action inside of the notebook such as executing a cell, creating files, or interacting with the user interface in general.</p>
+<p>A notebook is considered idle when no logged-in user has taken any action inside of the notebook such as executing a cell, creating files, or interacting with the user interface in general.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If your cluster is configured to end user sessions after a certain period of time, then this setting overrides the idle notebook time limit configured in RHOAI.</p>
+</div>
+<div class="paragraph">
+<p>For example, assume you have configured your cluster to time out user sessions after one hour of inactivity, and also configured the RHOAI idle notebook time limit to five hours.
+In this case, RHOAI will stop a notebook if no logged-in user activity is detected after one hour.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
