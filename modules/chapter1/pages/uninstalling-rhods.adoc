@@ -1,9 +1,9 @@
-= Uninstalling Red{nbsp}Hat OpenShift Data Science
+= Uninstalling Red{nbsp}Hat OpenShift AI
 
-*Red{nbsp}Hat OpenShift Data Science* operator manages *Red{nbsp}Hat OpenShift Data Science* components hence uninstalling of the *Red{nbsp}Hat OpenShift Data Science* requires uninstalling the *Red{nbsp}Hat OpenShift Data Science* operator and cleaning some of the resources that have been created by the operator or users.
+*Red{nbsp}Hat OpenShift Data Science* operator manages *Red{nbsp}Hat OpenShift AI* components hence uninstalling of the *Red{nbsp}Hat OpenShift AI* requires uninstalling the *Red{nbsp}Hat OpenShift Data Science* operator and cleaning some of the resources that have been created by the operator or users.
 
 [#demo-rhods]
-== Demo: Uninstalling Red{nbsp}Hat OpenShift Data Science
+== Demo: Uninstalling Red{nbsp}Hat OpenShift AI
 . Log in to Red{nbsp} OpenShift web console using a user which has the _cluster-admin_ role assigned.
 
 . Delete the DataScienceCluster object. 
@@ -37,7 +37,7 @@ alternatively you can delete the *DCSI* objects from the CLI.
 dscinitialization.dscinitialization.opendatahub.io "default" deleted
 ----
 
-. Uninstall the *Red Hat OpenShift Data Science* operator. 
+. Uninstall the *Red Hat OpenShift Data Science* operator.
 +
 Navigate to *Operators* ->  *Installed Operators* and uninstall the *Red Hat OpenShift Data Science* operator.
 +
@@ -100,7 +100,7 @@ my-rhods-project   Active   6h22m
 namespace "my-rhods-project" deleted
 ----
 
-== Uninstalling the Red{nbsp}Hat OpenShift Data Science dependencies.
+== Uninstalling the Red{nbsp}Hat OpenShift AI dependencies.
 
 If you have installed some dependencies you can remove them as long as they are not used by other deployments.
 The following demonstration shows uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator

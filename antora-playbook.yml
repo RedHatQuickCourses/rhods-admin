@@ -1,5 +1,5 @@
 site:
-  title: Red Hat OpenShift Data Science Administration
+  title: Red Hat OpenShift AI Administration
   start_page: rhods-admin::index.adoc
 
 content:
@@ -9,6 +9,7 @@ content:
 asciidoc:
   attributes:
     page-pagination: true
+    experimental: true
 
 ui:
   bundle:

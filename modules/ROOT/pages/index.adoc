@@ -1,17 +1,16 @@
-= Red Hat OpenShift Data Science Administration
+= Red Hat OpenShift AI Administration
 :navtitle: Home
 
-Welcome to this quick course on the _Red Hat OpenShift Data Science Administration_.
-This course is the second in a series of 6 courses about Red Hat OpenShift Data Science:
+Welcome to this quick course on the _Red Hat OpenShift AI Administration_.
+This course is the *second* in a series of *five* courses about Red Hat OpenShift AI:
 
-1. https://redhatquickcourses.github.io/rhods-intro[Introduction to Red Hat OpenShift Data Science]
-2. Red Hat OpenShift Data Science Administration  (_This course_)
-3. Data Analysis and Visualization with Red Hat OpenShift Data Science (Under Development)
-4. https://redhatquickcourses.github.io/rhods-model[Creating Machine Learning Models with Red Hat OpenShift Data Science]
-5. https://redhatquickcourses.github.io/rhods-deploy[Deploying Machine Learning Models with Red Hat OpenShift Data Science]
-6. https://redhatquickcourses.github.io/rhods-pipelines[Automation using Data Science Pipelines]
+1. https://redhatquickcourses.github.io/rhods-intro[Introduction to Red Hat OpenShift AI]
+2. Red Hat OpenShift AI Administration  (_This course_)
+3. https://redhatquickcourses.github.io/rhods-model[Creating Machine Learning Models with Red Hat OpenShift AI]
+4. https://redhatquickcourses.github.io/rhods-deploy[Deploying Machine Learning Models with Red Hat OpenShift AI]
+5. https://redhatquickcourses.github.io/rhods-pipelines[Automation using Data Science Pipelines]
 
-NOTE: After you have completed all the courses in the learning path, you can attempt the https://github.com/RedHatQuickCourses/rhods-qc-apps/tree/main/7.hands-on-lab["Hit the RHODS"] exercise, that tests your understanding of the concepts taught in all the courses.
+NOTE: After you have completed all the courses in the learning path, you can attempt the https://github.com/RedHatQuickCourses/rhods-qc-apps/tree/main/7.hands-on-lab["Workshop final hands-on lab"], that tests your understanding of the concepts taught in all the courses.
 
 == Authors
 
@@ -28,7 +27,48 @@ The PTL team acknowledges the valuable contributions of the following Red Hat as
 
 Use the https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod[Red Hat OpenShift Container Platform 4.13 Workshop] catalog item from Red Hat Demo Platform (RHDP).
 
-This classroom does *NOT* have RHODS pre-installed. You install and configure a basic RHODS instance, and then continue using this instance with other courses in the learning path.
+When ordering this demo item:
+
+* Select at least two users in the `User Count` field.
+Having two users is required for the user management exercise.
+
+* In the `OpenShift worker memory size` field, select `64Gi`.
+This size might be required if you run multiple workbenches and pipelines simultaneously.
+
+[IMPORTANT]
+====
+RHOAI workbenches and pipelines use large container images.
+Dependencies such as Tensorflow, PyTorch, or CUDA result in image sizes of several gigabytes.
+
+The data ingestion and training stages can demand large amounts of memory and CPU/GPU resources.
+Make sure that your worker nodes have enough memory to accommodate pods that consume dozens of GB.
+====
+
+This classroom does *NOT* have RHOAI pre-installed.
+You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.
+
+=== Alternative classroom environment on AWS
+
+You can also use an AWS cluster by ordering the https://demo.redhat.com/catalog?search=AWS+with+OpenShift+Open+Environment&item=babylon-catalog-prod%2Fsandboxes-gpte.sandbox-ocp.prod[AWS with OpenShift Open Environment].
+
+If you use this item, you must:
+
+* Make sure that you select `3` as the control plane count and `4.13` as the OpenShift version.
+
+* Configure users and authentication.
+The AWS item is only preconfigured with the `kubeadmin` user, which does not have the `cluster-admin` role assigned.
+The exercises in this course, however, assume the existence of an `admin` user with the `cluster-admin` role and five non-admin users (`user1...user5`).
+To configure authentication for these users, use the xref:attachment$authentication.yaml[authentication.yaml] file.
++
+[subs=+quotes]
+----
+$ *oc replace -f authentication.yaml*
+----
+
+[INFO]
+====
+The password for the `admin` and `user1...user5` users is `openshift23`.
+====
 
 == Prerequisites
 
@@ -41,9 +81,9 @@ This classroom does *NOT* have RHODS pre-installed. You install and configure a 
 
 The overall objectives of this course include:
 
-* Installing RedHat OpenShift Data Science using the web console and CLI
-* Upgrading RedHat OpenShift Data Science components
-* Managing RedHat OpenShift Data Science users and controlling access
-* Enabling GPU support in RedHat OpenShift Data Science
+* Installing RedHat OpenShift AI using the web console and CLI
+* Upgrading RedHat OpenShift AI components
+* Managing RedHat OpenShift AI users and controlling access
+* Enabling GPU support in RedHat OpenShift AI
 * Stopping idle notebooks
 * Create and configure a custom notebook image

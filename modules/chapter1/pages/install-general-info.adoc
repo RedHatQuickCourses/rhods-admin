@@ -1,14 +1,31 @@
 = General Information about Installation   
 
-Red{nbsp}Hat OpenShift Data Science is available to install a self-managed version as an operator through OperatorHub or as a fully managed solution through OpenShift Marketplace. 
+Red{nbsp}Hat OpenShift AI is available to install a self-managed version as an operator through OperatorHub or as a fully managed solution through OpenShift Marketplace.
 
-In addition to the *Red{nbsp}Hat OpenShift Data Science* Operator there are some other operators that you may need to install depending on which features and components of *Red{nbsp}Hat OpenShift Data Science* you want to install and use.
+
+[INFO]
+====
+The product name has been recently changed to *Red{nbsp}Hat OpenShift AI (RHOAI)*, but the operator still uses the earlier name: *Red{nbsp}Hat OpenShift Data Science*.
+
+In this course, most references to the product use the new name.
+However, references to the operator and UI elements might still use the previous name.
+====
+
+In addition to the *Red{nbsp}Hat OpenShift AI* Operator there are some other operators that you may need to install depending on which features and components of *Red{nbsp}Hat OpenShift AI* you want to install and use.
 
 https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat OpenShift Pipelines Operator]::
-The *Red{nbsp}Hat OpenShift Pipelines Operator* is required if you want to install the  *Red{nbsp}Hat OpenShift Data Science Pipelines* component.
+The *Red{nbsp}Hat OpenShift Pipelines Operator* is required if you want to install the  *Red{nbsp}Hat OpenShift AI Pipelines* component.
 
 https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
-The *NVIDIA GPU Operator* is required for GPU support in  Red Hat OpenShift Data Science.
+The *NVIDIA GPU Operator* is required for GPU support in  Red Hat OpenShift AI.
 
 https://docs.openshift.com/container-platform/4.13/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
 The *Node Feature Discovery Operator* is a prerequisite for the *NVIDIA GPU Operator*.
+
+
+[IMPORTANT]
+====
+Make sure that the https://access.redhat.com/solutions/6993520[internal OpenShift image registry] is running before installing and running RHOAI.
+
+RHOAI uses the internal image registry to pull prebuilt notebook images that are used to run containerized workbenches.
+====

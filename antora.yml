@@ -1,5 +1,5 @@
 name: rhods-admin
-title: Red Hat OpenShift Data Science Administration
+title: Red Hat OpenShift AI Administration
 version: 1.33
 nav:
 - modules/ROOT/nav.adoc
