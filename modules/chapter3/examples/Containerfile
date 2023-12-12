@@ -16,7 +16,7 @@ RUN echo "Installing softwares and packages" && \
     pip install micropipenv && \
     # Install Python packages \
     micropipenv install && \
-    rm -f ./requiremnents.txt
+    rm -f ./requirements.txt
 
 # This should be blank since Java has not been installed
 RUN echo "-- WHERE IS JAVA= " && whereis java
