@@ -48,7 +48,7 @@ RUN echo "Installing softwares and packages" && \     <3>
     pip install micropipenv && \
     # Install Python packages \
     micropipenv install && \
-    rm -f ./requiremnents.txt
+    rm -f ./requirements.txt
 
 # Fix permissions to support pip in OpenShift environments \
 RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \    <4>
