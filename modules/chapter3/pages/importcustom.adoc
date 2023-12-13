@@ -11,6 +11,33 @@ image::quaySettings.png[Quay Repository Settings]
 2. Scroll down until you see the *Repository Visibility* section.  Click the *Make Public* button and click Ok to make the repository public.
 +
 image::quayMakePublic.png[Quay Visibility Setting]
++
+[TIP]
+====
+To use private container images, you can create a `dockerconfigjson` secret in the `redhat-ods-applications` project and assign this secret to the `default` service account in this project.
+
+The secret can contain the registry credentials in dockerconfig JSON format, which, if you use Quay, you can download from the btn:[Account Settings] page, by clicking btn:[Generate Encrypted Password] and then downloading the credentials JSON file from the btn:[Docker Configuration] option.
+
+After downloading the credentials file, use this file to create a secret:
+
+[source,console,subs=+quotes]
+----
+$ oc create secret generic quay-pull-secret \
+ --from-file=.dockerconfigjson=_path-to-credentials-file.json_ \
+ --type=kubernetes.io/dockerconfigjson \
+ -n redhat-ods-applications
+----
+
+Finally, link the secret to the `default` service account as a pull secret:
+
+[source,console,subs=+quotes]
+----
+$ oc secrets link default quay-pull-secret --for=pull \
+ -n redhat-ods-applications
+----
+
+For more information, refer to https://docs.openshift.com/container-platform/4.13/openshift_images/image-streams-manage.html#images-imagestream-import-images-private-registry_image-streams-managing[Importing images and image streams from private registries].
+====
 
 3. Login to the OpenShift AI dashboard as the admin user. Expand *Settings*, click *Notebook Images*, and then click *Import Image*.
 +
