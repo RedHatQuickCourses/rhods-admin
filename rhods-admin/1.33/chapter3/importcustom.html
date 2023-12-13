@@ -166,6 +166,46 @@
 <img src="_images/quayMakePublic.png" alt="Quay Visibility Setting">
 </div>
 </div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To use private container images, you can create a <code>dockerconfigjson</code> secret in the <code>redhat-ods-applications</code> project and assign this secret to the <code>default</code> service account in this project.</p>
+</div>
+<div class="paragraph">
+<p>The secret can contain the registry credentials in dockerconfig JSON format, which, if you use Quay, you can download from the <b class="button">Account Settings</b> page, by clicking <b class="button">Generate Encrypted Password</b> and then downloading the credentials JSON file from the <b class="button">Docker Configuration</b> option.</p>
+</div>
+<div class="paragraph">
+<p>After downloading the credentials file, use this file to create a secret:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ oc create secret generic quay-pull-secret \
+ --from-file=.dockerconfigjson=<em>path-to-credentials-file.json</em> \
+ --type=kubernetes.io/dockerconfigjson \
+ -n redhat-ods-applications</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Finally, link the secret to the <code>default</code> service account as a pull secret:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-console hljs" data-lang="console">$ oc secrets link default quay-pull-secret --for=pull \
+ -n redhat-ods-applications</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For more information, refer to <a href="https://docs.openshift.com/container-platform/4.13/openshift_images/image-streams-manage.html#images-imagestream-import-images-private-registry_image-streams-managing">Importing images and image streams from private registries</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
 <p>Login to the OpenShift AI dashboard as the admin user. Expand <strong>Settings</strong>, click <strong>Notebook Images</strong>, and then click <strong>Import Image</strong>.</p>
