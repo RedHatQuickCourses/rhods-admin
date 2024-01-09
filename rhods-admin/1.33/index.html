@@ -208,8 +208,11 @@ After you have completed all the courses in the learning path, you can attempt t
 </div>
 </div>
 <div class="sect1">
-<h2 id="_classroom_environment"><a class="anchor" href="#_classroom_environment"></a>Classroom Environment</h2>
+<h2 id="_classroom_environment_for_red_hat_associates"><a class="anchor" href="#_classroom_environment_for_red_hat_associates"></a>Classroom Environment for Red Hat Associates</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat associates should use the Red Hat Demo Platform to provision a classroom.</p>
+</div>
 <div class="paragraph">
 <p>Use the <a href="https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&amp;item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod">Red Hat OpenShift Container Platform 4.13 Workshop</a> catalog item from Red Hat Demo Platform (RHDP).</p>
 </div>
@@ -219,12 +222,21 @@ After you have completed all the courses in the learning path, you can attempt t
 <div class="ulist">
 <ul>
 <li>
-<p>Select at least two users in the <code>User Count</code> field.
-Having two users is required for the user management exercise.</p>
+<p>Select <code>Practice/Enablement</code> for the <code>Activity</code> field, and <code>Learning about the product</code> for the <code>Purpose</code>.</p>
+</li>
+<li>
+<p>Leave the <code>Salesforce ID</code> blank.</p>
+</li>
+<li>
+<p>Select <strong>5</strong> users in the <code>User Count</code> field.
+Having at least two users is required for the user management exercise.</p>
 </li>
 <li>
 <p>In the <code>OpenShift worker memory size</code> field, select <code>64Gi</code>.
 This size might be required if you run multiple workbenches and pipelines simultaneously.</p>
+</li>
+<li>
+<p>Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.</p>
 </li>
 </ul>
 </div>
@@ -252,9 +264,13 @@ Make sure that your worker nodes have enough memory to accommodate pods that con
 You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
 </div>
 <div class="sect2">
-<h3 id="_alternative_classroom_environment_on_aws"><a class="anchor" href="#_alternative_classroom_environment_on_aws"></a>Alternative classroom environment on AWS</h3>
+<h3 id="_alternative_classroom_environment_on_aws_for_red_hat_associates"><a class="anchor" href="#_alternative_classroom_environment_on_aws_for_red_hat_associates"></a>Alternative classroom environment on AWS for Red Hat Associates</h3>
 <div class="paragraph">
 <p>You can also use an AWS cluster by ordering the <a href="https://demo.redhat.com/catalog?search=AWS+with+OpenShift+Open+Environment&amp;item=babylon-catalog-prod%2Fsandboxes-gpte.sandbox-ocp.prod">AWS with OpenShift Open Environment</a>.</p>
+</div>
+<div class="paragraph">
+<p>This classroom does <strong>NOT</strong> have RHOAI pre-installed.
+You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
 </div>
 <div class="paragraph">
 <p>If you use this item, you must:</p>
@@ -262,7 +278,16 @@ You install and configure a basic RHOAI instance, and then continue using this i
 <div class="ulist">
 <ul>
 <li>
+<p>Select <code>Practice/Enablement</code> for the <code>Activity</code> field, and <code>Learning about the product</code> for the <code>Purpose</code>.</p>
+</li>
+<li>
+<p>Leave the <code>Salesforce ID</code> blank.</p>
+</li>
+<li>
 <p>Make sure that you select <code>3</code> as the control plane count and <code>4.13</code> as the OpenShift version.</p>
+</li>
+<li>
+<p>Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.</p>
 </li>
 <li>
 <p>Configure users and authentication.
@@ -282,6 +307,38 @@ To configure authentication for these users, use the <a href="_attachments/authe
 <div class="paragraph">
 <p>The password for the <code>admin</code> and <code>user1&#8230;&#8203;user5</code> users is <code>openshift23</code>.</p>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_classroom_environment_for_red_hat_partners"><a class="anchor" href="#_classroom_environment_for_red_hat_partners"></a>Classroom Environment for Red Hat Partners</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat partners should provision their own Red Hat OpenShift cluster using the Red Hat Hybrid Cloud Console at <a href="https://console.redhat.com/openshift/overview" class="bare">https://console.redhat.com/openshift/overview</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and 3 worker nodes (each with 8 vCPU, and 64GB of RAM).</p>
+</li>
+<li>
+<p>Configure users and authentication.
+The exercises in this course assume the existence of an <code>admin</code> user with the <code>cluster-admin</code> role and five non-admin users (<code>user1&#8230;&#8203;user5</code>). You need to create an <strong>admin</strong> user along with the users <strong>user1&#8230;&#8203;user5</strong>.
+To configure authentication for these users, use the sample <a href="_attachments/authentication.yaml" class="xref attachment">authentication.yaml</a> file and customize it for your environment.</p>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc replace -f authentication.yaml</strong></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The password for the <code>admin</code> and <code>user1&#8230;&#8203;user5</code> should be <code>openshift23</code>.</p>
 </div>
 </div>
 </div>
