@@ -222,12 +222,21 @@ After you have completed all the courses in the learning path, you can attempt t
 <div class="ulist">
 <ul>
 <li>
-<p>Select at least two users in the <code>User Count</code> field.
-Having two users is required for the user management exercise.</p>
+<p>Select <code>Practice/Enablement</code> for the <code>Activity</code> field, and <code>Learning about the product</code> for the <code>Purpose</code>.</p>
+</li>
+<li>
+<p>Leave the <code>Salesforce ID</code> blank.</p>
+</li>
+<li>
+<p>Select <strong>5</strong> users in the <code>User Count</code> field.
+Having at least two users is required for the user management exercise.</p>
 </li>
 <li>
 <p>In the <code>OpenShift worker memory size</code> field, select <code>64Gi</code>.
 This size might be required if you run multiple workbenches and pipelines simultaneously.</p>
+</li>
+<li>
+<p>Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.</p>
 </li>
 </ul>
 </div>
@@ -260,12 +269,25 @@ You install and configure a basic RHOAI instance, and then continue using this i
 <p>You can also use an AWS cluster by ordering the <a href="https://demo.redhat.com/catalog?search=AWS+with+OpenShift+Open+Environment&amp;item=babylon-catalog-prod%2Fsandboxes-gpte.sandbox-ocp.prod">AWS with OpenShift Open Environment</a>.</p>
 </div>
 <div class="paragraph">
+<p>This classroom does <strong>NOT</strong> have RHOAI pre-installed.
+You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
+</div>
+<div class="paragraph">
 <p>If you use this item, you must:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
+<p>Select <code>Practice/Enablement</code> for the <code>Activity</code> field, and <code>Learning about the product</code> for the <code>Purpose</code>.</p>
+</li>
+<li>
+<p>Leave the <code>Salesforce ID</code> blank.</p>
+</li>
+<li>
 <p>Make sure that you select <code>3</code> as the control plane count and <code>4.13</code> as the OpenShift version.</p>
+</li>
+<li>
+<p>Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.</p>
 </li>
 <li>
 <p>Configure users and authentication.
@@ -294,12 +316,12 @@ To configure authentication for these users, use the <a href="_attachments/authe
 <h2 id="_classroom_environment_for_red_hat_partners"><a class="anchor" href="#_classroom_environment_for_red_hat_partners"></a>Classroom Environment for Red Hat Partners</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat partners should provision their own Red Hat OpenShift AI cluster using the Red Hat Hybrid Cloud Console at <a href="https://console.redhat.com/application-services/data-science" class="bare">https://console.redhat.com/application-services/data-science</a>.</p>
+<p>Red Hat partners should provision their own Red Hat OpenShift cluster using the Red Hat Hybrid Cloud Console at <a href="https://console.redhat.com/openshift/overview" class="bare">https://console.redhat.com/openshift/overview</a>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and at least 2 worker nodes (each with 8 vCPU, and 64GB of RAM).</p>
+<p>Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and 3 worker nodes (each with 8 vCPU, and 64GB of RAM).</p>
 </li>
 <li>
 <p>Configure users and authentication.
