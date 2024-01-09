@@ -23,17 +23,25 @@ The PTL team acknowledges the valuable contributions of the following Red Hat as
 * John Hurlocker
 * Ravi Srinivasan
 
-== Classroom Environment
+== Classroom Environment for Red Hat Associates
+
+Red Hat associates should use the Red Hat Demo Platform to provision a classroom.
 
 Use the https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod[Red Hat OpenShift Container Platform 4.13 Workshop] catalog item from Red Hat Demo Platform (RHDP).
 
 When ordering this demo item:
 
-* Select at least two users in the `User Count` field.
-Having two users is required for the user management exercise.
+* Select `Practice/Enablement` for the `Activity` field, and `Learning about the product` for the `Purpose`.
+
+* Leave the `Salesforce ID` blank.
+
+* Select *5* users in the `User Count` field.
+Having at least two users is required for the user management exercise.
 
 * In the `OpenShift worker memory size` field, select `64Gi`.
 This size might be required if you run multiple workbenches and pipelines simultaneously.
+
+* Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.
 
 [IMPORTANT]
 ====
@@ -47,13 +55,22 @@ Make sure that your worker nodes have enough memory to accommodate pods that con
 This classroom does *NOT* have RHOAI pre-installed.
 You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.
 
-=== Alternative classroom environment on AWS
+=== Alternative classroom environment on AWS for Red Hat Associates
 
 You can also use an AWS cluster by ordering the https://demo.redhat.com/catalog?search=AWS+with+OpenShift+Open+Environment&item=babylon-catalog-prod%2Fsandboxes-gpte.sandbox-ocp.prod[AWS with OpenShift Open Environment].
 
+This classroom does *NOT* have RHOAI pre-installed.
+You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.
+
 If you use this item, you must:
 
+* Select `Practice/Enablement` for the `Activity` field, and `Learning about the product` for the `Purpose`.
+
+* Leave the `Salesforce ID` blank.
+
 * Make sure that you select `3` as the control plane count and `4.13` as the OpenShift version.
+
+* Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.
 
 * Configure users and authentication.
 The AWS item is only preconfigured with the `kubeadmin` user, which does not have the `cluster-admin` role assigned.
@@ -68,6 +85,26 @@ $ *oc replace -f authentication.yaml*
 [INFO]
 ====
 The password for the `admin` and `user1...user5` users is `openshift23`.
+====
+
+== Classroom Environment for Red Hat Partners
+
+Red Hat partners should provision their own Red Hat OpenShift cluster using the Red Hat Hybrid Cloud Console at https://console.redhat.com/openshift/overview.
+
+* Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and 3 worker nodes (each with 8 vCPU, and 64GB of RAM).
+
+* Configure users and authentication.
+The exercises in this course assume the existence of an `admin` user with the `cluster-admin` role and five non-admin users (`user1...user5`). You need to create an *admin* user along with the users *user1...user5*.
+To configure authentication for these users, use the sample xref:attachment$authentication.yaml[authentication.yaml] file and customize it for your environment.
++
+[subs=+quotes]
+----
+$ *oc replace -f authentication.yaml*
+----
+
+[INFO]
+====
+The password for the `admin` and `user1...user5` should be `openshift23`.
 ====
 
 == Prerequisites
