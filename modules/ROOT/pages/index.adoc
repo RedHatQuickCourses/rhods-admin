@@ -33,7 +33,8 @@ When ordering this demo item:
 
 * Select `Practice/Enablement` for the `Activity` field, and `Learning about the product` for the `Purpose`.
 
-* Leave the `Salesforce ID` blank.
+* If you have a Salesforce ID for a customer sales opportunity, then copy it to the `Salesforce ID` field.
+Otherwise, add some random text like "Learning RHOAI".
 
 * Select *5* users in the `User Count` field.
 Having at least two users is required for the user management exercise.
@@ -66,7 +67,8 @@ If you use this item, you must:
 
 * Select `Practice/Enablement` for the `Activity` field, and `Learning about the product` for the `Purpose`.
 
-* Leave the `Salesforce ID` blank.
+* If you have a Salesforce ID for a customer sales opportunity, then copy it to the `Salesforce ID` field.
+Otherwise, add some random text like "Learning RHOAI".
 
 * Make sure that you select `3` as the control plane count and `4.13` as the OpenShift version.
 
