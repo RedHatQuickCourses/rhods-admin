@@ -148,4 +148,4 @@ NOTE: The Dashboard may initially show "All GPUs are currently in use, try again
 
 TIP: The *NVIDIA GPU Operator* supports many advanced use cases such as Multi-Instance GPU (MIG) and Time Slicing that are configurable using the *ClusterPolicy*.  For information about advanced GPU configuration capabilities, refer to the official https://docs.nvidia.com/datacenter/cloud-native/openshift/latest/introduction.html[NVIDIA Documentation].
 
-TIP: For assistance installing the Node Feature Discovery Operator from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/gpu-operator-certified](https://github.com/redhat-cop/gitops-catalog/tree/main/gpu-operator-certified) GitHub repo.
+TIP: For assistance installing the *NVIDIA GPU Operator* from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/gpu-operator-certified](https://github.com/redhat-cop/gitops-catalog/tree/main/gpu-operator-certified) GitHub repo.
