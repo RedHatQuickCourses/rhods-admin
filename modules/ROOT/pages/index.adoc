@@ -14,7 +14,7 @@ NOTE: After you have completed all the courses in the learning path, you can att
 
 == Authors
 
-The PTL team acknowledges the valuable contributions of the following Red Hat associates: 
+The PTL team acknowledges the valuable contributions of the following Red Hat associates:
 
 * Jiri Tesar
 * Jaime Ramirez Castillo
