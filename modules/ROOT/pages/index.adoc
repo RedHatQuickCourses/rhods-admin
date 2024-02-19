@@ -81,7 +81,7 @@ To configure authentication for these users, use the xref:attachment$authenticat
 +
 [subs=+quotes]
 ----
-$ *oc replace -f authentication.yaml*
+$ *oc apply -f authentication.yaml*
 ----
 
 [INFO]
@@ -101,7 +101,7 @@ To configure authentication for these users, use the sample xref:attachment$auth
 +
 [subs=+quotes]
 ----
-$ *oc replace -f authentication.yaml*
+$ *oc apply -f authentication.yaml*
 ----
 
 [INFO]

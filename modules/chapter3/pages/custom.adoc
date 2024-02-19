@@ -11,21 +11,21 @@ Additional images are available at the ODH contributions repository (https://git
 == Exercise
 We will now build our own custom image. We'll use https://quay.io/mmurakam/workbenches:fraud-detection-v1.0.1[Fraud Detection Image] as our base image. This image contains artifacts that we will be using later in the course. 
 
-We will be adding the seaborn python package to the Fraud Detection image. It is a data visualization library based on matplotlib. 
+We will be adding the *seaborn* python package to the Fraud Detection image. It is a data visualization library based on *matplotlib*.
 
 [TIP]
 ====
-* On OpenShift, every containers in a standard namespace (unless you modify security) run with a user with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The *best practice* is to set the *ownership at 1001:0* (user "default", group "0").
-* If you don't want/can't do that, another solution is to set permissions properly for any user, like 775.
+* On OpenShift, every container in a standard namespace (unless you modify security) runs with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The *best practice* is to set the *ownership as 1001:0* (user "default", group "0").
+* If you don't want/can't do that, another solution is to set permissions properly for any user, like *chmod 775*.
 * When launching a notebook in OpenShift AI, the working directory of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.
 ====
 
 === Requirements
-To build 
+To build:
 
-* Need podman
+* You need *podman*
 ** You could also use buildah, docker, OpenShift BuildConfigs, or a Tekton pipeline, but we'll just build the image using podman for this course.
-* Need an image registry
+* You need a container image registry
 ** We'll use Quay as our image registry. You can sign up for a free account at https://quay.io[Quay.io] if you don't already have one.
 
 === Containerfile Overview
@@ -57,17 +57,18 @@ RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \    <4>
 ----
 <1> The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. Our Fraud Detection image is using [sh]`quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-2023a-20230714-933b52f` as the base image. You can find more base images at https://quay.io/organization/modh.
 
-<2> The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on. micropipenv is a small footprint alternative to pip that allows us to install packages from our requirements.txt file.
+<2> The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on. `micropipenv` is a small footprint alternative to pip that allows us to install packages from our requirements.txt file.
 
-<3> The next step is to install the packages. A lighweight wrapper for pip, micropipenv, allows us to install packages from our requirements.txt file. After the seaborn pacakge is installed we then remove the requirements.txt to clean up the files.
+<3> The next step is to install the packages. A lightweight wrapper for pip, `micropipenv`, allows us to install packages from our requirements.txt file. After the seaborn package is installed we then remove the requirements.txt to clean up the files.
 
-<4> We'll fix the permissons to support pip in OpenShift.
+<4> We'll fix the permissions to support pip in OpenShift.
 --
 
 === Build Steps
 
-1. Open the requirements.txt file under /6.rhod-admin/custom-images. +
-The only package we're installing is seaborn. It's a Python data visualization library that we'll use in our notebook. 
+. Clone the https://github.com/RedHatQuickCourses/rhods-qc-apps Git repository to your workstation (using the `git` CLI, not in the Jupyter Notebook interface).
+
+. Navigate to the cloned repository, and open the `requirements.txt` file under the `6.rhod-admin/custom-images` folder . The only package we're installing is `seaborn`. It's a Python data visualization library that we'll use in our notebook. 
 +
 *_requirements.txt_*
 +
@@ -86,7 +87,7 @@ seaborn==0.12.2
 trino==0.305.0
 ----
 
-2. Open the Containerfile under /6.rhod-admin/custom-images and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
+. Open the Containerfile under the `6.rhod-admin/custom-images` folder and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
 +
 [source, dockerfile]
 ----
@@ -98,7 +99,7 @@ trino==0.305.0
    COPY requirements.txt ./
 ----
 +
-3. We'll now build the image with podman. Open a terminal and go to /6.rhod-admin/custom-images. Run the below command. 
+. We'll now build the image with podman. Open a terminal and go to `6.rhod-admin/custom-images`. Run the below command. 
 +
 [source]
 ----
@@ -111,7 +112,7 @@ You should see a similar message in the logs:
 +
 image::podmanSeabornInstalled.png[]
 
-4. Once the image is done building run the below command to make sure the image is in the list.
+. Once the image is done building run the below command to make sure the image is in the list.
 +
 [source]
 ----
@@ -119,13 +120,13 @@ podman images
 ----
 +
 image::podmanImages.png[]
-5. Login to quay.io so we can push the image you just built up to the quay repository.
+. Login to quay.io so we can push the image you just built up to the quay repository.
 +
 [source]
 ----
 podman login quay.io
 ----
-6. Push the image to your quay repository.
+. Push the image to your quay repository.
 +
 [source]
 ----
