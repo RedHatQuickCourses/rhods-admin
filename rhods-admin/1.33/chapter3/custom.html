@@ -165,7 +165,7 @@
 <p>We will now build our own custom image. We&#8217;ll use <a href="https://quay.io/mmurakam/workbenches:fraud-detection-v1.0.1">Fraud Detection Image</a> as our base image. This image contains artifacts that we will be using later in the course.</p>
 </div>
 <div class="paragraph">
-<p>We will be adding the seaborn python package to the Fraud Detection image. It is a data visualization library based on matplotlib.</p>
+<p>We will be adding the <strong>seaborn</strong> python package to the Fraud Detection image. It is a data visualization library based on <strong>matplotlib</strong>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -177,10 +177,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p>On OpenShift, every containers in a standard namespace (unless you modify security) run with a user with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The <strong>best practice</strong> is to set the <strong>ownership at 1001:0</strong> (user "default", group "0").</p>
+<p>On OpenShift, every container in a standard namespace (unless you modify security) runs with a random user id (uid), and the group id (gid) 0. Therefore, all the folders that you want to write in, and all the files you want to modify (temporarily) in your image must be accessible by this user. The <strong>best practice</strong> is to set the <strong>ownership as 1001:0</strong> (user "default", group "0").</p>
 </li>
 <li>
-<p>If you don&#8217;t want/can&#8217;t do that, another solution is to set permissions properly for any user, like 775.</p>
+<p>If you don&#8217;t want/can&#8217;t do that, another solution is to set permissions properly for any user, like <strong>chmod 775</strong>.</p>
 </li>
 <li>
 <p>When launching a notebook in OpenShift AI, the working directory of a user is mounted at /opt/app-root/src. This is not configurable, so make sure to build your images with this default location for the data that you want persisted.</p>
@@ -194,12 +194,12 @@
 <div class="sect2">
 <h3 id="_requirements"><a class="anchor" href="#_requirements"></a>Requirements</h3>
 <div class="paragraph">
-<p>To build</p>
+<p>To build:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Need podman</p>
+<p>You need <strong>podman</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -209,7 +209,7 @@
 </div>
 </li>
 <li>
-<p>Need an image registry</p>
+<p>You need a container image registry</p>
 <div class="ulist">
 <ul>
 <li>
@@ -263,15 +263,15 @@ RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages &amp;&amp; \    <i cl
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on. micropipenv is a small footprint alternative to pip that allows us to install packages from our requirements.txt file.</td>
+<td>The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on. <code>micropipenv</code> is a small footprint alternative to pip that allows us to install packages from our requirements.txt file.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
-<td>The next step is to install the packages. A lighweight wrapper for pip, micropipenv, allows us to install packages from our requirements.txt file. After the seaborn pacakge is installed we then remove the requirements.txt to clean up the files.</td>
+<td>The next step is to install the packages. A lightweight wrapper for pip, <code>micropipenv</code>, allows us to install packages from our requirements.txt file. After the seaborn package is installed we then remove the requirements.txt to clean up the files.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>We&#8217;ll fix the permissons to support pip in OpenShift.</td>
+<td>We&#8217;ll fix the permissions to support pip in OpenShift.</td>
 </tr>
 </table>
 </div>
@@ -283,8 +283,10 @@ RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages &amp;&amp; \    <i cl
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open the requirements.txt file under /6.rhod-admin/custom-images.<br>
-The only package we&#8217;re installing is seaborn. It&#8217;s a Python data visualization library that we&#8217;ll use in our notebook.</p>
+<p>Clone the <a href="https://github.com/RedHatQuickCourses/rhods-qc-apps" class="bare">https://github.com/RedHatQuickCourses/rhods-qc-apps</a> Git repository to your workstation (using the <code>git</code> CLI, not in the Jupyter Notebook interface).</p>
+</li>
+<li>
+<p>Navigate to the cloned repository, and open the <code>requirements.txt</code> file under the <code>6.rhod-admin/custom-images</code> folder . The only package we&#8217;re installing is <code>seaborn</code>. It&#8217;s a Python data visualization library that we&#8217;ll use in our notebook.</p>
 <div class="paragraph">
 <p><strong><em>requirements.txt</em></strong></p>
 </div>
@@ -307,7 +309,7 @@ trino==0.305.0</code></pre>
 </div>
 </li>
 <li>
-<p>Open the Containerfile under /6.rhod-admin/custom-images and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
+<p>Open the Containerfile under the <code>6.rhod-admin/custom-images</code> folder and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1</code></pre>
@@ -320,7 +322,7 @@ trino==0.305.0</code></pre>
 </div>
 </li>
 <li>
-<p>We&#8217;ll now build the image with podman. Open a terminal and go to /6.rhod-admin/custom-images. Run the below command.</p>
+<p>We&#8217;ll now build the image with podman. Open a terminal and go to <code>6.rhod-admin/custom-images</code>. Run the below command.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-none hljs">podman build -t rhods-admin-custom-image .</code></pre>
