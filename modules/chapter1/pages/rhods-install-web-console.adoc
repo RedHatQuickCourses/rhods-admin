@@ -44,7 +44,7 @@ There are following components to choose from:
 +
  * *ModelMeshServing:*  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.
 +
-* *TrustyAI*: TrustyAI aims to help explain black-box machine learning models by using XAI techniques. XAI techniques are used within TrustyAI to introspect these black-box models to describe predictions and outcomes. 
+* *TrustyAI*: TrustyAI aims to help explain black-box machine learning models by using explainable AI (XAI) techniques. XAI techniques are used within TrustyAI to introspect these black-box models to describe predictions and outcomes. 
 +
  * *Workbenches:* Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.
 +
