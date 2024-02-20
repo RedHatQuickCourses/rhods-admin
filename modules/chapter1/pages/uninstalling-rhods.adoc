@@ -1,32 +1,37 @@
 = Uninstalling Red{nbsp}Hat OpenShift AI
 
-*Red{nbsp}Hat OpenShift Data Science* operator manages *Red{nbsp}Hat OpenShift AI* components hence uninstalling of the *Red{nbsp}Hat OpenShift AI* requires uninstalling the *Red{nbsp}Hat OpenShift Data Science* operator and cleaning some of the resources that have been created by the operator or users.
+The *Red{nbsp}Hat OpenShift AI* operator manages *Red{nbsp}Hat OpenShift AI* components, hence uninstalling components requires uninstalling the *Red{nbsp}Hat OpenShift AI* operator and cleaning some of the resources that have been created by the operator or users.
 
 [#demo-rhods]
 == Demo: Uninstalling Red{nbsp}Hat OpenShift AI
+
+WARNING: These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the installed version of the product in the hands on labs in the course.
+
+[IMPORTANT]
+Make sure that you have installed the *Red{nbsp}Hat OpenShift AI* operator using one of the previous demonstrations (Web based or CLI). They both install a version of the operator from the _stable_ channel. The screenshots in this section were taken on an older version of the product and may not exactly match yours.
+
 . Log in to Red{nbsp} OpenShift web console using a user which has the _cluster-admin_ role assigned.
 
 . Delete the DataScienceCluster object. 
 +
-Navigate to *Operators* -> *Installed Operators* -> *Red Hat OpenShift Data Science* -> *DataScienceCluster* and delete all the *DSC* resources.
+Navigate to *Operators* -> *Installed Operators* -> *Red Hat OpenShift AI* -> *DataScienceCluster* and delete all the *DSC* resources.
 +
-image::rhods2-delete-dsc.png[width=800]
+image::rhods2-delete-dsc.png[title=Delete DSC Resource]
 +
-alternatively you can delete the *DataScienceCluster* objects from the CLI.
+Alternatively, you can delete the *DataScienceCluster* objects from the CLI.
 +
 [subs=+quotes]
 ----
 $ *oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')*
 
-datasciencecluster.datasciencecluster.opendatahub.io "default" deleted
+datasciencecluster.datasciencecluster.opendatahub.io "default-dsc" deleted
 ----
-
 
 . Delete the DSCInitialization object that the Operator created during installation. 
 +
 Navigate to the *DSCInitialization* tab and delete all *DSCI* resources.
 +
-image::rhods2-delete-dsci.png[width=800]
+image::rhods2-delete-dsci.png[title=Delete DSCI Resource]
 +
 alternatively you can delete the *DCSI* objects from the CLI.
 +
@@ -34,14 +39,14 @@ alternatively you can delete the *DCSI* objects from the CLI.
 ----
 *$ oc delete dscinitialization $(oc get dscinitialization --no-headers |  awk '{print $1}')*
 
-dscinitialization.dscinitialization.opendatahub.io "default" deleted
+dscinitialization.dscinitialization.opendatahub.io "default-dsci" deleted
 ----
 
-. Uninstall the *Red Hat OpenShift Data Science* operator.
+. Uninstall the *Red Hat OpenShift AI* operator.
 +
-Navigate to *Operators* ->  *Installed Operators* and uninstall the *Red Hat OpenShift Data Science* operator.
+Navigate to *Operators* ->  *Installed Operators* and uninstall the *Red Hat OpenShift AI* operator.
 +
-image::rhods2-uninstall-operator.png[width=800]
+image::rhods2-uninstall-operator.png[title=Uninstall RHOAI Operator]
 +
 Alternatively you can delete the operator's subscription from the CLI. OLM will uninstall the operator.
 +
@@ -84,7 +89,7 @@ namespace "redhat-ods-monitoring" deleted
 
 . Delete all remaining namespaces created for *Datascience* projects. These namespaces are labeled by the label _opendatahub.io/dashboard=true_.
 +
-Navigate to *Administration* -> *Namespaces*, filter namespaces using the label _opendatahub.io/dashboard=true_ and delete them.
+Navigate to *Home* -> *Projects*, filter namespaces using the label _opendatahub.io/dashboard=true_ and delete them.
 +
 image::rhods2-delete-projects.png[width=800]
 +

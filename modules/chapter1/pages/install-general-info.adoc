@@ -1,14 +1,10 @@
 = General Information about Installation   
 
-Red{nbsp}Hat OpenShift AI is available to install a self-managed version as an operator through OperatorHub or as a fully managed solution through OpenShift Marketplace.
-
+Red{nbsp}Hat OpenShift AI is available to install as an operator through the *OperatorHub*, or as a fully managed solution through the OpenShift Marketplace.
 
 [INFO]
 ====
-The product name has been recently changed to *Red{nbsp}Hat OpenShift AI (RHOAI)*, but the operator still uses the earlier name: *Red{nbsp}Hat OpenShift Data Science*.
-
-In this course, most references to the product use the new name.
-However, references to the operator and UI elements might still use the previous name.
+The product name has been recently changed to *Red{nbsp}Hat OpenShift AI (RHOAI)* (old name *Red{nbsp}Hat OpenShift Data Science*). In this course, most references to the product use the new name. However, references to some UI elements might still use the previous name.
 ====
 
 In addition to the *Red{nbsp}Hat OpenShift AI* Operator there are some other operators that you may need to install depending on which features and components of *Red{nbsp}Hat OpenShift AI* you want to install and use.

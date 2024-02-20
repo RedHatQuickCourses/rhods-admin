@@ -1,9 +1,6 @@
 = Upgrading Red{nbsp}Hat OpenShift AI
 
-Red Hat OpenShift AI upgrades are handled by the *Red{nbsp}Hat OpenShift Data Science* operator.
-
-[NOTE]
-Upgrading directly from the Red Hat OpenShift Data Science self-managed Beta version to the Generally Available (GA) release is not supported. The operator has to be uninstalled first and replaced with the new version.
+Red Hat OpenShift AI upgrades are handled by the *Red{nbsp}Hat OpenShift AI* operator.
 
 When an upgrade is available *OLM* creates an *Installplan* for the new version.
 
@@ -18,7 +15,7 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <2>
 <2> *Installplan* for the currently installed version. It's been approved and the version is currently installed.
 
 
-Installplan is approved either automatically when a new version is available without user's intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the *installPlanApproval* attribute of the operator's subscription. When it is set to _Automatic_ the *installplan* is approved automaticaly and installation starts without user's intervention. _Manual_ value requires a manual approval.
+Installplan is approved either automatically when a new version is available without user's intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the *installPlanApproval* attribute of the operator's subscription. When it is set to _Automatic_ the *installplan* is approved automatically and installation starts without user's intervention. _Manual_ value requires a manual approval.
 
 Approvals can be set from the web console as well as from the CLI.
 
@@ -26,19 +23,25 @@ The following demonstration shows an upgrade with a manual approval done from th
 
 == Demo: Upgrading Red{nbsp}Hat OpenShift AI
 
+WARNING: These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the _stable_ version of the product in the hands on labs in the course.
+
 [IMPORTANT]
-Make sure that you have installed the *Red{nbsp}Hat OpenShift Data Science* operator using one of the previous demonstrations (Web based or CLI). They both install an older version of the operator from the _embedded_ channel.
+Make sure that you have installed the *Red{nbsp}Hat OpenShift AI* operator using one of the previous demonstrations (Web based or CLI). They both install a version of the operator from the _stable_ channel. The screenshots in this section were taken on an older version of the product and may not exactly match yours.
 
 . Log in to Red{nbsp}Hat OpenShift web console using a user which has _cluster-admin_ role assigned.
 
-. Navigate to *Operators* -> *Installed Operators*, select project *redhat-ods-operator*, click on the *Red{nbsp}Hat OpenShift Data Science* and choose the *Subscription* tab.
+. Navigate to *Operators* -> *Installed Operators*, select project *redhat-ods-operator*, click on the *Red{nbsp}Hat OpenShift AI* and choose the *Subscription* tab.
 Edit the *Update channel* - change it to *alpha* and click *Save*.
 +
 image::rhods2-channel-change.png[width=800]
++
+NOTE: There may not be any updates available at the time when you do this. In which case, your screen will look different in the following steps.
 
 . Navigate again to *Operators* -> *Installed Operators* and select project *redhat-ods-operator*. You should see *Upgrade available* under the *Status* column.
 +
 image::rhods2-upgrade-available.png[width=800]
++
+NOTE: You will see a similar screen only if there is an update available. The screenshots in this demo were taken on an older version of the product when there were frequent updates available.
 
 . Click on the *Upgrade available* status link to open operator's *Install plan*
 +
