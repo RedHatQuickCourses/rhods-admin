@@ -1,33 +1,32 @@
 = Installing Red{nbsp}Hat OpenShift AI Using the Web Console
 
-*Red{nbsp}Hat OpenShift AI* is available as an operator via OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift Data Science operator V2* using the OpenShift web console in this section.
+*Red{nbsp}Hat OpenShift AI* is available as an operator via OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift AI operator* using the OpenShift web console in this section.
 
 == Demo: Installation of Red{nbsp}Hat OpenShift AI
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
-
 . Login to the Red Hat OpenShift using a user which has the _cluster-admin_ role assigned.
 
-. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat OpenShift Data Science*.
+. Navigate to **Operators** -> **OperatorHub** and search for *OpenShift AI*.
 +
-image::rhods_install1.png[width=800]
+image::rhods_install1.png[title=Search for OpenShift AI operator,width=800]
 
-. Click on the Red{nbsp}Hat OpenShift Data Science operator and in the pop up window click on **Install** to open the operator's installation view.
+. Click on the `Red{nbsp}Hat OpenShift AI` operator and in the pop up window click on **Install** to open the operator's installation view.
 +
-image::rhods_install2.png[width=800]
+image::rhods_install2.png[title=OpenShift AI Operator Details,width=800]
 
-. In the Install Operator page, leave all of the options as default and click on the *Install* button to start the installation.
+. In the `Install Operator` page, leave all of the options as default and click on the *Install* button to start the installation.
 +
-image::rhods_install3.png[width=800]
+image::rhods_install3.png[title=Install Operator with default values,width=800]
 
 . The operator Installation progress window will pop up. The installation may take a couple of minutes.
 +
-image::rhods_install4.png[width=800]
+image::rhods_install4.png[title=RHOAI Operator Installing,width=800]
 
 . When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
 +
-image::rhods_install5.png[width=800]
+image::rhods_install5.png[title=RHOAI Operator Installed,width=800]
 
 . In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
 + 
@@ -45,13 +44,15 @@ There are following components to choose from:
 +
  * *ModelMeshServing:*  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.
 +
+* *TrustyAI*: TrustyAI aims to help explain black-box machine learning models by using explainable AI (XAI) techniques. XAI techniques are used within TrustyAI to introspect these black-box models to describe predictions and outcomes. 
++
  * *Workbenches:* Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.
 +
-For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving and Workbenches.
+For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving, TrustyAI, and Workbenches.
 +
 You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
 +
-image::rhods2-create-cluster.png[width=800]
+image::rhods2-create-cluster.png[title=Create DSC default options,width=800]
 +
 If you choose the _YAML view_, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.
 +
@@ -59,29 +60,38 @@ If you choose the _YAML view_, you are presented with a template of the YAML Dat
 apiVersion: datasciencecluster.opendatahub.io/v1
 kind: DataScienceCluster
 metadata:
-  name: default 
   labels:
     app.kubernetes.io/name: datasciencecluster
-    app.kubernetes.io/instance: default
+    app.kubernetes.io/instance: default-dsc
     app.kubernetes.io/part-of: rhods-operator
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: rhods-operator
+  name: default-dsc
 spec:
   components:
     codeflare:
-      managementState: Removed  <1>
+      managementState: Removed <1>
     dashboard:
-      managementState: Managed  <2>
+      managementState: Managed <2>
     datasciencepipelines:
       managementState: Managed
     kserve:
-      managementState: Removed
+      serving:
+        ingressGateway:
+          certificate:
+            type: SelfSigned
+        managementState: Managed
+        name: knative-serving
+      managementState: Managed
     modelmeshserving:
       managementState: Managed
     ray:
       managementState: Removed
+    trustyai:
+      managementState: Managed
     workbenches:
       managementState: Managed
+
 ----
 <1> For components you *do not* want to install use *Removed*
 <2> For components you *want* to install and manage by the operator use *Managed*
@@ -90,47 +100,44 @@ After naming the cluster and choosing the components you wish the operator to in
 
 . After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
 +
-image::rhods2-clusters.png[width=800]
+image::rhods2-clusters.png[title=DataScienceCluster Instance Ready,width=800]
 +
-You may also check the status of individual installed components by looking at their conditions. Click on the *default* cluster and switch to the YAML view. Scroll down to view *conditions*. 
+You may also check the status of individual installed components by looking at their conditions. Click on the *default-dsc* cluster and switch to the YAML view. Scroll down to view *conditions*. It may take some time for the default DataScienceCluster resources to be fully created and running.
 +
-image::rhods2-conditions.png[width=800]
+image::rhods2-conditions.png[title=Conditions of individual components]
 +
 Each condition is represented by a *type* and a *status*. The *Type* is a string describing the condition, for instance _odh-dashboardReady_ and the status says whether it is _true_ or not. The following example shows the *Ready* status of the Dashboard component.
 +
 [subs=+quotes]
 ----
-- lastHeartbeatTime: '2023-11-13T10:53:20Z'
-  lastTransitionTime: '2023-11-13T10:53:20Z'
+- lastHeartbeatTime: '2024-02-20T06:43:16Z'
+  lastTransitionTime: '2024-02-20T06:43:16Z'
   message: Component reconciled successfully
   reason: ReconcileCompleted
   status: 'True' <1>
-  type: odh-dashboardReady <2>
+  type: dashboardReady <2>
+- lastHeartbeatTime: '2024-02-20T06:43:18Z'
+  lastTransitionTime: '2024-02-20T06:43:18Z'
+  message: Component reconciled successfully
+  reason: ReconcileCompleted
+  status: 'True'
+  type: workbenchesReady
 ---- 
 <1> Status of the condition. _True_ means that the condition is met, _False_ means that the condition is not met.
-<2> Type represents the meaning of the condition. Together with the value of _status_ you can assess the state of the component. In this example _type=odh-dashboardReady_  and _status=True_ means that the *Dashboard* component is ready. 
-+
-Similarly to the example above other *Red{nbsp}Hat Data Science* components have their condition types. The following list shows the condition types for the *Red{nbsp}Hat Data Science* components.
-+
- * rayReady
- * codeflareReady
- * model-meshReady
- * workbenchesReady
- * data-science-pipelines-operatorReady
- * odh-dashboardReady
+<2> Type represents the meaning of the condition. Together with the value of _status_ you can assess the state of the component. In this example _type=dashboardReady_  and _status=True_ means that the *Dashboard* component is ready. 
 
 . The operator should be installed and configured now. 
-In the applications window in the right upper corner of the screen the *Red{nbsp}Hat OpenShift Data Science* dashboard should be available.
+In the applications window in the right upper corner of the screen the *Red{nbsp}Hat OpenShift AI* dashboard should be available.
 +
-image::rhods_verify1.png[width=800]
+image::rhods_verify1.png[title=RHOAI Dashboard]
  
-. Click the *Red{nbsp}Hat OpenShift Data Science* button to log in to the *Red{nbsp}Hat OpenShift AI* dashboard.
+. Click the *Red{nbsp}Hat OpenShift AI* button to log in to the *Red{nbsp}Hat OpenShift AI* dashboard.
 +
-image::rhods_verify2.png[width=800]
+image::rhods_verify2.png[title=Red Hat OpenShift AI Log in,width=800]
 +
 IMPORTANT: It may take a while to start all the service pods hence the login window may not be accessible immediately. If you are getting an error, check the status of the pods in the project *redhat-ods-applications*.
 Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and be ready. If they are not, wait until they become running and ready.
 +
-image::rhods_verify_pods.png[width=800] 
+image::rhods_verify_pods.png[title=Pods in Running state,width=800]
 
-TIP: For assistance installing the *Red{nbsp}Hat Openshift Data Science* from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/rhods-operator](https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator) GitHub repo.
+TIP: For assistance installing the *Red{nbsp}Hat Openshift AI* from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/rhods-operator](https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator) GitHub repo.

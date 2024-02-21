@@ -2,8 +2,7 @@
 
 As described in the xref::install-general-info.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of OpenShift AI you want to use.  This section will discuss installing and configuring those components.
 
-It is generally recommended to install any dependent operators prior to installing the *Red{nbsp}Hat OpenShift Data Science* operator.
-
+It is generally recommended to install any dependent operators prior to installing the *Red{nbsp}Hat OpenShift AI* operator.
 
 https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat OpenShift Pipelines Operator]::
 The *Red Hat OpenShift Pipelines Operator* is required if you want to install the *Data Science Pipelines* component.
@@ -80,7 +79,7 @@ NOTE: Some of these options may vary slightly depending on your version of OpenS
 +
 image::nfd_install2.png[width=800]
 
-5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
+5. Click on the **Install** button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.
 + 
 image::nfd_install3.png[width=800]
 
@@ -120,7 +119,7 @@ image::gpu_install1.png[width=800]
 +
 image::gpu_install2.png[width=800]
 
-5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
+5. Click on the **Install** button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.
 + 
 image::gpu_install3.png[width=800]
 
@@ -140,7 +139,7 @@ image::gpu_configure2.png[width=800]
 +
 image::gpu_verify1.png[width=800]
 
-10. After the *Red{nbsp}Hat OpenShift Data Science* operator has been installed and configured, users will be able to see an option for "Number of GPUs" when creating a new workbench.
+10. After the *Red{nbsp}Hat OpenShift AI* operator has been installed and configured, users will be able to see an option for "Number of GPUs" when creating a new workbench.
 +
 image::gpu_verify2.png[width=800]
 
