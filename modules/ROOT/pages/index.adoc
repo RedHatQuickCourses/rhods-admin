@@ -113,8 +113,8 @@ Download the following two scripts to your local machine, and execute the follow
 +
 [subs=+quotes]
 ----
-$ *oc replace -f authentication.yaml
-$ oc apply -f secret.yaml*
+$ *oc replace -f authentication.yaml*
+$ *oc apply -f secret.yaml*
 ----
 
 [INFO]
