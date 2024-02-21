@@ -75,19 +75,28 @@ Otherwise, add some random text like "Learning RHOAI".
 * Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.
 
 * Configure users and authentication.
-The AWS item is only preconfigured with the `kubeadmin` user, which does not have the `cluster-admin` role assigned.
-The exercises in this course, however, assume the existence of an `admin` user with the `cluster-admin` role and five non-admin users (`user1...user5`).
-To configure authentication for these users, use the xref:attachment$authentication.yaml[authentication.yaml] file.
+The AWS item is only pre-configured with the `kubeadmin` user, which does not have the `cluster-admin` role assigned.
+The exercises in this course, however, assume the existence of a user named `admin` with the `cluster-admin` role and five non-admin users (`user1...user5`).
+Download the following two scripts to your local machine, and execute the following commands.
+** xref:attachment$authentication.yaml[authentication.yaml]
+** xref:attachment$secret.yaml[secret.yaml]
 +
 [subs=+quotes]
 ----
-$ *oc apply -f authentication.yaml*
+$ *oc replace -f authentication.yaml*
+$ *oc apply -f secret.yaml*
 ----
 
 [INFO]
 ====
-The password for the `admin` and `user1...user5` users is `openshift23`.
+The password for both the `admin` and `user1...user5` users is `openshift23`.
 ====
+
+* You may have to wait for 5 minutes while the changes take effect. You will see a log in prompt with the `htpasswd_provider` displayed.
++
+image::htpasswd-provider.png[title=htpasswd_provider prompt]
+
+* Click the `htpasswd_provider` button, and log in as the `admin` user with password `openshift23` to access the OpenShift web console as a cluster administrator.
 
 == Classroom Environment for Red Hat Partners
 
@@ -96,18 +105,28 @@ Red Hat partners should provision their own Red Hat OpenShift cluster using the 
 * Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and 3 worker nodes (each with 8 vCPU, and 64GB of RAM).
 
 * Configure users and authentication.
-The exercises in this course assume the existence of an `admin` user with the `cluster-admin` role and five non-admin users (`user1...user5`). You need to create an *admin* user along with the users *user1...user5*.
-To configure authentication for these users, use the sample xref:attachment$authentication.yaml[authentication.yaml] file and customize it for your environment.
+A default OpenShift cluster installation has a user called `kubeadmin`.
+The exercises in this course, however, assume the existence of a user named `admin` with the `cluster-admin` role and five non-admin users (`user1...user5`).
+Download the following two scripts to your local machine, and execute the following commands after logging in to your cluster as the `kubeadmin` user using the `oc` CLI tool.
+** xref:attachment$authentication.yaml[authentication.yaml]
+** xref:attachment$secret.yaml[secret.yaml]
 +
 [subs=+quotes]
 ----
-$ *oc apply -f authentication.yaml*
+$ *oc replace -f authentication.yaml*
+$ *oc apply -f secret.yaml*
 ----
 
 [INFO]
 ====
-The password for the `admin` and `user1...user5` should be `openshift23`.
+The password for both the `admin` and `user1...user5` users is `openshift23`.
 ====
+
+* You may have to wait for 5 minutes while the changes take effect. You will see a log in prompt with the `htpasswd_provider` displayed.
++
+image::htpasswd-provider.png[title=htpasswd_provider prompt]
+
+* Click the `htpasswd_provider` button, and log in as the `admin` user with password `openshift23` to access the OpenShift web console as a cluster administrator.
 
 == Prerequisites
 
