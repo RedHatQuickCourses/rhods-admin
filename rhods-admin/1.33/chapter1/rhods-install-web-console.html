@@ -143,7 +143,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Red&#160;Hat OpenShift AI</strong> is available as an operator via OpenShift Operator Hub.  You will install the <strong>Red&#160;Hat OpenShift Data Science operator V2</strong> using the OpenShift web console in this section.</p>
+<p><strong>Red&#160;Hat OpenShift AI</strong> is available as an operator via OpenShift Operator Hub.  You will install the <strong>Red&#160;Hat OpenShift AI operator</strong> using the OpenShift web console in this section.</p>
 </div>
 </div>
 </div>
@@ -168,27 +168,30 @@ The installation requires a user with the <em>cluster-admin</em> role
 <p>Login to the Red Hat OpenShift using a user which has the <em>cluster-admin</em> role assigned.</p>
 </li>
 <li>
-<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>Red&#160;Hat OpenShift Data Science</strong>.</p>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>OperatorHub</strong> and search for <strong>OpenShift AI</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_install1.png" alt="rhods install1" width="800">
 </div>
+<div class="title">Figure 1. Search for OpenShift AI operator</div>
 </div>
 </li>
 <li>
-<p>Click on the Red&#160;Hat OpenShift Data Science operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<p>Click on the <code>Red&#160;Hat OpenShift AI</code> operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_install2.png" alt="rhods install2" width="800">
 </div>
+<div class="title">Figure 2. OpenShift AI Operator Details</div>
 </div>
 </li>
 <li>
-<p>In the Install Operator page, leave all of the options as default and click on the <strong>Install</strong> button to start the installation.</p>
+<p>In the <code>Install Operator</code> page, leave all of the options as default and click on the <strong>Install</strong> button to start the installation.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_install3.png" alt="rhods install3" width="800">
 </div>
+<div class="title">Figure 3. Install Operator with default values</div>
 </div>
 </li>
 <li>
@@ -197,6 +200,7 @@ The installation requires a user with the <em>cluster-admin</em> role
 <div class="content">
 <img src="_images/rhods_install4.png" alt="rhods install4" width="800">
 </div>
+<div class="title">Figure 4. RHOAI Operator Installing</div>
 </div>
 </li>
 <li>
@@ -205,6 +209,7 @@ The installation requires a user with the <em>cluster-admin</em> role
 <div class="content">
 <img src="_images/rhods_install5.png" alt="rhods install5" width="800">
 </div>
+<div class="title">Figure 5. RHOAI Operator Installed</div>
 </div>
 </li>
 <li>
@@ -233,12 +238,12 @@ The installation requires a user with the <em>cluster-admin</em> role
 <p><strong>ModelMeshServing:</strong>  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.</p>
 </li>
 <li>
-<p><strong>Workbenches:</strong> Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.</p>
+<p><strong>TrustyAI</strong>: TrustyAI aims to help explain black-box machine learning models by using explainable AI (XAI) techniques. XAI techniques are used within TrustyAI to introspect these black-box models to describe predictions and outcomes.</p>
 </li>
-</ul>
-</div>
+<li>
+<p><strong>Workbenches:</strong> Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.</p>
 <div class="paragraph">
-<p>For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving and Workbenches.</p>
+<p>For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving, TrustyAI, and Workbenches.</p>
 </div>
 <div class="paragraph">
 <p>You can choose to create the DataScienceCluster using either the <em>Form view</em> or the <em>YAML View</em>. The <em>Form view</em> is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the <em>Form view</em>.</p>
@@ -247,6 +252,7 @@ The installation requires a user with the <em>cluster-admin</em> role
 <div class="content">
 <img src="_images/rhods2-create-cluster.png" alt="rhods2 create cluster" width="800">
 </div>
+<div class="title">Figure 6. Create DSC default options</div>
 </div>
 <div class="paragraph">
 <p>If you choose the <em>YAML view</em>, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.</p>
@@ -256,27 +262,35 @@ The installation requires a user with the <em>cluster-admin</em> role
 <pre>apiVersion: datasciencecluster.opendatahub.io/v1
 kind: DataScienceCluster
 metadata:
-  name: default
   labels:
     app.kubernetes.io/name: datasciencecluster
-    app.kubernetes.io/instance: default
+    app.kubernetes.io/instance: default-dsc
     app.kubernetes.io/part-of: rhods-operator
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: rhods-operator
+  name: default-dsc
 spec:
   components:
     codeflare:
-      managementState: Removed  <i class="conum" data-value="1"></i><b>(1)</b>
+      managementState: Removed <i class="conum" data-value="1"></i><b>(1)</b>
     dashboard:
-      managementState: Managed  <i class="conum" data-value="2"></i><b>(2)</b>
+      managementState: Managed <i class="conum" data-value="2"></i><b>(2)</b>
     datasciencepipelines:
       managementState: Managed
     kserve:
-      managementState: Removed
+      serving:
+        ingressGateway:
+          certificate:
+            type: SelfSigned
+        managementState: Managed
+        name: knative-serving
+      managementState: Managed
     modelmeshserving:
       managementState: Managed
     ray:
       managementState: Removed
+    trustyai:
+      managementState: Managed
     workbenches:
       managementState: Managed</pre>
 </div>
@@ -297,32 +311,43 @@ spec:
 <p>After naming the cluster and choosing the components you wish the operator to install and manage click on the <strong>Create</strong> button.</p>
 </div>
 </li>
+</ul>
+</div>
+</li>
 <li>
 <p>After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads <strong>Phase: Ready</strong>. This represents the status of the whole cluster.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-clusters.png" alt="rhods2 clusters" width="800">
 </div>
+<div class="title">Figure 7. DataScienceCluster Instance Ready</div>
 </div>
 <div class="paragraph">
-<p>You may also check the status of individual installed components by looking at their conditions. Click on the <strong>default</strong> cluster and switch to the YAML view. Scroll down to view <strong>conditions</strong>.</p>
+<p>You may also check the status of individual installed components by looking at their conditions. Click on the <strong>default-dsc</strong> cluster and switch to the YAML view. Scroll down to view <strong>conditions</strong>. It may take some time for the default DataScienceCluster resources to be fully created and running.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods2-conditions.png" alt="rhods2 conditions" width="800">
+<img src="_images/rhods2-conditions.png" alt="rhods2 conditions">
 </div>
+<div class="title">Figure 8. Conditions of individual components</div>
 </div>
 <div class="paragraph">
 <p>Each condition is represented by a <strong>type</strong> and a <strong>status</strong>. The <strong>Type</strong> is a string describing the condition, for instance <em>odh-dashboardReady</em> and the status says whether it is <em>true</em> or not. The following example shows the <strong>Ready</strong> status of the Dashboard component.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>- lastHeartbeatTime: '2023-11-13T10:53:20Z'
-  lastTransitionTime: '2023-11-13T10:53:20Z'
+<pre>- lastHeartbeatTime: '2024-02-20T06:43:16Z'
+  lastTransitionTime: '2024-02-20T06:43:16Z'
   message: Component reconciled successfully
   reason: ReconcileCompleted
   status: 'True' <i class="conum" data-value="1"></i><b>(1)</b>
-  type: odh-dashboardReady <i class="conum" data-value="2"></i><b>(2)</b></pre>
+  type: dashboardReady <i class="conum" data-value="2"></i><b>(2)</b>
+- lastHeartbeatTime: '2024-02-20T06:43:18Z'
+  lastTransitionTime: '2024-02-20T06:43:18Z'
+  message: Component reconciled successfully
+  reason: ReconcileCompleted
+  status: 'True'
+  type: workbenchesReady</pre>
 </div>
 </div>
 <div class="colist arabic">
@@ -333,51 +358,28 @@ spec:
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Type represents the meaning of the condition. Together with the value of <em>status</em> you can assess the state of the component. In this example <em>type=odh-dashboardReady</em>  and <em>status=True</em> means that the <strong>Dashboard</strong> component is ready.</td>
+<td>Type represents the meaning of the condition. Together with the value of <em>status</em> you can assess the state of the component. In this example <em>type=dashboardReady</em>  and <em>status=True</em> means that the <strong>Dashboard</strong> component is ready.</td>
 </tr>
 </table>
-</div>
-<div class="paragraph">
-<p>Similarly to the example above other <strong>Red&#160;Hat Data Science</strong> components have their condition types. The following list shows the condition types for the <strong>Red&#160;Hat Data Science</strong> components.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>rayReady</p>
-</li>
-<li>
-<p>codeflareReady</p>
-</li>
-<li>
-<p>model-meshReady</p>
-</li>
-<li>
-<p>workbenchesReady</p>
-</li>
-<li>
-<p>data-science-pipelines-operatorReady</p>
-</li>
-<li>
-<p>odh-dashboardReady</p>
-</li>
-</ul>
 </div>
 </li>
 <li>
 <p>The operator should be installed and configured now.
-In the applications window in the right upper corner of the screen the <strong>Red&#160;Hat OpenShift Data Science</strong> dashboard should be available.</p>
+In the applications window in the right upper corner of the screen the <strong>Red&#160;Hat OpenShift AI</strong> dashboard should be available.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods_verify1.png" alt="rhods verify1" width="800">
+<img src="_images/rhods_verify1.png" alt="rhods verify1">
 </div>
+<div class="title">Figure 9. RHOAI Dashboard</div>
 </div>
 </li>
 <li>
-<p>Click the <strong>Red&#160;Hat OpenShift Data Science</strong> button to log in to the <strong>Red&#160;Hat OpenShift AI</strong> dashboard.</p>
+<p>Click the <strong>Red&#160;Hat OpenShift AI</strong> button to log in to the <strong>Red&#160;Hat OpenShift AI</strong> dashboard.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_verify2.png" alt="rhods verify2" width="800">
 </div>
+<div class="title">Figure 10. Red Hat OpenShift AI Log in</div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -396,6 +398,7 @@ Navigate to <strong>Workloads</strong> &#8594; <strong>pods</strong> and select 
 <div class="content">
 <img src="_images/rhods_verify_pods.png" alt="rhods verify pods" width="800">
 </div>
+<div class="title">Figure 11. Pods in Running state</div>
 </div>
 </li>
 </ol>
@@ -407,7 +410,7 @@ Navigate to <strong>Workloads</strong> &#8594; <strong>pods</strong> and select 
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-For assistance installing the <strong>Red&#160;Hat Openshift Data Science</strong> from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/rhods-operator](<a href="https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator" class="bare">https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator</a>) GitHub repo.
+For assistance installing the <strong>Red&#160;Hat Openshift AI</strong> from YAML or via ArgoCD, refer to examples found in the [redhat-cop/gitops-catalog/rhods-operator](<a href="https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator" class="bare">https://github.com/redhat-cop/gitops-catalog/tree/main/rhods-operator</a>) GitHub repo.
 </td>
 </tr>
 </table>

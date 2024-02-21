@@ -143,19 +143,7 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Red Hat OpenShift AI upgrades are handled by the <strong>Red&#160;Hat OpenShift Data Science</strong> operator.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Upgrading directly from the Red Hat OpenShift Data Science self-managed Beta version to the Generally Available (GA) release is not supported. The operator has to be uninstalled first and replaced with the new version.
-</td>
-</tr>
-</table>
+<p>Red Hat OpenShift AI upgrades are handled by the <strong>Red&#160;Hat OpenShift AI</strong> operator.</p>
 </div>
 <div class="paragraph">
 <p>When an upgrade is available <strong>OLM</strong> creates an <strong>Installplan</strong> for the new version.</p>
@@ -181,7 +169,7 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <i class="conum" data-
 </table>
 </div>
 <div class="paragraph">
-<p>Installplan is approved either automatically when a new version is available without user&#8217;s intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the <strong>installPlanApproval</strong> attribute of the operator&#8217;s subscription. When it is set to <em>Automatic</em> the <strong>installplan</strong> is approved automaticaly and installation starts without user&#8217;s intervention. <em>Manual</em> value requires a manual approval.</p>
+<p>Installplan is approved either automatically when a new version is available without user&#8217;s intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the <strong>installPlanApproval</strong> attribute of the operator&#8217;s subscription. When it is set to <em>Automatic</em> the <strong>installplan</strong> is approved automatically and installation starts without user&#8217;s intervention. <em>Manual</em> value requires a manual approval.</p>
 </div>
 <div class="paragraph">
 <p>Approvals can be set from the web console as well as from the CLI.</p>
@@ -194,6 +182,18 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <i class="conum" data-
 <div class="sect1">
 <h2 id="_demo_upgrading_redhat_openshift_ai"><a class="anchor" href="#_demo_upgrading_redhat_openshift_ai"></a>Demo: Upgrading Red&#160;Hat OpenShift AI</h2>
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the <em>stable</em> version of the product in the hands on labs in the course.
+</td>
+</tr>
+</table>
+</div>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -201,7 +201,7 @@ install-w6lqv   rhods-operator.2.1.0   Manual     true    <i class="conum" data-
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Make sure that you have installed the <strong>Red&#160;Hat OpenShift Data Science</strong> operator using one of the previous demonstrations (Web based or CLI). They both install an older version of the operator from the <em>embedded</em> channel.
+Make sure that you have installed the <strong>Red&#160;Hat OpenShift AI</strong> operator using one of the previous demonstrations (Web based or CLI). They both install a version of the operator from the <em>stable</em> channel. The screenshots in this section were taken on an older version of the product and may not exactly match yours.
 </td>
 </tr>
 </table>
@@ -212,12 +212,24 @@ Make sure that you have installed the <strong>Red&#160;Hat OpenShift Data Scienc
 <p>Log in to Red&#160;Hat OpenShift web console using a user which has <em>cluster-admin</em> role assigned.</p>
 </li>
 <li>
-<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong>, select project <strong>redhat-ods-operator</strong>, click on the <strong>Red&#160;Hat OpenShift Data Science</strong> and choose the <strong>Subscription</strong> tab.
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong>, select project <strong>redhat-ods-operator</strong>, click on the <strong>Red&#160;Hat OpenShift AI</strong> and choose the <strong>Subscription</strong> tab.
 Edit the <strong>Update channel</strong> - change it to <strong>alpha</strong> and click <strong>Save</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-channel-change.png" alt="rhods2 channel change" width="800">
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+There may not be any updates available at the time when you do this. In which case, your screen will look different in the following steps.
+</td>
+</tr>
+</table>
 </div>
 </li>
 <li>
@@ -226,6 +238,18 @@ Edit the <strong>Update channel</strong> - change it to <strong>alpha</strong> a
 <div class="content">
 <img src="_images/rhods2-upgrade-available.png" alt="rhods2 upgrade available" width="800">
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You will see a similar screen only if there is an update available. The screenshots in this demo were taken on an older version of the product when there were frequent updates available.
+</td>
+</tr>
+</table>
 </div>
 </li>
 <li>

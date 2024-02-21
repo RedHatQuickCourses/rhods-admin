@@ -143,13 +143,37 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Red&#160;Hat OpenShift Data Science</strong> operator manages <strong>Red&#160;Hat OpenShift AI</strong> components hence uninstalling of the <strong>Red&#160;Hat OpenShift AI</strong> requires uninstalling the <strong>Red&#160;Hat OpenShift Data Science</strong> operator and cleaning some of the resources that have been created by the operator or users.</p>
+<p>The <strong>Red&#160;Hat OpenShift AI</strong> operator manages <strong>Red&#160;Hat OpenShift AI</strong> components, hence uninstalling components requires uninstalling the <strong>Red&#160;Hat OpenShift AI</strong> operator and cleaning some of the resources that have been created by the operator or users.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="demo-rhods"><a class="anchor" href="#demo-rhods"></a>Demo: Uninstalling Red&#160;Hat OpenShift AI</h2>
 <div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the installed version of the product in the hands on labs in the course.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure that you have installed the <strong>Red&#160;Hat OpenShift AI</strong> operator using one of the previous demonstrations (Web based or CLI). They both install a version of the operator from the <em>stable</em> channel. The screenshots in this section were taken on an older version of the product and may not exactly match yours.
+</td>
+</tr>
+</table>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -158,21 +182,22 @@
 <li>
 <p>Delete the DataScienceCluster object.</p>
 <div class="paragraph">
-<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong> &#8594; <strong>Red Hat OpenShift Data Science</strong> &#8594; <strong>DataScienceCluster</strong> and delete all the <strong>DSC</strong> resources.</p>
+<p>Navigate to <strong>Operators</strong> &#8594; <strong>Installed Operators</strong> &#8594; <strong>Red Hat OpenShift AI</strong> &#8594; <strong>DataScienceCluster</strong> and delete all the <strong>DSC</strong> resources.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods2-delete-dsc.png" alt="rhods2 delete dsc" width="800">
+<img src="_images/rhods2-delete-dsc.png" alt="rhods2 delete dsc">
 </div>
+<div class="title">Figure 1. Delete DSC Resource</div>
 </div>
 <div class="paragraph">
-<p>alternatively you can delete the <strong>DataScienceCluster</strong> objects from the CLI.</p>
+<p>Alternatively, you can delete the <strong>DataScienceCluster</strong> objects from the CLI.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre>$ <strong>oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')</strong>
 
-datasciencecluster.datasciencecluster.opendatahub.io "default" deleted</pre>
+datasciencecluster.datasciencecluster.opendatahub.io "default-dsc" deleted</pre>
 </div>
 </div>
 </li>
@@ -183,8 +208,9 @@ datasciencecluster.datasciencecluster.opendatahub.io "default" deleted</pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods2-delete-dsci.png" alt="rhods2 delete dsci" width="800">
+<img src="_images/rhods2-delete-dsci.png" alt="rhods2 delete dsci">
 </div>
+<div class="title">Figure 2. Delete DSCI Resource</div>
 </div>
 <div class="paragraph">
 <p>alternatively you can delete the <strong>DCSI</strong> objects from the CLI.</p>
@@ -193,19 +219,20 @@ datasciencecluster.datasciencecluster.opendatahub.io "default" deleted</pre>
 <div class="content">
 <pre><strong>$ oc delete dscinitialization $(oc get dscinitialization --no-headers |  awk '{print $1}')</strong>
 
-dscinitialization.dscinitialization.opendatahub.io "default" deleted</pre>
+dscinitialization.dscinitialization.opendatahub.io "default-dsci" deleted</pre>
 </div>
 </div>
 </li>
 <li>
-<p>Uninstall the <strong>Red Hat OpenShift Data Science</strong> operator.</p>
+<p>Uninstall the <strong>Red Hat OpenShift AI</strong> operator.</p>
 <div class="paragraph">
-<p>Navigate to <strong>Operators</strong> &#8594;  <strong>Installed Operators</strong> and uninstall the <strong>Red Hat OpenShift Data Science</strong> operator.</p>
+<p>Navigate to <strong>Operators</strong> &#8594;  <strong>Installed Operators</strong> and uninstall the <strong>Red Hat OpenShift AI</strong> operator.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/rhods2-uninstall-operator.png" alt="rhods2 uninstall operator" width="800">
+<img src="_images/rhods2-uninstall-operator.png" alt="rhods2 uninstall operator">
 </div>
+<div class="title">Figure 3. Uninstall RHOAI Operator</div>
 </div>
 <div class="paragraph">
 <p>Alternatively you can delete the operator&#8217;s subscription from the CLI. OLM will uninstall the operator.</p>
@@ -263,7 +290,7 @@ namespace "redhat-ods-monitoring" deleted</pre>
 <li>
 <p>Delete all remaining namespaces created for <strong>Datascience</strong> projects. These namespaces are labeled by the label <em>opendatahub.io/dashboard=true</em>.</p>
 <div class="paragraph">
-<p>Navigate to <strong>Administration</strong> &#8594; <strong>Namespaces</strong>, filter namespaces using the label <em>opendatahub.io/dashboard=true</em> and delete them.</p>
+<p>Navigate to <strong>Home</strong> &#8594; <strong>Projects</strong>, filter namespaces using the label <em>opendatahub.io/dashboard=true</em> and delete them.</p>
 </div>
 <div class="imageblock">
 <div class="content">
