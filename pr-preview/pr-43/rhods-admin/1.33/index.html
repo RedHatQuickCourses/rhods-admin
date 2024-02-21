@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Red Hat OpenShift AI Administration :: Red Hat OpenShift AI Administration</title>
+    <link rel="next" href="chapter1/index.html">
+    <meta name="generator" content="Antora 3.1.3">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../..">Red Hat OpenShift AI Administration</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/rhods-admin/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header><div class="body">
+<div class="nav-container" data-component="rhods-admin" data-version="1.33">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Red Hat OpenShift AI Administration</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="chapter1/index.html">Installation of Red&#160;Hat OpenShift AI</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter1/install-general-info.html">General Information about Installation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter1/dependencies-install-web-console.html">Installing Dependencies Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter1/rhods-install-web-console.html">Installing Red&#160;Hat OpenShift AI Using the Web Console</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter1/upgrading-rhods.html">Upgrading Red&#160;Hat OpenShift AI</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter1/uninstalling-rhods.html">Uninstalling Red&#160;Hat OpenShift AI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="chapter2/index.html">Controlling User Access and Managing Resources</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter2/users.html">Users, Projects, and Permissions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter2/resources.html">Managing Resources</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="chapter3/index.html">Building Custom Notebook Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter3/custom.html">Create a Custom Notebook Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="chapter3/importcustom.html">Importing Custom Notebook Images</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Red Hat OpenShift AI Administration</span>
+    <span class="version">1.33</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Red Hat OpenShift AI Administration</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">1.33</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link is-current"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Red Hat OpenShift AI Administration</a></li>
+    <li><a href="index.html">Home</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Red Hat OpenShift AI Administration</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Welcome to this quick course on the <em>Red Hat OpenShift AI Administration</em>.
+This course is the <strong>second</strong> in a series of <strong>five</strong> courses about Red Hat OpenShift AI:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://redhatquickcourses.github.io/rhods-intro">Introduction to Red Hat OpenShift AI</a></p>
+</li>
+<li>
+<p>Red Hat OpenShift AI Administration  (<em>This course</em>)</p>
+</li>
+<li>
+<p><a href="https://redhatquickcourses.github.io/rhods-model">Creating Machine Learning Models with Red Hat OpenShift AI</a></p>
+</li>
+<li>
+<p><a href="https://redhatquickcourses.github.io/rhods-deploy">Deploying Machine Learning Models with Red Hat OpenShift AI</a></p>
+</li>
+<li>
+<p><a href="https://redhatquickcourses.github.io/rhods-pipelines">Automation using Data Science Pipelines</a></p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+After you have completed all the courses in the learning path, you can attempt the <a href="https://github.com/RedHatQuickCourses/rhods-qc-apps/tree/main/7.hands-on-lab">"Workshop final hands-on lab"</a>, that tests your understanding of the concepts taught in all the courses.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_authors"><a class="anchor" href="#_authors"></a>Authors</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The PTL team acknowledges the valuable contributions of the following Red Hat associates:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Jiri Tesar</p>
+</li>
+<li>
+<p>Jaime Ramirez Castillo</p>
+</li>
+<li>
+<p>Max Murakami</p>
+</li>
+<li>
+<p>Trevor Royer</p>
+</li>
+<li>
+<p>John Hurlocker</p>
+</li>
+<li>
+<p>Ravi Srinivasan</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_classroom_environment_for_red_hat_associates"><a class="anchor" href="#_classroom_environment_for_red_hat_associates"></a>Classroom Environment for Red Hat Associates</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat associates should use the Red Hat Demo Platform to provision a classroom.</p>
+</div>
+<div class="paragraph">
+<p>Use the <a href="https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&amp;item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod">Red Hat OpenShift Container Platform 4.13 Workshop</a> catalog item from Red Hat Demo Platform (RHDP).</p>
+</div>
+<div class="paragraph">
+<p>When ordering this demo item:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select <code>Practice/Enablement</code> for the <code>Activity</code> field, and <code>Learning about the product</code> for the <code>Purpose</code>.</p>
+</li>
+<li>
+<p>If you have a Salesforce ID for a customer sales opportunity, then copy it to the <code>Salesforce ID</code> field.
+Otherwise, add some random text like "Learning RHOAI".</p>
+</li>
+<li>
+<p>Select <strong>5</strong> users in the <code>User Count</code> field.
+Having at least two users is required for the user management exercise.</p>
+</li>
+<li>
+<p>In the <code>OpenShift worker memory size</code> field, select <code>64Gi</code>.
+This size might be required if you run multiple workbenches and pipelines simultaneously.</p>
+</li>
+<li>
+<p>Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>RHOAI workbenches and pipelines use large container images.
+Dependencies such as Tensorflow, PyTorch, or CUDA result in image sizes of several gigabytes.</p>
+</div>
+<div class="paragraph">
+<p>The data ingestion and training stages can demand large amounts of memory and CPU/GPU resources.
+Make sure that your worker nodes have enough memory to accommodate pods that consume dozens of GB.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>This classroom does <strong>NOT</strong> have RHOAI pre-installed.
+You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
+</div>
+<div class="sect2">
+<h3 id="_alternative_classroom_environment_on_aws_for_red_hat_associates"><a class="anchor" href="#_alternative_classroom_environment_on_aws_for_red_hat_associates"></a>Alternative classroom environment on AWS for Red Hat Associates</h3>
+<div class="paragraph">
+<p>You can also use an AWS cluster by ordering the <a href="https://demo.redhat.com/catalog?search=AWS+with+OpenShift+Open+Environment&amp;item=babylon-catalog-prod%2Fsandboxes-gpte.sandbox-ocp.prod">AWS with OpenShift Open Environment</a>.</p>
+</div>
+<div class="paragraph">
+<p>This classroom does <strong>NOT</strong> have RHOAI pre-installed.
+You install and configure a basic RHOAI instance, and then continue using this instance with other courses in the learning path.</p>
+</div>
+<div class="paragraph">
+<p>If you use this item, you must:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Select <code>Practice/Enablement</code> for the <code>Activity</code> field, and <code>Learning about the product</code> for the <code>Purpose</code>.</p>
+</li>
+<li>
+<p>If you have a Salesforce ID for a customer sales opportunity, then copy it to the <code>Salesforce ID</code> field.
+Otherwise, add some random text like "Learning RHOAI".</p>
+</li>
+<li>
+<p>Make sure that you select <code>3</code> as the control plane count and <code>4.13</code> as the OpenShift version.</p>
+</li>
+<li>
+<p>Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.</p>
+</li>
+<li>
+<p>Configure users and authentication.
+The AWS item is only pre-configured with the <code>kubeadmin</code> user, which does not have the <code>cluster-admin</code> role assigned.
+The exercises in this course, however, assume the existence of a user named <code>admin</code> with the <code>cluster-admin</code> role and five non-admin users (<code>user1&#8230;&#8203;user5</code>).
+Download the following two scripts to your local machine, and execute the following commands.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_attachments/authentication.yaml" class="xref attachment">authentication.yaml</a></p>
+</li>
+<li>
+<p><a href="_attachments/secret.yaml" class="xref attachment">secret.yaml</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc replace -f authentication.yaml
+$ oc apply -f secret.yaml</strong></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The password for both the <code>admin</code> and <code>user1&#8230;&#8203;user5</code> users is <code>openshift23</code>.</p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You may have to wait for 5 minutes while the changes take effect. You will see a log in prompt with the <code>htpasswd_provider</code> displayed.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/htpasswd-provider.png" alt="htpasswd provider">
+</div>
+<div class="title">Figure 1. htpasswd_provider prompt</div>
+</div>
+</li>
+<li>
+<p>Click the <code>htpasswd_provider</code> button, and log in as the <code>admin</code> user with password <code>openshift23</code> to access the OpenShift web console as a cluster administrator.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_classroom_environment_for_red_hat_partners"><a class="anchor" href="#_classroom_environment_for_red_hat_partners"></a>Classroom Environment for Red Hat Partners</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat partners should provision their own Red Hat OpenShift cluster using the Red Hat Hybrid Cloud Console at <a href="https://console.redhat.com/openshift/overview" class="bare">https://console.redhat.com/openshift/overview</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and 3 worker nodes (each with 8 vCPU, and 64GB of RAM).</p>
+</li>
+<li>
+<p>Configure users and authentication.
+A default OpenShift cluster installation has a user called <code>kubeadmin</code>.
+The exercises in this course, however, assume the existence of a user named <code>admin</code> with the <code>cluster-admin</code> role and five non-admin users (<code>user1&#8230;&#8203;user5</code>).
+Download the following two scripts to your local machine, and execute the following commands after logging in to your cluster as the <code>kubeadmin</code> user using the <code>oc</code> CLI tool.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="_attachments/authentication.yaml" class="xref attachment">authentication.yaml</a></p>
+</li>
+<li>
+<p><a href="_attachments/secret.yaml" class="xref attachment">secret.yaml</a></p>
+<div class="listingblock">
+<div class="content">
+<pre>$ <strong>oc replace -f authentication.yaml
+$ oc apply -f secret.yaml</strong></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The password for both the <code>admin</code> and <code>user1&#8230;&#8203;user5</code> users is <code>openshift23</code>.</p>
+</div>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>You may have to wait for 5 minutes while the changes take effect. You will see a log in prompt with the <code>htpasswd_provider</code> displayed.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/htpasswd-provider.png" alt="htpasswd provider">
+</div>
+<div class="title">Figure 2. htpasswd_provider prompt</div>
+</div>
+</li>
+<li>
+<p>Click the <code>htpasswd_provider</code> button, and log in as the <code>admin</code> user with password <code>openshift23</code> to access the OpenShift web console as a cluster administrator.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Basic knowledge of OpenShift (or Kubernetes) administration</p>
+</li>
+<li>
+<p>Building and deploying container images</p>
+</li>
+<li>
+<p>OpenShift User and Role administration</p>
+</li>
+<li>
+<p>Basic knowledge of AWS EC2 and S3 services</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_objectives"><a class="anchor" href="#_objectives"></a>Objectives</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The overall objectives of this course include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Installing RedHat OpenShift AI using the web console and CLI</p>
+</li>
+<li>
+<p>Upgrading RedHat OpenShift AI components</p>
+</li>
+<li>
+<p>Managing RedHat OpenShift AI users and controlling access</p>
+</li>
+<li>
+<p>Enabling GPU support in RedHat OpenShift AI</p>
+</li>
+<li>
+<p>Stopping idle notebooks</p>
+</li>
+<li>
+<p>Create and configure a custom notebook image</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="next"><a href="chapter1/index.html">Installation of Red&#160;Hat OpenShift AI</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../_/js/site.js" data-ui-root-path="../../_"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
