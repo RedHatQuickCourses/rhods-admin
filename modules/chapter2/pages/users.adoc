@@ -95,7 +95,7 @@ image::create-datascience-project.png[]
 [NOTE]
 ====
 
-The terms `Namespaces`, OpenShift `Projects`, and `Data Science Projects` are often used synonymy.  While there are technical differences between these objects, a project is essentially a namespace with some additional features provided by OpenShift.  OpenShift will always create a corresponding project for every namespace, and vise versa.  
+The terms `Namespaces`, OpenShift `Projects`, and `Data Science Projects` are often used synonymously.  While there are technical differences between these objects, a project is essentially a namespace with some additional features provided by OpenShift.  OpenShift will always create a corresponding project for every namespace, and vice versa.  
 
 Similarly, a Data Science Project is just an OpenShift Project that has a specific label, which enables it to be used with the Dashboard.
 
@@ -123,7 +123,7 @@ All users with the `cluster-admin` role have the ability to see all other users 
 
 A Data Science Project is nothing more than a normal OpenShift Project with a few special labels.  These labels are required for the project to appear in the Dashboard.  As such, permissions to the project function the same as any other project/namespace in OpenShift.
 
-Users and Groups permissions to a project are managed using Kubernetes Role Based Access and Control (RBAC).  The Dashboard provides a user interface to easily assign additional users or groups permissions to a project.
+Users and Groups permissions to a project are managed using Kubernetes Role Based Access Control (RBAC).  The Dashboard provides a user interface to easily assign additional users or groups permissions to a project.
 
 An admin user on the project can add additional users or groups to a project by navigating to a specific project under the Data Science Projects menu, and selecting the Permissions tab.
 
