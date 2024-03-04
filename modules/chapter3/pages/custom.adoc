@@ -130,7 +130,7 @@ podman login quay.io
 +
 [source]
 ----
-podman push rhods-custom-image:latest quay.io/<YOUR_USERNAME>/rhods-admin-custom-image
+podman push rhods-admin-custom-image:latest quay.io/<YOUR_USERNAME>/rhods-admin-custom-image
 ----
 
 Now you're ready to import your image into OpenShift AI! See the next section to learn how to import your custom image and test it out.
