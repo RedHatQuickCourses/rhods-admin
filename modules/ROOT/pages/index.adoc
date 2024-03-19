@@ -27,7 +27,7 @@ The PTL team acknowledges the valuable contributions of the following Red Hat as
 
 Red Hat associates should use the Red Hat Demo Platform to provision a classroom.
 
-Use the https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+4.13+Workshop&item=babylon-catalog-prod%2Fopenshift-cnv.ocp413-wksp-cnv.prod[Red Hat OpenShift Container Platform 4.13 Workshop] catalog item from Red Hat Demo Platform (RHDP).
+Use the https://demo.redhat.com/catalog?search=Red+Hat+OpenShift+Container+Platform+Workshop&item=babylon-catalog-prod%2Fopenshift-cnv.ocpmulti-wksp-cnv.prod[Red Hat OpenShift Container Platform Cluster] catalog item from Red Hat Demo Platform (RHDP).
 
 When ordering this demo item:
 
