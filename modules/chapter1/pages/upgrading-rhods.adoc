@@ -8,8 +8,8 @@ When an upgrade is available *OLM* creates an *Installplan* for the new version.
 ----
 *$ oc get installplan -n redhat-ods-operator*
 NAME            CSV                    APPROVAL   APPROVED
-install-sp49w   rhods-operator.2.2.0   Manual     false   <1>
-install-w6lqv   rhods-operator.2.1.0   Manual     true    <2>
+install-sp49w   rhods-operator.2.7.0   Manual     false   <1>
+install-w6lqv   rhods-operator.2.6.0   Manual     true    <2>
 ----
 <1> *Installplan* for the new version of the operator which has not been approved yet. It has to be approved in order to start the upgrade.
 <2> *Installplan* for the currently installed version. It's been approved and the version is currently installed.
