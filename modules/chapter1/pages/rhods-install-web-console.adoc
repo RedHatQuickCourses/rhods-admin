@@ -88,7 +88,7 @@ spec:
     ray:
       managementState: Removed
     trustyai:
-      managementState: Managed
+      managementState: Removed
     workbenches:
       managementState: Managed
 
@@ -106,7 +106,7 @@ You may also check the status of individual installed components by looking at t
 +
 image::rhods2-conditions.png[title=Conditions of individual components]
 +
-Each condition is represented by a *type* and a *status*. The *Type* is a string describing the condition, for instance _odh-dashboardReady_ and the status says whether it is _true_ or not. The following example shows the *Ready* status of the Dashboard component.
+Each condition is represented by a *type* and a *status*. The *Type* is a string describing the condition, for instance _dashboardReady_ and the status says whether it is _true_ or not. The following example shows the *Ready* status of the Dashboard component.
 +
 [subs=+quotes]
 ----

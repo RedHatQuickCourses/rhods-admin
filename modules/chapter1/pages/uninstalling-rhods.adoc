@@ -22,7 +22,7 @@ Alternatively, you can delete the *DataScienceCluster* objects from the CLI.
 +
 [subs=+quotes]
 ----
-$ *oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')*
+$ *oc delete datasciencecluster default-dsc*
 
 datasciencecluster.datasciencecluster.opendatahub.io "default-dsc" deleted
 ----
@@ -37,7 +37,7 @@ alternatively you can delete the *DCSI* objects from the CLI.
 +
 [subs=+quotes]
 ----
-*$ oc delete dscinitialization $(oc get dscinitialization --no-headers |  awk '{print $1}')*
+*$ oc delete dscinitialization default-dsci*
 
 dscinitialization.dscinitialization.opendatahub.io "default-dsci" deleted
 ----
@@ -73,6 +73,7 @@ namespace "redhat-ods-operator" deleted
 
 . Delete the namespaces that the Operator created during 
 installation. They are labeled with label _opendatahub.io/generated-namespace=true_.
+Deleting namespace _rhods-notebooks_ leads to Persistent Volume Claims (PVC) being used by Workbench get deleted as well.
 +
 Navigate to *Administration* -> *Namespaces*, filter the namespaces using the label _opendatahub.io/generated-namespace=true_ and delete them.
 +
@@ -97,10 +98,6 @@ Alternatively you can delete them from the CLI.
 +
 [subs=+quotes]
 ----
-*$ oc get ns -l opendatahub.io/dashboard=true*
-NAME               STATUS   AGE
-my-rhods-project   Active   6h22m
-
 *$ oc delete ns -l opendatahub.io/dashboard=true*
 namespace "my-rhods-project" deleted
 ----
