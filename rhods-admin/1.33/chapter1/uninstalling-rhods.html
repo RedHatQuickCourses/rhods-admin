@@ -195,7 +195,7 @@ Make sure that you have installed the <strong>Red&#160;Hat OpenShift AI</strong>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>$ <strong>oc delete datasciencecluster $(oc get datasciencecluster --no-headers |  awk '{print $1}')</strong>
+<pre>$ <strong>oc delete datasciencecluster default-dsc</strong>
 
 datasciencecluster.datasciencecluster.opendatahub.io "default-dsc" deleted</pre>
 </div>
@@ -217,7 +217,7 @@ datasciencecluster.datasciencecluster.opendatahub.io "default-dsc" deleted</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre><strong>$ oc delete dscinitialization $(oc get dscinitialization --no-headers |  awk '{print $1}')</strong>
+<pre><strong>$ oc delete dscinitialization default-dsci</strong>
 
 dscinitialization.dscinitialization.opendatahub.io "default-dsci" deleted</pre>
 </div>
@@ -267,7 +267,8 @@ namespace "redhat-ods-operator" deleted</pre>
 </li>
 <li>
 <p>Delete the namespaces that the Operator created during
-installation. They are labeled with label <em>opendatahub.io/generated-namespace=true</em>.</p>
+installation. They are labeled with label <em>opendatahub.io/generated-namespace=true</em>.
+Deleting namespace <em>rhods-notebooks</em> leads to Persistent Volume Claims (PVC) being used by Workbench get deleted as well.</p>
 <div class="paragraph">
 <p>Navigate to <strong>Administration</strong> &#8594; <strong>Namespaces</strong>, filter the namespaces using the label <em>opendatahub.io/generated-namespace=true</em> and delete them.</p>
 </div>
@@ -302,11 +303,7 @@ namespace "redhat-ods-monitoring" deleted</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre><strong>$ oc get ns -l opendatahub.io/dashboard=true</strong>
-NAME               STATUS   AGE
-my-rhods-project   Active   6h22m
-
-<strong>$ oc delete ns -l opendatahub.io/dashboard=true</strong>
+<pre><strong>$ oc delete ns -l opendatahub.io/dashboard=true</strong>
 namespace "my-rhods-project" deleted</pre>
 </div>
 </div>
