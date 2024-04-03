@@ -162,10 +162,10 @@
 <h2 id="_exercise"><a class="anchor" href="#_exercise"></a>Exercise</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>We will now build our own custom image. We&#8217;ll use <a href="https://quay.io/mmurakam/workbenches:fraud-detection-v1.0.1">Fraud Detection Image</a> as our base image. This image contains artifacts that we will be using later in the course.</p>
+<p>We will now build our own custom image. We&#8217;ll use <a href="https://quay.io/modh/cuda-notebooks">CUDA Notebook</a> as our base image. This image contains artifacts that we will be using later in the course.</p>
 </div>
 <div class="paragraph">
-<p>We will be adding the <strong>seaborn</strong> python package to the Fraud Detection image. It is a data visualization library based on <strong>matplotlib</strong>.</p>
+<p>We will be adding the <strong>seaborn</strong> python package to the base image. It is a data visualization library based on <strong>matplotlib</strong>.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -236,7 +236,7 @@
 <div class="listingblock">
 <div class="content">
 <pre>#This is the base image we'll be working from
-FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1  <i class="conum" data-value="1"></i><b>(1)</b>
+FROM quay.io/modh/cuda-notebooks  <i class="conum" data-value="1"></i><b>(1)</b>
 
 # Copying custom packages
 # The requirements.txt file contains additional package dependencies we want installed
@@ -259,7 +259,7 @@ RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages &amp;&amp; \    <i cl
 <table>
 <tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>The FROM command contains the base image that we&#8217;ll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. Our Fraud Detection image is using <code class="sh">quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-2023a-20230714-933b52f</code> as the base image. You can find more base images at <a href="https://quay.io/organization/modh" class="bare">https://quay.io/organization/modh</a>.</td>
+<td>The FROM command contains the base image that we&#8217;ll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. You can find more base images at <a href="https://quay.io/organization/modh" class="bare">https://quay.io/organization/modh</a>.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -312,7 +312,7 @@ trino==0.305.0</code></pre>
 <p>Open the Containerfile under the <code>6.rhod-admin/custom-images</code> folder and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1</code></pre>
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/modh/cuda-notebooks</code></pre>
 </div>
 </div>
 <div class="listingblock">
