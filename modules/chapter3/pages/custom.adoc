@@ -4,7 +4,7 @@ Custom notebook images allow you to add specific packages and libraries for your
 
 == Image source and Pre-built images
 
-The default OpenShift AI notebook images can be found in the https://github.com/opendatahub-io/notebooks[Default OpenShift AI notebooks] repository. This repository contains the source code, pre-built images, and examples to help you create your own image. 
+The default OpenShift AI notebook images can be found in the https://github.com/red-hat-data-services/notebooks[Default OpenShift AI notebooks] repository. This repository contains the source code, pre-built images, and examples to help you create your own image.
 
 Additional images are available at the ODH contributions repository (https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images]) This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (https://github.com/opendatahub-io-contrib/workbench-images#building-an-image[])
 
@@ -74,7 +74,7 @@ RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \    <4>
 +
 [source, text]
 ----
-seaborn==0.12.2
+seaborn==0.13.0
 ----
 +
 Multiple packages can be installed with the requirements.txt file by adding them on the next line. For example, the below requirements.txt file would install seaborn and the trino packages.
@@ -83,7 +83,7 @@ Multiple packages can be installed with the requirements.txt file by adding them
 +
 [source, text]
 ----
-seaborn==0.12.2
+seaborn==0.13.0
 trino==0.305.0
 ----
 

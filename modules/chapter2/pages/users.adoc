@@ -15,7 +15,7 @@ By default, any user with the ability to login to OpenShift will be able to acce
 [TIP]
 ====
 
-For assistance with configuring user access to OpenShift with various identity providers, please refer to the official https://docs.openshift.com/container-platform/4.13/post_installation_configuration/preparing-for-users.html[Preparing for users] OpenShift documentation.
+For assistance with configuring user access to OpenShift with various identity providers, please refer to the official https://docs.openshift.com/container-platform/latest/post_installation_configuration/preparing-for-users.html[Preparing for users] OpenShift documentation.
 
 ====
 
@@ -104,7 +104,7 @@ Similarly, a Data Science Project is just an OpenShift Project that has a specif
 [TIP]
 ====
 
-For information on how to disable self-provisioner on OpenShift refer to the official https://docs.openshift.com/container-platform/4.13/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation[Disabling project self-provisioning] OpenShift documentation.
+For information on how to disable self-provisioner on OpenShift refer to the official https://docs.openshift.com/container-platform/latest/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation[Disabling project self-provisioning] OpenShift documentation.
 
 ====
 
@@ -163,7 +163,7 @@ metadata:
     opendatahub.io/dashboard: 'true'
 ```
 
-Once the Data Science Project has been created, access to the project will need to be configured for the necessary user or group using either the cli, or a namespace RoleBinding.  Refer to the OpenShift documentation for https://docs.openshift.com/container-platform/4.13/authentication/using-rbac.html#adding-roles_using-rbac[Adding roles to users] for additional instructions.
+Once the Data Science Project has been created, access to the project will need to be configured for the necessary user or group using either the cli, or a namespace RoleBinding.  Refer to the OpenShift documentation for https://docs.openshift.com/container-platform/latest/authentication/using-rbac.html#adding-roles_using-rbac[Adding roles to users] for additional instructions.
 
 == Exercise
 
