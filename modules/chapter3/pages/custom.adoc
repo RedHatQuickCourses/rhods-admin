@@ -9,9 +9,9 @@ The default OpenShift AI notebook images can be found in the https://github.com/
 Additional images are available at the ODH contributions repository (https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images]) This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (https://github.com/opendatahub-io-contrib/workbench-images#building-an-image[])
 
 == Exercise
-We will now build our own custom image. We'll use https://quay.io/mmurakam/workbenches:fraud-detection-v1.0.1[Fraud Detection Image] as our base image. This image contains artifacts that we will be using later in the course. 
+We will now build our own custom image. We'll use https://quay.io/modh/cuda-notebooks[CUDA Notebook] as our base image. This image contains artifacts that we will be using later in the course. 
 
-We will be adding the *seaborn* python package to the Fraud Detection image. It is a data visualization library based on *matplotlib*.
+We will be adding the *seaborn* python package to the base image. It is a data visualization library based on *matplotlib*.
 
 [TIP]
 ====
@@ -36,7 +36,7 @@ Containerfile::
 [subs=+quotes]
 ----
 #This is the base image we'll be working from
-FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1  <1>
+FROM quay.io/modh/cuda-notebooks  <1>
 
 # Copying custom packages
 # The requirements.txt file contains additional package dependencies we want installed
@@ -55,7 +55,7 @@ RUN chmod -R g+w /opt/app-root/lib/python3.9/site-packages && \    <4>
     fix-permissions /opt/app-root -P
 
 ----
-<1> The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. Our Fraud Detection image is using [sh]`quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-2023a-20230714-933b52f` as the base image. You can find more base images at https://quay.io/organization/modh.
+<1> The FROM command contains the base image that we'll be using to build our custom image from. This will already contain common python packages that Data Scientists use and artifacts needed later in the course. You can find more base images at https://quay.io/organization/modh.
 
 <2> The COPY command copies a requirements.txt file with the extra package that we will need in our notebook. The requirements.txt file in Python is a text file that lists all the third-party Python packages or libraries that a project depends on. `micropipenv` is a small footprint alternative to pip that allows us to install packages from our requirements.txt file.
 
@@ -91,7 +91,7 @@ trino==0.305.0
 +
 [source, dockerfile]
 ----
-   FROM quay.io/mmurakam/workbenches:fraud-detection-v1.0.1
+   FROM quay.io/modh/cuda-notebooks
 ----
 +
 [source, dockerfile]

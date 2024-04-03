@@ -3,7 +3,7 @@
 In this section we will go over importing a custom notebook through the OpenShift AI dashboard and test it to make sure our dependencies are included.
 
 == Import the Notebook Image
-1. Before we import the image into OpenShif AI we need to set the quay repository we just created to public. In a browser login to quay.io and go to the rhods-admin-custom-image repository. Select the *Settings* gear icon.
+1. Before we import the image into OpenShif AI we need to set the quay repository we just created to public. In a browser login to quay.io and go to the *rhods-admin-custom-image* repository. Select the *Settings* gear icon.
 +
 image::quaySettings.png[Quay Repository Settings]
 
@@ -36,7 +36,7 @@ $ oc secrets link default quay-pull-secret --for=pull \
  -n redhat-ods-applications
 ----
 
-For more information, refer to https://docs.openshift.com/container-platform/4.13/openshift_images/image-streams-manage.html#images-imagestream-import-images-private-registry_image-streams-managing[Importing images and image streams from private registries].
+For more information, refer to https://docs.openshift.com/container-platform/latest/openshift_images/image-streams-manage.html#images-imagestream-import-images-private-registry_image-streams-managing[Importing images and image streams from private registries].
 ====
 
 3. Login to the OpenShift AI dashboard as the admin user. Expand *Settings*, click *Notebook Images*, and then click *Import Image*.
