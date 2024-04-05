@@ -36,7 +36,7 @@ Containerfile::
 [subs=+quotes]
 ----
 #This is the base image we'll be working from
-FROM quay.io/modh/cuda-notebooks  <1>
+FROM quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-20240329-3538b44  <1>
 
 # Copying custom packages
 # The requirements.txt file contains additional package dependencies we want installed
@@ -91,7 +91,7 @@ trino==0.305.0
 +
 [source, dockerfile]
 ----
-   FROM quay.io/modh/cuda-notebooks
+   FROM quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-20240329-3538b44
 ----
 +
 [source, dockerfile]
