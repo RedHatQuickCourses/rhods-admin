@@ -236,7 +236,7 @@
 <div class="listingblock">
 <div class="content">
 <pre>#This is the base image we'll be working from
-FROM quay.io/modh/cuda-notebooks  <i class="conum" data-value="1"></i><b>(1)</b>
+FROM quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-20240329-3538b44  <i class="conum" data-value="1"></i><b>(1)</b>
 
 # Copying custom packages
 # The requirements.txt file contains additional package dependencies we want installed
@@ -312,7 +312,7 @@ trino==0.305.0</code></pre>
 <p>Open the Containerfile under the <code>6.rhod-admin/custom-images</code> folder and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location.</p>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/modh/cuda-notebooks</code></pre>
+<pre class="highlightjs highlight"><code class="language-dockerfile hljs" data-lang="dockerfile">   FROM quay.io/modh/cuda-notebooks:cuda-jupyter-tensorflow-ubi9-python-3.9-20240329-3538b44</code></pre>
 </div>
 </div>
 <div class="listingblock">
