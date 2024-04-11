@@ -179,7 +179,7 @@
 <p>The following section discusses installing the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator.</p>
 </div>
 <div class="sect2">
-<h3 id="_demo_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_demo_installation_of_the_redhat_openshift_pipelines_operator"></a>Demo: Installation of the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator</h3>
+<h3 id="_lab_installation_of_the_redhat_openshift_pipelines_operator"><a class="anchor" href="#_lab_installation_of_the_redhat_openshift_pipelines_operator"></a>Lab: Installation of the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -194,7 +194,7 @@
 </div>
 </li>
 <li>
-<p>Click on the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<p>Click on the <strong>Red&#160;Hat OpenShift Pipelines</strong> operator. In the pop up window, select the <strong>latest</strong> channel and the most recent version of the pipelines operator. Click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipeline_install1.png" alt="pipeline install1" width="800">
@@ -202,7 +202,7 @@
 </div>
 </li>
 <li>
-<p>In the installation view choose the <strong>Update&#160;channel</strong> and the <strong>Update&#160;approval</strong> parameters. You can accept the default values. The <strong>Installation&#160;mode</strong> and the <strong>Installed&#160;namespace</strong> parameters are fixed.</p>
+<p>In the <code>Install Operator</code> page, select the default values for all the fields and click <strong>Install</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipeline_install2.png" alt="pipeline install2" width="800">
@@ -210,7 +210,7 @@
 </div>
 </li>
 <li>
-<p>Click on the <strong>Install</strong> button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.</p>
+<p>A window showing the installation progress will pop up.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/pipeline_install3.png" alt="pipeline install3" width="800">
@@ -246,7 +246,7 @@ For assistance installing OpenShift Pipelines from YAML or via ArgoCD, refer to 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_installation_of_gpu_dependencies"><a class="anchor" href="#_installation_of_gpu_dependencies"></a>Installation of GPU Dependencies</h2>
+<h2 id="_lab_installation_of_gpu_dependencies"><a class="anchor" href="#_lab_installation_of_gpu_dependencies"></a>Lab: Installation of GPU Dependencies</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Red&#160;Hat OpenShift AI</strong> makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.</p>
@@ -297,7 +297,7 @@ To view the list of GPU models supported by the <strong>NVIDIA GPU Operator</str
 </div>
 </li>
 <li>
-<p>Two options for the <strong>Node Feature Discovery</strong> operator will be available.  Click on the one with <strong>Red Hat</strong> in the top right hand corner and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<p>Two options for the <strong>Node Feature Discovery</strong> operator will be available.  Click on the one with <strong>Red Hat</strong> in the top right hand corner, and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -305,7 +305,7 @@ To view the list of GPU models supported by the <strong>NVIDIA GPU Operator</str
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-Make sure you select <strong>Node Feature Discovery</strong> from <strong>Red&#160;Hat</strong> not the <strong>Community</strong> version.
+Make sure you select <strong>Node Feature Discovery</strong> from <strong>Red&#160;Hat</strong> NOT the Community version.
 </td>
 </tr>
 </table>
@@ -317,7 +317,7 @@ Make sure you select <strong>Node Feature Discovery</strong> from <strong>Red&#1
 </div>
 </li>
 <li>
-<p>In the installation view check the box to <strong>Enable Operator recommended cluster monitoring on this Namespace</strong> and the <strong>Update&#160;approval</strong> parameters if desired.  Leave the <strong>Update channel</strong>, <strong>Version</strong>, and the <strong>Installed&#160;Namespace</strong> parameters as the default options.</p>
+<p>In the <code>Install Operator</code> page, select the option to <strong>Enable Operator recommended cluster monitoring on this Namespace</strong>, and keep all the rest of the parameters at their default values.</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -337,20 +337,10 @@ Some of these options may vary slightly depending on your version of OpenShift. 
 </div>
 </li>
 <li>
-<p>Click on the <strong>Install</strong> button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nfd_install3.png" alt="nfd install3" width="800">
-</div>
-</div>
+<p>Click the <strong>Install</strong> button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.</p>
 </li>
 <li>
-<p>When the installation finishes the operator to be configured.  Click the button to <strong>View Operator</strong>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nfd_install4.png" alt="nfd install4" width="800">
-</div>
-</div>
+<p>When the installation finishes, click <strong>View Operator</strong> to configure the <code>Node Feature Discovery</code> operator.</p>
 </li>
 <li>
 <p>Click the <strong>Create instance</strong> button for the <strong>NodeFeatureDiscovery</strong> object.</p>
@@ -361,15 +351,10 @@ Some of these options may vary slightly depending on your version of OpenShift. 
 </div>
 </li>
 <li>
-<p>Leave the default options for <strong>NodeFeatureDiscovery</strong> selected, and click the <strong>Create</strong> button.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/nfd_configure2.png" alt="nfd configure2" width="800">
-</div>
-</div>
+<p>In the <code>Create NodeFeatureDiscovery</code> page, leave all fields at their default values, and click the <strong>Create</strong> button.</p>
 </li>
 <li>
-<p>A new set of pods should appear in the <strong>Workloads</strong> &#8594; <strong>Pods</strong> section managed by the nfd-worker DaemonSet.  Node Feature Discovery will now be able to automatically detect information about the nodes in the cluster and apply labels to those nodes.</p>
+<p>A new set of pods should appear in the <strong>Workloads</strong> &#8594; <strong>Pods</strong> section managed by the <strong>nfd-worker</strong> DaemonSet.  Node Feature Discovery will now be able to automatically detect information about the nodes in the cluster and apply labels to those nodes.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/nfd_verify.png" alt="nfd verify" width="800">
@@ -395,7 +380,7 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 </div>
 </div>
 <div class="sect2">
-<h3 id="_demo_installation_of_the_nvidia_gpu_operator"><a class="anchor" href="#_demo_installation_of_the_nvidia_gpu_operator"></a>Demo: Installation of the <strong>NVIDIA GPU Operator</strong></h3>
+<h3 id="_lab_installation_of_the_nvidia_gpu_operator"><a class="anchor" href="#_lab_installation_of_the_nvidia_gpu_operator"></a>Lab: Installation of the <strong>NVIDIA GPU Operator</strong></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -410,7 +395,7 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 </div>
 </li>
 <li>
-<p>Click the NVIDIA GPU Operator tile and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<p>Click the <code>NVIDIA GPU Operator</code> tile. In the pop up window leave all fields at their default values, and click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/gpu_install1.png" alt="gpu install1" width="800">
@@ -418,7 +403,7 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 </div>
 </li>
 <li>
-<p>In the installation view update the <strong>Update channel</strong> and <strong>Update&#160;approval</strong> parameters if desired.  Leave the <strong>Installation&#160;mode</strong> and the <strong>Installed&#160;namespace</strong> parameters as the default options.</p>
+<p>In the <code>Install Operator</code> page, keep all the parameters at their default values, and click the <strong>Install</strong> button at the bottom of the page to proceed with the installation.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/gpu_install2.png" alt="gpu install2" width="800">
@@ -426,20 +411,10 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 </div>
 </li>
 <li>
-<p>Click on the <strong>Install</strong> button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/gpu_install3.png" alt="gpu install3" width="800">
-</div>
-</div>
+<p>A window showing the installation progress will pop up. Wait while the operator finishes installing.</p>
 </li>
 <li>
-<p>When the installation finishes the operator to be configured.  Click the button to <strong>View Operator</strong>.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/gpu_install4.png" alt="gpu install4" width="800">
-</div>
-</div>
+<p>When the installation finishes, click the <strong>View Operator</strong> button.</p>
 </li>
 <li>
 <p>Click the <strong>Create instance</strong> button for the <strong>ClusterPolicy</strong> object.</p>
@@ -450,15 +425,10 @@ For assistance installing the Node Feature Discovery Operator from YAML or via A
 </div>
 </li>
 <li>
-<p>Leave the default options for <strong>ClusterPolicy</strong> selected, and click the <strong>Create</strong> button.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/gpu_configure2.png" alt="gpu configure2" width="800">
-</div>
-</div>
+<p>In the <code>Create ClusterPolicy</code> page, leave all fields at their default values, and click the <strong>Create</strong> button.</p>
 </li>
 <li>
-<p>After the gpu-cluster-policy <strong>ClusterPolicy</strong> is created, the  <strong>NVIDIA GPU Operator</strong> will update the status of the <strong>ClusterPolicy</strong> to <strong>State: ready</strong>.</p>
+<p>After the  <strong>ClusterPolicy</strong> is created, the  <strong>NVIDIA GPU Operator</strong> will update the status <strong>State: ready</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/gpu_verify1.png" alt="gpu verify1" width="800">

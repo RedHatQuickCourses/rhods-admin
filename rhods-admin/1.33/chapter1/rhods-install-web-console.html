@@ -143,12 +143,12 @@
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Red&#160;Hat OpenShift AI</strong> is available as an operator via OpenShift Operator Hub.  You will install the <strong>Red&#160;Hat OpenShift AI operator</strong> using the OpenShift web console in this section.</p>
+<p><strong>Red&#160;Hat OpenShift AI</strong> is available as an operator via the OpenShift Operator Hub.  You will install the <strong>Red&#160;Hat OpenShift AI operator</strong> using the OpenShift web console in this section.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_demo_installation_of_redhat_openshift_ai"><a class="anchor" href="#_demo_installation_of_redhat_openshift_ai"></a>Demo: Installation of Red&#160;Hat OpenShift AI</h2>
+<h2 id="_lab_installation_of_redhat_openshift_ai"><a class="anchor" href="#_lab_installation_of_redhat_openshift_ai"></a>Lab: Installation of Red&#160;Hat OpenShift AI</h2>
 <div class="sectionbody">
 <div class="admonitionblock important">
 <table>
@@ -177,7 +177,7 @@ The installation requires a user with the <em>cluster-admin</em> role
 </div>
 </li>
 <li>
-<p>Click on the <code>Red&#160;Hat OpenShift AI</code> operator and in the pop up window click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
+<p>Click on the <code>Red&#160;Hat OpenShift AI</code> operator. In the pop up window that opens, ensure you select the latest version in the <strong>stable</strong> channel and click on <strong>Install</strong> to open the operator&#8217;s installation view.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_install2.png" alt="rhods install2" width="800">
@@ -187,180 +187,23 @@ The installation requires a user with the <em>cluster-admin</em> role
 </li>
 <li>
 <p>In the <code>Install Operator</code> page, leave all of the options as default and click on the <strong>Install</strong> button to start the installation.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/rhods_install3.png" alt="rhods install3" width="800">
-</div>
-<div class="title">Figure 3. Install Operator with default values</div>
-</div>
 </li>
 <li>
 <p>The operator Installation progress window will pop up. The installation may take a couple of minutes.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/rhods_install4.png" alt="rhods install4" width="800">
-</div>
-<div class="title">Figure 4. RHOAI Operator Installing</div>
-</div>
 </li>
 <li>
 <p>When the operator&#8217;s installation is finished, click on the <strong>Create DataScienceCluster</strong> button to create and configure your cluster.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/rhods_install5.png" alt="rhods install5" width="800">
-</div>
-<div class="title">Figure 5. RHOAI Operator Installed</div>
-</div>
 </li>
 <li>
-<p>In the <strong>Create DataScienceCluster</strong> view select components that will be installed and managed by the operator.</p>
-<div class="paragraph">
-<p>There are following components to choose from:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>CodeFlare:</strong> CodeFlare simplifies the integration, scaling and acceleration of complex multi-step analytics and machine learning pipelines on the hybrid multi-cloud.CodeFlare, an open-source framework for simplifying the integration and efficient scaling of big data and AI workflows onto the hybrid cloud. CodeFlare is built on top of Ray, an emerging open-source distributed computing framework for machine learning applications. CodeFlare extends the capabilities of Ray by adding specific elements to make scaling workflows easier.</p>
+<p>In the <strong>Create DataScienceCluster</strong> page, a number of components have been pre-selected. You can explore the components offered by expanding the <strong>Components</strong> field. Once you finish reviewing, click on the <strong>Create</strong> button.</p>
 </li>
 <li>
-<p><strong>Ray:</strong> Ray is an open technology for “fast and simple distributed computing.” It makes it easy for data scientists and application developers to run their code in a distributed fashion. It also provides a lean and easy interface for distributed programming with many different libraries, best suited to perform machine learning and other intensive compute tasks.</p>
-</li>
-<li>
-<p><strong>Dashboard:</strong> A web dashboard that displays installed <strong>Data Science</strong> components with easy access to component UIs and documentation</p>
-</li>
-<li>
-<p><strong>Data Science Pipelines:</strong> Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models.</p>
-</li>
-<li>
-<p><strong>KServe:</strong> Kserve is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.</p>
-</li>
-<li>
-<p><strong>ModelMeshServing:</strong>  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.</p>
-</li>
-<li>
-<p><strong>TrustyAI</strong>: TrustyAI aims to help explain black-box machine learning models by using explainable AI (XAI) techniques. XAI techniques are used within TrustyAI to introspect these black-box models to describe predictions and outcomes.</p>
-</li>
-<li>
-<p><strong>Workbenches:</strong> Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.</p>
-<div class="paragraph">
-<p>For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving, TrustyAI, and Workbenches.</p>
-</div>
-<div class="paragraph">
-<p>You can choose to create the DataScienceCluster using either the <em>Form view</em> or the <em>YAML View</em>. The <em>Form view</em> is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the <em>Form view</em>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/rhods2-create-cluster.png" alt="rhods2 create cluster" width="800">
-</div>
-<div class="title">Figure 6. Create DSC default options</div>
-</div>
-<div class="paragraph">
-<p>If you choose the <em>YAML view</em>, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>apiVersion: datasciencecluster.opendatahub.io/v1
-kind: DataScienceCluster
-metadata:
-  labels:
-    app.kubernetes.io/name: datasciencecluster
-    app.kubernetes.io/instance: default-dsc
-    app.kubernetes.io/part-of: rhods-operator
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: rhods-operator
-  name: default-dsc
-spec:
-  components:
-    codeflare:
-      managementState: Removed <i class="conum" data-value="1"></i><b>(1)</b>
-    dashboard:
-      managementState: Managed <i class="conum" data-value="2"></i><b>(2)</b>
-    datasciencepipelines:
-      managementState: Managed
-    kserve:
-      serving:
-        ingressGateway:
-          certificate:
-            type: SelfSigned
-        managementState: Managed
-        name: knative-serving
-      managementState: Managed
-    modelmeshserving:
-      managementState: Managed
-    ray:
-      managementState: Removed
-    trustyai:
-      managementState: Removed
-    workbenches:
-      managementState: Managed</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>For components you <strong>do not</strong> want to install use <strong>Removed</strong></td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>For components you <strong>want</strong> to install and manage by the operator use <strong>Managed</strong></td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>After naming the cluster and choosing the components you wish the operator to install and manage click on the <strong>Create</strong> button.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads <strong>Phase: Ready</strong>. This represents the status of the whole cluster.</p>
+<p>After creating the <strong>DataScienceCluster</strong>, a view showing the <strong>DataScienceCluster</strong> details opens. Wait until the status of the cluster reads <strong>Phase: Ready</strong>. This represents the status of the whole cluster.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods2-clusters.png" alt="rhods2 clusters" width="800">
 </div>
-<div class="title">Figure 7. DataScienceCluster Instance Ready</div>
-</div>
-<div class="paragraph">
-<p>You may also check the status of individual installed components by looking at their conditions. Click on the <strong>default-dsc</strong> cluster and switch to the YAML view. Scroll down to view <strong>conditions</strong>. It may take some time for the default DataScienceCluster resources to be fully created and running.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/rhods2-conditions.png" alt="rhods2 conditions">
-</div>
-<div class="title">Figure 8. Conditions of individual components</div>
-</div>
-<div class="paragraph">
-<p>Each condition is represented by a <strong>type</strong> and a <strong>status</strong>. The <strong>Type</strong> is a string describing the condition, for instance <em>dashboardReady</em> and the status says whether it is <em>true</em> or not. The following example shows the <strong>Ready</strong> status of the Dashboard component.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>- lastHeartbeatTime: '2024-02-20T06:43:16Z'
-  lastTransitionTime: '2024-02-20T06:43:16Z'
-  message: Component reconciled successfully
-  reason: ReconcileCompleted
-  status: 'True' <i class="conum" data-value="1"></i><b>(1)</b>
-  type: dashboardReady <i class="conum" data-value="2"></i><b>(2)</b>
-- lastHeartbeatTime: '2024-02-20T06:43:18Z'
-  lastTransitionTime: '2024-02-20T06:43:18Z'
-  message: Component reconciled successfully
-  reason: ReconcileCompleted
-  status: 'True'
-  type: workbenchesReady</pre>
-</div>
-</div>
-<div class="colist arabic">
-<table>
-<tr>
-<td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>Status of the condition. <em>True</em> means that the condition is met, <em>False</em> means that the condition is not met.</td>
-</tr>
-<tr>
-<td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>Type represents the meaning of the condition. Together with the value of <em>status</em> you can assess the state of the component. In this example <em>type=dashboardReady</em>  and <em>status=True</em> means that the <strong>Dashboard</strong> component is ready.</td>
-</tr>
-</table>
+<div class="title">Figure 3. DataScienceCluster Instance Ready</div>
 </div>
 </li>
 <li>
@@ -370,16 +213,25 @@ In the applications window in the right upper corner of the screen the <strong>R
 <div class="content">
 <img src="_images/rhods_verify1.png" alt="rhods verify1">
 </div>
-<div class="title">Figure 9. RHOAI Dashboard</div>
+<div class="title">Figure 4. RHOAI Dashboard</div>
 </div>
 </li>
 <li>
-<p>Click the <strong>Red&#160;Hat OpenShift AI</strong> button to log in to the <strong>Red&#160;Hat OpenShift AI</strong> dashboard.</p>
+<p>Click the <strong>Red&#160;Hat OpenShift AI</strong> button to log in to the <strong>Red&#160;Hat OpenShift AI</strong> dashboard. Log in as the <strong>admin</strong> user (With the same password that you used to log in to the OpenShift web console).</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/rhods_verify2.png" alt="rhods verify2" width="800">
 </div>
-<div class="title">Figure 10. Red Hat OpenShift AI Log in</div>
+<div class="title">Figure 5. Red Hat OpenShift AI Log in</div>
+</div>
+</li>
+<li>
+<p>You should be able to see the Red Hat OpenShift AI home page.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/rhoai-home.png" alt="rhoai home">
+</div>
+<div class="title">Figure 6. Red Hat OpenShift AI Home Page</div>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -398,7 +250,7 @@ Navigate to <strong>Workloads</strong> &#8594; <strong>pods</strong> and select 
 <div class="content">
 <img src="_images/rhods_verify_pods.png" alt="rhods verify pods" width="800">
 </div>
-<div class="title">Figure 11. Pods in Running state</div>
+<div class="title">Figure 7. Pods in Running state</div>
 </div>
 </li>
 </ol>
