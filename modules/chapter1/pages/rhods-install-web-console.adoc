@@ -1,8 +1,8 @@
 = Installing Red{nbsp}Hat OpenShift AI Using the Web Console
 
-*Red{nbsp}Hat OpenShift AI* is available as an operator via OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift AI operator* using the OpenShift web console in this section.
+*Red{nbsp}Hat OpenShift AI* is available as an operator via the OpenShift Operator Hub.  You will install the *Red{nbsp}Hat OpenShift AI operator* using the OpenShift web console in this section.
 
-== Demo: Installation of Red{nbsp}Hat OpenShift AI
+== Lab: Installation of Red{nbsp}Hat OpenShift AI
 
 IMPORTANT: The installation requires a user with the _cluster-admin_ role
 
@@ -12,128 +12,34 @@ IMPORTANT: The installation requires a user with the _cluster-admin_ role
 +
 image::rhods_install1.png[title=Search for OpenShift AI operator,width=800]
 
-. Click on the `Red{nbsp}Hat OpenShift AI` operator and in the pop up window click on **Install** to open the operator's installation view.
+. Click on the `Red{nbsp}Hat OpenShift AI` operator. In the pop up window that opens, ensure you select the latest version in the *stable* channel and click on **Install** to open the operator's installation view.
 +
 image::rhods_install2.png[title=OpenShift AI Operator Details,width=800]
 
 . In the `Install Operator` page, leave all of the options as default and click on the *Install* button to start the installation.
-+
-image::rhods_install3.png[title=Install Operator with default values,width=800]
 
 . The operator Installation progress window will pop up. The installation may take a couple of minutes.
-+
-image::rhods_install4.png[title=RHOAI Operator Installing,width=800]
 
 . When the operator's installation is finished, click on the *Create DataScienceCluster* button to create and configure your cluster.
-+
-image::rhods_install5.png[title=RHOAI Operator Installed,width=800]
 
-. In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
-+ 
-There are following components to choose from:
-+
- * *CodeFlare:* CodeFlare simplifies the integration, scaling and acceleration of complex multi-step analytics and machine learning pipelines on the hybrid multi-cloud.CodeFlare, an open-source framework for simplifying the integration and efficient scaling of big data and AI workflows onto the hybrid cloud. CodeFlare is built on top of Ray, an emerging open-source distributed computing framework for machine learning applications. CodeFlare extends the capabilities of Ray by adding specific elements to make scaling workflows easier. 
-+
- * *Ray:* Ray is an open technology for “fast and simple distributed computing.” It makes it easy for data scientists and application developers to run their code in a distributed fashion. It also provides a lean and easy interface for distributed programming with many different libraries, best suited to perform machine learning and other intensive compute tasks. 
-+
- * *Dashboard:* A web dashboard that displays installed *Data Science* components with easy access to component UIs and documentation
-+
- * *Data Science Pipelines:* Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models. 
-+
- * *KServe:* Kserve is a Kubernetes-based serverless framework for inferencing (scoring) deep learning models. It provides a consistent and Kubernetes-native way to deploy, serve, and manage machine learning models in production environments. KServe is designed to be scalable and efficient, allowing for automatic scaling of model serving based on demand.
-+
- * *ModelMeshServing:*  ModelMesh Serving is the Controller for managing ModelMesh, a general-purpose model serving management/routing layer.
-+
-* *TrustyAI*: TrustyAI aims to help explain black-box machine learning models by using explainable AI (XAI) techniques. XAI techniques are used within TrustyAI to introspect these black-box models to describe predictions and outcomes. 
-+
- * *Workbenches:* Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.
-+
-For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving, TrustyAI, and Workbenches.
-+
-You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
-+
-image::rhods2-create-cluster.png[title=Create DSC default options,width=800]
-+
-If you choose the _YAML view_, you are presented with a template of the YAML DataScienceCluster resource definition similar to the one below.
-+
-----
-apiVersion: datasciencecluster.opendatahub.io/v1
-kind: DataScienceCluster
-metadata:
-  labels:
-    app.kubernetes.io/name: datasciencecluster
-    app.kubernetes.io/instance: default-dsc
-    app.kubernetes.io/part-of: rhods-operator
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: rhods-operator
-  name: default-dsc
-spec:
-  components:
-    codeflare:
-      managementState: Removed <1>
-    dashboard:
-      managementState: Managed <2>
-    datasciencepipelines:
-      managementState: Managed
-    kserve:
-      serving:
-        ingressGateway:
-          certificate:
-            type: SelfSigned
-        managementState: Managed
-        name: knative-serving
-      managementState: Managed
-    modelmeshserving:
-      managementState: Managed
-    ray:
-      managementState: Removed
-    trustyai:
-      managementState: Removed
-    workbenches:
-      managementState: Managed
+. In the *Create DataScienceCluster* page, a number of components have been pre-selected. You can explore the components offered by expanding the *Components* field. Once you finish reviewing, click on the *Create* button.
 
-----
-<1> For components you *do not* want to install use *Removed*
-<2> For components you *want* to install and manage by the operator use *Managed*
-+
-After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
-
-. After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
+. After creating the *DataScienceCluster*, a view showing the *DataScienceCluster* details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
 +
 image::rhods2-clusters.png[title=DataScienceCluster Instance Ready,width=800]
-+
-You may also check the status of individual installed components by looking at their conditions. Click on the *default-dsc* cluster and switch to the YAML view. Scroll down to view *conditions*. It may take some time for the default DataScienceCluster resources to be fully created and running.
-+
-image::rhods2-conditions.png[title=Conditions of individual components]
-+
-Each condition is represented by a *type* and a *status*. The *Type* is a string describing the condition, for instance _dashboardReady_ and the status says whether it is _true_ or not. The following example shows the *Ready* status of the Dashboard component.
-+
-[subs=+quotes]
-----
-- lastHeartbeatTime: '2024-02-20T06:43:16Z'
-  lastTransitionTime: '2024-02-20T06:43:16Z'
-  message: Component reconciled successfully
-  reason: ReconcileCompleted
-  status: 'True' <1>
-  type: dashboardReady <2>
-- lastHeartbeatTime: '2024-02-20T06:43:18Z'
-  lastTransitionTime: '2024-02-20T06:43:18Z'
-  message: Component reconciled successfully
-  reason: ReconcileCompleted
-  status: 'True'
-  type: workbenchesReady
----- 
-<1> Status of the condition. _True_ means that the condition is met, _False_ means that the condition is not met.
-<2> Type represents the meaning of the condition. Together with the value of _status_ you can assess the state of the component. In this example _type=dashboardReady_  and _status=True_ means that the *Dashboard* component is ready. 
 
 . The operator should be installed and configured now. 
 In the applications window in the right upper corner of the screen the *Red{nbsp}Hat OpenShift AI* dashboard should be available.
 +
 image::rhods_verify1.png[title=RHOAI Dashboard]
  
-. Click the *Red{nbsp}Hat OpenShift AI* button to log in to the *Red{nbsp}Hat OpenShift AI* dashboard.
+. Click the *Red{nbsp}Hat OpenShift AI* button to log in to the *Red{nbsp}Hat OpenShift AI* dashboard. Log in as the *admin* user (With the same password that you used to log in to the OpenShift web console).
 +
 image::rhods_verify2.png[title=Red Hat OpenShift AI Log in,width=800]
+
+. You should be able to see the Red Hat OpenShift AI home page.
++
+image::rhoai-home.png[title=Red Hat OpenShift AI Home Page]
 +
 IMPORTANT: It may take a while to start all the service pods hence the login window may not be accessible immediately. If you are getting an error, check the status of the pods in the project *redhat-ods-applications*.
 Navigate to *Workloads* -> *pods* and select project *redhat-ods-applications*. All pods must be running and be ready. If they are not, wait until they become running and ready.

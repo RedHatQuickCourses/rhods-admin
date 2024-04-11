@@ -106,7 +106,7 @@ image::htpasswd-provider.png[title=htpasswd_provider prompt]
 
 Red Hat partners should provision their own Red Hat OpenShift cluster using the Red Hat Hybrid Cloud Console at https://console.redhat.com/openshift/overview.
 
-* Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and 3 worker nodes (each with 8 vCPU, and 64GB of RAM).
+* Ensure that you provision an OpenShift 4.13 or later cluster with a minimum of 3 control plane nodes (each with 8vCPU and 16GB RAM), and 3 worker nodes (each with 16 vCPU, and 64GB of RAM).
 
 * Configure users and authentication.
 A default OpenShift cluster installation has a user called `kubeadmin`.
