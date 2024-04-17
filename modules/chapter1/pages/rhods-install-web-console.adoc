@@ -11,6 +11,7 @@ IMPORTANT: The installation requires a user with the _cluster-admin_ role
 . Navigate to **Operators** -> **OperatorHub** and search for *OpenShift AI*.
 +
 image::rhods_install1.png[title=Search for OpenShift AI operator,width=800]
+// The sentence in thsi image is not captured correctly
 
 . Click on the `Red{nbsp}Hat OpenShift AI` operator and in the pop up window click on **Install** to open the operator's installation view.
 +
@@ -28,15 +29,15 @@ image::rhods_install4.png[title=RHOAI Operator Installing,width=800]
 +
 image::rhods_install5.png[title=RHOAI Operator Installed,width=800]
 
-. In the *Create DataScienceCluster* view select components that will be installed and managed by the operator. 
+. In the *Create DataScienceCluster* view, select the components that will be installed and managed by the operator. 
 + 
 There are following components to choose from:
 +
- * *CodeFlare:* CodeFlare simplifies the integration, scaling and acceleration of complex multi-step analytics and machine learning pipelines on the hybrid multi-cloud.CodeFlare, an open-source framework for simplifying the integration and efficient scaling of big data and AI workflows onto the hybrid cloud. CodeFlare is built on top of Ray, an emerging open-source distributed computing framework for machine learning applications. CodeFlare extends the capabilities of Ray by adding specific elements to make scaling workflows easier. 
+ * *CodeFlare:* CodeFlare simplifies the integration, scaling and acceleration of complex multi-step analytics and machine learning pipelines on the hybrid multi-cloud. CodeFlare, is an open-source framework for simplifying the integration and efficient scaling of big data and AI workflows onto the hybrid cloud. CodeFlare is built on top of Ray, an emerging open-source distributed computing framework for machine learning applications. CodeFlare extends the capabilities of Ray by adding specific elements to make scaling workflows easier. 
 +
  * *Ray:* Ray is an open technology for “fast and simple distributed computing.” It makes it easy for data scientists and application developers to run their code in a distributed fashion. It also provides a lean and easy interface for distributed programming with many different libraries, best suited to perform machine learning and other intensive compute tasks. 
 +
- * *Dashboard:* A web dashboard that displays installed *Data Science* components with easy access to component UIs and documentation
+ * *Dashboard:* A web dashboard that displays installed *Data Science* components with easy access to component UIs and documentation.
 +
  * *Data Science Pipelines:* Data Science Pipelines allow building portable machine learning workflows with data science pipelines, using Docker containers. This enables you to standardize and automate machine learning workflows to enable you to develop and deploy your data science models. 
 +
@@ -48,9 +49,9 @@ There are following components to choose from:
 +
  * *Workbenches:* Workbenches allow to examine and work with data models in an isolated area. It enables you to create a new Jupyter notebook from an existing notebook container image to access its resources and properties. For data science projects that require data to be retained, you can add container storage to the workbench you are creating.
 +
-For this demonstration accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving, TrustyAI, and Workbenches.
+For this demonstration, accept the default (pre-selected) components selection - Dashboard, Data Science Pipelines, Model Mesh Serving, TrustyAI, and Workbenches.
 +
-You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
+You can choose to create the DataScienceCluster using either the _Form view_ or the _YAML View_. The _Form view_ is a web-based form and 'YAML view' is based on a YAML definition of the DataScience cluster resource. The following picture shows the _Form view_. 
 +
 image::rhods2-create-cluster.png[title=Create DSC default options,width=800]
 +
@@ -96,7 +97,7 @@ spec:
 <1> For components you *do not* want to install use *Removed*
 <2> For components you *want* to install and manage by the operator use *Managed*
 +
-After naming the cluster and choosing the components you wish the operator to install and manage click on the *Create* button.
+After naming the cluster and choosing the components you wish the operator to install and manage, click on the *Create* button.
 
 . After creating the DataScienceCluster a view showing the DataScienceCluster details opens. Wait until the status of the cluster reads *Phase: Ready*. This represents the status of the whole cluster. 
 +
