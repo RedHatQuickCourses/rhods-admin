@@ -6,7 +6,7 @@ Custom notebook images allow you to add specific packages and libraries for your
 
 The default OpenShift AI notebook images can be found in the https://github.com/red-hat-data-services/notebooks[Default OpenShift AI notebooks] repository. This repository contains the source code, pre-built images, and examples to help you create your own image.
 
-Additional images are available at the ODH contributions repository (https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images]) This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (https://github.com/opendatahub-io-contrib/workbench-images#building-an-image[])
+Additional images are available at the ODH contributions repository (https://github.com/opendatahub-io-contrib/workbench-images[opendatahub-io-contrib/workbench-images]). This is a place to source additional images, as well as a great resource for best practices for building custom images. Workbench and runtime images are available as well as a script to generate custom images (https://github.com/opendatahub-io-contrib/workbench-images#building-an-image[]).
 
 == Exercise
 We will now build our own custom image. We'll use https://quay.io/modh/cuda-notebooks[CUDA Notebook] as our base image. This image contains artifacts that we will be using later in the course. 

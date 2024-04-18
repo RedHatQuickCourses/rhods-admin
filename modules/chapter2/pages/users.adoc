@@ -47,7 +47,7 @@ The admin group can be updated to another group other than the default `rhods-ad
 [TIP]
 ====
 
-It is highly recommended that dedicated admin users are configured for OpenShift AI and that organizations do not rely on the `cluster-admin` role for exclusive permissions to admin configurations of OpenShift AI.  Dedicated Admin users should be added to the existing `rhods-admins` group, or another group which already contains the correct users should be configured in lieu of the `rhods-admins` group.
+It is highly recommended that dedicated admin users are configured for OpenShift AI and that organizations do not rely on the `cluster-admin` role for exclusive permissions to admin configurations of OpenShift AI.  Dedicated Admin users should be added to the existing `rhods-admins` group, or another group which already contains the correct users that should be configured in lieu of the `rhods-admins` group.
 
 ====
 
@@ -56,11 +56,12 @@ The normal Data Science user group can also be updated to change what users are 
 [WARNING]
 ====
 
-Updating the access in the `User and group settings` in the Dashboard will only impact a users abilities to access the Dashboard, and will not impact any permissions granted by regular Kubernetes based RBAC.
+Updating the access in the `User and group settings` in the Dashboard will only impact a user's abilities to access the Dashboard, and will not impact any permissions granted by regular Kubernetes based RBAC.
 
-For example, if the normal user group is updated to only allow specific users to access the Dashboard, and a user that is not part of that group has admin may still have the ability to create Data Science related objects such as Notebooks, Data Science Pipelines, or Model Servers in a namespace they have permission in using the associated k8s objects without the UI.
+For example, if the normal user group is updated to only allow specific users to access the Dashboard, and a user that is not part of that group as admin may still have the ability to create Data Science related objects such as Notebooks, Data Science Pipelines, or Model Servers in a namespace they have permission in using the associated k8s objects without the UI.
 
 ====
+// Revised sentence suggestion - For example, the normal user group is updated to allow access to the Dashboard only for specific users. In this scenario, an administrator, even if not included in that group, might still have the ability to create Data Science-related objects—like Notebooks, Data Science Pipelines, or Model Servers—in a namespace where they have permissions, in using the associated k8s objects without the UI."
 
 === Managing Dashboard Permissions with GitOps
 
