@@ -237,7 +237,7 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>It is highly recommended that dedicated admin users are configured for OpenShift AI and that organizations do not rely on the <code>cluster-admin</code> role for exclusive permissions to admin configurations of OpenShift AI.  Dedicated Admin users should be added to the existing <code>rhods-admins</code> group, or another group which already contains the correct users should be configured in lieu of the <code>rhods-admins</code> group.</p>
+<p>It is highly recommended that dedicated admin users are configured for OpenShift AI and that organizations do not rely on the <code>cluster-admin</code> role for exclusive permissions to admin configurations of OpenShift AI.  Dedicated Admin users should be added to the existing <code>rhods-admins</code> group, or another group which already contains the correct users that should be configured in lieu of the <code>rhods-admins</code> group.</p>
 </div>
 </td>
 </tr>
@@ -254,10 +254,10 @@
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Updating the access in the <code>User and group settings</code> in the Dashboard will only impact a users abilities to access the Dashboard, and will not impact any permissions granted by regular Kubernetes based RBAC.</p>
+<p>Updating the access in the <code>User and group settings</code> in the Dashboard will only impact a user&#8217;s abilities to access the Dashboard, and will not impact any permissions granted by regular Kubernetes based RBAC.</p>
 </div>
 <div class="paragraph">
-<p>For example, if the normal user group is updated to only allow specific users to access the Dashboard, and a user that is not part of that group has admin may still have the ability to create Data Science related objects such as Notebooks, Data Science Pipelines, or Model Servers in a namespace they have permission in using the associated k8s objects without the UI.</p>
+<p>For example, if the normal user group is updated to only allow specific users to access the Dashboard, and a user that is not part of that group as admin may still have the ability to create Data Science related objects such as Notebooks, Data Science Pipelines, or Model Servers in a namespace they have permission in using the associated k8s objects without the UI.</p>
 </div>
 </td>
 </tr>
