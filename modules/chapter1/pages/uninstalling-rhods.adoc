@@ -5,12 +5,12 @@ The *Red{nbsp}Hat OpenShift AI* operator manages *Red{nbsp}Hat OpenShift AI* com
 [#demo-rhods]
 == Demo: Uninstalling Red{nbsp}Hat OpenShift AI
 
-WARNING: These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the installed version of the product in the hands on labs in the course.
+WARNING: These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the installed version of the product in the hands-on labs in the course.
 
 [IMPORTANT]
 Make sure that you have installed the *Red{nbsp}Hat OpenShift AI* operator using one of the previous demonstrations (Web based or CLI). They both install a version of the operator from the _stable_ channel. The screenshots in this section were taken on an older version of the product and may not exactly match yours.
 
-. Log in to Red{nbsp} OpenShift web console using a user which has the _cluster-admin_ role assigned.
+. Log in to Red{nbsp}Hat OpenShift web console using a user which has the _cluster-admin_ role assigned.
 
 . Delete the DataScienceCluster object. 
 +
@@ -33,7 +33,7 @@ Navigate to the *DSCInitialization* tab and delete all *DSCI* resources.
 +
 image::rhods2-delete-dsci.png[title=Delete DSCI Resource]
 +
-alternatively you can delete the *DCSI* objects from the CLI.
+Alternatively you can delete the *DCSI* objects from the CLI.
 +
 [subs=+quotes]
 ----
@@ -73,7 +73,7 @@ namespace "redhat-ods-operator" deleted
 
 . Delete the namespaces that the Operator created during 
 installation. They are labeled with label _opendatahub.io/generated-namespace=true_.
-Deleting namespace _rhods-notebooks_ leads to Persistent Volume Claims (PVC) being used by Workbench get deleted as well.
+Deleting namespace _rhods-notebooks_ leads to Persistent Volume Claims (PVC) being used by Workbench getting deleted as well.
 +
 Navigate to *Administration* -> *Namespaces*, filter the namespaces using the label _opendatahub.io/generated-namespace=true_ and delete them.
 +
@@ -105,7 +105,7 @@ namespace "my-rhods-project" deleted
 == Uninstalling the Red{nbsp}Hat OpenShift AI dependencies.
 
 If you have installed some dependencies you can remove them as long as they are not used by other deployments.
-The following demonstration shows uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator
+The following demonstration shows uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator.
 
 [#demo-pipelines]
 === Demo: Uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator
@@ -117,7 +117,7 @@ image::pipelines-uninstall.png[width=800]
 +
 Click on Uninstall operator.
 
-. In the pop-up window scroll down, check *Delete all operand instances for this operator* and click on *Uninstall*
+. In the pop-up window scroll down, check *Delete all operand instances for this operator* and click on *Uninstall*.
 + 
 image::piplines-uninstall-confirm.png[width=800]
 

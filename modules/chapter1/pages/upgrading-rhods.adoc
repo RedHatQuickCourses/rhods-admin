@@ -2,7 +2,7 @@
 
 Red Hat OpenShift AI upgrades are handled by the *Red{nbsp}Hat OpenShift AI* operator.
 
-When an upgrade is available *OLM* creates an *Installplan* for the new version.
+When an upgrade is available, *OLM* creates an *Installplan* for the new version.
 
 [subs=+quotes]
 ----
@@ -11,11 +11,11 @@ NAME            CSV                    APPROVAL   APPROVED
 install-sp49w   rhods-operator.2.7.0   Manual     false   <1>
 install-w6lqv   rhods-operator.2.6.0   Manual     true    <2>
 ----
-<1> *Installplan* for the new version of the operator which has not been approved yet. It has to be approved in order to start the upgrade.
+<1> *Installplan* for the new version of the operator which has not been approved yet. It has to be approved in order to start the upgrade. 
 <2> *Installplan* for the currently installed version. It's been approved and the version is currently installed.
 
 
-Installplan is approved either automatically when a new version is available without user's intervention or requires a manual approval. Whether the approval is automatic or manual depends on the value of the *installPlanApproval* attribute of the operator's subscription. When it is set to _Automatic_ the *installplan* is approved automatically and installation starts without user's intervention. _Manual_ value requires a manual approval.
+Installplan is approved either automatically when a new version is available without user's intervention or requires a manual approval. Whether the approval is automatic or manual, depends on the value of the *installPlanApproval* attribute of the operator's subscription. When it is set to _Automatic_ the *installplan* is approved automatically and installation starts without user's intervention. _Manual_ value requires a manual approval.
 
 Approvals can be set from the web console as well as from the CLI.
 
@@ -23,7 +23,7 @@ The following demonstration shows an upgrade with a manual approval done from th
 
 == Demo: Upgrading Red{nbsp}Hat OpenShift AI
 
-WARNING: These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the _stable_ version of the product in the hands on labs in the course.
+WARNING: These steps are for demonstration purposes only! Do NOT run these steps in your classroom because you will continue to work with the _stable_ version of the product in the hands-on labs in the course.
 
 [IMPORTANT]
 Make sure that you have installed the *Red{nbsp}Hat OpenShift AI* operator using one of the previous demonstrations (Web based or CLI). They both install a version of the operator from the _stable_ channel. The screenshots in this section were taken on an older version of the product and may not exactly match yours.

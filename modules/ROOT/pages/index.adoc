@@ -135,17 +135,17 @@ image::htpasswd-provider.png[title=htpasswd_provider prompt]
 == Prerequisites
 
 * Basic knowledge of OpenShift (or Kubernetes) administration
-* Building and deploying container images
-* OpenShift User and Role administration
+* Ability to build and deploy container images
+* Knowledge of OpenShift User and Role administration
 * Basic knowledge of AWS EC2 and S3 services
 
 == Objectives
 
 The overall objectives of this course include:
 
-* Installing RedHat OpenShift AI using the web console and CLI
-* Upgrading RedHat OpenShift AI components
-* Managing RedHat OpenShift AI users and controlling access
-* Enabling GPU support in RedHat OpenShift AI
-* Stopping idle notebooks
+* Install RedHat OpenShift AI using the web console and CLI
+* Upgrade RedHat OpenShift AI components
+* Manage RedHat OpenShift AI users and controlling access
+* Enable GPU support in RedHat OpenShift AI
+* Stop idle notebooks
 * Create and configure a custom notebook image

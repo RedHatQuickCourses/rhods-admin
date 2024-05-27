@@ -1,8 +1,10 @@
 = Installing Dependencies Using the Web Console
 
-As described in the xref::install-general-info.adoc[General Information about Installation] section you may need to install other operators depending on the components and features of OpenShift AI you want to use.  This section will discuss installing and configuring those components.
+As described in the xref::install-general-info.adoc[General Information about Installation] section, you may need to install other operators depending on the components and features of OpenShift AI you want to use.  This section will discuss about installing and configuring those components.
 
 It is generally recommended to install any dependent operators prior to installing the *Red{nbsp}Hat OpenShift AI* operator.
+
+// This section given below is the same as in the previous chapter. Is the whole section with explanation required here again?
 
 https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat OpenShift Pipelines Operator]::
 The *Red Hat OpenShift Pipelines Operator* is required if you want to install the *Data Science Pipelines* component.
@@ -45,7 +47,7 @@ image::pipeline_install4.png[width=800]
 
 *Red{nbsp}Hat OpenShift Pipelines* is now successfully installed.
 
-TIP: For assistance installing OpenShift Pipelines from YAML or via ArgoCD, refer to examples found in the https://github.com/redhat-cop/gitops-catalog/tree/main/openshift-pipelines-operator[redhat-cop/gitops-catalog/openshift-pipelines-operator] GitHub repo.
+TIP: For assistance in installing OpenShift Pipelines from YAML or via ArgoCD, refer to examples found in the https://github.com/redhat-cop/gitops-catalog/tree/main/openshift-pipelines-operator[redhat-cop/gitops-catalog/openshift-pipelines-operator] GitHub repo.
 
 == Lab: Installation of GPU Dependencies
 
@@ -55,7 +57,7 @@ Currently, *Red{nbsp}Hat OpenShift AI* supports accelerated compute with NVIDIA 
 
 The following section will discuss the installation and a basic configuration of both *NVIDIA GPU Operator* and the *Node Feature Discovery* operator.
 
-NOTE: *Node Feature Discovery* and the *NVIDIA GPU Operator* can both be installed in a cluster that does not have a node with a GPU.  This can be helpful when you plan to add GPUs at a later date.  If a GPU is not present in the cluster the Dashboard will not present the user an option to deploy using a GPU.
+NOTE: *Node Feature Discovery* and the *NVIDIA GPU Operator* can both be installed in a cluster that does not have a node with a GPU.  This can be helpful when you plan to add GPUs at a later date.  If a GPU is not present in the cluster, the Dashboard will not present the user an option to deploy using a GPU.
 
 TIP: To view the list of GPU models supported by the *NVIDIA GPU Operator* refer to the https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/platform-support.html#supported-nvidia-gpus-and-systems[Supported NVIDIA GPUs and Systems] docs.
 
@@ -93,7 +95,7 @@ image::nfd_configure1.png[width=800]
 +
 image::nfd_verify.png[width=800]
 
-TIP: For assistance installing the Node Feature Discovery Operator from YAML or via ArgoCD, refer to examples found in the https://github.com/redhat-cop/gitops-catalog/tree/main/nfd[redhat-cop/gitops-catalog/nfd] GitHub repo.
+TIP: For assistance in installing the Node Feature Discovery Operator from YAML or via ArgoCD, refer to examples found in the https://github.com/redhat-cop/gitops-catalog/tree/main/nfd[redhat-cop/gitops-catalog/nfd] GitHub repo.
 
 *Node Feature Discovery* is now successfully installed and configured.
 

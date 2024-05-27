@@ -4,7 +4,7 @@ OpenShift AI allows for end users to create many different types of resources as
 
 == Kubernetes Resources
 
-The majority of actions taken in the OpenShift AI will create a kubernetes object based on that action.  This section will discussion the different components supported by OpenShift AI and the different resources they create or interact with.
+The majority of actions taken in the OpenShift AI will create a kubernetes object based on that action.  This section will discuss the different components supported by OpenShift AI and the different resources they create or interact with.
 
 === Data Science Projects
 
@@ -15,7 +15,7 @@ The majority of actions taken in the OpenShift AI will create a kubernetes objec
 |Data Science Project
 |projects.project.openshift.io
 |No
-|A Data Science Project is synonym with an OpenShift Project or a Namespace.  See the users section for more information on how to create and manage Data Science Projects
+|A Data Science Project is synonym with an OpenShift Project or a Namespace.  See the users section for more information on how to create and manage Data Science Projects.
 
 |Users
 |users.user.openshift.io
@@ -144,7 +144,7 @@ In this case, RHOAI will stop a notebook if no logged-in user activity is detect
 
 == Managing Workbench and Model Server Sizes
 
-When launching Workbenches or Model Servers from the Dashboard, users are presented with several default sizes they can select from.  The default options may not suit your organizations needs
+When launching Workbenches or Model Servers from the Dashboard, users are presented with several default sizes they can select from.  The default options may not suit your organizations needs.
 
 ----
 apiVersion: opendatahub.io/v1alpha

@@ -11,6 +11,7 @@ IMPORTANT: The installation requires a user with the _cluster-admin_ role
 . Navigate to **Operators** -> **OperatorHub** and search for *OpenShift AI*.
 +
 image::rhods_install1.png[title=Search for OpenShift AI operator,width=800]
+// The sentence in this image is not captured correctly
 
 . Click on the `Red{nbsp}Hat OpenShift AI` operator. In the pop up window that opens, ensure you select the latest version in the *stable* channel and click on **Install** to open the operator's installation view.
 +

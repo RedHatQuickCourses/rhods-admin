@@ -3,7 +3,7 @@
 In this section we will go over importing a custom notebook through the OpenShift AI dashboard and test it to make sure our dependencies are included.
 
 == Import the Notebook Image
-1. Before we import the image into OpenShif AI we need to set the quay repository we just created to public. In a browser login to quay.io and go to the *rhods-admin-custom-image* repository. Select the *Settings* gear icon.
+1. Before we import the image into OpenShif AI we need to set the quay repository we just created to public. In a browser, login to quay.io and go to the *rhods-admin-custom-image* repository. Select the *Settings* gear icon.
 +
 image::quaySettings.png[Quay Repository Settings]
 
@@ -61,7 +61,8 @@ image::rhodsDataScienceProj.png[OpenShift AI Data Science Projects]
 +
 image::rhodsCreateProj.png[OpenShift AI Project]
 
-3. Click the *Create* button.
+3. Click the *Create* button. 
+// This is covered in the earlier instruction.
 +
 image::rhodsCreateWrkbench.png[OpenShift AI Workbench]
 
