@@ -87,7 +87,7 @@ seaborn==0.13.0
 trino==0.305.0
 ----
 
-. Open the Containerfile under the `6.rhod-admin/custom-images` folder and add the 2 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
+. Open the Containerfile under the `6.rhod-admin/custom-images` folder and add the 3 commands below to the appropriate sections in the Containerfile. Refer to the Containerfile Overview section above to verify the correct location. 
 +
 [source, dockerfile]
 ----
@@ -97,6 +97,11 @@ trino==0.305.0
 [source, dockerfile]
 ----
    COPY requirements.txt ./
+----
++
+[source, dockerfile]
+----
+   RUN pip install --no-cache-dir -r requirements.txt
 ----
 +
 . We'll now build the image with podman. Open a terminal and go to `6.rhod-admin/custom-images`. Run the below command. 

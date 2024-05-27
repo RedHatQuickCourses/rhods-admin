@@ -21,7 +21,7 @@ The Data Science Pipelines component utilizes *Red{nbsp}Hat OpenShift Pipelines*
 
 The following section discusses installing the *Red{nbsp}Hat OpenShift Pipelines* operator.
 
-=== Demo: Installation of the *Red{nbsp}Hat OpenShift Pipelines* operator
+=== Lab: Installation of the *Red{nbsp}Hat OpenShift Pipelines* operator
 
 1. Login to Red{nbsp}Hat OpenShift using a user which has the _cluster-admin_ role assigned.
 
@@ -29,15 +29,15 @@ The following section discusses installing the *Red{nbsp}Hat OpenShift Pipelines
 +
 image::pipeline_search.png[width=800]
 
-3. Click on the *Red{nbsp}Hat OpenShift Pipelines* operator and in the pop up window click on **Install** to open the operator's installation view.
+3. Click on the *Red{nbsp}Hat OpenShift Pipelines* operator. In the pop up window, select the *latest* channel and the most recent version of the pipelines operator. Click on **Install** to open the operator's installation view.
 +
 image::pipeline_install1.png[width=800]
 
-4. In the installation view choose the *Update{nbsp}channel* and the *Update{nbsp}approval* parameters. You can accept the default values. The *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters are fixed.
+4. In the `Install Operator` page, select the default values for all the fields and click *Install*.
 +
 image::pipeline_install2.png[width=800]
 
-5. Click on the **Install** button at the bottom of to view the to proceed with the installation. A window showing the installation progress will pop up.
+5. A window showing the installation progress will pop up.
 + 
 image::pipeline_install3.png[width=800]
 
@@ -49,7 +49,7 @@ image::pipeline_install4.png[width=800]
 
 TIP: For assistance in installing OpenShift Pipelines from YAML or via ArgoCD, refer to examples found in the https://github.com/redhat-cop/gitops-catalog/tree/main/openshift-pipelines-operator[redhat-cop/gitops-catalog/openshift-pipelines-operator] GitHub repo.
 
-== Installation of GPU Dependencies
+== Lab: Installation of GPU Dependencies
 
 *Red{nbsp}Hat OpenShift AI* makes it easy to expose GPUs to end users to help accelerate training and serving machine learning models.
 
@@ -69,35 +69,29 @@ TIP: To view the list of GPU models supported by the *NVIDIA GPU Operator* refer
 +
 image::nfd_search.png[width=800]
 
-3. Two options for the *Node Feature Discovery* operator will be available.  Click on the one with *Red Hat* in the top right hand corner and in the pop up window click on **Install** to open the operator's installation view.
+3. Two options for the *Node Feature Discovery* operator will be available.  Click on the one with *Red Hat* in the top right hand corner, and in the pop up window click on **Install** to open the operator's installation view.
 +
-IMPORTANT: Make sure you select *Node Feature Discovery* from *Red{nbsp}Hat* not the *Community* version.
+IMPORTANT: Make sure you select *Node Feature Discovery* from *Red{nbsp}Hat* NOT the Community version.
 +
 image::nfd_install1.png[width=800]
 
-4. In the installation view check the box to *Enable Operator recommended cluster monitoring on this Namespace* and the *Update{nbsp}approval* parameters if desired.  Leave the *Update channel*, *Version*, and the *Installed{nbsp}Namespace* parameters as the default options.
+4. In the `Install Operator` page, select the option to *Enable Operator recommended cluster monitoring on this Namespace*, and keep all the rest of the parameters at their default values.
 +
 NOTE: Some of these options may vary slightly depending on your version of OpenShift.  Please refer to the official Node Feature Discovery Documentation for your version of OpenShift for the recommended settings.
 +
 image::nfd_install2.png[width=800]
 
-5. Click on the **Install** button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.
-+ 
-image::nfd_install3.png[width=800]
+5. Click the **Install** button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.
 
-6. When the installation finishes the operator to be configured.  Click the button to **View Operator**.
-+
-image::nfd_install4.png[width=800]
+6. When the installation finishes, click **View Operator** to configure the `Node Feature Discovery` operator.
 
 7. Click the **Create instance** button for the *NodeFeatureDiscovery* object.
 +
 image::nfd_configure1.png[width=800]
 
-8. Leave the default options for *NodeFeatureDiscovery* selected, and click the **Create** button.
-+
-image::nfd_configure2.png[width=800]
+8. In the `Create NodeFeatureDiscovery` page, leave all fields at their default values, and click the **Create** button.
 
-9. A new set of pods should appear in the **Workloads** -> **Pods** section managed by the nfd-worker DaemonSet.  Node Feature Discovery will now be able to automatically detect information about the nodes in the cluster and apply labels to those nodes.
+9. A new set of pods should appear in the **Workloads** -> **Pods** section managed by the *nfd-worker* DaemonSet.  Node Feature Discovery will now be able to automatically detect information about the nodes in the cluster and apply labels to those nodes.
 +
 image::nfd_verify.png[width=800]
 
@@ -105,7 +99,7 @@ TIP: For assistance in installing the Node Feature Discovery Operator from YAML 
 
 *Node Feature Discovery* is now successfully installed and configured.
 
-=== Demo: Installation of the *NVIDIA GPU Operator*
+=== Lab: Installation of the *NVIDIA GPU Operator*
 
 1. Login to Red{nbsp}Hat OpenShift using a user which has the _cluster-admin_ role assigned.
 
@@ -113,31 +107,25 @@ TIP: For assistance in installing the Node Feature Discovery Operator from YAML 
 +
 image::gpu_search.png[width=800]
 
-3. Click the NVIDIA GPU Operator tile and in the pop up window click on **Install** to open the operator's installation view.
+3. Click the `NVIDIA GPU Operator` tile. In the pop up window leave all fields at their default values, and click on **Install** to open the operator's installation view.
 +
 image::gpu_install1.png[width=800]
 
-4. In the installation view, update the *Update channel* and *Update{nbsp}approval* parameters if desired.  Leave the *Installation{nbsp}mode* and the *Installed{nbsp}namespace* parameters as the default options.
+4. In the `Install Operator` page, keep all the parameters at their default values, and click the **Install** button at the bottom of the page to proceed with the installation.
 +
 image::gpu_install2.png[width=800]
 
-5. Click on the **Install** button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.
-+ 
-image::gpu_install3.png[width=800]
+5.  A window showing the installation progress will pop up. Wait while the operator finishes installing.
 
-6. When the installation finishes the operator to be configured.  Click the button to **View Operator**.
-+
-image::gpu_install4.png[width=800]
+6. When the installation finishes, click the **View Operator** button.
 
 7. Click the **Create instance** button for the *ClusterPolicy* object.
 +
 image::gpu_configure1.png[width=800]
 
-8. Leave the default options for *ClusterPolicy* selected, and click the **Create** button.
-+
-image::gpu_configure2.png[width=800]
+8. In the `Create ClusterPolicy` page, leave all fields at their default values, and click the **Create** button.
 
-9. After the gpu-cluster-policy *ClusterPolicy* is created, the  *NVIDIA GPU Operator* will update the status of the *ClusterPolicy* to *State: ready*.
+9. After the  *ClusterPolicy* is created, the  *NVIDIA GPU Operator* will update the status *State: ready*.
 +
 image::gpu_verify1.png[width=800]
 

@@ -42,6 +42,8 @@ Having at least two users is required for the user management exercise.
 * In the `OpenShift worker memory size` field, select `64Gi`.
 This size might be required if you run multiple workbenches and pipelines simultaneously.
 
+* In the `OpenShift version` field, select the latest stable version available.
+
 * Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.
 
 [IMPORTANT]
@@ -70,7 +72,9 @@ If you use this item, you must:
 * If you have a Salesforce ID for a customer sales opportunity, then copy it to the `Salesforce ID` field.
 Otherwise, add some random text like "Learning RHOAI".
 
-* Make sure that you select `3` as the control plane count and `4.13` as the OpenShift version.
+* Make sure that you select `3` as the control plane count and the latest OpenShift version.
+
+* Select your nearest AWS region and choose `m6a.4xlarge` as the instance type (Ensure that whatever instance type you choose has at least 16 vCPUs and 64GB RAM).
 
 * Review the auto-stop and auto-destroy timers. You can change this later after classroom provisioning by opening a ticket with the RHDP team.
 
@@ -102,7 +106,7 @@ image::htpasswd-provider.png[title=htpasswd_provider prompt]
 
 Red Hat partners should provision their own Red Hat OpenShift cluster using the Red Hat Hybrid Cloud Console at https://console.redhat.com/openshift/overview.
 
-* Ensure that you provision an OpenShift 4.13 cluster with a minimum of 3 control plane nodes (each with 4vCPU and 16GB RAM), and 3 worker nodes (each with 8 vCPU, and 64GB of RAM).
+* Ensure that you provision an OpenShift 4.13 or later cluster with a minimum of 3 control plane nodes (each with 8vCPU and 16GB RAM), and 3 worker nodes (each with 16 vCPU, and 64GB of RAM).
 
 * Configure users and authentication.
 A default OpenShift cluster installation has a user called `kubeadmin`.
