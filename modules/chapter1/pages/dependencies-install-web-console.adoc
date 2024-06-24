@@ -6,8 +6,15 @@ It is generally recommended to install any dependent operators prior to installi
 
 // This section given below is the same as in the previous chapter. Is the whole section with explanation required here again?
 
-https://www.redhat.com/en/technologies/cloud-computing/openshift/pipelines[Red{nbsp}Hat OpenShift Pipelines Operator]::
-The *Red Hat OpenShift Pipelines Operator* is required if you want to install the *Data Science Pipelines* component.
+https://www.redhat.com/en/technologies/cloud-computing/openshift/serverless[Red{nbsp}Hat OpenShift Serverless Operator]::
+The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *Single-model serving platform component*.
+
+https://catalog.redhat.com/software/container-stacks/detail/5ec53e8c110f56bd24f2ddc4[Red{nbsp}Hat OpenShift Service Mesh Operator]::
+The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *Single-model serving platform component*.
+
+https://developers.redhat.com/articles/2021/06/18/authorino-making-open-source-cloud-native-api-security-simple-and-flexible[Red{nbsp}Hat OpenShift Authorino (technical preview) Operator]::
+The *Red{nbsp}Hat Authorino Operator* is required to support enforcing authentication policies in *Red Hat OpenShift AI*.
+
 https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/index.html[NVIDIA GPU Operator]::
 The *NVIDIA GPU Operator* is required for GPU support in *Red Hat OpenShift AI*.
 https://docs.openshift.com/container-platform/latest/hardware_enablement/psap-node-feature-discovery-operator.html[Node Feature Discovery Operator]::
@@ -15,39 +22,95 @@ The *Node Feature Discovery Operator* is a prerequisite for the *NVIDIA GPU Oper
 
 This section will discuss the process for installing the dependent operators using the OpenShift Web Console.
 
-== Installation of Data Science Pipelines Dependencies
+== Installation of Red Hat OpenShift Serverless Dependencies
 
-The Data Science Pipelines component utilizes *Red{nbsp}Hat OpenShift Pipelines* as an execution engine for all pipeline runs, and is required to be installed to take advantage of the Data Science Pipelines component.
+The following section discusses installing the *Red{nbsp}Hat OpenShift Serverless* operator.
 
-The following section discusses installing the *Red{nbsp}Hat OpenShift Pipelines* operator.
-
-=== Lab: Installation of the *Red{nbsp}Hat OpenShift Pipelines* operator
+=== Lab: Installation of the *Red{nbsp}Hat OpenShift Serverless* operator
 
 1. Login to Red{nbsp}Hat OpenShift using a user which has the _cluster-admin_ role assigned.
 
-2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat OpenShift Pipelines*
+2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat OpenShift Serverless*
 +
-image::pipeline_search.png[width=800]
+image::serverless_search.png[width=800]
 
-3. Click on the *Red{nbsp}Hat OpenShift Pipelines* operator. In the pop up window, select the *latest* channel and the most recent version of the pipelines operator. Click on **Install** to open the operator's installation view.
+3. Click on the *Red{nbsp}Hat OpenShift Serverless* operator. In the pop up window, select the *stable* channel and the most recent version of the serverless operator. Click on **Install** to open the operator's installation view.
 +
-image::pipeline_install1.png[width=800]
+image::serverless_install1.png[width=600]
 
 4. In the `Install Operator` page, select the default values for all the fields and click *Install*.
 +
-image::pipeline_install2.png[width=800]
+image::serverless_install2.png[width=800]
 
 5. A window showing the installation progress will pop up.
 + 
-image::pipeline_install3.png[width=800]
+image::serverless_install3.png[width=800]
 
 6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat OpenShift AI*.
 +
-image::pipeline_install4.png[width=800]
+image::serverless_install4.png[width=800]
 
-*Red{nbsp}Hat OpenShift Pipelines* is now successfully installed.
+*Red{nbsp}Hat OpenShift Serverless* is now successfully installed.
 
-TIP: For assistance in installing OpenShift Pipelines from YAML or via ArgoCD, refer to examples found in the https://github.com/redhat-cop/gitops-catalog/tree/main/openshift-pipelines-operator[redhat-cop/gitops-catalog/openshift-pipelines-operator] GitHub repo.
+== Installation of Red Hat OpenShift Service Mesh Dependencies
+
+The following section discusses installing the *Red{nbsp}Hat OpenShift Service Mesh* operator.
+
+=== Lab: Installation of the *Red{nbsp}Hat OpenShift Service Mesh* operator
+
+1. Login to Red{nbsp}Hat OpenShift using a user which has the _cluster-admin_ role assigned.
+
+2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat OpenShift Service Mesh*
++
+image::service_mesh1.png[width=800]
+
+3. Click on the *Red{nbsp}Hat OpenShift Service Mesh* operator. In the pop up window, select the *stable* channel and the most recent version of the server mesh operator. Click on **Install** to open the operator's installation view.
++
+image::service_mesh2.png[width=600]
+
+4. In the `Install Operator` page, select the default values for all the fields and click *Install*.
++
+image::service_mesh3.png[width=800]
+
+5. A window showing the installation progress will pop up.
++ 
+image::service_mesh4.png[width=800]
+
+6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat OpenShift AI*.
++
+// image::serverless_install4.png[width=800]
+
+*Red{nbsp}Hat OpenShift Service Mesh* is now successfully installed.
+
+== Installation of Red Hat Authorino Dependencies
+
+=== Lab: Installation of the *Red{nbsp}Hat Authorino* operator
+
+1. Login to Red{nbsp}Hat OpenShift using a user which has the _cluster-admin_ role assigned.
+
+2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Authorino
++
+image::authorino1.png[width=800]
+
+3. Click on the *Red{nbsp}Hat Authorino * operator. In the pop up window, select the *stable* channel and the most recent version of the serverless operator. Click on **Install** to open the operator's installation view.
++
+image::authorino2.png[width=600]
+
+4. In the `Install Operator` page, select the default values for all the fields and click *Install*.
++
+image::authorino3.png[width=800]
+
+5. A window showing the installation progress will pop up.
++ 
+image::authorino4.png[width=800]
+
+6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat OpenShift AI*.
++
+// image::authorino4.png[width=800]
+
+*Red{nbsp}Hat Authorino* is now successfully installed.
+
+The following section discusses installing the *Red{nbsp}Hat - Authorino* operator.
 
 == Lab: Installation of GPU Dependencies
 
