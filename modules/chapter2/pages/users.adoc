@@ -40,7 +40,7 @@ oc adm groups add-users rhods-admins my-user1 my-user2
 
 The default permissions for the OpenShift AI Dashboard can be updated through the menu:Settings[User management] section.
 
-image::user-management.png[]
+image::users_groups_manage2.png[]
 
 The admin group can be updated to another group other than the default `rhods-admins` group, such as one that is configured to sync with an external system.  Additionally, admin permissions to the Dashboard are always granted to users assigned the `cluster-admin` ClusterRole.
 
@@ -91,7 +91,7 @@ This object can be exported from the cluster and stored in a git repository to e
 
 The OpenShift AI Dashboard permits users of the Dashboard to create new Data Science Projects when self-provisioning is enabled on the cluster:
 
-image::create-datascience-project.png[]
+image::create_dsp_project.png[]
 
 [NOTE]
 ====
@@ -128,7 +128,7 @@ Users and Groups permissions to a project are managed using Kubernetes Role Base
 
 An admin user on the project can add additional users or groups to a project by navigating to a specific project under the Data Science Projects menu, and selecting the Permissions tab.
 
-image::datascience-project-permissions.png[]
+image::users_groups_manage1.png[]
 
 From the permissions tab, project admin users are able to add additional users or groups and grant them the `edit` or `admin` role on the project.
 

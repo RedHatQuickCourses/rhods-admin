@@ -41,34 +41,34 @@ For more information, refer to https://docs.openshift.com/container-platform/lat
 
 3. Login to the OpenShift AI dashboard as the admin user. Expand *Settings*, click *Notebook Images*, and then click *Import Image*.
 +
-image::rhodsAdminCustomNotebook.png[OpenShift AI Admin Notebook Images]
+image::custom_image_notebook3.png[OpenShift AI Admin Notebook Images]
 
 4. Enter the path to the your repository and give the image a name. Optionally add a description and package information. Click the *Import* button.
 +
-image::rhodsImportCustomImage.png[OpenShift AI Import Notebook]
+image::custom_image_notebook2.png[OpenShift AI Import Notebook]
 +
 You should now see the image in the list and enabled.
 +
-image::rhodsNotebookImage.png[OpenShift AI Custom Notebooks]
+image::custom_image_notebook1.png[OpenShift AI Custom Notebooks]
 
 == Test the Image in a Workbench
 
 1. Now we'll test out the image we just imported. Go to *Data Science Projects* and then click the *Create data science project* button.
 +
-image::rhodsDataScienceProj.png[OpenShift AI Data Science Projects]
+image::create_dsp_project.png[OpenShift AI Data Science Projects]
 
 2. Give the project a name and resource name. Click the *Create* button.
 +
-image::rhodsCreateProj.png[OpenShift AI Project]
+image::custom_image_workbench2.png[OpenShift AI Project]
 
 3. Click the *Create* button. 
 // This is covered in the earlier instruction.
 +
-image::rhodsCreateWrkbench.png[OpenShift AI Workbench]
+image::custom_image_workbench1.png[OpenShift AI Workbench]
 
 4. Give the workbench a name and select the rhods-admin-custom-image from the Image selection drop down list. Click the *Create Workbench* button.
 +
-image::rhodsCreateWrkbenchDetails.png[OpenShift AI Workbench Details]
+image::custom_image_workbench.png[OpenShift AI Workbench Details]
 
 5. Once the Status changes to Running click the *Open* link.
 +
