@@ -1,6 +1,6 @@
 name: rhods-admin
 title: Red Hat OpenShift AI Administration
-version: 1.43
+version: 2.10
 nav:
 - modules/ROOT/nav.adoc
 - modules/chapter1/nav.adoc
