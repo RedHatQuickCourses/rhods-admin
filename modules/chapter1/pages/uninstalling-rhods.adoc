@@ -16,7 +16,7 @@ Make sure that you have installed the *Red{nbsp}Hat OpenShift AI* operator using
 +
 Navigate to *Operators* -> *Installed Operators* -> *Red Hat OpenShift AI* -> *DataScienceCluster* and delete all the *DSC* resources.
 +
-image::rhods2-delete-dsc.png[title=Delete DSC Resource]
+image::uninstall_dsc_delete2.png[title=Delete DSC Resource]
 +
 Alternatively, you can delete the *DataScienceCluster* objects from the CLI.
 +
@@ -61,7 +61,7 @@ subscription.operators.coreos.com "rhods-operator" deleted
 +
 Navigate to *Administration* -> *Namespaces*, search for the `redhat-ods-operator` and delete it.
 +
-image::rhods2-delete-ope-ns.png[width=800]
+image::uninstall_rhods_namespace.png[width=800]
 +
 Alternatively you can delete the namespace from the CLI.
 +
@@ -77,7 +77,7 @@ Deleting namespace _rhods-notebooks_ leads to Persistent Volume Claims (PVC) bei
 +
 Navigate to *Administration* -> *Namespaces*, filter the namespaces using the label _opendatahub.io/generated-namespace=true_ and delete them.
 +
-image::rhods2-delete-generated-ns.png[width=800]
+image::rhods_manual_component-remove.png[width=800]
 + 
 Alternatively you can delete the namespaces from the CLI.
 +
@@ -92,7 +92,7 @@ namespace "redhat-ods-monitoring" deleted
 +
 Navigate to *Home* -> *Projects*, filter namespaces using the label _opendatahub.io/dashboard=true_ and delete them.
 +
-image::rhods2-delete-projects.png[width=800]
+image::dsproject_removal.png[width=800]
 +
 Alternatively you can delete them from the CLI.
 +
@@ -105,19 +105,19 @@ namespace "my-rhods-project" deleted
 == Uninstalling the Red{nbsp}Hat OpenShift AI dependencies.
 
 If you have installed some dependencies you can remove them as long as they are not used by other deployments.
-The following demonstration shows uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator.
+// The following demonstration shows uninstallation of the *Red{nbsp}Hat Authorino operator.
 
-[#demo-pipelines]
-=== Demo: Uninstallation of the *Red{nbsp}Hat OpenShift Pipelines* operator
+[#demo-authorino]
+=== Demo: Uninstallation of the *Red{nbsp}Hat Authorino* operator
 .  Log in to Red{nbsp}Hat OpenShift web console using a user which has the _cluster-admin_ role assigned.
 
-. Navigate to *Operators* -> *Installed Operators*, choose *All Projects* and click on the three dots on the right side of the *Red{nbsp}Hat OpenShift Pipelines* operator.
+. Navigate to *Operators* -> *Installed Operators*, choose *All Projects* and click on the three dots on the right side of the *Red{nbsp}Hat Authorino* operator.
 +
-image::pipelines-uninstall.png[width=800]
+image::uninstall_authorino1.png[width=800]
 +
 Click on Uninstall operator.
 
 . In the pop-up window scroll down, check *Delete all operand instances for this operator* and click on *Uninstall*.
 + 
-image::piplines-uninstall-confirm.png[width=800]
+image::uninstall_authorino2.png[width=800]
 

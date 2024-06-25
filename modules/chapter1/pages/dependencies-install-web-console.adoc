@@ -32,23 +32,23 @@ The following section discusses installing the *Red{nbsp}Hat OpenShift Serverles
 
 2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat OpenShift Serverless*
 +
-image::serverless_search.png[width=800]
+image::serverless_operator_search.png[width=800]
 
 3. Click on the *Red{nbsp}Hat OpenShift Serverless* operator. In the pop up window, select the *stable* channel and the most recent version of the serverless operator. Click on **Install** to open the operator's installation view.
 +
-image::serverless_install1.png[width=600]
+image::serverless_operator_install1.png[width=600]
 
 4. In the `Install Operator` page, select the default values for all the fields and click *Install*.
 +
-image::serverless_install2.png[width=800]
+image::serverless_operator_install2.png[width=800]
 
 5. A window showing the installation progress will pop up.
 + 
-image::serverless_install3.png[width=800]
+image::serverless_operator_install3.png[width=800]
 
 6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat OpenShift AI*.
 +
-image::serverless_install4.png[width=800]
+image::serverless_operator_install4.png[width=800]
 
 *Red{nbsp}Hat OpenShift Serverless* is now successfully installed.
 
@@ -62,23 +62,23 @@ The following section discusses installing the *Red{nbsp}Hat OpenShift Service M
 
 2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat OpenShift Service Mesh*
 +
-image::service_mesh1.png[width=800]
+image::servicemesh_operator_search.png[width=800]
 
 3. Click on the *Red{nbsp}Hat OpenShift Service Mesh* operator. In the pop up window, select the *stable* channel and the most recent version of the server mesh operator. Click on **Install** to open the operator's installation view.
 +
-image::service_mesh2.png[width=600]
+image::servicemesh_operator_install1.png[width=600]
 
 4. In the `Install Operator` page, select the default values for all the fields and click *Install*.
 +
-image::service_mesh3.png[width=800]
+image::servicemesh_operator_install2.png[width=800]
 
 5. A window showing the installation progress will pop up.
 + 
-image::service_mesh4.png[width=800]
+image::servicemesh_operator_install3.png[width=800]
 
 6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat OpenShift AI*.
 +
-// image::serverless_install4.png[width=800]
+image::servicemesh_operator_install4.png[width=800]
 
 *Red{nbsp}Hat OpenShift Service Mesh* is now successfully installed.
 
@@ -90,23 +90,23 @@ image::service_mesh4.png[width=800]
 
 2. Navigate to **Operators** -> **OperatorHub** and search for *Red{nbsp}Hat Authorino
 +
-image::authorino1.png[width=800]
+image::authorino_operator_search.png[width=800]
 
 3. Click on the *Red{nbsp}Hat Authorino * operator. In the pop up window, select the *stable* channel and the most recent version of the serverless operator. Click on **Install** to open the operator's installation view.
 +
-image::authorino2.png[width=600]
+image::authorino_operator_install1.png[width=600]
 
 4. In the `Install Operator` page, select the default values for all the fields and click *Install*.
 +
-image::authorino3.png[width=800]
+image::authorino_operator_install2.png[width=800]
 
 5. A window showing the installation progress will pop up.
 + 
-image::authorino4.png[width=800]
+image::authorino_operator_install3.png[width=800]
 
 6. When the installation finishes the operator is ready to be used by *Red{nbsp}Hat OpenShift AI*.
 +
-// image::authorino4.png[width=800]
+image::authorino_operator_install4.png[width=800]
 
 *Red{nbsp}Hat Authorino* is now successfully installed.
 
@@ -130,19 +130,19 @@ TIP: To view the list of GPU models supported by the *NVIDIA GPU Operator* refer
 
 2. Navigate to **Operators** -> **OperatorHub** and search for *Node Feature Discovery*
 +
-image::nfd_search.png[width=800]
+image::node_feature_discovery_search.png[width=800]
 
 3. Two options for the *Node Feature Discovery* operator will be available.  Click on the one with *Red Hat* in the top right hand corner, and in the pop up window click on **Install** to open the operator's installation view.
 +
 IMPORTANT: Make sure you select *Node Feature Discovery* from *Red{nbsp}Hat* NOT the Community version.
 +
-image::nfd_install1.png[width=800]
+image::node_feature_discovery_install1.png[width=800]
 
 4. In the `Install Operator` page, select the option to *Enable Operator recommended cluster monitoring on this Namespace*, and keep all the rest of the parameters at their default values.
 +
 NOTE: Some of these options may vary slightly depending on your version of OpenShift.  Please refer to the official Node Feature Discovery Documentation for your version of OpenShift for the recommended settings.
 +
-image::nfd_install2.png[width=800]
+image::node_feature_discovery_install2.png[width=800]
 
 5. Click the **Install** button at the bottom of the page to proceed with the installation. A window showing the installation progress will pop up.
 
@@ -150,13 +150,13 @@ image::nfd_install2.png[width=800]
 
 7. Click the **Create instance** button for the *NodeFeatureDiscovery* object.
 +
-image::nfd_configure1.png[width=800]
+image::node_feature_discovery_instance1.png[width=800]
 
 8. In the `Create NodeFeatureDiscovery` page, leave all fields at their default values, and click the **Create** button.
 
 9. A new set of pods should appear in the **Workloads** -> **Pods** section managed by the *nfd-worker* DaemonSet.  Node Feature Discovery will now be able to automatically detect information about the nodes in the cluster and apply labels to those nodes.
 +
-image::nfd_verify.png[width=800]
+image::nvidia_gpu_pods.png[width=800]
 
 TIP: For assistance in installing the Node Feature Discovery Operator from YAML or via ArgoCD, refer to examples found in the https://github.com/redhat-cop/gitops-catalog/tree/main/nfd[redhat-cop/gitops-catalog/nfd] GitHub repo.
 
@@ -168,15 +168,15 @@ TIP: For assistance in installing the Node Feature Discovery Operator from YAML 
 
 2. Navigate to **Operators** -> **OperatorHub** and search for *NVIDIA GPU Operator*
 +
-image::gpu_search.png[width=800]
+image::nvidia_operator_search.png[width=800]
 
 3. Click the `NVIDIA GPU Operator` tile. In the pop up window leave all fields at their default values, and click on **Install** to open the operator's installation view.
 +
-image::gpu_install1.png[width=800]
+image::nvidia_gpu_operator1.png[width=800]
 
 4. In the `Install Operator` page, keep all the parameters at their default values, and click the **Install** button at the bottom of the page to proceed with the installation.
 +
-image::gpu_install2.png[width=800]
+image::nvidia_gpu_operator2.png[width=800]
 
 5.  A window showing the installation progress will pop up. Wait while the operator finishes installing.
 
@@ -184,13 +184,13 @@ image::gpu_install2.png[width=800]
 
 7. Click the **Create instance** button for the *ClusterPolicy* object.
 +
-image::gpu_configure1.png[width=800]
+image::nvidia_gpu_instance1.png[width=800]
 
 8. In the `Create ClusterPolicy` page, leave all fields at their default values, and click the **Create** button.
 
 9. After the  *ClusterPolicy* is created, the  *NVIDIA GPU Operator* will update the status *State: ready*.
 +
-image::gpu_verify1.png[width=800]
+image::nvidia_gpu_instance2.png[width=800]
 
 10. After the *Red{nbsp}Hat OpenShift AI* operator has been installed and configured, users will be able to see an option for "Number of GPUs" when creating a new workbench.
 +
