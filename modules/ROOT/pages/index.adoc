@@ -106,6 +106,11 @@ image::htpasswd-provider.png[title=htpasswd_provider prompt]
 
 Red Hat partners should provision their own Red Hat OpenShift cluster using the Red Hat Hybrid Cloud Console at https://console.redhat.com/openshift/overview.
 
+[INFO]
+====
+The following compute resource requirements are recommendations for this lab environment. For the https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/2.10/html/installing_and_uninstalling_openshift_ai_self-managed/installing-and-deploying-openshift-ai_install#requirements-for-openshift-ai-self-managed_install[official compute requirements for OpenShift AI Self_Managed on OpenShift Container platform visit the product documentation].
+====
+
 * Ensure that you provision an OpenShift 4.13 or later cluster with a minimum of 3 control plane nodes (each with 8vCPU and 16GB RAM), and 3 worker nodes (each with 16 vCPU, and 64GB of RAM).
 
 * Configure users and authentication.
