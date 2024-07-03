@@ -33,7 +33,7 @@ Make sure that you have installed the *Red{nbsp}Hat OpenShift AI* operator using
 . Navigate to *Operators* -> *Installed Operators*, select project *redhat-ods-operator*, click on the *Red{nbsp}Hat OpenShift AI* and choose the *Subscription* tab.
 Edit the *Update channel* - change it to *alpha* and click *Save*.
 +
-image::rhods2-channel-change.png[width=800]
+image::openshiftai_upgrade1.png[width=800]
 +
 NOTE: There may not be any updates available at the time when you do this. In which case, your screen will look different in the following steps.
 
