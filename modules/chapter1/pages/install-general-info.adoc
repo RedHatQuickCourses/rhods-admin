@@ -10,7 +10,7 @@ The product name has been recently changed to *Red{nbsp}Hat OpenShift AI (RHOAI)
 In addition to the *Red{nbsp}Hat OpenShift AI* Operator there are some other operators that you may need to install depending on which features and components of *Red{nbsp}Hat OpenShift AI* you want to install and use. 
 
 https://www.redhat.com/en/technologies/cloud-computing/openshift/serverless[Red{nbsp}Hat OpenShift Serverless Operator]::
-The *Red Hat OpenShift Serverless operator* provides a collection of APIs that enables containers, microservices and functions to run "serverless". The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the Single-model serving platform component.
+The *Red Hat OpenShift Serverless operator* provides a collection of APIs that enables containers, microservices and functions to run "serverless". The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the single-model serving platform component.
 
 https://catalog.redhat.com/software/container-stacks/detail/5ec53e8c110f56bd24f2ddc4[Red{nbsp}Hat OpenShift Service Mesh Operator]::
 *Red Hat OpenShift Service Mesh operator* provides an easy way to create a network of deployed services that provides discovery, load balancing, service-to-service authentication, failure recovery, metrics, and monitoring. The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the single-model serving platform component.
