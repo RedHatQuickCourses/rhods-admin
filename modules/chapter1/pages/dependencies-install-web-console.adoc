@@ -10,7 +10,7 @@ https://www.redhat.com/en/technologies/cloud-computing/openshift/serverless[Red{
 The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *Single-model serving platform component*.
 
 https://catalog.redhat.com/software/container-stacks/detail/5ec53e8c110f56bd24f2ddc4[Red{nbsp}Hat OpenShift Service Mesh Operator]::
-The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *Single-model serving platform component*.
+The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *single-model serving platform component*.
 
 https://developers.redhat.com/articles/2021/06/18/authorino-making-open-source-cloud-native-api-security-simple-and-flexible[Red{nbsp}Hat OpenShift Authorino (technical preview) Operator]::
 The *Red{nbsp}Hat Authorino Operator* is required to support enforcing authentication policies in *Red Hat OpenShift AI*.
