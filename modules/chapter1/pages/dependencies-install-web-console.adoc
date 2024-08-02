@@ -7,7 +7,7 @@ It is generally recommended to install any dependent operators prior to installi
 // This section given below is the same as in the previous chapter. Is the whole section with explanation required here again?
 
 https://www.redhat.com/en/technologies/cloud-computing/openshift/serverless[Red{nbsp}Hat OpenShift Serverless Operator]::
-The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *Single-model serving platform component*.
+The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *single-model serving platform component*.
 
 https://catalog.redhat.com/software/container-stacks/detail/5ec53e8c110f56bd24f2ddc4[Red{nbsp}Hat OpenShift Service Mesh Operator]::
 The *Red{nbsp}Hat OpenShift Serverless Operator* is required if you want to install the *single-model serving platform component*.
