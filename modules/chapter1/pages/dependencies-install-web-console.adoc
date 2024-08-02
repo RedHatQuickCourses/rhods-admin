@@ -92,7 +92,7 @@ image::servicemesh_operator_install4.png[width=800]
 +
 image::authorino_operator_search.png[width=800]
 
-3. Click on the *Red{nbsp}Hat Authorino * operator. In the pop up window, select the *stable* channel and the most recent version of the serverless operator. Click on **Install** to open the operator's installation view.
+3. Click on the *Red{nbsp}Hat Authorino* operator. In the pop up window, select the *stable* channel and the most recent version of the serverless operator. Click on **Install** to open the operator's installation view.
 +
 image::authorino_operator_install1.png[width=600]
 
