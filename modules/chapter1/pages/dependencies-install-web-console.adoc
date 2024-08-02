@@ -82,7 +82,7 @@ image::servicemesh_operator_install4.png[width=800]
 
 *Red{nbsp}Hat OpenShift Service Mesh* is now successfully installed.
 
-== Installation of Red Hat Authorino Dependencies
+== Installation of Red Hat Authorino
 
 === Lab: Installation of the *Red{nbsp}Hat Authorino* operator
 
