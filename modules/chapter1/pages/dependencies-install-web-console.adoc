@@ -52,7 +52,7 @@ image::serverless_operator_install4.png[width=800]
 
 *Red{nbsp}Hat OpenShift Serverless* is now successfully installed.
 
-== Installation of Red Hat OpenShift Service Mesh Dependencies
+== Installation of Red Hat OpenShift Service Mesh
 
 The following section discusses installing the *Red{nbsp}Hat OpenShift Service Mesh* operator.
 
